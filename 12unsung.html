@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쌤의 하루한장 명리 - 12운성 & 60갑자</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', 'Segoe UI', sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f8f9fa;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* 1. 좌측 메뉴 프레임 */
+        #sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #34495e;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px 15px;
+            background-color: #1a252f;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f39c12;
+            letter-spacing: 2px;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 15px 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 12px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .menu-link:hover, .menu-link.active {
+            background-color: #34495e;
+            color: #ffffff;
+            border-left: 4px solid #f39c12;
+        }
+
+        .submenu-list {
+            list-style: none;
+            background-color: #212f3d;
+            padding: 5px 0;
+        }
+
+        .submenu-link {
+            display: block;
+            padding: 8px 10px 8px 35px;
+            color: #a6acaf;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .submenu-link:hover, .submenu-link.active {
+            background-color: #2e4053;
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        /* 우측 전체 메인 영역 */
+        #main-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 2. 우측 상단 제목 프레임 */
+        #header-frame {
+            height: 85px;
+            background-color: #ffffff;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            padding: 10px 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+        }
+
+        .book-img {
+            height: 65px;
+            width: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            margin-right: 20px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        /* 4. 우측 하단 내용 프레임 */
+        #content-frame {
+            flex-grow: 1;
+            padding: 25px;
+            overflow-y: auto;
+            background-color: #ffffff;
+        }
+
+        .content-card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .content-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        /* 표 서식 */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .styled-table th, .styled-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 12px;
+            text-align: center;
+        }
+
+        .styled-table th {
+            background-color: #34495e;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .styled-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .styled-table tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .styled-table td:first-child {
+            font-weight: bold;
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .gabja-table th {
+            background-color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h1>一日命理</h1>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <a class="menu-link active" onclick="show12UnseongFull(this)">12운성</a>
+                <ul class="submenu-list">
+                    <li><a class="submenu-link" onclick="showBranchUnseong(1, '寅', this)">寅</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(2, '卯', this)">卯</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(3, '辰', this)">辰</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(4, '巳', this)">巳</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(5, '午', this)">午</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(6, '未', this)">未</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(7, '申', this)">申</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(8, '酉', this)">酉</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(9, '戌', this)">戌</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(10, '亥', this)">亥</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(11, '子', this)">子</a></li>
+                    <li><a class="submenu-link" onclick="showBranchUnseong(12, '丑', this)">丑</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" onclick="show60Gabja(this)">60갑자 12운성</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="main-container">
+        <div id="header-frame">
+            <img src="https://image.yes24.com/goods/177570594/XL" alt="하루한장명리" class="book-img">
+            <div class="header-title">제이쌤의 하루한장 명리</div>
+        </div>
+
+        <div id="content-frame">
+            <div class="content-card">
+                <div id="content-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CSV 실시데이터 바인딩
+        const unseongData = [
+            ["", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"],
+            ["寅", "건록", "제왕", "장생", "사", "장생", "사", "절", "태", "병", "목욕"],
+            ["卯", "제왕", "건록", "목욕", "병", "목욕", "병", "태", "절", "사", "장생"],
+            ["辰", "쇠", "관대", "관대", "쇠", "관대", "쇠", "양", "묘", "묘", "양"],
+            ["巳", "병", "목욕", "건록", "제왕", "건록", "제왕", "장생", "사", "절", "태"],
+            ["午", "사", "장생", "제왕", "건록", "제왕", "건록", "목욕", "병", "태", "절"],
+            ["未", "묘", "양", "쇠", "관대", "쇠", "관대", "관대", "쇠", "양", "묘"],
+            ["申", "절", "태", "병", "목욕", "병", "목욕", "건록", "제왕", "장생", "사"],
+            ["酉", "태", "절", "사", "장생", "사", "장생", "제왕", "건록", "목욕", "병"],
+            ["戌", "양", "묘", "묘", "양", "묘", "양", "쇠", "관대", "관대", "쇠"],
+            ["亥", "장생", "사", "절", "태", "절", "태", "병", "목욕", "건록", "제왕"],
+            ["子", "목욕", "병", "태", "절", "태", "절", "사", "장생", "제왕", "건록"],
+            ["丑", "관대", "쇠", "양", "묘", "양", "묘", "묘", "양", "쇠", "관대"]
+        ];
+
+        const gabjaData = [
+            ["No.", "천간", "지지", "비고"],
+            [1, "甲", "子", "목욕"], [2, "乙", "丑", "쇠"], [3, "丙", "寅", "장생"], [4, "丁", "卯", "병"], [5, "戊", "辰", "관대"],
+            [6, "己", "巳", "제왕"], [7, "庚", "午", "목욕"], [8, "辛", "未", "쇠"], [9, "壬", "申", "장생"], [10, "癸", "酉", "병"],
+            [11, "甲", "戌", "양"], [12, "乙", "亥", "사"], [13, "丙", "子", "태"], [14, "丁", "丑", "묘"], [15, "戊", "寅", "장생"],
+            [16, "己", "卯", "병"], [17, "庚", "辰", "양"], [18, "辛", "巳", "사"], [19, "壬", "午", "태"], [20, "癸", "未", "묘"],
+            [21, "甲", "申", "절"], [22, "乙", "酉", "절"], [23, "丙", "戌", "묘"], [24, "丁", "亥", "태"], [25, "戊", "子", "태"],
+            [26, "己", "丑", "묘"], [27, "庚", "寅", "절"], [28, "辛", "卯", "절"], [29, "壬", "辰", "묘"], [30, "癸", "巳", "태"],
+            [31, "甲", "午", "사"], [32, "乙", "未", "양"], [33, "丙", "申", "병"], [34, "丁", "酉", "장생"], [35, "戊", "戌", "묘"],
+            [36, "己", "亥", "태"], [37, "庚", "子", "사"], [38, "辛", "丑", "양"], [39, "壬", "寅", "병"], [40, "癸", "卯", "장생"],
+            [41, "甲", "辰", "쇠"], [42, "乙", "巳", "목욕"], [43, "丙", "午", "제왕"], [44, "丁", "未", "관대"], [45, "戊", "申", "병"],
+            [46, "己", "酉", "장생"], [47, "庚", "戌", "쇠"], [48, "辛", "亥", "목욕"], [49, "壬", "子", "제왕"], [50, "癸", "丑", "관대"],
+            [51, "甲", "寅", "건록"], [52, "乙", "卯", "건록"], [53, "丙", "辰", "관대"], [54, "丁", "巳", "제왕"], [55, "戊", "午", "제왕"],
+            [56, "己", "未", "관대"], [57, "庚", "申", "건록"], [58, "辛", "酉", "건록"], [59, "壬", "戌", "관대"], [60, "癸", "亥", "제왕"]
+        ];
+
+        function clearActive() {
+            document.querySelectorAll('.menu-link, .submenu-link').forEach(el => {
+                el.classList.remove('active');
+            });
+        }
+
+        // 12운성 전체표 출력
+        function show12UnseongFull(elem) {
+            clearActive();
+            if(elem) elem.classList.add('active');
+
+            let html = '<h2 class="content-title">12운성 전체표</h2>';
+            html += '<table class="styled-table"><thead><tr>';
+            unseongData[0].forEach((col) => {
+                html += `<th>${col || '지지/천간'}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+
+            for(let i = 1; i < unseongData.length; i++) {
+                html += '<tr>';
+                unseongData[i].forEach(cell => {
+                    html += `<td>${cell}</td>`;
+                });
+                html += '</tr>';
+            }
+            html += '</tbody></table>';
+
+            document.getElementById('content-body').innerHTML = html;
+        }
+
+        // 지지별 12운성 출력 (1행 헤더 + 선택 행)
+        function showBranchUnseong(rowIndex, branchName, elem) {
+            clearActive();
+            if(elem) {
+                elem.classList.add('active');
+                elem.closest('.menu-item').querySelector('.menu-link').classList.add('active');
+            }
+
+            let html = `<h2 class="content-title">지지별 12운성 - [ ${branchName} ]</h2>`;
+            html += '<table class="styled-table"><thead><tr>';
+
+            unseongData[0].forEach(col => {
+                html += `<th>${col || '지지/천간'}</th>`;
+            });
+            html += '</tr></thead><tbody><tr>';
+
+            unseongData[rowIndex].forEach(cell => {
+                html += `<td>${cell}</td>`;
+            });
+            html += '</tr></tbody></table>';
+
+            document.getElementById('content-body').innerHTML = html;
+        }
+
+        // 60갑자 12운성 전체표 출력
+        function show60Gabja(elem) {
+            clearActive();
+            if(elem) elem.classList.add('active');
+
+            let html = '<h2 class="content-title">60갑자 12운성</h2>';
+            html += '<table class="styled-table gabja-table"><thead><tr>';
+
+            gabjaData[0].forEach(col => {
+                html += `<th>${col}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+
+            for(let i = 1; i < gabjaData.length; i++) {
+                html += '<tr>';
+                gabjaData[i].forEach(cell => {
+                    html += `<td>${cell}</td>`;
+                });
+                html += '</tr>';
+            }
+            html += '</tbody></table>';
+
+            document.getElementById('content-body').innerHTML = html;
+        }
+
+        // 초기 화면 로드
+        window.onload = function() {
+            show12UnseongFull(document.querySelector('.menu-link'));
+        };
+    </script>
+</body>
+</html>

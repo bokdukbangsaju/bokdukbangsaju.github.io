@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사주 명리 심리상담 - 일간별 참조 Sheet</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 좌측 사이드바 메뉴 */
+    .sidebar {
+      width: 220px;
+      background-color: #1e293b;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid #0f172a;
+    }
+    .sidebar-header {
+      padding: 20px 15px;
+      background-color: #0f172a;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid #334155;
+      letter-spacing: 1px;
+    }
+    .menu-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .menu-item {
+      padding: 14px 20px;
+      cursor: pointer;
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+      transition: background-color 0.2s, padding-left 0.2s;
+    }
+    .menu-item:hover {
+      background-color: #334155;
+      padding-left: 25px;
+    }
+    .menu-item.active {
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: bold;
+    }
+    .element-badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: normal;
+    }
+
+    /* 오행 색상 태그 */
+    .bg-wood { background-color: #16a34a; } /* 木 (초록) */
+    .bg-fire { background-color: #dc2626; } /* 火 (빨강) */
+    .bg-earth { background-color: #d97706; } /* 土 (황색/갈색) */
+    .bg-metal { background-color: #64748b; } /* 金 (회색) */
+    .bg-water { background-color: #0284c7; } /* 水 (파랑) */
+
+    /* 우측 내용 프레임 */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      background-color: #ffffff;
+    }
+
+    .content-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .content-header h2 {
+      font-size: 1.8rem;
+      color: #0f172a;
+    }
+    .stem-tag {
+      font-size: 1rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* 특징 (Feature Box) - 상단 우선 배치 */
+    .feature-box {
+      background-color: #f8fafc;
+      border-left: 5px solid #2563eb;
+      padding: 18px 22px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .feature-box h3 {
+      font-size: 1.1rem;
+      color: #1e293b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feature-box p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #334155;
+      white-space: pre-line;
+    }
+
+    /* 데이터 표 (C~F열 대응) */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      font-weight: bold;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      border-bottom: 2px solid #cbd5e1;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      vertical-align: middle;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .stem-cell {
+      font-weight: bold;
+      text-align: center;
+      width: 90px;
+    }
+    .element-cell {
+      width: 220px;
+    }
+    .tenstar-cell {
+      font-weight: 600;
+      width: 110px;
+      color: #1d4ed8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">일간 선택 (10천간)</div>
+    <ul class="menu-list" id="menuList">
+      </ul>
+  </div>
+
+  <div class="main-content" id="mainContent">
+    <div class="content-header">
+      <h2 id="currentTitle">甲 (갑목)</h2>
+      <span id="currentTag" class="stem-tag bg-wood">木 (양목)</span>
+    </div>
+
+    <div class="feature-box">
+      <h3>📌 일간 핵심 특징</h3>
+      <p id="featureText">특징 내용이 여기에 표시됩니다.</p>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 10%;">천간</th>
+            <th style="width: 25%;">오행의 특성</th>
+            <th style="width: 15%;">십성 (십신)</th>
+            <th style="width: 50%;">십성의 일반적 특징</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // 10천간 데이터 구조 정의 (C~F열 대응 데이터)
+    const sajuData = {
+      "甲": {
+        name: "甲 (갑목)",
+        element: "木 (양목)",
+        elementClass: "bg-wood",
+        range: "C6 ~ F18",
+        feature: "새로운 시작, 리더십, 솟구치는 기운, 직선적이며 곧은 성향.\n추진력이 뛰어나고 불굴의 의지를 가지나 꺾이기 쉬운 특성이 있음.",
+        rows: [
+          { stem: "甲", detail: "동일 오행(양), 당당함, 주도권", tenStar: "비견", desc: "주관이 뚜렷하고 독립심이 강하며 승부욕이 높음" },
+          { stem: "乙", detail: "동일 오행(음), 협력, 유연함", tenStar: "겁재", desc: "경쟁심과 은근한 집착, 타인과의 협력 및 경쟁 공존" },
+          { stem: "丙", detail: "목생화(양), 표출, 발산, 명랑", tenStar: "식신", desc: "의식주 풍족, 창의적 표현력, 다정다감하고 솔직함" },
+          { stem: "丁", detail: "목생화(음), 집중, 기술, 섬세", tenStar: "상관", desc: "변화추구, 언변 능력, 비판적 시각 및 표현력 발달" },
+          { stem: "戊", detail: "목극토(양), 넓은 무대, 안정", tenStar: "편재", desc: "재물에 대한 활동성, 공간감, 통이 크고 활동적" },
+          { stem: "己", detail: "목극토(음), 결합, 실속, 관리", tenStar: "정재", desc: "성실함, 정당한 대가, 알뜰한 재물 관리 및 신용" },
+          { stem: "庚", detail: "금극목(양), 단련, 결단, 절제", tenStar: "편관", desc: "카리스마, 규율, 책임감과 권력 지향성" },
+          { stem: "辛", detail: "금극목(음), 세공, 규칙, 완성", tenStar: "정관", desc: "바른 원칙, 원만한 준법정신, 사회적 신용" },
+          { stem: "壬", detail: "수생목(양), 지혜, 학문, 포용", tenStar: "편인", desc: "직관력, 전문 학문, 독창적인 사고방식" },
+          { stem: "癸", detail: "수생목(음), 자양, 보살핌, 학습", tenStar: "정인", desc: "수용성, 어머니의 자애로움, 정통 학문 및 자격" }
+        ]
+      },
+      "乙": {
+        name: "乙 (을목)",
+        element: "木 (음목)",
+        elementClass: "bg-wood",
+        range: "C19 ~ F32",
+        feature: "유연함, 적응력, 생명력, 끈기 있는 확산 능력.\n환경에 빠르게 적응하며 외유내강형의 부드러운 카리스마.",
+        rows: [
+          { stem: "甲", detail: "동일 오행(양), 의지, 등라계갑", tenStar: "겁재", desc: "타인의 역량을 활용하는 지혜, 경쟁 및 의존성" },
+          { stem: "乙", detail: "동일 오행(음), 자립, 세력 확충", tenStar: "비견", desc: "동료의식, 완만함 속의 고집, 유대감" },
+          { stem: "丙", detail: "목생화(양), 화려함, 자기발현", tenStar: "상관", desc: "뛰어난 자기표현, 예술적 감각, 순발력" },
+          { stem: "丁", detail: "목생화(음), 은근한 온기, 헌신", tenStar: "식신", desc: "꾸준한 연구, 실속 있는 생산 활동, 온화함" },
+          { stem: "戊", detail: "목극토(양), 넓은 환경 탐색", tenStar: "정재", desc: "시장의 확장성, 정당한 수익 및 기회 포착" },
+          { stem: "己", detail: "목극토(음), 내실 단속, 영토", tenStar: "편재", desc: "현실적인 판단력, 꼼꼼한 관리 및 재치" },
+          { stem: "庚", detail: "금극목(양), 을경합, 안정과 조화", tenStar: "정관", desc: "원칙 준수, 조직 적응력, 합리적인 대인관계" },
+          { stem: "辛", detail: "금극목(음), 예리한 자극, 시련", tenStar: "편관", desc: "자기관리, 긴장감, 예민성과 과감한 단련" },
+          { stem: "壬", detail: "수생목(양), 큰 후원, 풍부한 수분", tenStar: "정인", desc: "안정적인 지원, 지식의 축적, 귀인 운" },
+          { stem: "癸", detail: "수생목(음), 촉촉한 단비, 섬세함", tenStar: "편인", desc: "섬세한 감수성, 순발력 있는 아이디어" }
+        ]
+      },
+      "丙": {
+        name: "丙 (병화)",
+        element: "火 (양화)",
+        elementClass: "bg-fire",
+        range: "C33 ~ F46",
+        feature: "태양의 열정과 열린 마음, 공평무사, 정열과 열광.\n숨김이 없고 명랑하며 직관적으로 상황을 파악하는 에너지.",
+        rows: [
+          { stem: "丙", detail: "동일 오행(양), 강력한 빛과 열", tenStar: "비견", desc: "독립심, 주도적 자아, 숨김없는 당당함" },
+          { stem: "丁", detail: "동일 오행(음), 열의 집중, 대비", tenStar: "겁재", desc: "열정적 경쟁, 은근한 자존심 대립" },
+          { stem: "戊", detail: "화생토(양), 포용과 정착, 넓음", tenStar: "식신", desc: "너그러운 표현력, 안정적 생산활동, 여유" },
+          { stem: "己", detail: "화생토(음), 비옥함, 기예 발현", tenStar: "상관", desc: "다재다능함, 세련된 언변 및 설득력" },
+          { stem: "庚", detail: "화극금(양), 큰 결실의 제련", tenStar: "편재", desc: "사업적 수완, 큰 재물에 대한 과감한 도전" },
+          { stem: "辛", detail: "화극금(음), 병신합, 가치 완성", tenStar: "정재", desc: "정확한 계산, 치밀한 결실 관리, 실속" },
+          { stem: "壬", detail: "수극화(양), 수화기제, 절제", tenStar: "편관", desc: "명예 지향, 강력한 책임감과 리더십" },
+          { stem: "癸", detail: "수극화(음), 빛의 은은함, 규율", tenStar: "정관", desc: "단정함, 바른 태도, 공공의 가치 추구" },
+          { stem: "甲", detail: "목생화(양), 태양 아래 자람", tenStar: "편인", desc: "지적 호기심, 높은 영감, 후원자의 도움" },
+          { stem: "乙", detail: "목생화(음), 아름다운 꽃 피움", tenStar: "정인", desc: "사랑받는 인복, 따뜻한 수용성, 학문적 성취" }
+        ]
+      },
+      "丁": {
+        name: "丁 (정화)",
+        element: "火 (음화)",
+        elementClass: "bg-fire",
+        range: "C47 ~ F60",
+        feature: "촛불 및 등대의 온기, 은근한 지속성, 섬세함과 집중력.\n타인을 따뜻하게 배려하지만 내면에 강력한 집념과 열정을 보유.",
+        rows: [
+          { stem: "丙", detail: "동일 오행(양), 빛에 묻힘 조심", tenStar: "겁재", desc: "경쟁에서의 자극, 독기 및 발전의 계기" },
+          { stem: "丁", detail: "동일 오행(음), 온기의 확산", tenStar: "비견", desc: "동료와의 친밀함, 은근한 고집과 집념" },
+          { stem: "戊", detail: "화생토(양), 기운의 조율", tenStar: "상관", desc: "창의적인 변형, 뛰어난 재치와 감각" },
+          { stem: "己", detail: "화생토(음), 결실의 보살핌", tenStar: "식신", desc: "섬세한 기술, 꾸준한 생산성, 봉사 정신" },
+          { stem: "庚", detail: "화극금(양), 제련을 통한 기물 완성", tenStar: "정재", desc: "명확한 목표 의식, 가치 창출, 실속" },
+          { stem: "辛", detail: "화극금(음), 정신합/보석 다듬기", tenStar: "편재", desc: "예리한 재물 감각, 가치 판단의 정교함" },
+          { stem: "壬", detail: "수극화(양), 정임합, 다정다감", tenStar: "정관", desc: "원만한 조직 생활, 단정함, 규칙 준수" },
+          { stem: "癸", detail: "수극화(음), 자극과 긴장감", tenStar: "편관", desc: "위험 관리 능력, 순발력, 강한 의지" },
+          { stem: "甲", detail: "목생화(양), 지속적인 땔감", tenStar: "정인", desc: "안정적 보살핌, 수용성, 깊이 있는 학문" },
+          { stem: "乙", detail: "목생화(음), 땔감의 조율", tenStar: "편인", desc: "독창적 직관, 전문적 재능, 집중력" }
+        ]
+      },
+      "戊": {
+        name: "戊 (무토)",
+        element: "土 (양토)",
+        elementClass: "bg-earth",
+        range: "C61 ~ F73",
+        feature: "넓은 태산과 주체적인 포용력, 중용, 신용과 침묵.\n변화에 동요하지 않고 무게감 있게 타인의 의견을 포용하는 성향.",
+        rows: [
+          { stem: "戊", detail: "동일 오행(양), 중후함, 산맥", tenStar: "비견", desc: "주관의 견고함, 흔들리지 않는 중심" },
+          { stem: "己", detail: "동일 오행(음), 옥토와의 조화", tenStar: "겁재", desc: "경쟁 및 포용, 다양한 세력과의 융합" },
+          { stem: "庚", detail: "토생금(양), 매장된 원석 매칭", tenStar: "식신", desc: "묵묵한 결실 도출, 풍요로운 표현력" },
+          { stem: "辛", detail: "토생금(음), 보석의 드러남", tenStar: "상관", desc: "예리한 언변, 자기주장 및 개성 표현" },
+          { stem: "壬", detail: "토극수(양), 제방, 큰 물 조율", tenStar: "편재", desc: "대규모 자원 관리, 사업적 안목, 거시적 수완" },
+          { stem: "癸", detail: "토극수(음), 무계합, 흡수", tenStar: "정재", desc: "알뜰한 수용, 성실한 자산 축적, 신용" },
+          { stem: "甲", detail: "목극토(양), 소토, 개발", tenStar: "편관", desc: "도전 과제 수용, 통제력, 강한 책임감" },
+          { stem: "乙", detail: "목극토(음), 초목으로 가꿈", tenStar: "정관", desc: "안정적 조직 형성, 질서 확립" },
+          { stem: "丙", detail: "화생토(양), 따뜻한 기운 채움", tenStar: "편인", desc: "포용적 지혜, 스케일 큰 지식 수용" },
+          { stem: "丁", detail: "화생토(음), 땅을 비옥하게 함", tenStar: "정인", desc: "어머니 같은 따뜻함, 신뢰받는 인품" }
+        ]
+      },
+      "己": {
+        name: "己 (기토)",
+        element: "土 (음토)",
+        elementClass: "bg-earth",
+        range: "C74 ~ F86",
+        feature: "비옥한 전답, 실속, 자기관리, 섬세한 포용력.\n현실적이며 실리를 중시하고 사람을 조용히 품어주는 능력.",
+        rows: [
+          { stem: "戊", detail: "동일 오행(양), 태산에 의지", tenStar: "겁재", desc: "외부 세력과의 연대, 은근한 경쟁심" },
+          { stem: "己", detail: "동일 오행(음), 평평함, 조화", tenStar: "비견", desc: "내실 중심, 온화한 주관, 평정심" },
+          { stem: "庚", detail: "토생금(양), 단단한 결실 내포", tenStar: "상관", desc: "재치 있는 기예, 실속 있는 표현" },
+          { stem: "辛", detail: "토생금(음), 가치 있는 씨앗", tenStar: "식신", desc: "꼼꼼한 가공 및 생산활동, 전문성" },
+          { stem: "壬", detail: "토극수(양), 기토탁임 주의", tenStar: "정재", desc: "현실적 자산 관리, 신중한 판단" },
+          { stem: "癸", detail: "토극수(음), 수분 흡수, 옥토", tenStar: "편재", desc: "알뜰한 수완, 재물 포착의 정교함" },
+          { stem: "甲", detail: "목극토(양), 갑기합, 정착", tenStar: "정관", desc: "바른 명예, 정당한 권위, 원만한 조화" },
+          { stem: "乙", detail: "목극토(음), 새싹의 발현", tenStar: "편관", desc: "적응력 개발, 자극을 통한 단련" },
+          { stem: "丙", detail: "화생토(양), 만물 자양의 빛", tenStar: "정인", desc: "풍부한 자애로움, 후원운, 학문적 성과" },
+          { stem: "丁", detail: "화생토(음), 온실의 열기", tenStar: "편인", desc: "전문적 재능, 깊이 있는 기술과 직관" }
+        ]
+      },
+      "庚": {
+        name: "庚 (경금)",
+        element: "金 (양금)",
+        elementClass: "bg-metal",
+        range: "C87 ~ F99",
+        feature: "원석 및 과감한 결단력, 정의감, 의리와 절제.\n강직하고 타협하지 않는 원칙을 가지며 단련을 통해 결실을 이룸.",
+        rows: [
+          { stem: "庚", detail: "동일 오행(양), 강 대 강 의리", tenStar: "비견", desc: "강한 소신, 절개, 주관의 확고함" },
+          { stem: "辛", detail: "동일 오행(음), 예리함과의 조화", tenStar: "겁재", desc: "경쟁을 통한 제련, 정밀함과의 대비" },
+          { stem: "壬", detail: "금생수(양), 금수쌍청, 명료", tenStar: "식신", desc: "명확한 논리, 시원시원한 표현력" },
+          { stem: "癸", detail: "금생수(음), 은은한 유출", tenStar: "상관", desc: "날카로운 비판력, 독창적인 창작성" },
+          { stem: "甲", detail: "금극목(양), 쪼개어 재목 만듦", tenStar: "편재", desc: "과감한 사업성, 큰 가치 재구성" },
+          { stem: "乙", detail: "금극목(음), 을경합, 유연함", tenStar: "정재", desc: "안정적 정재 관리, 합리적 결실" },
+          { stem: "丙", detail: "화극금(양), 불로 제련함", tenStar: "편관", desc: "조직 내 리더십, 단련과 권력" },
+          { stem: "丁", detail: "화극금(음), 정밀 세공", tenStar: "정관", desc: "올바른 틀 형성, 완벽주의적 규율" },
+          { stem: "戊", detail: "토생금(양), 원석의 매장", tenStar: "편인", desc: "중후한 수용, 깊이 있는 전문 지식" },
+          { stem: "己", detail: "토생금(음), 흙을 털어냄", tenStar: "정인", desc: "자상한 정인, 바른 학문적 바탕" }
+        ]
+      },
+      "辛": {
+        name: "辛 (신금)",
+        element: "金 (음금)",
+        elementClass: "bg-metal",
+        range: "C100 ~ F111",
+        feature: "완성된 보석, 예리함, 정확성, 높은 자존심.\n섬세하고 완벽을 추구하며 깔끔하고 명확한 구분을 선호함.",
+        rows: [
+          { stem: "庚", detail: "동일 오행(양), 자극과 배경", tenStar: "겁재", desc: "경쟁 의식, 자존심을 통한 발전" },
+          { stem: "辛", detail: "동일 오행(음), 빛나는 보석들", tenStar: "비견", desc: "섬세한 고집, 자신만의 독자성" },
+          { stem: "壬", detail: "금생수(양), 도세주옥(보석 씻음)", tenStar: "상관", desc: "재능의 화려한 발현, 뛰어난 매력" },
+          { stem: "癸", detail: "금생수(음), 은은한 매력", tenStar: "식신", desc: "꾸준한 자기관리, 정교한 솜씨" },
+          { stem: "甲", detail: "금극목(양), 정밀한 재단", tenStar: "정재", desc: "정확한 셈법, 실속 있는 재물 운용" },
+          { stem: "乙", detail: "금극목(음), 가꾸기", tenStar: "편재", desc: "순발력 있는 기회 포착, 센스" },
+          { stem: "丙", detail: "화극금(양), 병신합, 빛남", tenStar: "정관", desc: "합리적 질서 준수, 세련된 명예" },
+          { stem: "丁", detail: "화극금(음), 은근한 자극", tenStar: "편관", desc: "자기 검열, 예민함 관리, 긴장감" },
+          { stem: "戊", detail: "토생금(양), 빛이 묻히지 않게 관리", tenStar: "정인", desc: "안정적 체계 수용, 귀인의 배려" },
+          { stem: "己", detail: "토생금(음), 습토의 영양", tenStar: "편인", desc: "전문적 재능, 독창적 감각" }
+        ]
+      },
+      "壬": {
+        name: "壬 (임수)",
+        element: "水 (양수)",
+        elementClass: "bg-water",
+        range: "C112 ~ F123",
+        feature: "넓은 바다와 지혜, 유연한 변화, 거시적 안목.\n모든 것을 받아들이는 포용력과 깊은 생각, 지혜로운 대처 능력.",
+        rows: [
+          { stem: "壬", detail: "동일 오행(양), 큰 수량, 대범함", tenStar: "비견", desc: "주관의 거대함, 거시적 안목" },
+          { stem: "癸", detail: "동일 오행(음), 정밀함과의 유합", tenStar: "겁재", desc: "다양성 포용, 은근한 주도권 경쟁" },
+          { stem: "甲", detail: "수생목(양), 원대한 키움", tenStar: "식신", desc: "풍부한 표현, 미래 지향적 사업" },
+          { stem: "乙", detail: "수생목(음), 촉촉한 자양", tenStar: "상관", desc: "유연한 언변, 예술적 표현성" },
+          { stem: "丙", detail: "수극화(양), 강휘상영, 반사", tenStar: "편재", desc: "스케일 큰 활동, 글로벌 안목" },
+          { stem: "丁", detail: "수극화(음), 정임합, 온기 조화", tenStar: "정재", desc: "치밀한 수익 모델, 성실성" },
+          { stem: "戊", detail: "토극수(양), 제방으로 방향성 제시", tenStar: "편관", desc: "절제와 규율, 리더의 책임감" },
+          { stem: "己", detail: "토극수(음), 흐름의 조율", tenStar: "정관", desc: "안정적 규범, 조직 적응력" },
+          { stem: "庚", detail: "금생수(양), 수원(水源)의 끊임없음", tenStar: "편인", desc: "마르지 않는 아이디어, 깊은 원천" },
+          { stem: "辛", detail: "금생수(음), 깨끗한 물 유지", tenStar: "정인", desc: "정통 학문, 높은 도덕성과 수용성" }
+        ]
+      },
+      "癸": {
+        name: "癸 (계수)",
+        element: "水 (음수)",
+        elementClass: "bg-water",
+        range: "C124 ~ F136",
+        feature: "단비와 샘물, 정교함, 침투력, 섬세한 지혜.\n상대를 조용히 변화시키며 환경에 맞춰 스며드는 직관력보유.",
+        rows: [
+          { stem: "壬", detail: "동일 오행(양), 큰 물에 합류", tenStar: "겁재", desc: "타인의 역량을 활용하는 지혜" },
+          { stem: "癸", detail: "동일 오행(음), 은은한 모임", tenStar: "비견", desc: "섬세한 소신, 은근한 집념" },
+          { stem: "甲", detail: "수생목(양), 나무를 키우는 단비", tenStar: "상관", desc: "비판적 재치, 독창적 언변" },
+          { stem: "乙", detail: "수생목(음), 꽃을 피우는 촉촉함", tenStar: "식신", desc: "자상한 보살핌, 꾸준한 생산력" },
+          { stem: "丙", detail: "수극화(양), 빛과의 시너지", tenStar: "정재", desc: "명확한 계산, 실속 있는 기획" },
+          { stem: "丁", detail: "수극화(음), 자극과 변화", tenStar: "편재", desc: "예리한 재물 감각, 기회 포착" },
+          { stem: "戊", detail: "토극수(양), 무계합, 정착", tenStar: "정관", desc: "바른 규칙, 안정적 원칙 준수" },
+          { stem: "己", detail: "토극수(음), 습토와의 결합", tenStar: "편관", desc: "자기절제, 세심한 대응 능력" },
+          { stem: "庚", detail: "금생수(양), 바위 샘물", tenStar: "정인", desc: "깊은 수용성, 학문적 후원" },
+          { stem: "辛", detail: "금생수(음), 은은한 가공수", tenStar: "편인", desc: "전문적 직관, 기예 및 아이디어" }
+        ]
+      }
+    };
+
+    // 순서 정의: 甲 ~ 癸
+    const stemOrder = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+
+    const menuList = document.getElementById('menuList');
+    const currentTitle = document.getElementById('currentTitle');
+    const currentTag = document.getElementById('currentTag');
+    const featureText = document.getElementById('featureText');
+    const tableBody = document.getElementById('tableBody');
+
+    // 좌측 사이드바 메뉴 생성
+    function initMenu() {
+      stemOrder.forEach((stemKey, index) => {
+        const item = sajuData[stemKey];
+        const li = document.createElement('li');
+        li.className = `menu-item ${index === 0 ? 'active' : ''}`;
+        li.dataset.stem = stemKey;
+        li.innerHTML = `
+          <span>${item.name}</span>
+          <span class="element-badge ${item.elementClass}">${item.element.split(' ')[0]}</span>
+        `;
+        li.addEventListener('click', () => selectStem(stemKey));
+        menuList.appendChild(li);
+      });
+    }
+
+    // 일간 선택 시 우측 내용 프레임 업데이트
+    function selectStem(stemKey) {
+      // 메뉴 active 클래스 전환
+      document.querySelectorAll('.menu-item').forEach(el => {
+        if (el.dataset.stem === stemKey) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      const data = sajuData[stemKey];
+      if (!data) return;
+
+      // 상단 헤더 업데이트
+      currentTitle.textContent = `${data.name}`;
+      currentTag.textContent = data.element;
+      currentTag.className = `stem-tag ${data.elementClass}`;
+
+      // 1. [특징] 영역 업데이트 (맨 앞/상단 배치)
+      featureText.textContent = data.feature;
+
+      // 2. 표 내용 업데이트 (C~F열 기준)
+      tableBody.innerHTML = '';
+      data.rows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="stem-cell">${row.stem}</td>
+          <td class="element-cell">${row.detail}</td>
+          <td class="tenstar-cell">${row.tenStar}</td>
+          <td>${row.desc}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    // 초기화 함수 실행 (기본 선택: 甲)
+    initMenu();
+    selectStem('甲');
+  </script>
+</body>
+</html>

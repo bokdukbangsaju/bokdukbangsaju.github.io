@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>음양오행 및 천간 참조 Sheet</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 1. 좌측 메뉴 프레임 */
+    .sidebar {
+      width: 220px;
+      background-color: #1e293b;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid #0f172a;
+    }
+    .sidebar-header {
+      padding: 20px 15px;
+      background-color: #0f172a;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid #334155;
+      letter-spacing: 1px;
+    }
+    .menu-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .menu-item {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+      transition: background-color 0.2s, padding-left 0.2s;
+    }
+    .menu-item:hover {
+      background-color: #334155;
+      padding-left: 25px;
+    }
+    .menu-item.active {
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* 오행 뱃지 스타일 */
+    .badge {
+      font-size: 0.8rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: normal;
+    }
+    .bg-all { background-color: #475569; }
+    .bg-wood { background-color: #16a34a; }  /* 木 */
+    .bg-fire { background-color: #dc2626; }  /* 火 */
+    .bg-earth { background-color: #d97706; } /* 土 */
+    .bg-metal { background-color: #64748b; } /* 金 */
+    .bg-water { background-color: #0284c7; } /* 水 */
+
+    /* 2. 우측 내용 프레임 */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      background-color: #ffffff;
+    }
+
+    /* 제목 가운데 정렬 */
+    .section-title {
+      text-align: center;
+      font-size: 1.6rem;
+      color: #0f172a;
+      margin-bottom: 20px;
+      padding: 12px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .sub-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #1e293b;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 테이블 스타일 */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      margin-bottom: 25px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: bold;
+      padding: 12px 15px;
+      font-size: 0.95rem;
+      border: 1px solid #cbd5e1;
+      text-align: center;
+    }
+    td {
+      padding: 10px 15px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* 단일 오행 행렬 변환 표 전용 스타일 */
+    .transposed-single th {
+      width: 25%;
+      background-color: #f8fafc;
+      text-align: center;
+    }
+    .transposed-single td {
+      width: 75%;
+      font-weight: 500;
+    }
+
+    /* 전체보기 행렬 변환 표 전용 스타일 */
+    .transposed-all th {
+      width: 15%;
+      background-color: #f1f5f9;
+      text-align: center;
+    }
+    .transposed-all td {
+      width: 17%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">음양오행 메뉴</div>
+    <ul class="menu-list" id="menuList">
+      <li class="menu-item active" onclick="showContent('ALL')">
+        <span>전체보기</span>
+        <span class="badge bg-all">ALL</span>
+      </li>
+      <li class="menu-item" onclick="showContent('木')">
+        <span>木 (나무)</span>
+        <span class="badge bg-wood">木</span>
+      </li>
+      <li class="menu-item" onclick="showContent('火')">
+        <span>火 (불)</span>
+        <span class="badge bg-fire">火</span>
+      </li>
+      <li class="menu-item" onclick="showContent('土')">
+        <span>土 (흙)</span>
+        <span class="badge bg-earth">土</span>
+      </li>
+      <li class="menu-item" onclick="showContent('金')">
+        <span>金 (쇠)</span>
+        <span class="badge bg-metal">金</span>
+      </li>
+      <li class="menu-item" onclick="showContent('水')">
+        <span>水 (물)</span>
+        <span class="badge bg-water">水</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-content" id="mainContent">
+    </div>
+
+  <script>
+    // [Sheet 1] 오행과 천간 데이터 (A1:D11)
+    const stemData = [
+      { elem: "木", yinYang: "陽", stem: "甲", pursuit: "계속 분출하고자 하는 마음" },
+      { elem: "木", yinYang: "陰", stem: "乙", pursuit: "火를 지나 金을 이루겠다는 마음" },
+      { elem: "火", yinYang: "陽", stem: "丙", pursuit: "가장 높은 곳에서 확산하려는 마음" },
+      { elem: "火", yinYang: "陰", stem: "丁", pursuit: "金을 통해 水를 정복하려는 변화의 마음" },
+      { elem: "土", yinYang: "陽", stem: "戊", pursuit: "앞선 오행의 정보를 받아들임" },
+      { elem: "土", yinYang: "陰", stem: "己", pursuit: "다음 오행을 만들어 감" },
+      { elem: "金", yinYang: "陽", stem: "庚", pursuit: "火를 모으고 수렴하려는 마음" },
+      { elem: "金", yinYang: "陰", stem: "辛", pursuit: "水를 향하고 木을 키워내겠다는 변화의 마음" },
+      { elem: "水", yinYang: "陽", stem: "壬", pursuit: "水의 본연의 모습인 응축하고자 하는 마음" },
+      { elem: "水", yinYang: "陰", stem: "癸", pursuit: "木을 통해 火로 나가겠다는 마음" }
+    ];
+
+    // [Sheet 2] 오행1 데이터 (A1:Q6)
+    const element1Headers = [
+      "오행", "형상", "천간", "지지", "오성", "절기", "방위", 
+      "색상", "인생", "오상", "얼굴", "신체", "오장", "오음", "맛", "숫자", "物極必反"
+    ];
+
+    const element1Data = {
+      "木": ["木", "나무", "甲, 乙", "寅, 卯", "곡직(曲直)", "봄", "동쪽", "청색", "초년기", "인(仁)", "눈", "신경계", "간", "각", "신맛", "3, 8", "木가 극에 이르면 金를 추구"],
+      "火": ["火", "불", "丙, 丁", "巳, 午", "염상(炎上)", "여름", "남쪽", "적색", "청년기", "예(禮)", "혀", "심장, 순환계", "심", "치", "쓴맛", "2, 7", "火가 극에 이르면 水를 추구"],
+      "土": ["土", "흙", "戊, 己", "辰戌, 丑未", "가색(稼穑)", "환절기", "중앙", "황색", "중년기", "신(信)", "입", "피부, 근육계", "비", "궁", "단맛", "5, 10", "水火木金을 조율"],
+      "金": ["金", "쇠", "庚, 辛", "申, 酉", "종혁(從革)", "가을", "가을", "백색", "장년기", "의(義)", "코", "뼈, 근골계", "폐", "상", "매운맛", "4, 9", "金가 극에 이르면 木를 추구"],
+      "水": ["水", "물", "壬, 癸", "亥, 子", "윤하(潤下)", "겨울", "겨울", "흑색", "노년기", "지(智)", "귀", "혈액계", "신", "우", "짠맛", "1, 6", "水가 극에 이르면 火를 추구"]
+    };
+
+    // 내용 출력 함수
+    function showContent(targetKey) {
+      // 1. 메뉴 활성화 버튼 처리
+      document.querySelectorAll('.menu-item').forEach(item => {
+        if ((targetKey === 'ALL' && item.innerText.includes('전체보기')) || item.innerText.startsWith(targetKey)) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      const mainContent = document.getElementById('mainContent');
+      mainContent.innerHTML = '';
+
+      // 2. [전체보기] 선택 시
+      if (targetKey === 'ALL') {
+        // (1) 오행과 천간 Sheet 전체 (A1:D11)
+        let stemRowsAll = '';
+        stemData.forEach(row => {
+          stemRowsAll += `
+            <tr>
+              <td style="text-align:center; font-weight:bold;">${row.elem}</td>
+              <td style="text-align:center;">${row.yinYang}</td>
+              <td style="text-align:center; font-weight:bold;">${row.stem}</td>
+              <td>${row.pursuit}</td>
+            </tr>
+          `;
+        });
+
+        const stemTableAll = `
+          <h2 class="section-title">음양오행 및 천간 전체보기</h2>
+          <div class="sub-title">📌 [오행과 천간 Sheet 전체 (A1:D11)]</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:15%;">오행</th>
+                  <th style="width:15%;">음양</th>
+                  <th style="width:15%;">천간</th>
+                  <th style="width:55%;">추구하는 바</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${stemRowsAll}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        // (2) 오행1 Sheet 전체 행렬 변환 (A1:Q6 -> 17개 항목 x 5개 오행)
+        let transposedAllRows = '';
+        element1Headers.forEach((header, idx) => {
+          transposedAllRows += `
+            <tr>
+              <th>${header}</th>
+              <td>${element1Data["木"][idx]}</td>
+              <td>${element1Data["火"][idx]}</td>
+              <td>${element1Data["土"][idx]}</td>
+              <td>${element1Data["金"][idx]}</td>
+              <td>${element1Data["水"][idx]}</td>
+            </tr>
+          `;
+        });
+
+        const element1TableAll = `
+          <div class="sub-title">📋 [오행1 Sheet 전체 행렬 바꾸기 (A1:Q6)]</div>
+          <div class="table-container">
+            <table class="transposed-all">
+              <thead>
+                <tr>
+                  <th>항목</th>
+                  <th>木</th>
+                  <th>火</th>
+                  <th>土</th>
+                  <th>金</th>
+                  <th>水</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${transposedAllRows}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        mainContent.innerHTML = stemTableAll + element1TableAll;
+      } 
+      // 3. 개별 오행 (木, 火, 土, 金, 水) 선택 시
+      else {
+        // (1) 해당 오행의 오행과 천간 데이터 필터링 (2개 행)
+        const filteredStems = stemData.filter(item => item.elem === targetKey);
+        let stemRowsSingle = '';
+        filteredStems.forEach(row => {
+          stemRowsSingle += `
+            <tr>
+              <td style="text-align:center; font-weight:bold;">${row.elem}</td>
+              <td style="text-align:center;">${row.yinYang}</td>
+              <td style="text-align:center; font-weight:bold;">${row.stem}</td>
+              <td>${row.pursuit}</td>
+            </tr>
+          `;
+        });
+
+        const stemTableSingle = `
+          <h2 class="section-title">오행 : ${targetKey}</h2>
+          <div class="sub-title">📌 [오행과 천간 Sheet]</div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:15%;">오행</th>
+                  <th style="width:15%;">음양</th>
+                  <th style="width:15%;">천간</th>
+                  <th style="width:55%;">추구하는 바</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${stemRowsSingle}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        // (2) 해당 오행의 오행1 행렬 바꾸기 표 (1행 헤더 + 해당 오행 행)
+        const targetElement1 = element1Data[targetKey];
+        let transposedSingleRows = '';
+        element1Headers.forEach((header, idx) => {
+          transposedSingleRows += `
+            <tr>
+              <th>${header}</th>
+              <td>${targetElement1[idx]}</td>
+            </tr>
+          `;
+        });
+
+        const element1TableSingle = `
+          <div class="sub-title">📋 [오행1 Sheet 특성]</div>
+          <div class="table-container">
+            <table class="transposed-single">
+              <tbody>
+                ${transposedSingleRows}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        mainContent.innerHTML = stemTableSingle + element1TableSingle;
+      }
+
+      // 스크롤 탑 위치 재설정
+      mainContent.scrollTop = 0;
+    }
+
+    // 처음 실행 시 '전체보기' 화면 출력
+    showContent('ALL');
+  </script>
+</body>
+</html>

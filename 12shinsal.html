@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장 명리공부 - 12신살 정리</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            color: #333;
+            background-color: #f5f6f8;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* 1. 좌측 메뉴 프레임 */
+        #menu-frame {
+            width: 260px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        #menu-frame h1 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #34495e;
+            color: #f39c12;
+            text-align: center;
+        }
+        .menu-group {
+            margin-bottom: 20px;
+        }
+        .menu-title {
+            font-size: 1.05rem;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #34495e;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 5px;
+        }
+        .menu-title:hover {
+            background-color: #415b76;
+        }
+        .submenu-header {
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding: 8px 10px;
+            background-color: #243342;
+            color: #bdc3c7;
+            border-radius: 4px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .submenu-list {
+            list-style: none;
+            padding-left: 5px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .submenu-list.samhap {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .submenu-item {
+            padding: 8px 5px;
+            background-color: #3e5871;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .submenu-item:hover, .menu-title.active, .submenu-item.active {
+            background-color: #e67e22;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* 우측 영역 (제목 프레임 + 내용 프레임) */
+        #main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 2. 우측 상단 제목 프레임 */
+        #title-frame {
+            height: 85px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dcdcdc;
+            display: flex;
+            align-items: center;
+            padding: 10px 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            z-index: 10;
+        }
+        #title-frame img {
+            height: 65px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            margin-right: 20px;
+        }
+        #title-frame h2 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* 3. 우측 하단 내용 프레임 */
+        #content-frame {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            background-color: #ffffff;
+        }
+
+        /* 표(Table) 공통 스타일 - 모든 셀 가운데 정렬 기본화 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #d1d5db;
+            padding: 10px 12px;
+            text-align: center; /* 가운데 정렬 */
+            font-size: 0.92rem;
+            line-height: 1.5;
+            vertical-align: middle;
+            white-space: pre-line;
+        }
+        .data-table th {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .highlight-col {
+            background-color: #fef3c7;
+            font-weight: bold;
+        }
+        .left-text {
+            text-align: left !important;
+        }
+
+        /* 삼합 전용 디자인 (빈 셀 테두리 없앰) */
+        .samhap-table td.empty-cell {
+            border: none !important;
+            background-color: transparent !important;
+        }
+        .samhap-table td.filled-cell {
+            border: 1px solid #d1d5db;
+            text-align: center;
+        }
+        .samhap-header {
+            background-color: #f1f5f9;
+            font-weight: bold;
+        }
+
+        .content-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1e293b;
+            border-left: 4px solid #e67e22;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="menu-frame">
+        <h1>一日命理</h1>
+        
+        <div class="menu-group">
+            <div class="menu-title active" onclick="show12Sinsal(this)">12신살</div>
+        </div>
+
+        <div class="menu-group">
+            <div class="submenu-header">지지별 12신살</div>
+            <ul class="submenu-list">
+                <li class="submenu-item" onclick="showJiji('寅', this)">寅</li>
+                <li class="submenu-item" onclick="showJiji('卯', this)">卯</li>
+                <li class="submenu-item" onclick="showJiji('辰', this)">辰</li>
+                <li class="submenu-item" onclick="showJiji('巳', this)">巳</li>
+                <li class="submenu-item" onclick="showJiji('午', this)">午</li>
+                <li class="submenu-item" onclick="showJiji('未', this)">未</li>
+                <li class="submenu-item" onclick="showJiji('申', this)">申</li>
+                <li class="submenu-item" onclick="showJiji('酉', this)">酉</li>
+                <li class="submenu-item" onclick="showJiji('戌', this)">戌</li>
+                <li class="submenu-item" onclick="showJiji('亥', this)">亥</li>
+                <li class="submenu-item" onclick="showJiji('子', this)">子</li>
+                <li class="submenu-item" onclick="showJiji('丑', this)">丑</li>
+            </ul>
+        </div>
+
+        <div class="menu-group">
+            <div class="submenu-header">삼합기준 신살</div>
+            <ul class="submenu-list samhap">
+                <li class="submenu-item" onclick="showSamhap('寅午戌', this)">寅午戌</li>
+                <li class="submenu-item" onclick="showSamhap('巳酉丑', this)">巳酉丑</li>
+                <li class="submenu-item" onclick="showSamhap('申子辰', this)">申子辰</li>
+                <li class="submenu-item" onclick="showSamhap('亥卯未', this)">亥卯未</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main-wrapper">
+        <div id="title-frame">
+            <img src="https://image.yes24.com/goods/177570594/XL" alt="하루한장 명리공부">
+            <h2>제이쌤의 하루한장 명리</h2>
+        </div>
+
+        <div id="content-frame">
+            </div>
+    </div>
+
+    <script>
+        // 1. 12신살_01 Sheet 데이터
+        const sinsal01Data = [
+            { sinsal: "지살", meaning: "\"자발적 변화/계획성 有/희망\"\n지살은 아이가 태어나서 걸음을 배우는 형태라서 매우 활동적이고 이사, 변동, 직업변동, 여행, 이민 등이 발생한다.\n(지살 방향에 문패, 간판, 거울, 기타 선전물 현관문 등이 있고, 지살 방에 차고 및 출입문을 내면 좋다.)", detail: "1) 힘들었던 과거 (겁살 : 허물어지다. 재살 : 고민을 시작, 천살 : 복구, 갱생)\n2) 능동적 움직임, 새로운 시작 (역마 → 지살과 충)\n3) 장기적인 계획, 정보 多 (이치에 밝은 사람)\n4) 최선을 다해 노력(각오, 의지)\n5) 밝은 성품, 호기심, 적극성 多", direction: "영업장 출입문\n간판설치에 길한 방향. 사업장에는 이 방향으로 문을 내면 좋다.\n대문, 복도, 차고, 신발장에 길한 방향\n자신을 알리는 선전물을 걸기" },
+            { sinsal: "장성살", meaning: "\"정면대응/책임감\"\n장성살은 용맹심이 왕성하여 과감하다는 뜻이 있고, 무슨 일이든 진취적으로 임하여 인내와 끈기로 능히 많은 어려움을 돌파하여 업무를 수행한다. 장성 방향은 항상 담장을 높여야 한다. 공부하는 학생은 더욱 꺼린다. 장성살 방에 대문을 두면 안 된다. 특히 남자한테 화가 온다.", detail: "1) 책임, 의무, 중심을 잃어서는 안된다.\n2) 자리를 비우기 어렵다. 이동 X\n3) 용맹, 책임, 주도, 의지, 지략\n4) 굳어 있다. 융통성 ↓\n5) 유치원, 요양원, 보육원, 체력이 강함 → 뭔가를 지키는 일(법률, 보험)", direction: "이 방위는 막혀 있어야 한다.\n사람의 출입문은 물론 외부 기운이 스며들지 않도록 막아 두어야 하는 방향.\n부엌이나 창고, 장독대 설치하는 것이 좋다.\n부적은 여기!" },
+            { sinsal: "화개살", meaning: "\"종교, 예술, 철학, 내면적 성숙\"\n화개살은 만물을 추구하여 창고에 보관시키는 것을 나타낸다. 화개가 공망을 맞으면 자식 두기가 어렵고, 종교계로 들어가는 사람이 많다. 여자는 미색이 좋으나 색정이 강하여 염문도 풍긴다. 화개살 띠와 동업하거나 연애하거나 어려운 부탁을 하지 말고 돈을 빌려 쓰지 말아야 한다. 사업실패 후 복구 목적으로 이사할 때는 반드시 화개 방향으로 이사를 하게 된다.", detail: "1) 예술, 종교, 철학 : 학문, 연구, 정리\n2) 과거 흔적, 문서, 자격\n3) 예전에 알던 것(사람)과 인연\n4) 정신세계 추구, 떠벌리지 X\n5) 창고, 보관, 금고", direction: "종교적 물품이나 예술품.\n자신이 마나든 물건을 보관하는 방위.\n이 방향에 습관적, 반복적으로 사용하는 물건을 둔다." },
+            { sinsal: "역마살", meaning: "\"외부작용에 의한 변화, 이동\"\n역마살은 이동살이다. 역마는 활동력이 뛰어남으로 사방팔방 돌아다니기를 좋아하고, 재주가 뛰어나다. 원행, 이사, 이동, 해외여행 등을 나타낸다.\n(활용 : 寅申巳亥의 역마 중 寅巳는 비행기, 申은 자동차, 亥는 배로 비유한다. 역마살 방향은 라디오, 비디오, 편지함 등의 진열장을 두는 것이 길하다. 어떤 직업 및 학술을 익히는데 첫 인연이 되는 사람은 역마에 해당된다.)", detail: "1) 지살과 충한다.\n2) 변동, 변화, 적응을 잘한다. (요령, 대체능력 ↑)\n3) 일시적 관계, 일시적 직업, 공 돈, 인성 : 실용학문\n4) 정보, 통신, 신문방송, 홍보, 무역, 이동수단(외국 이동, 변동)", direction: "이사에 길한 방위\n우편물이나 자동차의 차고가 있는 방위\n집안에서도 핸드폰이나 라디오, 텔레비전을 두면 소식을 빠르게 접할 수 있다." },
+            { sinsal: "재살", meaning: "\"꾀를 내다/어려운 환경\"\n재살은 일명 백호살 또는 수옥살이라 하며 생명과 명예를 걸고 최고 실권을 주도하는 상호간의 싸움을 치열하게 다투는 것을 뜻한다. 사법기관에 있으면 이름이 높아지지만 일반인들은 감금, 송사, 교통사고를 당할 수도 있다.\n(활용 : 재살 방향은 집에선 기밀문서, 드라이버, 운동기구, 시계, 우산 등을 진열하고, 밖에는 법원, 병원, 약방, 목욕탕, 정육점, 사돈집, 직속상사 집, 사장님의 일가친척이 살고 있는 방위를 말한다.)", detail: "1) 송사, 관재구설, 다툼\n2) 꾀를 낸다. 방법을 찾는다. 기민한 동작, 눈치 (아이디어, 창의력, 창조, 순발력, 변화 ↑)\n3) 운에서 : 안정 X, 불편한 관계\n4) 자신의 감정을 숨기고 문제를 해결하려 함\n5) 극단적 문제해결의 실마리", direction: "피곤한 사람이 거주하는 방위\n도둑이 들거나 우환이 생기는 방위로 이 방향에 창이나 문을 내거나 이사하면 좋지 않다." },
+            { sinsal: "월살", meaning: "\"고초살/멀리 있어도 마음이 가다\"\n월살은 저장해 둔 창고의 곡식이 고갈되는 작용을 나타내는데 만물이 고갈되어 싹이 트지 못한다. 원인불명의 병이 생긴다. 예부터 농촌에는 월살 일에는 씨앗 파종이나 동물의 교배, 결혼 날은 절대로 금지 하는 날로 여겨졌다.\n(활용 : 월살 방향은 한 가정에 가장이 주로 사용하는 물건이나 생필품 등이 진열되어 있으며 전기밥통, 쌀통, 밥상 등이 놓여 있다.)", detail: "1) 고초살 : 고독, 쓸쓸하다. 내면에 공허함\n2) 달 : 이루지 못함, 결실, 성과가 어려움 / 꿈 : 흥분, 새로운 것을 해 보고 싶은 마음.\n3) 외면이 화려함.(내면이 비어 있음) : 수입품, 명품, 외국어, 외형적 가치 추구\n4) 조명, 감사, 보안", direction: "이사 길한 방위. 남편의 침실 방향. 월살방향에는 가전제품, 생활필수품, 구급약, 외출복 등을 두면 좋다. 환자기준 월살방향 병원으로 가면 병세가 호전된다." },
+            { sinsal: "망신살", meaning: "\"체면 상관X/현실 추구\"\n망신살은 안에서 잃은 것을 망신이라 하고, 망신이 왕하고, 길성과 같이 있으면 큰소리도 잘 치고, 농담도 잘하며, 권모술수에 능하고, 계산도 빠른 사람이다. 흉살과 같이 있으면 게으르고 송사를 잘 일으키는 사람이다.\n(활용 : 망신 방향은 부부 중 외도 할 때 애인을 숨겨둔 곳이 망신살 방위이다. 본인이 찾아 갈 때 목표물이 있게 되는 것이니 큰 빌딩이나 은행, 선전탑, 파출소, 예식장 등이 있다.)", detail: "1) 요령, 눈치, 영리, 분석, 똑똑 (급하다 → 대처능력 有) 목적을 위해 수단, 방법을 가리지 않는다.\n2) 급속하게 일을 도모하다.\n3) 현실적 이익, 이용, 응용\n4) 건강 챙기기, 속을 보이다. 수술, 출산, 성적인 것과 연결\n5) 원리, 원칙대로 X\n6) 속 옷", direction: "이사 대길 방위\n허물없는 친구들이 사는 방향.\n이쪽 문은 폐쇄하는 것이 좋다." },
+            { sinsal: "육해살", meaning: "\"문제가 드러난 상황, 현실추구\"\n육해살은 여섯 가지 해로움을 말하여 작용이 강하게 나타난다.\n(활용 : 육해살 방향은 중요한 물건을 두지 말 것. 수리용 기구, 헌 물건 등을 진열하면 길하다. 육해살 방은 수호신 방이요, 제사 지내는 방이요, 외상 및 빚을 얻고자 하는 방이다. 육해살 방향으로 '조상님 도와주세요'하고 소원을 빌면 소원은 이루어진다. (하수구, 도망가는 방향)", detail: "1) 문제가 발생, 눈치를 본다. 이득을 취하려 하다. 요령을 부리다. 임기응변\n2) 재능 : 문제를 잘 살핀다. 느긋 할 수 없다.\n3) 남이 버린것을 취한다. (중고품, 재활용, 경매)\n4) 내부적 문제 해결", direction: "조상에게 지성을 드리는 방향.\n깨끗이 관리하고 조상들의 사진을 걸어두면 좋다.\n하수구가 있는 방향.\n영업장 출입문 대길한 방위" },
+            { sinsal: "천살", meaning: "\"의탁, 갱생, 복구, 결정권이 타인에게 있다\"\n천살은 하늘이 내리는 천재지변을 뜻한다.\n(활용 : 천살에 해당 되는 사람과 동업은 금물이다. 천살 방향은 공부하는 학생에게 행운의 방향이다. 조상신을 보호하는 호법신들이 출입하는 방이므로 종교적 물건을 두면 안 된다. 조상님의 선산을 모실 방향이다.)", detail: "1) 복구, 교정, 부활 ← 고통 수반\n2) 모두 끝내고 다시 시작하려 하다.\n3) 의지하고 싶다. 빽이 필요하다.\n4) 배경을 가지고 싶다\n5) 종교적 마음\n6) 매개 중개(종교), 부동산(진술축미)\n7) 돈보다 중요한 가치를 안다.\n8) 장례, 수리, 건축, 건설", direction: "이사 흉한 방위.\n조상신 출입 방위. 제사 지내는 방위. 이 방향에 부적, 종교 관련 물건을 두면 좋지 않다.\n학생은 이 방향 보며 공부하면 좋다." },
+            { sinsal: "겁살", meaning: "\"결정하기 어렵다/속수무책/버틴다\"\n겁살은 외부로부터 겁탈과 강탈을 당한다는 뜻이 있고, 모든 살중에서 우두머리 격을 작용력 또한 강하다. 사주에 겁살이 길하게 작용하면, 사람이 총명하고 재주가 뛰어나며 大貴大富한 명이다. 그러나 흉하게 작용하면, 강도나 교통사고로 비명횡사 할 수도 있다.\n(활용 : 겁살 방향은 임시로 조작된 곳이나 수리를 해야 하는 곳을 말하며, 수리를 했던가 다시 수리를 해야 할 곳이다.)", detail: "1) 외부 작용에 의해 빼앗기다. (1) 초조한 마음. (2) 과묵함, 묵직함, 작용을 숨기다\n2) 강제 철거, 이사, 해체, 폭파, 압류, 재난, 외부침입, 화재\n3) 어려운 상황 사람 : 관재구설, 경제적 어려움, 건강조심, 행동의 주저함", direction: "이사 흉한 방위.\n귀금속, 금고 등 재물을 놓으면 쓸 일이 생긴다.\n수리 하지 않는 방위. 약간의 문제가 있더라도 새롭게 건드리는 것이 좋지 않다." },
+            { sinsal: "연살", meaning: "\"무한반복/노력/불안정\"\n연살은 화려한 색깔에 민감하고 예민하여 아름다움을 좋아하고 남녀 간 색정문제로 함정에 빠지게 된다. 사교적인 일에 종사하면 오히려 이름을 떨친다.\n(활용 : 사업은 다방업, 술집, 여관, 목욕탕 등의 직업 종사자가 많다. 연살 방향은 남이 보기에 가장 잘 보이는 방위로 진열장, 화장대 등이 정돈 되어있는 곳이다.)", detail: "1) 목적 달성을 위한 반복\n2) 음흉, 유흥, 음란, 사치, 낭비, 성행위, 바람\n3) 욕구, 욕망 → 불확실\n4) 불안정, 끊임없는 노력", direction: "이 방향으로 문을 내면 바람기가 발동해 문제를 일으킨다.\n불륜의 상대자나 도적이 생기는 방위.\n화장대 두는 방향.\n출입문이나 창문이 있으면 폐쇄, 액자 걸기" },
+            { sinsal: "반안살", meaning: "\"남의 덕/대행\"\n반안살은 말의 안장을 말하는 것으로 무관을 뜻하고 그만큼 안정되어 있다는 것을 나타낸다.\n(활용 : 반안살 방향은 숨는 곳이며 사람 및 물건을 찾는 곳이다. 미혼자들은 반안살 방향으로 잠을 자면 결혼이 성사된다. 건강이 좋지 않을 때는 반안살 방위에 자면 좋아진다.)", detail: "1) 남의 능력을 대행\n2) 금고 두는 곳\n3) 편안하게 대행 해 주다\n4) 비밀, 고지식, 속내를 감추다.\n5) 일회용품, 임시 통변 물건\n6) 예술, 문화", direction: "이사 길한 방위.\n잠잘 때 머리를 두는 두침 방위.\n평소 믿고 의지할 수 있는 사람이 살거나 돈줄이 되는 방향.\n학생은 이 방향을 보고 공부하면 학업에 지장" }
+        ];
+
+        // 2. 12신살 Sheet 데이터 (지지별 12신살)
+        const jijiData = {
+            "寅": ["亥","子","丑","寅","卯","辰","巳","午","未","申","酉","戌"],
+            "卯": ["申","酉","戌","亥","子","丑","寅","卯","辰","巳","午","未"],
+            "辰": ["巳","午","未","申","酉","戌","亥","子","丑","寅","卯","辰"],
+            "巳": ["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"],
+            "午": ["亥","子","丑","寅","卯","辰","巳","午","未","申","酉","戌"],
+            "未": ["申","酉","戌","亥","子","丑","寅","卯","辰","巳","午","未"],
+            "申": ["巳","午","未","申","酉","戌","亥","子","丑","寅","卯","辰"],
+            "酉": ["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"],
+            "戌": ["亥","子","丑","寅","卯","辰","巳","午","未","申","酉","戌"],
+            "亥": ["申","酉","戌","亥","子","丑","寅","卯","辰","巳","午","未"],
+            "子": ["巳","午","未","申","酉","戌","亥","子","丑","寅","卯","辰"],
+            "丑": ["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"]
+        };
+        const sinsalHeaders = ["겁살", "재살", "천살", "지살", "연살", "월살", "망신살", "장성살", "반안살", "역마살", "육해살", "화개살"];
+
+        // 3. 12신살_02 Sheet 데이터 (삼합기준 신살)
+        const samhapData = {
+            "寅午戌": {
+                sang: ["겁살", "연살", "반안살"],
+                sangJiji: ["亥", "卯", "未"],
+                jung: ["지살", "장성살", "화개살"],
+                jungJiji: ["寅", "午", "戌"],
+                saeng: ["망신살", "육해살", "천살"],
+                saengJiji: ["巳", "酉", "丑"],
+                ban: ["역마살", "재살", "월살"],
+                banJiji: ["申", "子", "辰"]
+            },
+            "巳酉丑": {
+                sang: ["겁살", "연살", "반안살"],
+                sangJiji: ["寅", "午", "戌"],
+                jung: ["지살", "장성살", "화개살"],
+                jungJiji: ["巳", "酉", "丑"],
+                saeng: ["망신살", "육해살", "천살"],
+                saengJiji: ["申", "子", "辰"],
+                ban: ["역마살", "재살", "월살"],
+                banJiji: ["亥", "卯", "未"]
+            },
+            "申子辰": {
+                sang: ["겁살", "연살", "반안살"],
+                sangJiji: ["巳", "酉", "丑"],
+                jung: ["지살", "장성살", "화개살"],
+                jungJiji: ["申", "子", "辰"],
+                saeng: ["망신살", "육해살", "천살"],
+                saengJiji: ["亥", "卯", "未"],
+                ban: ["역마살", "재살", "월살"],
+                banJiji: ["寅", "午", "戌"]
+            },
+            "亥卯未": {
+                sang: ["겁살", "연살", "반안살"],
+                sangJiji: ["申", "子", "辰"],
+                jung: ["지살", "장성살", "화개살"],
+                jungJiji: ["亥", "卯", "未"],
+                saeng: ["망신살", "육해살", "천살"],
+                saengJiji: ["寅", "午", "戌"],
+                ban: ["역마살", "재살", "월살"],
+                banJiji: ["巳", "酉", "丑"]
+            }
+        };
+
+        // 12신살_01 표 출력
+        function show12Sinsal(element) {
+            clearActiveState();
+            element.classList.add('active');
+
+            const contentFrame = document.getElementById('content-frame');
+            let html = `<h3 class="content-title">12신살 전체 개요</h3>`;
+            html += `<table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;">12신살</th>
+                                <th style="width: 30%;">의미</th>
+                                <th style="width: 30%;">내용</th>
+                                <th style="width: 30%;">방위</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+            sinsal01Data.forEach(row => {
+                html += `<tr>
+                            <td class="highlight-col">${row.sinsal}</td>
+                            <td class="left-text">${row.meaning}</td>
+                            <td class="left-text">${row.detail}</td>
+                            <td class="left-text">${row.direction}</td>
+                         </tr>`;
+            });
+
+            html += `</tbody></table>`;
+            contentFrame.innerHTML = html;
+        }
+
+        // 지지별 12신살 표 출력
+        function showJiji(jiji, element) {
+            clearActiveState();
+            element.classList.add('active');
+
+            const contentFrame = document.getElementById('content-frame');
+            const rowValues = jijiData[jiji];
+
+            let html = `<h3 class="content-title">지지별 12신살 - [ ${jiji} ]</h3>`;
+            html += `<table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>기준지지</th>`;
+            
+            sinsalHeaders.forEach(header => {
+                html += `<th>${header}</th>`;
+            });
+
+            html += `       </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="highlight-col">${jiji}</td>`;
+
+            rowValues.forEach(val => {
+                html += `<td style="font-weight: bold;">${val}</td>`;
+            });
+
+            html += `       </tr>
+                        </tbody>
+                    </table>`;
+
+            contentFrame.innerHTML = html;
+        }
+
+        // 삼합기준 신살 표 출력 (셀 병합, 빈 셀 테두리 제거, 가운데 정렬 적용)
+        function showSamhap(samhapKey, element) {
+            clearActiveState();
+            element.classList.add('active');
+
+            const contentFrame = document.getElementById('content-frame');
+            const d = samhapData[samhapKey];
+
+            let html = `<h3 class="content-title">삼합기준 신살 - [ ${samhapKey} ]</h3>`;
+            html += `<table class="data-table samhap-table">
+                        <tbody>
+                            <tr>
+                                <td class="empty-cell"></td>
+                                <td colspan="3" class="filled-cell samhap-header">중심삼합을 생</td>
+                                <td class="empty-cell"></td>
+                                <td colspan="3" class="filled-cell samhap-header">중심삼합</td>
+                                <td class="empty-cell"></td>
+                                <td colspan="3" class="filled-cell samhap-header">중심삼합이 생</td>
+                            </tr>
+                            <tr>
+                                <td class="empty-cell"></td>
+                                <td class="filled-cell highlight-col">${d.sang[0]}</td>
+                                <td class="filled-cell highlight-col">${d.sang[1]}</td>
+                                <td class="filled-cell highlight-col">${d.sang[2]}</td>
+                                <td class="empty-cell"></td>
+                                <td class="filled-cell highlight-col">${d.jung[0]}</td>
+                                <td class="filled-cell highlight-col">${d.jung[1]}</td>
+                                <td class="filled-cell highlight-col">${d.jung[2]}</td>
+                                <td class="empty-cell"></td>
+                                <td class="filled-cell highlight-col">${d.saeng[0]}</td>
+                                <td class="filled-cell highlight-col">${d.saeng[1]}</td>
+                                <td class="filled-cell highlight-col">${d.saeng[2]}</td>
+                            </tr>
+                            <tr>
+                                <td class="empty-cell"></td>
+                                <td class="filled-cell">${d.sangJiji[0]}</td>
+                                <td class="filled-cell">${d.sangJiji[1]}</td>
+                                <td class="filled-cell">${d.sangJiji[2]}</td>
+                                <td class="empty-cell"></td>
+                                <td class="filled-cell">${d.jungJiji[0]}</td>
+                                <td class="filled-cell">${d.jungJiji[1]}</td>
+                                <td class="filled-cell">${d.jungJiji[2]}</td>
+                                <td class="empty-cell"></td>
+                                <td class="filled-cell">${d.saengJiji[0]}</td>
+                                <td class="filled-cell">${d.saengJiji[1]}</td>
+                                <td class="filled-cell">${d.saengJiji[2]}</td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td colspan="12" class="empty-cell"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="empty-cell"></td>
+                                <td colspan="3" class="filled-cell samhap-header">반대삼합</td>
+                                <td colspan="4" class="empty-cell"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="empty-cell"></td>
+                                <td class="filled-cell highlight-col">${d.ban[0]}</td>
+                                <td class="filled-cell highlight-col">${d.ban[1]}</td>
+                                <td class="filled-cell highlight-col">${d.ban[2]}</td>
+                                <td colspan="4" class="empty-cell"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="empty-cell"></td>
+                                <td class="filled-cell">${d.banJiji[0]}</td>
+                                <td class="filled-cell">${d.banJiji[1]}</td>
+                                <td class="filled-cell">${d.banJiji[2]}</td>
+                                <td colspan="4" class="empty-cell"></td>
+                            </tr>
+                        </tbody>
+                    </table>`;
+
+            contentFrame.innerHTML = html;
+        }
+
+        // 선택 상태 초기화
+        function clearActiveState() {
+            const items = document.querySelectorAll('.menu-title, .submenu-item');
+            items.forEach(item => item.classList.remove('active'));
+        }
+
+        // 페이지 진입 시 기본으로 12신살 표 출력
+        window.onload = function() {
+            show12Sinsal(document.querySelector('.menu-title'));
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쌤의 하루한장 명리 - 지지와 지지의 관계</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif; display: flex; height: 100vh; background-color: #f4f6f9; color: #333; overflow: hidden; }
+        #menu-frame { width: 270px; background-color: #2c3e50; color: #ecf0f1; display: flex; flex-direction: column; border-right: 1px solid #1a252f; overflow-y: auto; flex-shrink: 0; }
+        .menu-header { padding: 16px 15px; background-color: #1a252f; text-align: center; border-bottom: 2px solid #34495e; }
+        .menu-header h1 { font-size: 20px; font-weight: bold; letter-spacing: 1px; color: #f39c12; }
+        .menu-section { padding: 10px 0; }
+        .menu-section-title { padding: 8px 16px; font-size: 13.5px; font-weight: bold; color: #bdc3c7; background-color: #243342; border-left: 4px solid #e67e22; }
+        .menu-list { list-style: none; padding: 4px 0; }
+        .menu-item { padding: 7px 15px 7px 22px; font-size: 13px; cursor: pointer; transition: all 0.2s ease; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+        .menu-item:hover { background-color: #34495e; color: #3498db; padding-left: 25px; }
+        .menu-item.active { background-color: #e67e22; color: #ffffff; font-weight: bold; }
+        .branch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 10px 14px; }
+        .branch-btn { background-color: #34495e; color: #ecf0f1; border: 1px solid #455a64; padding: 7px 0; text-align: center; font-size: 14.5px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; }
+        .branch-btn:hover { background-color: #e67e22; color: #ffffff; border-color: #e67e22; }
+        .branch-btn.active { background-color: #d35400; color: #ffffff; border-color: #d35400; }
+        #right-container { flex: 1; display: flex; flex-direction: column; overflow: hidden; background-color: #f8f9fa; }
+        #title-frame { height: 70px; background-color: #ffffff; border-bottom: 2px solid #e9ecef; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); flex-shrink: 0; }
+        .title-left { display: flex; align-items: center; gap: 15px; }
+        .book-img { height: 52px; width: auto; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); object-fit: cover; }
+        .main-title { font-size: 19px; font-weight: bold; color: #2c3e50; }
+        .title-right { text-align: right; font-size: 12px; color: #7f8c8d; font-weight: 500; }
+        #content-frame { flex: 1; padding: 20px; overflow-y: auto; background-color: #f8f9fa; }
+        .content-card { background: #ffffff; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e2e8f0; }
+        .content-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #3498db; }
+        .content-title { font-size: 17px; font-weight: bold; color: #2c3e50; }
+        .data-count { font-size: 12.5px; color: #7f8c8d; background-color: #edf2f7; padding: 4px 10px; border-radius: 12px; }
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; background-color: #ffffff; }
+        table.data-table th, table.data-table td { border: 1px solid #cbd5e1; padding: 9px 11px; vertical-align: middle; line-height: 1.5; }
+        table.data-table th { background-color: #34495e; color: #ffffff; font-weight: 600; text-align: center; position: sticky; top: 0; z-index: 2; }
+        table.data-table tr:nth-child(even) { background-color: #f8fafc; }
+        table.data-table tr:hover { background-color: #f1f5f9; }
+        table.data-table td.col-center, table.data-table th.col-center { text-align: center; }
+        table.data-table td.col-left { text-align: left; }
+    </style>
+</head>
+<body>
+    <div id="menu-frame">
+        <div class="menu-header"><h1>一日命理</h1></div>
+        <div class="menu-section">
+            <div class="menu-section-title">형충회합파해</div>
+            <ul class="menu-list">
+                <li class="menu-item active" onclick="loadCategory('전체', this)">0) 전체보기 (1~140행)</li>
+                <li class="menu-item" onclick="loadCategory('方合', this)">1) 方合</li>
+                <li class="menu-item" onclick="loadCategory('三合', this)">2) 三合</li>
+                <li class="menu-item" onclick="loadCategory('六合', this)">3) 六合</li>
+                <li class="menu-item" onclick="loadCategory('冲', this)">4) 冲</li>
+                <li class="menu-item" onclick="loadCategory('刑', this)">5) 刑</li>
+                <li class="menu-item" onclick="loadCategory('害', this)">6) 害</li>
+                <li class="menu-item" onclick="loadCategory('破', this)">7) 破</li>
+                <li class="menu-item" onclick="loadCategory('怨嗔', this)">8) 怨嗔</li>
+                <li class="menu-item" onclick="loadCategory('天醫', this)">9) 天醫</li>
+                <li class="menu-item" onclick="loadCategory('喪門', this)">10) 喪門</li>
+                <li class="menu-item" onclick="loadCategory('弔客', this)">11) 弔客</li>
+                <li class="menu-item" onclick="loadCategory('孤辰寡宿', this)">12) 孤辰寡宿</li>
+                <li class="menu-item" onclick="loadCategory('庫葬', this)">13) 庫葬</li>
+                <li class="menu-item" onclick="loadCategory('天羅地網', this)">14) 天羅地網</li>
+                <li class="menu-item" onclick="loadCategory('懸針', this)">15) 懸針</li>
+                <li class="menu-item" onclick="loadCategory('湯火', this)">16) 湯火</li>
+            </ul>
+        </div>
+        <div class="menu-section">
+            <div class="menu-section-title">지지별 형충회합파해</div>
+            <div class="branch-grid">
+                <div class="branch-btn" onclick="loadBranch('寅', this)">寅</div>
+                <div class="branch-btn" onclick="loadBranch('卯', this)">卯</div>
+                <div class="branch-btn" onclick="loadBranch('辰', this)">辰</div>
+                <div class="branch-btn" onclick="loadBranch('巳', this)">巳</div>
+                <div class="branch-btn" onclick="loadBranch('午', this)">午</div>
+                <div class="branch-btn" onclick="loadBranch('未', this)">未</div>
+                <div class="branch-btn" onclick="loadBranch('申', this)">申</div>
+                <div class="branch-btn" onclick="loadBranch('酉', this)">酉</div>
+                <div class="branch-btn" onclick="loadBranch('戌', this)">戌</div>
+                <div class="branch-btn" onclick="loadBranch('亥', this)">亥</div>
+                <div class="branch-btn" onclick="loadBranch('子', this)">子</div>
+                <div class="branch-btn" onclick="loadBranch('丑', this)">丑</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="right-container">
+        <div id="title-frame">
+            <div class="title-left">
+                <img src="https://image.yes24.com/goods/177570594/XL" alt="책 이미지" class="book-img">
+                <div class="main-title">제이쌤의 하루한장 명리</div>
+            </div>
+            <div class="title-right">icemnpe@naver.com (made by Gemini)</div>
+        </div>
+        <div id="content-frame">
+            <div class="content-card">
+                <div class="content-header-bar">
+                    <div class="content-title" id="display-title">지지의 이해 - 전체 목록</div>
+                    <div class="data-count" id="display-count">총 139개 항목</div>
+                </div>
+                <div class="table-responsive" id="table-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 지지1, 지지2, 지지3을 분리한 엑셀 기본 열 구조 (총 8개 열)
+        const rawData = [
+            ["구분", "지지1", "지지2", "지지3", "종류", "결과", "세부", "내용"],
+            ["方合", "寅", "卯", "辰", "東方", "木", "春", "계절의 합. 형제의 합. 방합이 형성되면 해당 오행의 세력이 매우 강해짐."],
+            ["方合", "巳", "午", "未", "南方", "火", "夏", "계절의 합. 형제의 합. 방합이 형성되면 해당 오행의 세력이 매우 강해짐."],
+            ["方合", "申", "酉", "戌", "西方", "金", "秋", "계절의 합. 형제의 합. 방합이 형성되면 해당 오행의 세력이 매우 강해짐."],
+            ["方合", "亥", "子", "丑", "北方", "水", "冬", "계절의 합. 형제의 합. 방합이 형성되면 해당 오행의 세력이 매우 강해짐."],
+            ["三合", "亥", "卯", "未", "木局", "木", "生旺墓", "사회적 합. 목적의 합. 생지-왕지-묘지가 만나 하나의 오행 국을 형성."],
+            ["三合", "寅", "午", "戌", "火局", "火", "生旺墓", "사회적 합. 목적의 합. 생지-왕지-묘지가 만나 하나의 오행 국을 형성."],
+            ["三合", "巳", "酉", "丑", "金局", "金", "生旺墓", "사회적 합. 목적의 합. 생지-왕지-묘지가 만나 하나의 오행 국을 형성."],
+            ["三合", "申", "子", "辰", "水局", "水", "生旺墓", "사회적 합. 목적의 합. 생지-왕지-묘지가 만나 하나의 오행 국을 형성."],
+            ["六合", "子", "丑", "", "土", "육합", "음양합", "지구 자전축 경사에 따른 합. 개인적, 다정한 합."],
+            ["六合", "寅", "亥", "", "木", "육합", "음양합", "지구 자전축 경사에 따른 합. 개인적, 다정한 합. 파와 겸함."],
+            ["六合", "卯", "戌", "", "火", "육합", "음양합", "지구 자전축 경사에 따른 합. 개인적, 다정한 합."],
+            ["六合", "辰", "酉", "", "金", "육합", "음양합", "지구 자전축 경사에 따른 합. 개인적, 다정한 합."],
+            ["六合", "巳", "申", "", "水", "육합", "음양합", "지구 자전축 경사에 따른 합. 개인적, 다정한 합. 형과 파를 겸함."],
+            ["六合", "午", "未", "", "日月", "육합", "음양합", "지구 자전축 경사에 따른 합. 개인적, 다정한 합."],
+            ["冲", "子", "午", "", "子午冲", "수화충", "정충", "마주보는 정반대 기운의 충돌. 변화, 이동, 수리, 수술, 이별, 갈등 발생."],
+            ["冲", "丑", "未", "", "丑未冲", "토충", "붕충", "마주보는 정반대 기운의 충돌. 붕충이라 하여 밭을 개간하는 변화."],
+            ["冲", "寅", "申", "", "寅申冲", "금목충", "생지충", "마주보는 정반대 기운의 충돌. 역마의 충, 역동적인 변화."],
+            ["冲", "卯", "酉", "", "卯酉冲", "금목충", "왕지충", "마주보는 정반대 기운의 충돌. 도화의 충, 정서적, 감정적 충돌."],
+            ["冲", "辰", "戌", "", "辰戌冲", "토충", "붕충", "마주보는 정반대 기운의 충돌. 고장의 충, 창고가 열리고 닫힘."],
+            ["冲", "巳", "亥", "", "巳亥冲", "수화충", "생지충", "마주보는 정반대 기운의 충돌. 역마의 충, 이동과 분주함."],
+            ["刑", "寅", "巳", "", " 인사형", "삼형", "무은지형", "지세지형 또는 무은지형. 배신, 수술, 법쟁, 교통사고 주의."],
+            ["刑", "巳", "申", "", " 사신형", "삼형", "무은지형", "지세지형 또는 무은지형. 배신, 수술, 법쟁, 교통사고 주의."],
+            ["刑", "申", "寅", "", " 신인형", "삼형", "무은지형", "지세지형 또는 무은지형. 배신, 수술, 법쟁, 교통사고 주의."],
+            ["刑", "丑", "戌", "", " 축술형", "삼형", "지세지형", "지세지형. 자신의 힘을 믿고 다투다가 해를 입음."],
+            ["刑", "戌", "未", "", " 술미형", "삼형", "지세지형", "지세지형. 자신의 힘을 믿고 다투다가 해를 입음."],
+            ["刑", "未", "丑", "", " 미축형", "삼형", "지세지형", "지세지형. 자신의 힘을 믿고 다투다가 해를 입음."],
+            ["刑", "子", "卯", "", " 자묘형", "무례지형", "무례지형", "무례지형. 예의가 없고 성욕, 비도덕적 문제 주의."],
+            ["刑", "辰", "辰", "", " 자형", "자형", "자형", "스스로를 볶아치고 괴롭히는 자형살."],
+            ["刑", "午", "午", "", " 자형", "자형", "자형", "스스로를 볶아치고 괴롭히는 자형살."],
+            ["刑", "酉", "酉", "", " 자형", "자형", "자형", "스스로를 볶아치고 괴롭히는 자형살."],
+            ["刑", "亥", "亥", "", " 자형", "자형", "자형", "스스로를 볶아치고 괴롭히는 자형살."],
+            ["刑", "丑", "未", "", " 축미형", "축미형", "붕충형", "토의 형. 창고 개간 및 내부 조정."],
+            ["刑", "辰", "戌", "", " 진술형", "진술형", "붕충형", "토의 형. 창고 개간 및 내부 조정."],
+            ["害", "子", "未", "", "자미해", "육해", "해함", "합을 방해함. 원망, 질투, 은근한 방해, 잔병치레."],
+            ["害", "丑", "午", "", "축오해", "육해", "해함", "합을 방해함. 원망, 질투, 은근한 방해, 잔병치레."],
+            ["害", "寅", "巳", "", "인사해", "육해", "해함", "합을 방해함. 원망, 질투, 은근한 방해, 잔병치레."],
+            ["害", "卯", "辰", "", "묘진해", "육해", "해함", "합을 방해함. 원망, 질투, 은근한 방해, 잔병치레."],
+            ["害", "申", "亥", "", "신해해", "육해", "해함", "합을 방해함. 원망, 질투, 은근한 방해, 잔병치레."],
+            ["害", "酉", "戌", "", "유술해", "육해", "해함", "합을 방해함. 원망, 질투, 은근한 방해, 잔병치레."],
+            ["破", "子", "酉", "", "자유파", "육파", "깨어짐", "깨어짐, 파괴, 부서짐, 계약 해지, 불화."],
+            ["破", "丑", "辰", "", "축진파", "육파", "깨어짐", "깨어짐, 파괴, 부서짐, 계약 해지, 불화."],
+            ["破", "寅", "亥", "", "인해파", "육파", "깨어짐", "깨어짐, 파괴, 부서짐, 계약 해지, 불화."],
+            ["破", "卯", "午", "", "묘오파", "육파", "깨어짐", "깨어짐, 파괴, 부서짐, 계약 해지, 불화."],
+            ["破", "巳", "申", "", "사신파", "육파", "깨어짐", "깨어짐, 파괴, 부서짐, 계약 해지, 불화."],
+            ["破", "未", "戌", "", "미술파", "육파", "깨어짐", "깨어짐, 파괴, 부서짐, 계약 해지, 불화."],
+            ["怨嗔", "子", "未", "", "원진", "원진살", "증오", "까닭 없이 서로 미워하고 원망하는 기운."],
+            ["怨嗔", "丑", "午", "", "원진", "원진살", "증오", "까닭 없이 서로 미워하고 원망하는 기운."],
+            ["怨嗔", "寅", "酉", "", "원진", "원진살", "증오", "까닭 없이 서로 미워하고 원망하는 기운."],
+            ["怨嗔", "卯", "申", "", "원진", "원진살", "증오", "까닭 없이 서로 미워하고 원망하는 기운."],
+            ["怨嗔", "辰", "亥", "", "원진", "원진살", "증오", "까닭 없이 서로 미워하고 원망하는 기운."],
+            ["怨嗔", "巳", "戌", "", "원진", "원진살", "증오", "까닭 없이 서로 미워하고 원망하는 기운."],
+            ["天醫", "子", "亥", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "丑", "子", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "寅", "丑", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "卯", "寅", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "辰", "卯", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "巳", "辰", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "午", "巳", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "未", "午", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "申", "未", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "酉", "申", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "戌", "酉", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["天醫", "亥", "戌", "", "천의성", "의료", "활인", "병을 고치는 기운, 의료, 활인업, 상담가 적성."],
+            ["喪門", "子", "寅", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "丑", "卯", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "寅", "辰", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "卯", "巳", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "辰", "午", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "巳", "未", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "午", "申", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "未", "酉", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "申", "戌", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "酉", "亥", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "戌", "子", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["喪門", "亥", "丑", "", "상문살", "흉살", "상가", "상가집 방문 주의, 상복 입을 일 생김."],
+            ["弔客", "子", "戌", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "丑", "亥", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "寅", "子", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "卯", "丑", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "辰", "寅", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "巳", "卯", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "午", "辰", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "未", "巳", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "申", "午", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "酉", "未", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "戌", "申", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["弔客", "亥", "酉", "", "조객살", "흉살", "문상", "문상 가기 전 주의, 불길한 일 예방."],
+            ["孤辰寡宿", "亥子丑", "寅(고)", "戌(과)", "고신과숙", "고독", "외로움", "남자는 고신(외로움), 여자는 과숙(과부). 고독함."],
+            ["孤辰寡宿", "寅卯辰", "巳(고)", "丑(과)", "고신과숙", "고독", "외로움", "남자는 고신(외로움), 여자는 과숙(과부). 고독함."],
+            ["孤辰寡宿", "巳午未", "申(고)", "辰(과)", "고신과숙", "고독", "외로움", "남자는 고신(외로움), 여자는 과숙(과부). 고독함."],
+            ["孤辰寡宿", "申酉戌", "亥(고)", "未(과)", "고신과숙", "고독", "외로움", "남자는 고신(외로움), 여자는 과숙(과부). 고독함."],
+            ["庫葬", "辰", "水庫", "", "묘고", "창고", "입고", "수 기운의 창고 및 입고."],
+            ["庫葬", "戌", "火庫", "", "묘고", "창고", "입고", "화 기운의 창고 및 입고."],
+            ["庫葬", "丑", "金庫", "", "묘고", "창고", "입고", "금 기운의 창고 및 입고."],
+            ["庫葬", "未", "木庫", "", "묘고", "창고", "입고", "목 기운의 창고 및 입고."],
+            ["天羅地網", "戌", "亥", "천라", "천라지망", "구속", "막힘", "하늘의 그물. 갇힘, 답답함, 정신적 고뇌."],
+            ["天羅地網", "辰", "巳", "지망", "천라지망", "구속", "막힘", "땅의 그물. 현실적 얽매임, 활동 제약."],
+            ["懸針", "甲", "", "", "현침", "현침살", "뾰족함", "바늘처럼 뾰족한 기운. 의료, 침술, 기술, 비판적 언사."],
+            ["懸針", "辛", "", "", "현침", "현침살", "뾰족함", "바늘처럼 뾰족한 기운. 의료, 침술, 기술, 비판적 언사."],
+            ["懸針", "卯", "", "", "현침", "현침살", "뾰족함", "바늘처럼 뾰족한 기운. 의료, 침술, 기술, 비판적 언사."],
+            ["懸針", "午", "", "", "현침", "현침살", "뾰족함", "바늘처럼 뾰족한 기운. 의료, 침술, 기술, 비판적 언사."],
+            ["懸針", "申", "", "", "현침", "현침살", "뾰족함", "바늘처럼 뾰족한 기운. 의료, 침술, 기술, 비판적 언사."],
+            ["湯火", "寅", "巳", "申", "탕화살", "화상", "폭발", "불, 물, 약물 중독, 화상, 수술 주의."],
+            ["湯火", "午", "辰", "丑", "탕화살", "화상", "폭발", "불, 물, 약물 중독, 화상, 수술 주의."],
+            ["湯火", "丑", "午", "戌", "탕화살", "화상", "폭발", "불, 물, 약물 중독, 화상, 수술 주의."]
+        ];
+
+        window.onload = function() {
+            renderTable(rawData.slice(1), "지지의 이해 - 전체 목록");
+        };
+
+        function resetActiveMenu() {
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.branch-btn').forEach(el => el.classList.remove('active'));
+        }
+
+        function loadCategory(catName, element) {
+            resetActiveMenu();
+            if(element) element.classList.add('active');
+
+            if (catName === '전체') {
+                renderTable(rawData.slice(1), "지지의 이해 - 전체 목록");
+            } else {
+                const filtered = rawData.slice(1).filter(row => row[0] === catName);
+                renderTable(filtered, `지지의 이해 - ${catName}`);
+            }
+        }
+
+        function loadBranch(branch, element) {
+            resetActiveMenu();
+            if(element) element.classList.add('active');
+
+            const filtered = rawData.slice(1).filter(row => 
+                row[0].includes(branch) || row[1].includes(branch) || row[2].includes(branch) || row[3].includes(branch)
+            );
+            renderTable(filtered, `지지별 관계 - [${branch}] 관련 항목`);
+        }
+
+        function renderTable(dataRows, title) {
+            document.getElementById('display-title').innerText = title;
+            document.getElementById('display-count').innerText = `총 ${dataRows.length}개 항목`;
+
+            if (dataRows.length === 0) {
+                document.getElementById('table-container').innerHTML = '<p style="padding:20px; text-align:center; color:#888;">해당하는 데이터가 없습니다.</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr>';
+            const headers = rawData[0];
+            headers.forEach((h) => {
+                html += `<th class="col-center">${h}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+
+            dataRows.forEach(row => {
+                html += '<tr>';
+                row.forEach((cell, colIdx) => {
+                    const lastIdx = row.length - 1;
+                    if (colIdx === lastIdx) { // 마지막 '내용' 열만 좌측 정렬
+                        html += `<td class="col-left">${cell}</td>`;
+                    } else { // 나머지 지지1, 지지2, 지지3 포함 모든 열은 가운데 정렬
+                        html += `<td class="col-center">${cell}</td>`;
+                    }
+                });
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            document.getElementById('table-container').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

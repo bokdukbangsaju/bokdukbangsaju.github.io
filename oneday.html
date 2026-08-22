@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쌤의 하루한장 명리</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Malgun Gothic', sans-serif; display: flex; height: 100vh; overflow: hidden; color: #333; background: #f8f9fa; }
+
+        /* 좌측 메뉴 프레임 */
+        #menu-frame { width: 320px; background: #2c3e50; color: #ecf0f1; height: 100%; overflow-y: auto; padding: 20px 15px; border-right: 1px solid #1a252f; }
+        #menu-frame h2 { font-size: 22px; margin-bottom: 20px; text-align: center; color: #f1c40f; border-bottom: 2px solid #f1c40f; padding-bottom: 10px; }
+        .sub-title { font-size: 16px; font-weight: bold; margin: 15px 0 8px; color: #bdc3c7; border-left: 4px solid #3498db; padding-left: 8px; }
+        .menu-list { list-style: none; margin-bottom: 15px; }
+        .menu-item { padding: 8px 12px; font-size: 13px; cursor: pointer; border-radius: 4px; margin-bottom: 3px; transition: background 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .menu-item:hover { background: #34495e; color: #fff; }
+        .menu-item.active { background: #3498db; color: #fff; font-weight: bold; }
+
+        /* 우측 영역 */
+        #main-area { flex: 1; display: flex; flex-direction: column; height: 100%; }
+
+        /* 우측 상단 제목 프레임 */
+        #header-frame { height: 90px; background: #fff; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; padding: 10px 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        #header-frame img { height: 70px; margin-right: 20px; border-radius: 4px; border: 1px solid #ddd; }
+        #header-frame h1 { font-size: 24px; color: #2c3e50; font-weight: bold; }
+
+        /* 우측 하단 내용 프레임 */
+        #content-frame { flex: 1; padding: 30px; overflow-y: auto; background: #fff; }
+        
+        /* 공통 표 서식 */
+        .content-body h3 { font-size: 20px; margin-bottom: 15px; color: #16a085; border-bottom: 2px solid #16a085; padding-bottom: 5px; }
+        .content-body h4 { font-size: 16px; margin: 20px 0 10px; color: #2980b9; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: #fff; font-size: 14px; }
+        th, td { border: 1px solid #dcdde1; padding: 10px 12px; text-align: center; line-height: 1.5; }
+        th { background: #f1f2f6; font-weight: bold; color: #2f3542; }
+        .text-left { text-align: left; }
+        .bg-highlight { background: #fef5e7; }
+        ul { margin-left: 20px; line-height: 1.8; margin-bottom: 15px; }
+        .stem-header { background: #e8f4f8; font-weight: bold; font-size: 15px; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 좌측 메뉴 프레임 -->
+    <div id="menu-frame">
+        <h2>一日命理</h2>
+        
+        <div class="sub-title">기초 1</div>
+        <ul class="menu-list">
+            <li class="menu-item active" onclick="loadPage('base1')">천간속성의 이해(Excel Sheet)</li>
+        </ul>
+
+        <div class="sub-title">기초 2</div>
+        <ul class="menu-list">
+            <li class="menu-item" onclick="loadPage('p1')">제1강 오행의 생극과 육신</li>
+            <li class="menu-item" onclick="loadPage('p2')">제2강 육신별 생극 관계</li>
+            <li class="menu-item" onclick="loadPage('p3')">제3강 천간의 생극과 십신</li>
+            <li class="menu-item" onclick="loadPage('p4')">제4강 일간별 십신 찾기</li>
+            <li class="menu-item" onclick="loadPage('p5')">제5강 지지와 십신</li>
+            <li class="menu-item" onclick="loadPage('p6')">제6강 십신의 의미</li>
+            <li class="menu-item" onclick="loadPage('p7')">제7강 천간합 이해</li>
+            <li class="menu-item" onclick="loadPage('p8')">제8강 천간합과 육친 이해</li>
+            <li class="menu-item" onclick="loadPage('p9')">제9강 십신의 무정한 극</li>
+            <li class="menu-item" onclick="loadPage('p10')">제10강 궁성 이해</li>
+            <li class="menu-item" onclick="loadPage('p11')">제11강 비견 이해 / 제12강 비견의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p12')">제13강 겁재 이해 / 제14강 겁재의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p13')">제15강 식신 이해 / 제16강 식신의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p14')">제17강 상관 이해 / 제18강 상관의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p15')">제19강 정재 이해 / 제20강 정재의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p16')">제21강 편재 이해 / 제22강 편재의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p17')">제23강 정관 이해 / 제24강 정관의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p18')">제25강 편관 이해 / 제26강 편관의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p19')">제27강 정인 이해 / 제28강 정인의 관계성</li>
+            <li class="menu-item" onclick="loadPage('p20')">제29강 편인 이해 / 제30강 편인의 관계성</li>
+        </ul>
+    </div>
+
+    <!-- 우측 영역 -->
+    <div id="main-area">
+        <!-- 2. 우측 상단 고정 제목 프레임 -->
+        <div id="header-frame">
+            <img src="https://image.yes24.com/goods/177570594/XL" alt="하루한장명리공부">
+            <h1>제이쌤의 하루한장 명리</h1>
+        </div>
+
+        <!-- 3. 우측 하단 내용 프레임 -->
+        <div id="content-frame">
+            <div id="content-display" class="content-body">
+                <!-- 기본 페이지로 기초 1 로딩 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Data 및 Script -->
+    <script>
+        const pages = {
+            'base1': `
+                <h3>기초 1 : 천간속성의 이해 (Excel Sheet: 천간속성이해_2)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">천간</th>
+                            <th style="width: 15%;">구분</th>
+                            <th style="width: 20%;">키워드</th>
+                            <th style="width: 55%;">내용</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 甲 (갑목) -->
+                        <tr><td rowspan="12" class="stem-header">甲</td><td rowspan="12">기질</td><td>직선적</td><td class="text-left">꾸밈없고 솔직한 태도</td></tr>
+                        <tr><td>강직함</td><td class="text-left">원칙과 신념을 굽히지 않는 성향</td></tr>
+                        <tr><td>개척 정신</td><td class="text-left">낯선 길을 두려워하지 않고 시도하는 힘</td></tr>
+                        <tr><td>진취성</td><td class="text-left">앞으로 나아가려는 적극적 기질</td></tr>
+                        <tr><td>성장</td><td class="text-left">자기 안에 깊은 지혜와 배움을 담으려는 속성이 강함</td></tr>
+                        <tr><td>리더십</td><td class="text-left">솔선수범하여 이끌며 조직에서 방향을 제시하는 힘</td></tr>
+                        <tr><td>대표성</td><td class="text-left">맏이, 중심인물로서의 책임감</td></tr>
+                        <tr><td>호기심</td><td class="text-left">새로운 지식과 경험을 향한 갈망</td></tr>
+                        <tr><td>순수함</td><td class="text-left">본능적이고 꾸밈없는 마음</td></tr>
+                        <tr><td>교육</td><td class="text-left">지혜를 습득하고 지식을 추구하려는 성향</td></tr>
+                        <tr><td>미래 지향성</td><td class="text-left">현재에 머무르지 않고 장기적 비전을 향함</td></tr>
+                        <tr><td>자립성</td><td class="text-left">스스로 뿌리내리고 성장하려는 독립심</td></tr>
+                        <tr><td rowspan="5" class="stem-header">甲</td><td rowspan="5">돌아볼 점</td><td>고집</td><td class="text-left">직선적 성향은 장점이지만, 때로는 완고함으로 비칠 수 있음<br>상황에 따라 유연하게 방향을 조절하는 지혜가 필요</td></tr>
+                        <tr><td>배려</td><td class="text-left">리더십과 대표성을 띠고 앞장서다 보면 상대의 마음을 놓칠 수 있음<br>직설적 태도는 신뢰를 주지만, 감정을 고려한 소통이 부족할 수 있음</td></tr>
+                        <tr><td>성급함</td><td class="text-left">진취성과 개척 정신이 강해 성과를 서두르는 경향<br>성장 과정에서 완급 조절을 배우는 것이 필요</td></tr>
+                        <tr><td>내면 성찰</td><td class="text-left">성장을 좇는 데 집중하다 보면 자기 내면의 안정을 놓칠 수 있음<br>자기 안에 채워 넣는 지혜가 외부 성과와 균형을 이루어야 함</td></tr>
+                        <tr><td>과부담</td><td class="text-left">맏이, 대표 기질로 늘 책임을 떠안으려는 성향<br>모든 짐을 홀로 지려 하지 말고, 함께 나누는 법을 배워야 함</td></tr>
+
+                        <!-- 乙 (을목) -->
+                        <tr><td rowspan="11" class="stem-header">乙</td><td rowspan="11">기질</td><td>유연함</td><td class="text-left">상황에 맞게 몸을 바꾸며 적응하는 능력</td></tr>
+                        <tr><td>관계 지향성</td><td class="text-left">유대감을 바탕으로 함께 하는 것을 중시하는 태도</td></tr>
+                        <tr><td>화려함</td><td class="text-left">꽃처럼 자신을 드러내고 빛나려는 성향</td></tr>
+                        <tr><td>현실성</td><td class="text-left">실속을 따지고 현실적인 선택을 중시</td></tr>
+                        <tr><td>협력성</td><td class="text-left">함께할 때 힘을 발휘하고, 네트워크 속에서 성장</td></tr>
+                        <tr><td>성실함</td><td class="text-left">작은 힘을 지속적으로 쌓아 성과를 꾸준하게 만드는 기질</td></tr>
+                        <tr><td>생명력</td><td class="text-left">풀과 넝쿨처럼 꺾이지 않고 살아남는 지속력</td></tr>
+                        <tr><td>배려심</td><td class="text-left">약자나 주변을 살피며 함께하려는 따뜻함</td></tr>
+                        <tr><td>타인 의식</td><td class="text-left">타인의 시선을 의식하고 규범과 질서를 갈망</td></tr>
+                        <tr><td>의존성</td><td class="text-left">스스로 성장하면서도 갑목 같은 강한 존재에 기대려는 심리</td></tr>
+                        <tr><td>설득력</td><td class="text-left">섬세하고 유연하게 관계를 맺으며, 현실적인 실속을 챙기려 함</td></tr>
+                        <tr><td rowspan="5" class="stem-header">乙</td><td rowspan="5">돌아볼 점</td><td>의존성</td><td class="text-left">타인과 함께 하려함이 지나치다 보면 자기주체성을 잃을 수 있음<br>관계 속에서 힘을 얻되, 자기 뿌리를 단단히 세우는 노력이 필요</td></tr>
+                        <tr><td>우유부단함</td><td class="text-left">결정의 순간에 주저하거나 선택을 미루는 약점으로 작용할 수 있음<br>때로는 명확한 기준과 결단력이 요구됨</td></tr>
+                        <tr><td>타인 의식</td><td class="text-left">타인의 시선과 규범을 중시하다 보면, 겉모습에 치중할 수 있음<br>자신의 내면과 진실한 목소리를 따르는 것이 더 중요할 때가 있음</td></tr>
+                        <tr><td>관계 얽힘</td><td class="text-left">관계 중심적인 면이, 때로는 인간관계가 지나치게 복잡해질 수 있음<br>모든 사람을 챙기려 하기보다, 관계를 분별할 필요가 있음</td></tr>
+                        <tr><td>실속 집착</td><td class="text-left">현실적인 것은 좋으나, 지나치면 계산적으로 보일 수 있음<br>단기적 이익보다 장기적 신뢰와 가치를 중시하는 균형이 필요</td></tr>
+
+                        <!-- 丙 (병화) -->
+                        <tr><td rowspan="11" class="stem-header">丙</td><td rowspan="11">기질</td><td>드러남</td><td class="text-left">태양과 같이 밝게 드러나는 중심적 존재</td></tr>
+                        <tr><td>드러냄</td><td class="text-left">돌려 말하기보다, 명료함과 진실 추구</td></tr>
+                        <tr><td>낙관성</td><td class="text-left">긍정적이고 미래를 밝게 보는 시선</td></tr>
+                        <tr><td>지도력</td><td class="text-left">소통능력을 통해 사람들을 지도하고 관리함</td></tr>
+                        <tr><td>표현력</td><td class="text-left">솔직하고 직설적이며 자기감정을 드러냄</td></tr>
+                        <tr><td>개방성</td><td class="text-left">숨김없이 공개적이고 시원스러움</td></tr>
+                        <tr><td>활동성</td><td class="text-left">늘 움직이고 외부로 뻗어나가는 에너지</td></tr>
+                        <tr><td>자신감</td><td class="text-left">스스로를 믿고 당당하게 표현</td></tr>
+                        <tr><td>존재감</td><td class="text-left">자연스럽게 주목받고 중심에 서는 에너지</td></tr>
+                        <tr><td>영향력</td><td class="text-left">주변을 따뜻하게 만들거나 조직을 운영할 수 있는 힘</td></tr>
+                        <tr><td>예의 중시</td><td class="text-left">사회적 체면과 바른 태도를 지키려는 성향</td></tr>
+                        <tr><td rowspan="5" class="stem-header">丙</td><td rowspan="5">돌아볼 점</td><td>자기 과잉</td><td class="text-left">때로는 지나친 자기중심성으로 보일 수 있음<br>빛을 나누되, 주변의 그늘을 살피는 균형이 필요</td></tr>
+                        <tr><td>자기 체계</td><td class="text-left">질서와 규범을 스스로 세우지 못하면 에너지가 흩어짐<br>바깥의 규칙만 기대하지 말고, 자기 안의 기준을 세워야 함</td></tr>
+                        <tr><td>지속력</td><td class="text-left">순간의 열정은 강하나, 장기적으로 이어가는 힘은 약해질 수 있음<br>한 번 붙은 불꽃을 꺼뜨리지 않고 지켜내는 꾸준함이 필요</td></tr>
+                        <tr><td>타인 배려</td><td class="text-left">솔직함이 장점이지만, 때로는 상대에게 상처가 될 수 있음<br>진실을 전하더라도 부드럽게 전하는 기술을 배워야 함</td></tr>
+                        <tr><td>자기 소모</td><td class="text-left">과열되어 자신과 타인을 지치게 만들 수 있음<br>에너지를 균형 있게 쓰는 법을 익히는 것이 중요</td></tr>
+
+                        <!-- 丁 (정화) -->
+                        <tr><td rowspan="10" class="stem-header">丁</td><td rowspan="10">기질</td><td>헌신</td><td class="text-left">자신을 태워서라도 타인에게 도움과 빛을 주려는 마음</td></tr>
+                        <tr><td>이타심</td><td class="text-left">세심하게 살피고 따뜻하게 감싸며 베풀려는 성향</td></tr>
+                        <tr><td>열정</td><td class="text-left">집중된 불꽃처럼 대상에 몰입하고 끝까지 태우는 에너지</td></tr>
+                        <tr><td>영향력</td><td class="text-left">은은하지만 오래 남아 주변에 변화를 일으키는 힘</td></tr>
+                        <tr><td>기술성</td><td class="text-left">섬세한 손재주와 전문성을 발휘하는 능력</td></tr>
+                        <tr><td>통찰력</td><td class="text-left">현상을 꿰뚫고 핵심을 읽어내어 사물의 본질을 파악하고자 함</td></tr>
+                        <tr><td>실용적</td><td class="text-left">추상보다 현실에서 쓰임 있는 결과를 중시하며 실용적 가치를 추구함</td></tr>
+                        <tr><td>고지식</td><td class="text-left">타인을 관찰하고, 옳고 그름을 따지며 가르치거나 조언하려는 태도</td></tr>
+                        <tr><td>자기 확신</td><td class="text-left">강한 자의식으로 자기 신념과 판단에 대한 강한 믿음</td></tr>
+                        <tr><td>질투심</td><td class="text-left">비교와 경쟁 속에서 생겨나는 내면적 갈등</td></tr>
+                        <tr><td rowspan="5" class="stem-header">丁</td><td rowspan="5">돌아볼 점</td><td>교훈적 태도</td><td class="text-left">옳고 그름에 민감해 타인을 교정하려는 태도가 강할 수 있음<br>상대의 입장을 받아들이고, 가르침보다 공감을 우선할 필요가 있음</td></tr>
+                        <tr><td>자의식</td><td class="text-left">스스로의 옳음을 확신하지만, 그 확신이 지나치면 독단으로 이어짐<br>자신의 불빛이 모두에게 동일한 온기로 닿지는 않음을 인식해야 함</td></tr>
+                        <tr><td>질투</td><td class="text-left">섬세한 감정이 때로는 비교와 경쟁심으로 변질됨<br>타인의 성취보다 자신의 켜 온 불빛의 방향에 집중할 필요가 있음</td></tr>
+                        <tr><td>과도한 헌신</td><td class="text-left">남을 돕고 챙기려다 자신을 소진시킬 수 있음<br>남을 비추기 전에 스스로의 온도부터 지켜야 함</td></tr>
+                        <tr><td>융통성</td><td class="text-left">성실하고 원칙적인 성향이 때로는 고지식함으로 비침<br>기준을 세우되, 상황에 맞게 행동을 조절하는 유연함이 필요함</td></tr>
+
+                        <!-- 戊 (무토) -->
+                        <tr><td rowspan="10" class="stem-header">戊</td><td rowspan="10">기질</td><td>포용력</td><td class="text-left">다양한 사람과 상황을 품어주는 대지 같은 마음</td></tr>
+                        <tr><td>중재력</td><td class="text-left">갈등을 조율하고 중심을 잡는 조정자적 성향</td></tr>
+                        <tr><td>리더십</td><td class="text-left">묵직한 신뢰를 바탕으로 조직을 안정시키는 지도력</td></tr>
+                        <tr><td>신념</td><td class="text-left">옳다고 믿는 원칙을 끝까지 지켜내는 확고한 의지</td></tr>
+                        <tr><td>고집</td><td class="text-left">한 번 정한 방향을 쉽게 바꾸지 않는 단단함</td></tr>
+                        <tr><td>우직함</td><td class="text-left">꾸준하고 성실하게 묵묵히 나아가는 태도</td></tr>
+                        <tr><td>신뢰감</td><td class="text-left">안정된 태도와 일관성으로 주변의 믿음을 얻음</td></tr>
+                        <tr><td>갈등 조정</td><td class="text-left">대립 속에서도 균형과 질서를 찾아내는 능력</td></tr>
+                        <tr><td>고독감</td><td class="text-left">중심에 서 있지만 그 무게만큼 외로움을 감내하는 존재</td></tr>
+                        <tr><td>열정</td><td class="text-left">넓은 시야와 큰 틀에서 사물을 바라보는 기질</td></tr>
+                        <tr><td rowspan="4" class="stem-header">戊</td><td rowspan="4">돌아볼 점</td><td>완고함</td><td class="text-left">신념이 강한 만큼 유연함이 부족할 수 있음<br>원칙은 지키되, 변화하는 상황에 맞게 시각을 조정하는 여유가 필요</td></tr>
+                        <tr><td>고집</td><td class="text-left">결정한 일에 집착하여 타인의 의견을 배척하기 쉬움<br>자신과 다른 방식도 같은 목표에 이를 수 있음을 인정해야 함</td></tr>
+                        <tr><td>감정 표현 부족</td><td class="text-left">속은 따뜻하지만 겉으로는 무뚝뚝하고 거리감이 생김<br>지나친 책임감은 자신을 고립되게 만들 수도 있음</td></tr>
+                        <tr><td>고독감</td><td class="text-left">중심을 잡는 자리에 서 있지만, 그 무게로 인한 고독감<br>혼자의 시간도 소중하지만, 사람과의 정서적 연결 필요</td></tr>
+
+                        <!-- 己 (기토) -->
+                        <tr><td rowspan="10" class="stem-header">己</td><td rowspan="10">기질</td><td>영역 관리</td><td class="text-left">자신이 다룰 수 있는 영역을 정하고, 책임감 있게 유지하는 능력</td></tr>
+                        <tr><td>섬세함</td><td class="text-left">작은 변화에도 민감하게 반응하며 질서를 유지</td></tr>
+                        <tr><td>현실감각</td><td class="text-left">구체적 상황 속에서 실용과 실속을 중시</td></tr>
+                        <tr><td>포용과 조정</td><td class="text-left">갈등 속에서도 균형을 잡고 조화를 만들어 냄</td></tr>
+                        <tr><td>인내심</td><td class="text-left">환경에 묵묵히 적응하며 끝까지 버티는 힘</td></tr>
+                        <tr><td>신용과 믿음</td><td class="text-left">맡은 일과 관계를 책임 있게 끌어나가며, 신뢰를 쌓는 안정된 성향</td></tr>
+                        <tr><td>배려</td><td class="text-left">가족, 친족 등 가까운 관계를 세심하게 챙김</td></tr>
+                        <tr><td>희생</td><td class="text-left">자신을 내세우지 않고 뒤에서 지원하는 모습</td></tr>
+                        <tr><td>보수성</td><td class="text-left">안정과 지속을 우선시 하고, 급격한 변화를 경계</td></tr>
+                        <tr><td>균형감각</td><td class="text-left">융통성 있게 감정, 이익, 관계를 조율하는 힘</td></tr>
+                        <tr><td rowspan="5" class="stem-header">己</td><td rowspan="5">돌아볼 점</td><td>과도한 통제</td><td class="text-left">모든 일을 세밀하게 통제하려는 습관이 스스로를 힘들게 할 수 있음<br>타인과 일에도 여유로운 틈을 남겨야 함</td></tr>
+                        <tr><td>좁은 시야</td><td class="text-left">자신의 영역 안에서만 판단하려다 더 큰 가능성을 놓칠 수 있음<br>안정 속에서도 새로운 자극과 시야 확장을 받아들일 필요가 있음</td></tr>
+                        <tr><td>감정 억제</td><td class="text-left">속마음을 드러내지 않아 스트레스가 쌓이기 쉬움<br>진심을 나누는 대화가 관계의 신뢰를 더 깊게 만듦</td></tr>
+                        <tr><td>지나친 희생</td><td class="text-left">가족과 가까운 사람을 위해 자신을 지나치게 소모함<br>돌봄의 마음은 소중하지만, 자기 회복을 위한 시간도 필요함</td></tr>
+                        <tr><td>자기중심성</td><td class="text-left">현실적 판단이 강해 새로움이나 변화를 경계하는 보수성<br>현실감은 유지하되, 융통성과 타인의 시선을 인정해야 함</td></tr>
+
+                        <!-- 庚 (경금) -->
+                        <tr><td rowspan="10" class="stem-header">庚</td><td rowspan="10">기질</td><td>냉정 속의 따뜻함</td><td class="text-left">겉은 단단하지만 속은 책임과 배려로 움직임</td></tr>
+                        <tr><td>강단</td><td class="text-left">상황에 흔들리지 않고 스스로 판단해 결단하는 힘</td></tr>
+                        <tr><td>의리와 소신</td><td class="text-left">약속과 신의를 지키며, 한 번 맺은 관계에 끝까지 책임</td></tr>
+                        <tr><td>의지와 결단성</td><td class="text-left">목표를 정하면 끝까지 밀어 붙이는 강한 추진력</td></tr>
+                        <tr><td>원칙과 질서</td><td class="text-left">질서 속에서 안정감을 느끼고 체계를 지키려 함</td></tr>
+                        <tr><td>승부욕</td><td class="text-left">경쟁 속에서 자신을 단련하고 결과로 증명하려는 의식</td></tr>
+                        <tr><td>타협의 어려움</td><td class="text-left">자기 기준이 뚜렷해 쉽게 물러서지 않음</td></tr>
+                        <tr><td>냉철함</td><td class="text-left">감정에 휘둘리지 않고 사실과 논리로 판단</td></tr>
+                        <tr><td>주체성</td><td class="text-left">타인의 의견보다 자신의 판단과 신념을 우선함</td></tr>
+                        <tr><td>인정 욕구</td><td class="text-left">노력과 성취가 정당하게 평가 받기를 바라는 내면의 욕망</td></tr>
+                        <tr><td rowspan="5" class="stem-header">庚</td><td rowspan="5">돌아볼 점</td><td>융통성 부족</td><td class="text-left">원칙과 질서를 중시하다 보면 변화나 타인의 방식을 수용하기 어려움<br>때로는 새로운 흐름에 자신을 맞추는 유연함이 필요</td></tr>
+                        <tr><td>타협의 어려움</td><td class="text-left">흑백이 분명한 사고방식으로 인해 협상이 쉽지 않음<br>다른 사람의 입장에서 사고하는 유연함이 필요</td></tr>
+                        <tr><td>과도한 자기 확신</td><td class="text-left">자신이 옳다고 믿는 신념이 강해 타인의 의견을 배척하기 쉬움<br>타인의 관점에서도 배울 점이 있음을 인식해야 함</td></tr>
+                        <tr><td>감정 표현 부족</td><td class="text-left">겉으로 냉정해 보여 따뜻한 진심이 전달되지 못할 때가 있음<br>때로는 솔직한 표현이 신뢰를 더 깊게 만든다는 것을 기억해야 함</td></tr>
+                        <tr><td>승부욕과 인정욕구</td><td class="text-left">스스로를 몰아 붙이거나 타인과 경쟁에 매몰될 수 있음<br>비교보다 성장, 이김보다 배움을 중시할 필요가 있음</td></tr>
+
+                        <!-- 辛 (신금) -->
+                        <tr><td rowspan="10" class="stem-header">辛</td><td rowspan="10">기질</td><td>냉정함</td><td class="text-left">감정보다 판단을 앞세우고, 상황을 이성적으로 분석하는 냉철한 태도</td></tr>
+                        <tr><td>섬세함</td><td class="text-left">미세한 변화와 감정의 결을 놓치지 않는 세밀한 감각</td></tr>
+                        <tr><td>완벽 추구</td><td class="text-left">자신이 세운 기준이 높고 명확하여, 허술함이나 모호함을 싫어함</td></tr>
+                        <tr><td>예리함</td><td class="text-left">사물의 본질과 결점을 날카롭게 꿰뚫어보는 통찰력</td></tr>
+                        <tr><td>꼼꼼함</td><td class="text-left">작은 실수도 그냥 넘어가지 않고, 세세한 부분까지 정리하고 확인함</td></tr>
+                        <tr><td>비판적</td><td class="text-left">사물이나 사람의 허점을 냉정히 분석하며 객관성을 유지함</td></tr>
+                        <tr><td>정리</td><td class="text-left">복잡한 상황을 정돈하고 질서를 세우는 능력</td></tr>
+                        <tr><td>효율성</td><td class="text-left">결과 중심으로 일처리를 마무리하는 실용적 태도</td></tr>
+                        <tr><td>냉철함</td><td class="text-left">감정에 휘둘리지 않고, 문제의 본질을 정확히 판단함</td></tr>
+                        <tr><td>끌어당김</td><td class="text-left">정제된 말투와 세련된 태도에서 타인을 끌어들이는 힘</td></tr>
+                        <tr><td rowspan="5" class="stem-header">辛</td><td rowspan="5">돌아볼 점</td><td>완벽주의</td><td class="text-left">흠 없는 결과를 만들려다 스스로를 지나치게 몰아붙임<br>완벽을 추구하다 보면 다음 단계로 나아가는 것이 지연될 수 있음</td></tr>
+                        <tr><td>냉정함</td><td class="text-left">감정을 절제하다 보면 인간관계가 차갑게 느껴질 수 있음<br>먼저 다가가고 따뜻한 표현을 건네는 노력이 필요함</td></tr>
+                        <tr><td>비판적 태도</td><td class="text-left">잦은 지적은 관계를 피로하게 만들 수 있음<br>판단보다 이해, 분석보다 공감이 중요함을 생각해야 함</td></tr>
+                        <tr><td>예민함과 스트레스</td><td class="text-left">작은 자극에도 긴장하고 완벽을 추구하다 쉽게 지침<br>여유와 불완전함을 허락하는 연습이 필요함</td></tr>
+                        <tr><td>폐쇄적 자존심</td><td class="text-left">스스로의 기준이 높아 타인에게 마음을 쉽게 열지 않음<br>도움을 받는 것도 능력임을 생각해야 함</td></tr>
+
+                        <!-- 壬 (임수) -->
+                        <tr><td rowspan="10" class="stem-header">壬</td><td rowspan="10">기질</td><td>포용력</td><td class="text-left">바다처럼 크고 넓게 사람과 세상을 품는 마음</td></tr>
+                        <tr><td>지혜</td><td class="text-left">많은 정보를 흡수해 스스로의 통찰로 바꾸는 깊은 사고력</td></tr>
+                        <tr><td>탐구심</td><td class="text-left">끝없이 알아가려는 지적 호기심이 강하며, 진리를 추구함</td></tr>
+                        <tr><td>통찰력</td><td class="text-left">사물의 이면을 읽고, 복잡한 문제의 흐름을 파악하는 능력</td></tr>
+                        <tr><td>정적인 성향</td><td class="text-left">내면의 고요함을 유지하며 사색과 관조 속에서 에너지를 충전함</td></tr>
+                        <tr><td>높은 이상</td><td class="text-left">단순한 이익보다 정신적 가치, 지적 성취를 중시함</td></tr>
+                        <tr><td>지속성</td><td class="text-left">물의 흐름처럼 멈추지 않고 꾸준히 나아가며, 쉽게 포기하지 않음</td></tr>
+                        <tr><td>비밀스러운</td><td class="text-left">속내를 깊이 감추고, 신뢰한 사람에게만 마음을 열려는 경향</td></tr>
+                        <tr><td>확산성</td><td class="text-left">한 곳에 머물지 않고 다양한 분야의 정보를 흡수함</td></tr>
+                        <tr><td>고집</td><td class="text-left">내면의 신념은 단단하며, 한 번 정한 생각은 쉽게 바꾸지 않음</td></tr>
+                        <tr><td rowspan="5" class="stem-header">壬</td><td rowspan="5">돌아볼 점</td><td>방향의 분산</td><td class="text-left">자유로운 흐름이 때로는 목적 없는 표류로 이어질 수 있음<br>폭넓은 시야 속에서도 '나의 목적지'를 명확히 설정해야 함</td></tr>
+                        <tr><td>감정의 과잉</td><td class="text-left">감정이 깊고 공감력이 강해 타인의 문제까지 떠안을 수 있음<br>감정의 경계를 세워 내면의 평형을 유지할 필요가 있음</td></tr>
+                        <tr><td>현실감의 부족</td><td class="text-left">현실과의 균형을 잃으면 끝없는 사유에 갇힐 수 있음<br>지식과 통찰을 현실적 행동으로 연결하는 노력이 필요함</td></tr>
+                        <tr><td>완고한 신념</td><td class="text-left">내면의 고집이 강해 타협이 쉽지 않음<br>신념을 지키되, 변화를 수용하는 노력이 필요함</td></tr>
+                        <tr><td>내면의 고립</td><td class="text-left">속이 깊고 신중해 쉽게 마음을 열지 않음<br>주변과의 소통과 교류를 통해 자신을 환기할 필요가 있음</td></tr>
+
+                        <!-- 癸 (계수) -->
+                        <tr><td rowspan="12" class="stem-header">癸</td><td rowspan="12">기질</td><td>통찰력</td><td class="text-left">현상과 구조를 읽어내는 직관적 사고가 발달해 있음</td></tr>
+                        <tr><td>지혜</td><td class="text-left">상황의 흐름을 읽고 본질을 꿰뚫는 명민한 통찰력</td></tr>
+                        <tr><td>감수성</td><td class="text-left">미묘한 정서와 분위기를 빠르게 감지하고, 말보다 마음으로 이해함</td></tr>
+                        <tr><td>공감력</td><td class="text-left">상대의 입장과 감정을 받아들임</td></tr>
+                        <tr><td>교감</td><td class="text-left">관계 속에서 감정적 연결을 중요하게 여김</td></tr>
+                        <tr><td>유연함</td><td class="text-left">강한 충돌보다는 부드러운 순응으로 흐름을 이어감</td></tr>
+                        <tr><td>융통성</td><td class="text-left">일정한 틀이나 방식에 갇히지 않고, 상황에 맞게 형태를 바꿈</td></tr>
+                        <tr><td>섬세함</td><td class="text-left">작은 차이를 놓치지 않고 세밀하게 살피며, 완성도를 높임</td></tr>
+                        <tr><td>적응력</td><td class="text-left">변화에 빠르게 대응하며, 어떤 환경에서도 자신만의 리듬을 찾아냄</td></tr>
+                        <tr><td>영향력</td><td class="text-left">존재감은 크지 않지만, 시간이 지나면서 깊은 신뢰와 감화를 남김</td></tr>
+                        <tr><td>내면의 강인함</td><td class="text-left">겉은 유약해 보여도, 끝내 버티고 나아가는 생명력</td></tr>
+                        <tr><td>지속성</td><td class="text-left">급격한 변화보다 꾸준하게 방향을 만들어가며 점진적 변화를 이끔</td></tr>
+                        <tr><td rowspan="5" class="stem-header">癸</td><td rowspan="5">돌아볼 점</td><td>경계의 모호함</td><td class="text-left">사람과 상황에 쉽게 스며들어, 자신의 의도나 기준이 흐려질 수 있음<br>공감은 유지하되, 내면의 중심선을 분명히 세워야 함</td></tr>
+                        <tr><td>휩쓸림</td><td class="text-left">유연함이 장점이지만, 명확한 목표가 없으면 주변에 휩쓸리기 쉬움<br>자신의 방향성과 목적성을 명확하게 할 필요가 있음</td></tr>
+                        <tr><td>과잉 감정</td><td class="text-left">타인의 감정에 깊이 이입해 스스로의 에너지를 소모하기 쉬움<br>감정이 과잉되지 않도록 균형이 필요함</td></tr>
+                        <tr><td>은폐된 마음</td><td class="text-left">나를 감추고 표현을 미루면, 진심이 왜곡되거나 오해를 낳을 수 있음<br>교감도 좋으나 때로는 명확하게 표현하는 것이 필요함</td></tr>
+                        <tr><td>불안감</td><td class="text-left">변화에 민감해 안정된 상태를 오래 유지하기 어려움<br>불안과 우울에 잠식되지 않도록 안정된 마음을 유지하는 것이 필요함</td></tr>
+                    </tbody>
+                </table>
+            `,
+            
+            'p1': `
+                <h3>1장 오행의 생극과 육신</h3>
+                <table>
+                    <thead><tr><th>구분</th><th>육신</th><th>한자/의미</th></tr></thead>
+                    <tbody>
+                        <tr><td>일간과 비겁이 생하는 것</td><td>식상</td><td>아생식 (我生食)</td></tr>
+                        <tr><td>식상이 생하는 것</td><td>재성</td><td>식생재 (食生財)</td></tr>
+                        <tr><td>재성이 생하는 것</td><td>관성</td><td>재생관 (財生官)</td></tr>
+                        <tr><td>관성이 생하는 것</td><td>인성</td><td>관생인 (官生印)</td></tr>
+                        <tr><td>인성이 생하는 것</td><td>일간과 비겁</td><td>인생아 (印生我)</td></tr>
+                        <tr><td>일간과 비겁이 극하는 것</td><td>재성</td><td>아극재 (我剋財)</td></tr>
+                        <tr><td>식상이 극하는 것</td><td>관성</td><td>식극관 (食剋官)</td></tr>
+                        <tr><td>재성이 극하는 것</td><td>인성</td><td>재극인 (財剋印)</td></tr>
+                        <tr><td>관성이 극하는 것</td><td>일간과 비겁</td><td>관극아 (官剋我)</td></tr>
+                        <tr><td>인성이 극하는 것</td><td>식상</td><td>인극식 (印剋食)</td></tr>
+                    </tbody>
+                </table>
+                <h4>1. 왕상휴수사 (旺相休囚死)</h4>
+                <table>
+                    <thead><tr><th>일간과의 관계</th><th>일간의 상태</th><th>별칭</th></tr></thead>
+                    <tbody>
+                        <tr><td>일간과 같은 오행 계절</td><td>왕(旺) : 최강</td><td>득시자 (得時者)</td></tr>
+                        <tr><td>일간을 생하는 계절</td><td>상(相) : 강</td><td>득래자 (得來者)</td></tr>
+                        <tr><td>일간이 생하는 계절</td><td>휴(休) : 약</td><td>과거자 (過去者)</td></tr>
+                        <tr><td>일간이 극하는 계절</td><td>수(囚) : 중약</td><td>극기자 (剋氣者)</td></tr>
+                        <tr><td>일간을 극하는 계절</td><td>사(死) : 최약</td><td>기극자 (氣剋者)</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p2': `
+                <h3>2장 육신별 생극관계</h3>
+                <table>
+                    <thead><tr><th>생의 의미</th><th>극의 의미</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>기운을 내어주고, 이어주며, 나아가게 함<br>(확장, 성장, 순환, 나아감, 연결, 창조)</td>
+                            <td>기운을 제어하고, 균형을 세우는 힘<br>(조율, 통제, 절제, 균형, 방향, 질서)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>기준별 생극 관계</h4>
+                <table>
+                    <thead><tr><th>기준</th><th>생극 관계</th></tr></thead>
+                    <tbody>
+                        <tr><td>일간, 비겁</td><td class="text-left">생: 식상 / 극: 재성 / 나를 생: 인성 / 나를 극: 관성</td></tr>
+                        <tr><td>식상</td><td class="text-left">생: 재성 / 극: 관성 / 나를 생: 일간 / 나를 극: 인성</td></tr>
+                        <tr><td>재성</td><td class="text-left">생: 관성 / 극: 인성 / 나를 생: 식상 / 나를 극: 일간</td></tr>
+                        <tr><td>관성</td><td class="text-left">생: 인성 / 극: 일간 / 나를 생: 재성 / 나를 극: 식상</td></tr>
+                        <tr><td>인성</td><td class="text-left">생: 일간 / 극: 식상 / 나를 생: 관성 / 나를 극: 재성</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p3': `
+                <h3>3장 천간의 생극과 십신</h3>
+                <table>
+                    <thead><tr><th>육신(六神)</th><th>십신(十神)</th><th>음양</th><th>오행 관계</th></tr></thead>
+                    <tbody>
+                        <tr><td rowspan="2">비겁(比劫)</td><td>비견(比肩)</td><td>같음</td><td rowspan="2">일간과 같은 오행</td></tr>
+                        <tr><td>겁재(劫財)</td><td>다름</td></tr>
+                        <tr><td rowspan="2">식상(食傷)</td><td>식신(食神)</td><td>같음</td><td rowspan="2">일간이 생하는 오행</td></tr>
+                        <tr><td>상관(傷官)</td><td>다름</td></tr>
+                        <tr><td rowspan="2">재성(財星)</td><td>편재(偏財)</td><td>같음</td><td rowspan="2">일간이 극하는 오행</td></tr>
+                        <tr><td>정재(正財)</td><td>다름</td></tr>
+                        <tr><td rowspan="2">관성(官星)</td><td>편관(偏官)</td><td>같음</td><td rowspan="2">일간을 극하는 오행</td></tr>
+                        <tr><td>정관(正官)</td><td>다름</td></tr>
+                        <tr><td rowspan="2">인성(印星)</td><td>편인(偏印)</td><td>같음</td><td rowspan="2">일간을 생하는 오행</td></tr>
+                        <tr><td>정인(正印)</td><td>다름</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p4': `
+                <h3>4장 일간별 십신 찾기</h3>
+                <p>하루한장 쌤 Site 참조 : <a href="https://usabjdxr.gensparkspace.com/" target="_blank">https://usabjdxr.gensparkspace.com/</a></p>
+            `,
+
+            'p5': `
+                <h3>5장 지지와 십신</h3>
+                <h4>지장간 및 대표천간</h4>
+                <table>
+                    <tr><th>지지</th><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td></tr>
+                    <tr><th>지장간</th><td>임계</td><td>계신기</td><td>무병갑</td><td>갑을</td><td>을계무</td><td>무경병</td><td>병기정</td><td>정을기</td><td>무임경</td><td>경신</td><td>신정무</td><td>무갑임</td></tr>
+                    <tr><th>대표천간</th><td>癸</td><td>己</td><td>甲</td><td>乙</td><td>戊</td><td>丙</td><td>丁</td><td>己</td><td>庚</td><td>辛</td><td>戊</td><td>壬</td></tr>
+                </table>
+                <h4>일간별 지지 십신 표</h4>
+                <table>
+                    <thead>
+                        <tr><th>일간</th><th>子</th><th>丑</th><th>寅</th><th>卯</th><th>辰</th><th>巳</th><th>午</th><th>未</th><th>申</th><th>酉</th><th>戌</th><th>亥</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th>甲</th><td>정인</td><td>정재</td><td>비견</td><td>겁재</td><td>편재</td><td>식신</td><td>상관</td><td>정재</td><td>편관</td><td>정관</td><td>편재</td><td>편인</td></tr>
+                        <tr><th>乙</th><td>편인</td><td>편재</td><td>겁재</td><td>비견</td><td>정재</td><td>상관</td><td>식신</td><td>편재</td><td>정관</td><td>편관</td><td>정재</td><td>정인</td></tr>
+                        <tr><th>丙</th><td>정관</td><td>상관</td><td>편인</td><td>정인</td><td>식신</td><td>비견</td><td>겁재</td><td>상관</td><td>편재</td><td>정재</td><td>식신</td><td>편관</td></tr>
+                        <tr><th>丁</th><td>편관</td><td>식신</td><td>정인</td><td>편인</td><td>상관</td><td>겁재</td><td>비견</td><td>식신</td><td>정재</td><td>편재</td><td>상관</td><td>정관</td></tr>
+                        <tr><th>戊</th><td>정재</td><td>겁재</td><td>편관</td><td>정관</td><td>비견</td><td>편인</td><td>정인</td><td>겁재</td><td>식신</td><td>상관</td><td>비견</td><td>편재</td></tr>
+                        <tr><th>己</th><td>편재</td><td>비견</td><td>정관</td><td>편관</td><td>겁재</td><td>정인</td><td>편인</td><td>비견</td><td>상관</td><td>식신</td><td>겁재</td><td>정재</td></tr>
+                        <tr><th>庚</th><td>상관</td><td>정인</td><td>편재</td><td>정재</td><td>편인</td><td>편관</td><td>정관</td><td>정인</td><td>비견</td><td>겁재</td><td>편인</td><td>식신</td></tr>
+                        <tr><th>辛</th><td>식신</td><td>편인</td><td>정재</td><td>편재</td><td>정인</td><td>정관</td><td>편관</td><td>편인</td><td>겁재</td><td>비견</td><td>정인</td><td>상관</td></tr>
+                        <tr><th>壬</th><td>겁재</td><td>정관</td><td>식신</td><td>상관</td><td>편관</td><td>편재</td><td>정재</td><td>정관</td><td>편인</td><td>정인</td><td>편관</td><td>비견</td></tr>
+                        <tr><th>癸</th><td>비견</td><td>편관</td><td>상관</td><td>식신</td><td>정관</td><td>정재</td><td>편재</td><td>편관</td><td>정인</td><td>편인</td><td>정관</td><td>겁재</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p6': `
+                <h3>6장 십신의 의미</h3>
+                <table>
+                    <thead><tr><th>십신</th><th>일간과의 관계성</th><th>의미</th></tr></thead>
+                    <tbody>
+                        <tr><td>비견</td><td>일간과 음양오행이 같음</td><td class="text-left">형제, 동료를 의미함, 자립과 주체성, 평등의식과 자신감</td></tr>
+                        <tr><td>겁재</td><td>일간과 음양오행이 다름</td><td class="text-left">경쟁관계, 다른 방향성, 도전, 경쟁, 모험과 경쟁심</td></tr>
+                        <tr><td>식신</td><td>일간이 생하며 음양 같음</td><td class="text-left">의식주의 안정, 창조, 표현, 생산, 안정 추구</td></tr>
+                        <tr><td>상관</td><td>일간이 생하며 음양 다름</td><td class="text-left">창의성, 자유, 비판의식, 도전 정신, 말솜씨와 말실수</td></tr>
+                        <tr><td>편재</td><td>일간이 극하며 음양 같음</td><td class="text-left">경험과 확장, 변덕과 소비, 인기, 자유로움 추구</td></tr>
+                        <tr><td>정재</td><td>일간이 극하며 음양 다름</td><td class="text-left">예측 가능성, 계획과 실천, 시간과 공간의 안정 추구</td></tr>
+                        <tr><td>편관</td><td>일간을 극하며 음양 같음</td><td class="text-left">과도한 책임감, 단련, 모범, 리더십, 강박, 불안</td></tr>
+                        <tr><td>정관</td><td>일간을 극하며 음양 다름</td><td class="text-left">책임, 신뢰, 규범과 규칙 준수, 보수적, 안정 추구</td></tr>
+                        <tr><td>편인</td><td>일간을 생하며 음양 같음</td><td class="text-left">몰입하는 힘, 직관, 상상력, 고독, 집중력, 전문성</td></tr>
+                        <tr><td>정인</td><td>일간을 생하며 음양 다름</td><td class="text-left">어머니, 보호와 학문, 배움과 신뢰, 모범생, 안정 추구</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p7': `
+                <h3>7장 천간합 이해</h3>
+                <table>
+                    <thead><tr><th>천간합</th><th>갑기합</th><th>을경합</th><th>병신합</th><th>정임합</th><th>무계합</th></tr></thead>
+                    <tbody>
+                        <tr><th>대음양상 양</th><td>갑목</td><td>을목</td><td>병화</td><td>정화</td><td>무토</td></tr>
+                        <tr><th>대음양상 음</th><td>기토</td><td>경금</td><td>신금</td><td>임수</td><td>계수</td></tr>
+                        <tr><th>극의 관계</th><td>목극토</td><td>금극목</td><td>화극금</td><td>수극화</td><td>토극수</td></tr>
+                        <tr><th>합화</th><td>갑기합화토</td><td>을경합화금</td><td>병신합화수</td><td>정임합화목</td><td>무계합화화</td></tr>
+                    </tbody>
+                </table>
+                <h4>천간합의 특성</h4>
+                <table>
+                    <thead><tr><th>천간합</th><th>의미</th><th>특성</th></tr></thead>
+                    <tbody>
+                        <tr><td>갑기합</td><td>중정지합 (中正之合)</td><td class="text-left">조화와 중용을 추구하는 미덕</td></tr>
+                        <tr><td>을경합</td><td>인의지합 (仁義之合)</td><td class="text-left">따뜻한 마음과 올바른 행동이 조화</td></tr>
+                        <tr><td>병신합</td><td>위엄지합 (威嚴之合)</td><td class="text-left">명예와 품격이 드러나는 결합</td></tr>
+                        <tr><td>정임합</td><td>인수지합 (仁壽之合)</td><td class="text-left">사람을 이롭게 하려는 어짐의 합</td></tr>
+                        <tr><td>무계합</td><td>무정지합 (無情之合)</td><td class="text-left">결과 중심의 실용적인 합</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p8': `
+                <h3>8장 천간합과 육친 이해</h3>
+                <table>
+                    <thead><tr><th>십신</th><th>해당 육친 및 관계</th></tr></thead>
+                    <tbody>
+                        <tr><th>비견</th><td class="text-left">형제, 친구, 동업자</td></tr>
+                        <tr><th>겁재</th><td class="text-left">형제, 친구, 이복형제, 시아버지, 며느리</td></tr>
+                        <tr><th>식신</th><td class="text-left">할머니, 부하, 제자, 종업원, 증조부, (女命) 자식이나 조카, (男命) 장모</td></tr>
+                        <tr><th>상관</th><td class="text-left">할머니, 할아버지, (女命) 자식이나 조카</td></tr>
+                        <tr><th>편재</th><td class="text-left">아버지, 시어머니, (男命) 애인</td></tr>
+                        <tr><th>정재</th><td class="text-left">(男命) 배우자</td></tr>
+                        <tr><th>편관</th><td class="text-left">외할머니, (男命) 자식, (女命) 애인</td></tr>
+                        <tr><th>정관</th><td class="text-left">(女命) 배우자, (男命) 자식이나 조카</td></tr>
+                        <tr><th>편인</th><td class="text-left">계모, 어머니 형제, 외손자</td></tr>
+                        <tr><th>정인</th><td class="text-left">어머니, 할아버지, (男命) 장인</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p9': `
+                <h3>9장 십신의 무정한 극</h3>
+                <h4>1) 비견 라인의 무정한 극</h4>
+                <table>
+                    <thead><tr><th>주체</th><th>관계</th><th>대상</th><th>결과/특성</th></tr></thead>
+                    <tbody>
+                        <tr><td>일간, 비견</td><td>剋</td><td>편재</td><td>-</td></tr>
+                        <tr><td>편재</td><td>剋</td><td>편인</td><td>-</td></tr>
+                        <tr><td>편인</td><td>剋</td><td>식신</td><td>편인도식</td></tr>
+                        <tr><td>식신</td><td>剋</td><td>편관</td><td>식신제살</td></tr>
+                        <tr><td>편관</td><td>剋</td><td>일간, 비견</td><td>-</td></tr>
+                    </tbody>
+                </table>
+                <h4>2) 겁재 라인의 무정한 극</h4>
+                <table>
+                    <thead><tr><th>주체</th><th>관계</th><th>대상</th><th>결과/특성</th></tr></thead>
+                    <tbody>
+                        <tr><td>겁재</td><td>剋</td><td>정재</td><td>쟁재</td></tr>
+                        <tr><td>정재</td><td>剋</td><td>편인</td><td>재극인</td></tr>
+                        <tr><td>정인</td><td>剋</td><td>식신</td><td>상관패인</td></tr>
+                        <tr><td>상관</td><td>剋</td><td>편관</td><td>상관견관</td></tr>
+                        <tr><td>정관</td><td>剋</td><td>일간, 비견</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p10': `
+                <h3>10장 궁성 이해</h3>
+                <table>
+                    <thead>
+                        <tr><th>구분</th><th>시주</th><th>일주</th><th>월주</th><th>연주</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th>천간</th><td>⑦시간</td><td>⑤일간</td><td>③월간</td><td>①연간</td></tr>
+                        <tr><th>의미</th><td>자녀, 손자, 결과물, 희망</td><td>본인, 자신, 성향, 가치관</td><td>아버지, 사회적 연결, 대외적 관계</td><td>할아버지, 조상, 정신적인 것</td></tr>
+                        <tr><th>지치</th><td>⑧시지</td><td>⑥일지</td><td>④월지</td><td>②연지</td></tr>
+                        <tr><th>의미</th><td>자녀, 손자, 제자, 작품, 명예, 후세</td><td>배우자, 내면의 욕구, 실질적 터전</td><td>어머니, 대인 관계, 일간의 의무, 근원지</td><td>할머니, 혈통의 뿌리, 가문, 전생</td></tr>
+                    </tbody>
+                </table>
+                <h4>주별 십성적 위치 및 의미</h4>
+                <table>
+                    <thead><tr><th>주</th><th>십성적 의미</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>연주</th><td>인성적 의미</td><td class="text-left">나의 의지와 상관없이 전승된 것 / 조상, 혈통, 오랜 세월 누적된 것</td></tr>
+                        <tr><th>월주</th><td>관성적 의미</td><td class="text-left">나의 의지와 상관없이 규정된 것 / 사회, 환경, 부여된 역할과 책임</td></tr>
+                        <tr><th>일지</th><td>재성적 의미</td><td class="text-left">나의 의지를 통해 다루고 싶은 것 / 나와 간지를 이루는 나의 자리</td></tr>
+                        <tr><th>시주</th><td>식상적 의미</td><td class="text-left">나의 의지를 통해 이루고 싶은 것 / 미래, 꿈, 희망, 방향성</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p11': `
+                <h3>11장 비견 이해 / 12장 비견의 관계성</h3>
+                <h4>1) 비견의 기질</h4>
+                <table>
+                    <tr><th>자립심</th><td class="text-left">스스로의 힘으로 삶을 세우며 외부에 의존하지 않음</td><th>주체성</th><td class="text-left">자기 판단을 믿고 중심을 잃지 않는 내적 기준이 있음</td></tr>
+                    <tr><th>분별력</th><td class="text-left">사람과 상황을 정확히 가려내어 신중하게 판단함</td><th>신뢰</th><td class="text-left">믿을 만한 사람에게 마음을 열고 끝까지 함께함</td></tr>
+                    <tr><th>절제</th><td class="text-left">감정과 행동을 조율하며 선을 넘지 않으려 함</td><th>경계</th><td class="text-left">자신과 타인의 영역을 명확히 구분하여 균형을 지킴</td></tr>
+                    <tr><th>친화력</th><td class="text-left">마음이 통하는 사람과 깊게 연결되는 관계의 힘을 가짐</td><th>충성심</th><td class="text-left">한번 인연을 맺으면 책임감 있게 끝까지 지킴</td></tr>
+                    <tr><th>자존감</th><td class="text-left">자신에 대한 확신이 강하고 스스로의 가치는 소중히 여김</td><th>독립심</th><td class="text-left">누구의 지시보다 자신이 판단으로 행동하려는 의지가 강함</td></tr>
+                </table>
+                <h4>2) 비견의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>자립심</th><td class="text-left">스스로 판단하고 결정하며 환경을 이겨내는 생존력</td><th>고집</th><td class="text-left">자신의 생각이 옳다고 믿어 타인의 조언을 무시하기 쉬움</td></tr>
+                        <tr><th>신뢰감</th><td class="text-left">진심과 성실함으로 사람들의 믿음을 얻음</td><th>독선</th><td class="text-left">자기 기준을 절대화하여 관계의 조화를 해칠 수 있음</td></tr>
+                        <tr><th>리더십</th><td class="text-left">공동체 속에서 중심을 잡고 타인을 이끄는 힘</td><th>경쟁심</th><td class="text-left">타인과의 비교 속에서 불필요한 대립이 생김</td></tr>
+                        <tr><th>추진력</th><td class="text-left">목표를 세우면 흔들림 없이 끝까지 밀고 나감</td><th>소유의식</th><td class="text-left">내 몫을 지키려는 마음이 지나쳐 협력을 어렵게 함</td></tr>
+                        <tr><th>분별력</th><td class="text-left">관계 속에서 주도권을 지키기 위해 분별력을 발휘함</td><th>고립감</th><td class="text-left">강한 자존심이 오히려 자신을 외롭게 만들기도 함</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p12': `
+                <h3>13장 겁재 이해 / 14장 겁재의 관계성</h3>
+                <h4>1) 겁재의 기질</h4>
+                <table>
+                    <tr><th>도전</th><td class="text-left">새로운 환경에도 두려움 없이 스스로 길을 여는 용기</td><th>변화</th><td class="text-left">익숙함보다 새로움을 추구함</td></tr>
+                    <tr><th>직감</th><td class="text-left">이성보다 감각으로 빠르게 판단함</td><th>불안</th><td class="text-left">긴장 속에서 변화를 준비함</td></tr>
+                    <tr><th>충동</th><td class="text-left">마음을 먹으면, 즉흥적이고 빠르고 강하게 행동함</td><th>독립심</th><td class="text-left">타인의 간섭을 매우 싫어하며, 스스로 결정하려 함</td></tr>
+                    <tr><th>매력</th><td class="text-left">자신감 넘치는 에너지로 사람들을 끌어당김</td><th>긴장감</th><td class="text-left">끊임없는 경쟁의식이 내면에 자리함</td></tr>
+                    <tr><th>자유</th><td class="text-left">구속을 싫어하고 자신만의 방식을 고수하려 함</td><th>양면성</th><td class="text-left">안정과 변화를 동시에 추구함</td></tr>
+                </table>
+                <h4>2) 겁재의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>결단력</th><td class="text-left">상황을 오래 고민하지 않고 빠르게 판단해 행동으로 옮김</td><th>충동</th><td class="text-left">생각보다 행동이 앞서며, 감정에 이끌려 결정을 내릴 수 있음</td></tr>
+                        <tr><th>추진력</th><td class="text-left">한번 정한 목표는 끝까지 밀고 나가며 중도에 포기하지 않음</td><th>과도한 경쟁</th><td class="text-left">타인을 의식하며 불필요한 대립을 만들기도 함</td></tr>
+                        <tr><th>적응력</th><td class="text-left">환경의 변화에도 빠르게 대응하며 자신만의 방법을 찾으려 함</td><th>불안정</th><td class="text-left">변화를 두려워하면서도 멈추지 못해 마음이 흔들림</td></tr>
+                        <tr><th>생존력</th><td class="text-left">위기 속에서도 중심을 잃지 않고 끝까지 버티는 힘</td><th>소유 집착</th><td class="text-left">잃을까 두려워 오히려 손실을 자초하기도 함</td></tr>
+                        <tr><th>자신감</th><td class="text-left">스스로의 능력을 믿고 앞으로 나아가려는 강한 에너지</td><th>독선과 독단</th><td class="text-left">타인의 의견을 받아들이지 못하고, 스스로 모든 것을 결정하려 함</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p13': `
+                <h3>15장 식신 이해 / 16장 식신의 관계성</h3>
+                <h4>1) 식신의 기질</h4>
+                <table>
+                    <tr><th>생활력</th><td class="text-left">스스로 길을 찾아내는 강한 생존력</td><th>규칙성</th><td class="text-left">일정한 리듬과 습관을 유지하며 자신을 다스리는 태도</td></tr>
+                    <tr><th>건강함</th><td class="text-left">신체적 활력을 바탕으로 삶을 실천</td><th>실천력</th><td class="text-left">생각을 행동으로 옮기는 추진력</td></tr>
+                    <tr><th>몰입</th><td class="text-left">일에 집중하여 완성도를 높이는 힘</td><th>손재주</th><td class="text-left">직접 대상을 다루며 결과를 만들어 내는 능력</td></tr>
+                    <tr><th>표현력</th><td class="text-left">말과 행동, 외국어를 통해 자신의 이해를 드러내는 힘</td><th>교육</th><td class="text-left">배운 것을 가르치고 나누며 다음 세대를 키우는 힘</td></tr>
+                    <tr><th>대비</th><td class="text-left">미리 준비하고 계획하여 불안을 안정으로 바꾸는 지혜</td><th>양육</th><td class="text-left">꾸준한 손길과 반복적인 정성으로 대상을 성장시키는 에너지</td></tr>
+                </table>
+                <h4>2) 식신의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>실행력</th><td class="text-left">계획한 일을 끝까지 밀고 가는 실천의 힘</td><th>완벽주의</th><td class="text-left">모든 일을 계획대로 이루려다 스스로를 몰아붙일 수 있음</td></tr>
+                        <tr><th>책임감</th><td class="text-left">맡은 일에 충실하며 결과까지 완수하려는 의지</td><th>과도한 대비</th><td class="text-left">미래의 불안에 지나치게 대비하며 걱정과 강박에 빠질 수 있음</td></tr>
+                        <tr><th>생산성</th><td class="text-left">꾸준한 반복 속에서 구체적 결과를 만들어 내는 능력</td><th>날선 표현</th><td class="text-left">말의 강도가 지나쳐 관계에 긴장이나 오해를 만들기도 함</td></tr>
+                        <tr><th>신뢰감</th><td class="text-left">성실하고 예측 가능한 태도로 주변의 믿음을 얻음</td><th>고집</th><td class="text-left">자신의 방식만을 고수해 타인의 의견을 받아들이지 않음</td></tr>
+                        <tr><th>안정성</th><td class="text-left">위기 속에서도 감정이나 판단이 쉽게 흔들리지 않음</td><th>과로</th><td class="text-left">책임감이 지나쳐 몸과 마음이 지치기 쉬움</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p14': `
+                <h3>17장 상관 이해 / 18장 상관의 관계성</h3>
+                <h4>1) 상관의 기질</h4>
+                <table>
+                    <tr><th>창의성</th><td class="text-left">새로운 해석을 더해, 전혀 다른 결과를 만들어 내는 힘</td><th>자유</th><td class="text-left">구속이나 제한을 벗어나 자신의 방식으로 움직이고자 하는 내적 동기</td></tr>
+                    <tr><th>비판</th><td class="text-left">겉으로 드러난 현상보다 그 이면의 구조와 허점을 먼저 보는 시각</td><th>논리</th><td class="text-left">상황 분석과 의미 재구성을 통해, 스스로 결론을 도출하는 능력</td></tr>
+                    <tr><th>도전</th><td class="text-left">안정된 틀보다 변화와 가능성에 더 큰 매력을 느끼고 뛰어드는 성향</td><th>표현력</th><td class="text-left">말과 글을 통해 자신의 이해와 감정을 표현하는 힘</td></tr>
+                    <tr><th>직관</th><td class="text-left">복잡한 정보를 빠르게 압축해 핵심을 파악하는 감각적 판단력</td><th>독창성</th><td class="text-left">같은 재료로도 자신만의 방식과 구조를 만들어 내는 능력</td></tr>
+                    <tr><th>혁신</th><td class="text-left">굳어진 규칙을 의문시하고, 당연하게 여겨진 질서를 뒤집는 능력</td><th>재해석</th><td class="text-left">이미 주어진 의미를 새로운 결로 바꾸어 이해하는 사고의 유연성</td></tr>
+                </table>
+                <h4>2) 상관의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>통찰력</th><td class="text-left">표면 너머 본질을 꿰뚫어 보고 구조의 핵심을 읽어 내는 능력</td><th>언행의 실수</th><td class="text-left">생각보다 말이나 행동이 지나쳐, 불필요한 갈등 야기</td></tr>
+                        <tr><th>전략 구성</th><td class="text-left">복잡한 상황을 재배치하고 실행 가능한 전략을 설계하는 힘</td><th>책임 회피</th><td class="text-left">정해진 틀을 답답함으로 느껴 필요한 절차나 책임을 소홀히 함</td></tr>
+                        <tr><th>혁신 주도</th><td class="text-left">낡은 방식을 뒤집고 새로운 질서를 만들어 가는 역량</td><th>충동성</th><td class="text-left">즉흥적 에너지가 강해 충분한 숙고 없이 빠르게 결정함</td></tr>
+                        <tr><th>영향력</th><td class="text-left">자신의 생각을 명확히 전달하며 타인과 상황을 움직이는 설득력</td><th>과도한 반발</th><td class="text-left">자기 의견을 지키려는 힘이 지나쳐 불필요한 대립을 만들기도 함</td></tr>
+                        <tr><th>재해석</th><td class="text-left">기존 자원과 정보를 새로운 관점으로 재조합하여 가치를 창출하는 힘</td><th>완성도 부족</th><td class="text-left">새로운 시도는 좋지만 끝까지 완성하는 힘이 약함</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p15': `
+                <h3>19장 정재 이해 / 20장 정재의 관계성</h3>
+                <h4>1) 정재의 기질</h4>
+                <table>
+                    <tr><th>예측가능성</th><td class="text-left">계획한 대로 흐름을 만들어 가며, 예상 가능한 방식으로 삶을 구성함</td><th>안정성</th><td class="text-left">변화보다 지속을, 모험보다 확실함을 선택하는 태도</td></tr>
+                    <tr><th>계획성</th><td class="text-left">미리 정해진 순서와 방법을 따르며 체계적으로 일을 처리함</td><th>성실성</th><td class="text-left">맡은 일에 끝까지 책임지고 성과를 내려는 자세</td></tr>
+                    <tr><th>책임감</th><td class="text-left">약속과 의무를 지키려는 분명한 내적 기준</td><th>현실감각</th><td class="text-left">이상보다 실제 가능성을 우선하는 판단력</td></tr>
+                    <tr><th>지속성</th><td class="text-left">시작한 일을 오래 이어가는 힘</td><th>축적관리</th><td class="text-left">재물과 자원을 모으고 체계적으로 유지하는 능력</td></tr>
+                    <tr><th>절제</th><td class="text-left">충동을 다스리고 계획 안에서 움직이는 자제력</td><th>신뢰</th><td class="text-left">예측 가능한 태도로 주변의 믿음을 얻게됨</td></tr>
+                </table>
+                <h4>2) 정재의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>꾸준함</th><td class="text-left">시작한 일을 오래 지속하며, 중도에 포기하지 않음</td><th>융통성 부족</th><td class="text-left">원칙과 절차를 고수하다 보니 상황에 맞는 유연한 대응이 어려움</td></tr>
+                        <tr><th>관리 능력</th><td class="text-left">시간, 공간, 관계, 재물을 체계적으로 관리하고 축적함</td><th>과도한 계산</th><td class="text-left">모든 것을 예측하고 통제하려다 자발성과 즉흥성을 잃음</td></tr>
+                        <tr><th>장기목표 수행</th><td class="text-left">당장의 유혹에 흔들리지 않고 먼 목표를 향해 나아감</td><th>보수성</th><td class="text-left">익숙한 방식만 고집하며 새로운 시도를 주저함</td></tr>
+                        <tr><th>안정적 관계</th><td class="text-left">예측 가능하고 일관된 태도로 신뢰받는 관계를 만듦</td><th>경직성</th><td class="text-left">정해진 틀을 벗어나는 것에 불안을 느껴 창의적 발상이 제한됨</td></tr>
+                        <tr><th>현실적 판단</th><td class="text-left">감정이나 충동이 아닌 논리와 경험으로 결정함</td><th>변화 회피</th><td class="text-left">안정을 우선시하다 성장의 기회를 놓침</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p16': `
+                <h3>21장 편재 이해 / 22장 편재의 관계성</h3>
+                <h4>1) 편재의 기질</h4>
+                <table>
+                    <tr><th>활동성</th><td class="text-left">정체되지 않고 끊임없이 움직이며 변화를 만들어 가는 에너지</td><th>확장성</th><td class="text-left">하나에 머무르지 않고 여러 방향으로 영역을 넓혀가는 성향</td></tr>
+                    <tr><th>기회포착</th><td class="text-left">가능성을 빠르게 발견하고 즉각 활용하는 직관</td><th>융통성</th><td class="text-left">상황에 따라 유연하게 대처하며 고정된 방식에 얽매이지 않으려 함</td></tr>
+                    <tr><th>외향성</th><td class="text-left">밖으로 나아가 세상과 적극적으로 관계 맺는 태도</td><th>관계확장</th><td class="text-left">다양한 사람들과 연결망을 넓히며 협력하는 능력</td></tr>
+                    <tr><th>재투자</th><td class="text-left">계속적 성장을 추구하는 기질</td><th>즉흥성</th><td class="text-left">계획보다 상황에 따라 즉각 판단하고 행동하는 특성</td></tr>
+                    <tr><th>적응력</th><td class="text-left">예상치 못한 변화에도 빠르게 방향을 조정하며 대응하는 힘</td><th>대담함</th><td class="text-left">큰 규모, 큰 변화, 큰 시장을 두려워하지 않는 대담함</td></tr>
+                </table>
+                <h4>2) 편재의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>네트워킹</th><td class="text-left">다양한 사람들과 관계를 맺고 상호 가치를 창출하는 능력</td><th>과소비</th><td class="text-left">자신이 집중한 것에 대해 필요 이상으로 소비할 수 있음</td></tr>
+                        <tr><th>순발력</th><td class="text-left">변화하는 상황을 빠르게 읽고 기회를 놓치지 않는 대응 능력</td><th>과욕</th><td class="text-left">여러 기회를 동시에 잡으려다 역량이 분산됨</td></tr>
+                        <tr><th>영업력</th><td class="text-left">사람과 자원을 연결하며 실질적 가치로 전환하는 설득력</td><th>불안정성</th><td class="text-left">변화 추구에 대한 지나친 기대로 지속성과 일관성이 약화됨</td></tr>
+                        <tr><th>확장성</th><td class="text-left">여러 영역에 동시다발적으로 진출하며 영향력을 넓힘</td><th>충동성</th><td class="text-left">충분한 고민 없는 빠른 판단이 성급한 결정으로 이어질 수 있음</td></tr>
+                        <tr><th>결과창출</th><td class="text-left">다양한 방법을 통해 실질적 성과를 만드는 실행력</td><th>집중력 저하</th><td class="text-left">에너지가 여러 방면으로 분산되어 하나를 깊이 완성하지 못함</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p17': `
+                <h3>23장 정관 이해 / 24장 정관의 관계성</h3>
+                <h4>1) 정관의 기질</h4>
+                <table>
+                    <tr><th>책임감</th><td class="text-left">맡은 역할과 의무를 끝까지 완수하려는 의지</td><th>안정성</th><td class="text-left">정해진 틀 안에서 균형을 유지하며 예측 가능한 삶을 추구하는 성향</td></tr>
+                    <tr><th>원칙</th><td class="text-left">옳고 그름의 기준을 세우고 그에 따라 일관되게 행동하는 힘</td><th>규범</th><td class="text-left">사회적 규칙과 질서를 존중하며 그 안에서 움직이려는 태도</td></tr>
+                    <tr><th>신뢰</th><td class="text-left">약속을 지키고 일관된 태도로 관계를 쌓아 가는 능력</td><th>절제</th><td class="text-left">감정과 욕구를 조절하며 정해진 기준 안에서 판단하는 힘</td></tr>
+                    <tr><th>성실</th><td class="text-left">정해진 절차와 루틴을 꾸준히 반복하며 완성도를 높이는 자세</td><th>조직</th><td class="text-left">흩어진 것을 정리하고 구조화하여 질서를 만드는 힘</td></tr>
+                    <tr><th>명예추구</th><td class="text-left">사회적 평판과 도덕적 가치를 지키려는 태도</td><th>일관성</th><td class="text-left">변하지 않는 기준으로 지속적으로 행동하며 신뢰를 쌓는 힘</td></tr>
+                </table>
+                <h4>2) 정관의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>신뢰</th><td class="text-left">일관된 행동과 원칙으로 타인의 믿음을 얻는 능력</td><th>경직성</th><td class="text-left">규칙과 원칙에 지나치게 얽매여 상황에 맞는 유연성을 잃을 수 있음</td></tr>
+                        <tr><th>조직운영</th><td class="text-left">질서와 규칙을 통해 안정적인 시스템을 구축하는 역량</td><th>엄격함</th><td class="text-left">자신의 기준을 타인에게도 강하게 적용하여 갈등을 만들 수 있음</td></tr>
+                        <tr><th>역할완수</th><td class="text-left">맡은 자리에서 책임을 다하며 기대를 충족시키는 능력</td><th>압박감</th><td class="text-left">책임을 과도하게 느껴 스스로를 압박하고 소진됨</td></tr>
+                        <tr><th>안정적 관계</th><td class="text-left">일관된 태도로 신뢰받는 관계를 만드는 능력</td><th>변화회피</th><td class="text-left">질서를 우선시하다 필요한 혁신과 도전을 두려워함</td></tr>
+                        <tr><th>판단력</th><td class="text-left">감정이나 충동이 아닌 원칙과 경험으로 결정함</td><th>형식 집착</th><td class="text-left">본질보다 절차와 체면을 중시하여 실질적 성과를 놓침</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p18': `
+                <h3>25장 편관 이해 / 26장 편관의 관계성</h3>
+                <h4>1) 편관의 기질</h4>
+                <table>
+                    <tr><th>책임</th><td class="text-left">스스로에게 부여되는 무거운 의무와 완수해야 하는 상황</td><th>압박</th><td class="text-left">일간을 강하게 극하여 느끼는 심리적 부담과 강제성</td></tr>
+                    <tr><th>긴장</th><td class="text-left">끊임없이 경계 상태를 유지하며 늘 준비된 자세를 취하는 성향</td><th>통제</th><td class="text-left">상황과 환경을 관리하여 위험을 차단하려는 힘</td></tr>
+                    <tr><th>경계</th><td class="text-left">주변의 위험 요소를 놓치지 않고 살피는 민감한 감각</td><th>강박</th><td class="text-left">완벽하게 해내지 못할까 봐 느끼는 불안과 집착</td></tr>
+                    <tr><th>위기감지</th><td class="text-left">문제가 발생하기 전에 미리 포착하는 예측 능력</td><th>몰입</th><td class="text-left">맡은 일에 모든 에너지를 쏟아 붓는 집중력</td></tr>
+                    <tr><th>단호함</th><td class="text-left">망설임 없이 결정하고 실행하는 결단력</td><th>의무</th><td class="text-left">해야 한다는 마음을 넘어 하지 않으면 안 된다는 절박감</td></tr>
+                </table>
+                <h4>2) 편관의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>책임감</th><td class="text-left">어떤 상황에서도 맡은 역할을 끝까지 완수하는 신뢰</td><th>과도한 책임</th><td class="text-left">감당하기 어려운 책임을 떠안게 되어 심리적, 신체적으로 소진됨</td></tr>
+                        <tr><th>위기돌파</th><td class="text-left">급박한 상황에서 침착하게 판단하고 국면을 전환하는 능력</td><th>불안</th><td class="text-left">끊임없는 경계와 긴장으로 인한 심리적 안정이 어려움</td></tr>
+                        <tr><th>대비능력</th><td class="text-left">문제가 발생하기 전에 미리 포착하고 대비하는 힘</td><th>경직</th><td class="text-left">지나친 통제로 인한 유연성 부족</td></tr>
+                        <tr><th>냉철한 판단</th><td class="text-left">감정에 휘둘리지 않고 상황을 객관적으로 분석하는 능력</td><th>압박</th><td class="text-left">스스로를 몰아붙여 심신이 지쳐가는 상태</td></tr>
+                        <tr><th>집중력</th><td class="text-left">맡은 일에 모든 에너지를 쏟아 붓고 완수할 때까지 몰입하는 힘</td><th>강박</th><td class="text-left">완벽 추구 성향으로 인한 집착과 긴장</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p19': `
+                <h3>27장 정인 이해 / 28장 정인의 관계성</h3>
+                <h4>1) 정인의 기질</h4>
+                <table>
+                    <tr><th>보호</th><td class="text-left">타인을 지지하고 감싸주며 안정감을 줌</td><th>배움</th><td class="text-left">학문과 지식을 중요하게 여기며 꾸준히 학습함</td></tr>
+                    <tr><th>신뢰</th><td class="text-left">약속과 원칙을 소중히 여김</td><th>인정</th><td class="text-left">조화를 추구하며 급작스러운 변화를 좋아하지 않음</td></tr>
+                    <tr><th>문서</th><td class="text-left">자료, 증명, 기록 등 형식을 갖춘 것을 중시</td><th>자격</th><td class="text-left">공인된 자격과 인정받는 지위를 추구함</td></tr>
+                    <tr><th>전통</th><td class="text-left">오래된 것, 검증된 방식, 이전의 가치를 존중함</td><th>수용</th><td class="text-left">타인의 말과 상황을 먼저 받아들이고 천천히 이해함</td></tr>
+                    <tr><th>권위</th><td class="text-left">인정 욕구가 강하며 관계 속에서 자신의 위치를 확립함</td><th>조화</th><td class="text-left">사람과 상황을 맞추며 균형을 만듦</td></tr>
+                </table>
+                <h4>2) 정인의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>전문성</th><td class="text-left">꾸준한 학습으로 한 분야를 깊이 있게 체득함</td><th>수동성</th><td class="text-left">스스로 주도하기보다 익숙한 환경에 의존하는 경향</td></tr>
+                        <tr><th>신뢰</th><td class="text-left">일관된 태도로 오래 지속되는 관계를 형성함</td><th>게으름</th><td class="text-left">받아 이루려는 마음이 강하게 작용하며, 움직이려는 의지가 약해짐</td></tr>
+                        <tr><th>자격</th><td class="text-left">사회적으로 인정받는 자격과 권위를 확보함</td><th>표현억제</th><td class="text-left">식상을 극하여 자기표현과 창의적 시도가 주저됨</td></tr>
+                        <tr><th>논리</th><td class="text-left">정보를 구조화하고 논리적으로 정리하는 능력</td><th>변화회피</th><td class="text-left">새로운 시도를 부담스러워하며 검증된 방식만 고집함</td></tr>
+                        <tr><th>성장</th><td class="text-left">장기적 관점에서 꾸준히 발전해 나감</td><th>자기중심성</th><td class="text-left">자신의 기준과 방식만을 옳다고 여기며 타인의 관점을 배척함</td></tr>
+                    </tbody>
+                </table>
+            `,
+
+            'p20': `
+                <h3>29장 편인 이해 / 30장 편인의 관계성</h3>
+                <h4>1) 편인의 기질</h4>
+                <table>
+                    <tr><th>내면집중</th><td class="text-left">외부보다 내면의 신호와 감각을 깊게 들여다봄</td><th>분석</th><td class="text-left">상황을 세밀하게 관찰하며 보이지 않는 흐름까지 파악함</td></tr>
+                    <tr><th>신중</th><td class="text-left">즉각적인 행동보다 충분한 검토 후 움직임</td><th>의심</th><td class="text-left">쉽게 확신하지 않고 여러 각도에서 다시 확인함</td></tr>
+                    <tr><th>탐구</th><td class="text-left">배움과 이론, 구조적 이해에 관심이 많음</td><th>감정내면화</th><td class="text-left">감정을 쉽게 드러내지 않고 조용히 소화함</td></tr>
+                    <tr><th>감수성</th><td class="text-left">말과 행동의 미세한 뉘앙스까지도 잘 느낌</td><th>독립성</th><td class="text-left">겉으론 조용하지만 스스로 판단하려는 힘이 강함</td></tr>
+                    <tr><th>관찰력</th><td class="text-left">사람의 마음과 상황의 흐름을 민감하게 읽어 냄</td><th>몰입</th><td class="text-left">깊게 몰두하며 성과를 만드는 힘이 강함</td></tr>
+                </table>
+                <h4>2) 편인의 긍정/부정</h4>
+                <table>
+                    <thead><tr><th>긍정적 측면</th><th>내용</th><th>부정적 측면</th><th>내용</th></tr></thead>
+                    <tbody>
+                        <tr><th>분석능력</th><td class="text-left">대상이나 상황의 핵심을 파악하는 능력</td><th>지나친 신중함</th><td class="text-left">판단이 늦어지고 기회를 놓치기 쉬움</td></tr>
+                        <tr><th>체계적 사고</th><td class="text-left">정보와 경험을 구조화하고 의미를 재구성하는 능력</td><th>과몰입</th><td class="text-left">생각이 깊어져 현실적 균형이 무너짐</td></tr>
+                        <tr><th>지속성</th><td class="text-left">자신이 탐구하는 것에 대하여 오래 밀고 나가는 힘</td><th>의심</th><td class="text-left">지나친 분석이 불안과 의심으로 이어짐</td></tr>
+                        <tr><th>공감</th><td class="text-left">타인의 속마음을 이해하는 능력</td><th>소통의 어려움</th><td class="text-left">표현 부족으로 관계에서 오해 발생</td></tr>
+                        <tr><th>위기감지</th><td class="text-left">분석 능력을 바탕으로 위험 신호를 예측하는 힘</td><th>관계의 단절</th><td class="text-left">새로운 시도나 만남을 주저함</td></tr>
+                    </tbody>
+                </table>
+            `
+        };
+
+        function loadPage(pageKey) {
+            const display = document.getElementById('content-display');
+            if (pages[pageKey]) {
+                display.innerHTML = pages[pageKey];
+            } else {
+                display.innerHTML = '<p>내용을 찾을 수 없습니다.</p>';
+            }
+
+            // active 클래스 관리
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach(item => item.classList.remove('active'));
+            
+            // 클릭 이벤트 발생 요소에 active 적용
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        // 초기 시작시 기초1 자동 로딩
+        window.onload = function() {
+            loadPage('base1');
+        };
+    </script>
+</body>
+</html>
