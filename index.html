@@ -28,22 +28,40 @@
         /* 우측 하단 내용 프레임 */
         #content-frame { flex: 1; padding: 30px; overflow-y: auto; background: #fff; }
         
-        /* 공통 표 서식 및 콘텐츠 스타일 */
+        /* 콘텐츠 스타일 */
         .content-body h3 { font-size: 20px; margin-bottom: 15px; color: #16a085; border-bottom: 2px solid #16a085; padding-bottom: 5px; }
-        .content-body h4 { font-size: 16px; margin: 20px 0 10px; color: #2980b9; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: #fff; font-size: 14px; }
-        th, td { border: 1px solid #dcdde1; padding: 10px 12px; text-align: center; line-height: 1.5; }
-        th { background: #f1f2f6; font-weight: bold; color: #2f3542; }
-        .text-left { text-align: left; }
-        ul { margin-left: 20px; line-height: 1.8; margin-bottom: 15px; }
-        .stem-header { background: #e8f4f8; font-weight: bold; font-size: 15px; }
-
-        /* 최신 포스트 카드 그리드 스타일 */
+        
+        /* 최신 포스트 카드 그리드 스타일 (실제 이미지 및 오버레이 적용) */
         .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 20px; }
         .post-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
-        .post-card:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        .post-thumbnail { height: 140px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #64748b; font-size: 15px; background-size: cover; background-position: center; }
-        .post-info { padding: 15px; }
+        .post-card:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        
+        .post-thumbnail { 
+            height: 140px; 
+            background-size: cover; 
+            background-position: center; 
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+        }
+        /* 이미지 가독성을 위한 어두운 그라데이션 오버레이 */
+        .post-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+            z-index: 1;
+        }
+        .post-thumbnail span {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        .post-info { padding: 15px; background: #fff; }
         .post-title { font-size: 16px; font-weight: bold; color: #2c3e50; }
     </style>
 </head>
@@ -55,32 +73,14 @@
         
         <div class="sub-title">메뉴</div>
         <ul class="menu-list">
-            <li class="menu-item active" onclick="loadPage('latest')">최신 포스트</li>
-            <li class="menu-item" onclick="loadPage('base1')">천간속성의 이해(Excel Sheet)</li>
-        </ul>
-
-        <div class="sub-title">기초 강의</div>
-        <ul class="menu-list">
-            <li class="menu-item" onclick="loadPage('p1')">제1강 오행의 생극과 육신</li>
-            <li class="menu-item" onclick="loadPage('p2')">제2강 육신별 생극 관계</li>
-            <li class="menu-item" onclick="loadPage('p3')">제3강 천간의 생극과 십신</li>
-            <li class="menu-item" onclick="loadPage('p4')">제4강 일간별 십신 찾기</li>
-            <li class="menu-item" onclick="loadPage('p5')">제5강 지지와 십신</li>
-            <li class="menu-item" onclick="loadPage('p6')">제6강 십신의 의미</li>
-            <li class="menu-item" onclick="loadPage('p7')">제7강 천간합 이해</li>
-            <li class="menu-item" onclick="loadPage('p8')">제8강 천간합과 육친 이해</li>
-            <li class="menu-item" onclick="loadPage('p9')">제9강 십신의 무정한 극</li>
-            <li class="menu-item" onclick="loadPage('p10')">제10강 궁성 이해</li>
-            <li class="menu-item" onclick="loadPage('p11')">제11강 비견 이해 / 제12강 비견의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p12')">제13강 겁재 이해 / 제14강 겁재의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p13')">제15강 식신 이해 / 제16강 식신의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p14')">제17강 상관 이해 / 제18강 상관의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p15')">제19강 정재 이해 / 제20강 정재의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p16')">제21강 편재 이해 / 제22강 편재의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p17')">제23강 정관 이해 / 제24강 정관의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p18')">제25강 편관 이해 / 제26강 편관의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p19')">제27강 정인 이해 / 제28강 정인의 관계성</li>
-            <li class="menu-item" onclick="loadPage('p20')">제29강 편인 이해 / 제30강 편인의 관계성</li>
+            <li class="menu-item active" onclick="loadPage('latest')">홈 (포스트 목록)</li>
+            <li class="menu-item" onclick="location.href='5haeng.html'">음양오행</li>
+            <li class="menu-item" onclick="location.href='12shinsal.html'">12신살</li>
+            <li class="menu-item" onclick="location.href='12unsung.html'">12운성</li>
+            <li class="menu-item" onclick="location.href='cheongan.html'">천간 vs 천간</li>
+            <li class="menu-item" onclick="location.href='hyeongchung.html'">형충회합파해</li>
+            <li class="menu-item" onclick="location.href='jijivsjiji.html'">지지 vs 지지</li>
+            <li class="menu-item" onclick="location.href='oneday.html'">하루한장명리</li>
         </ul>
     </div>
 
@@ -104,86 +104,52 @@
     <script>
         const pages = {
             'latest': `
-                <h3>최신 포스트</h3>
+                <h3>사주명리 핵심 포스트 목록</h3>
                 <div class="post-grid">
                     <a href="5haeng.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: #1e293b;">음양오행 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80');">
+                            <span>음양의 조화와 오행</span>
+                        </div>
                         <div class="post-info"><div class="post-title">음양오행</div></div>
                     </a>
                     <a href="12shinsal.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #1e293b;">12신살 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1532767153582-b1a0e5145009?auto=format&fit=crop&w=600&q=80');">
+                            <span>인생의 12가지 변화 기운</span>
+                        </div>
                         <div class="post-info"><div class="post-title">12신살</div></div>
                     </a>
                     <a href="12unsung.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); color: #fff;">12운성 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80');">
+                            <span>에너지의 세기와 흐름</span>
+                        </div>
                         <div class="post-info"><div class="post-title">12운성</div></div>
                     </a>
                     <a href="cheongan.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #a8caba 0%, #5d4157 100%); color: #fff;">천간 vs 천간 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80');">
+                            <span>하늘의 기운 상호작용</span>
+                        </div>
                         <div class="post-info"><div class="post-title">천간 vs 천간</div></div>
                     </a>
                     <a href="hyeongchung.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%); color: #fff;">형충회합파해 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80');">
+                            <span>합충형파해의 역학 관계</span>
+                        </div>
                         <div class="post-info"><div class="post-title">형충회합파해</div></div>
                     </a>
                     <a href="jijivsjiji.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); color: #1e293b;">지지 vs 지지 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=600&q=80');">
+                            <span>땅의 기운과 합충 분석</span>
+                        </div>
                         <div class="post-info"><div class="post-title">지지 vs 지지</div></div>
                     </a>
                     <a href="oneday.html" class="post-card">
-                        <div class="post-thumbnail" style="background: linear-gradient(135deg, #b2fefa 0%, #0ed2f7 100%); color: #1e293b;">하루한장명리 썸네일</div>
+                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80');">
+                            <span>매일 완성하는 사주 공부</span>
+                        </div>
                         <div class="post-info"><div class="post-title">하루한장명리</div></div>
                     </a>
                 </div>
-            `,
-            'base1': `
-                <h3>기초 1 : 천간속성의 이해 (Excel Sheet: 천간속성이해_2)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 10%;">천간</th>
-                            <th style="width: 15%;">구분</th>
-                            <th style="width: 20%;">키워드</th>
-                            <th style="width: 55%;">내용</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 甲 (갑목) -->
-                        <tr><td rowspan="12" class="stem-header">甲</td><td rowspan="12">기질</td><td>직선적</td><td class="text-left">꾸밈없고 솔직한 태도</td></tr>
-                        <tr><td>강직함</td><td class="text-left">원칙과 신념을 굽히지 않는 성향</td></tr>
-                        <tr><td>개척 정신</td><td class="text-left">낯선 길을 두려워하지 않고 시도하는 힘</td></tr>
-                        <tr><td>진취성</td><td class="text-left">앞으로 나아가려는 적극적 기질</td></tr>
-                        <tr><td>성장</td><td class="text-left">자기 안에 깊은 지혜와 배움을 담으려는 속성이 강함</td></tr>
-                        <tr><td>리더십</td><td class="text-left">솔선수범하여 이끌며 조직에서 방향을 제시하는 힘</td></tr>
-                        <tr><td>대표성</td><td class="text-left">맏이, 중심인물로서의 책임감</td></tr>
-                        <tr><td>호기심</td><td class="text-left">새로운 지식과 경험을 향한 갈망</td></tr>
-                        <tr><td>순수함</td><td class="text-left">본능적이고 꾸밈없는 마음</td></tr>
-                        <tr><td>교육</td><td class="text-left">지혜를 습득하고 지식을 추구하려는 성향</td></tr>
-                        <tr><td>미래 지향성</td><td class="text-left">현재에 머무르지 않고 장기적 비전을 향함</td></tr>
-                        <tr><td>자립성</td><td class="text-left">스스로 뿌리내리고 성장하려는 독립심</td></tr>
-                    </tbody>
-                </table>
-            `,
-            'p1': `<h3>1장 오행의 생극과 육신</h3><p>내용이 들어갑니다.</p>`,
-            'p2': `<h3>2장 육신별 생극관계</h3><p>내용이 들어갑니다.</p>`,
-            'p3': `<h3>3장 천간의 생극과 십신</h3><p>내용이 들어갑니다.</p>`,
-            'p4': `<h3>4장 일간별 십신 찾기</h3><p>내용이 들어갑니다.</p>`,
-            'p5': `<h3>5장 지지와 십신</h3><p>내용이 들어갑니다.</p>`,
-            'p6': `<h3>6장 십신의 의미</h3><p>내용이 들어갑니다.</p>`,
-            'p7': `<h3>7장 천간합 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p8': `<h3>8장 천간합과 육친 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p9': `<h3>9장 십신의 무정한 극</h3><p>내용이 들어갑니다.</p>`,
-            'p10': `<h3>10장 궁성 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p11': `<h3>11장 비견 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p12': `<h3>13장 겁재 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p13': `<h3>15장 식신 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p14': `<h3>17장 상관 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p15': `<h3>19장 정재 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p16': `<h3>21장 편재 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p17': `<h3>23장 정관 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p18': `<h3>25장 편관 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p19': `<h3>27장 정인 이해</h3><p>내용이 들어갑니다.</p>`,
-            'p20': `<h3>29장 편인 이해</h3><p>내용이 들어갑니다.</p>`
+            `
         };
 
         function loadPage(pageKey) {
@@ -198,12 +164,11 @@
             const items = document.querySelectorAll('.menu-item');
             items.forEach(item => item.classList.remove('active'));
             
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+            // 클릭된 메뉴에 active 부여
+            event && event.currentTarget && event.currentTarget.classList.add('active');
         }
 
-        // 초기 시작시 최신 포스트 자동 로딩
+        // 초기 시작시 홈 화면 자동 로딩
         window.onload = function() {
             loadPage('latest');
         };
