@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>명리학 용어정리</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* 1. 전체 프레임 레이아웃 */
+        .app-layout {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* 2. 우측 상단 제목프레임 (크지 않고 고정) */
+        .header-frame {
+            height: 60px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e1e4e8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            flex-shrink: 0;
+        }
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background-color: #3498db;
+            border-radius: 2px;
+        }
+        .header-info {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        /* 중하단 레이아웃 (좌측 메뉴 + 우측 내용) */
+        .body-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* 3. 메뉴프레임 (좌측) */
+        .menu-frame {
+            width: 260px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+        .menu-header-text {
+            padding: 18px 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            background-color: #1a252f;
+            border-bottom: 1px solid #34495e;
+            color: #bdc3c7;
+            letter-spacing: 0.5px;
+        }
+        .menu-list {
+            list-style: none;
+            padding: 10px 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .menu-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border-left: 4px solid transparent;
+            color: #ecf0f1;
+        }
+        .menu-item:hover {
+            background-color: #34495e;
+            color: #ffffff;
+        }
+        .menu-item.active {
+            background-color: #34495e;
+            border-left-color: #3498db;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* 4. 내용프레임 (우측) */
+        .content-frame {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-heading {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaedf2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .section-heading span {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+
+        /* 표 서식 디자인 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        table.data-table th, table.data-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #e1e4e8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        table.data-table th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        table.data-table tr:last-child td {
+            border-bottom: none;
+        }
+        table.data-table tr:hover {
+            background-color: #fdfdfe;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background-color: #ebf5fb;
+            color: #2980b9;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .hanzi {
+            font-weight: bold;
+            color: #2c3e50;
+            font-family: serif;
+            font-size: 1.05rem;
+        }
+        .term-name {
+            font-weight: bold;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-layout">
+    <!-- 우측 제목프레임 (고정, 슬림한 크기, 제목: 명리학 용어정리) -->
+    <header class="header-frame">
+        <div class="header-title">
+            명리학 용어정리
+        </div>
+        <div class="header-info">
+            명리 학습 연구 자료집
+        </div>
+    </header>
+
+    <div class="body-layout">
+        <!-- 메뉴프레임 -->
+        <nav class="menu-frame">
+            <div class="menu-header-text">학습 메뉴</div>
+            <ul class="menu-list" id="menuList">
+                <li class="menu-item active" onclick="selectMenu('전체보기', this)">전체보기</li>
+                <li class="menu-item" onclick="selectMenu('오행/물상', this)">오행/물상</li>
+                <li class="menu-item" onclick="selectMenu('격국/특수', this)">격국/특수</li>
+                <li class="menu-item" onclick="selectMenu('십신/정신', this)">십신/정신</li>
+                <li class="menu-item" onclick="selectMenu('합충변화', this)">합충변화</li>
+                <li class="menu-item" onclick="selectMenu('신살', this)">신살</li>
+            </ul>
+        </nav>
+
+        <!-- 내용프레임 -->
+        <main class="content-frame">
+            <div class="content-container" id="contentArea"></div>
+        </main>
+    </div>
+</div>
+
+<script>
+    const dataRows = [
+        { category: "오행/물상", han: "木火通明", term: "목화통명", situation: "사주에 목(木)과 화(火)의 기운이 조화를 이루며 청아하게 발달했을 때", meaning: "나무가 불을 지펴 밝은 빛을 내듯, 뛰어난 문장력, 학문적 성취, 총명한 지혜와 예술적 재능을 크게 떨치는 길격(吉格)을 의미합니다." },
+        { category: "오행/물상", han: "水火기제", term: "수화기제", situation: "사주 내에서 물(水)과 불(火)이 서로 상극하면서도 알맞은 균형과 조화를 이룰 때", meaning: "만물이 생장하기기에 가장 이상적인 상태로, 지혜(水)와 예의/열정(火)이 조화되어 사회적으로 큰 공헌을 하거나 능력을 발휘함을 뜻합니다." },
+        { category: "오행/물상", han: "傷官生財", term: "상관생재", situation: "상관(傷官)의 표현력·기술·아이디어가 재성(財星, 재물·결실)을 생조해 줄 때", meaning: "나의 재주나 언변, 전문 기술을 통해 확실한 경제적 보상과 재물을 창출해 내는 구조로, 사업가나 전문직에게 매우 길한 유통 구조입니다." },
+        { category: "오행/물상", han: "財生官旺", term: "재생관왕", situation: "재성(財星)이 다시 관성(官星)을 생하여 관의 세력을 강하게 만들어 줄 때", meaning: "내가 가진 재물이나 노력이 명예, 직장, 책임감으로 이어져 사회적 지위가 올라가고 조직 내에서 인정받는 형상을 뜻합니다." },
+
+        { category: "격국/특수", han: "殺印相生", term: "살인상생", situation: "나를 극하는 칠살(편관)의 흉포한 기운을 인성(印星)이 중간에서 받아 일간을 생해 줄 때", meaning: "거칠고 힘든 고난(칠살)이 오히려 학문이나 문서, 윗사람의 도움(인성)을 거쳐 나의 큰 권위와 명예(인수)로 승화되는 귀격 구조입니다." },
+        { category: "격국/특수", han: "傷官見官", term: "상관견관", situation: "사주에 상관이 정관을 정면으로 극하여 상처를 입힐 때", meaning: "기존의 체계, 법규, 직장, 명예에 반발하거나 마찰을 일으켜 송사, 구설, 좌천 등의 파란을 겪기 쉬운 대표적인 흉격 요소입니다." },
+        { category: "격국/특수", han: "官殺混雜", term: "관살혼잡", situation: "사주 천간이나 지지에 정관과 편관(칠살)이 함께 혼란스럽게 드러나 있을 때", meaning: "삶의 방향성과 책임감이 분산되어 일의 결정이 어렵고, 인간관계나 직장에서 갈등과 스트레스가 끊이지 않으며 특히 여명(女命)에서는 이성 문제의 복잡함을 뜻합니다." },
+        { category: "격국/특수", han: "財多身弱", term: "재다신약", situation: "재성은 사방에 깔려 있으나 일간이 너무 약하여 재물을 감당하지 못할 때", meaning: "그림의 떡처럼 내 앞에 돈은 많으나 지킬 힘이 없어, 오히려 과도한 일이나 이성 문제로 건강을 해치거나 재물을 다 잃게 되는 상태를 말합니다." },
+
+        { category: "십신/정신", han: "梟神奪食", term: "효신탈식", situation: "편인(효신)이 사주 내의 식신을 무자비하게 극하여 깨뜨릴 때", meaning: "식신은 밥그릇이자 재능, 건강을 뜻하는데 이를 편인이 치므로 진로의 막힘, 건강 악화, 재물 손재, 정신적 우울감을 겪기 쉽습니다." },
+        { category: "십신/정신", han: "傷官敗官", term: "상관패관", situation: "상관이 도를 지나쳐 관성을 완전히 무너뜨리고 파괴할 때", meaning: "법과 질서를 무시하고 안하무인 격의 행동으로 인해 관재구설(소송, 처벌)이나 명예 실추를 강하게 겪는 상태를 의미합니다." },
+
+        { category: "합충변화", han: "爭合 / 妒合", term: "쟁합 / 투합", situation: "한 개의 글자를 두고 여러 개의 글자가 서로 자기를 달라고 다투거나 시기할 때", meaning: "천간이나 지지에서 합이 이루어지려 할 때 경쟁자가 많아 원활하게 성사되지 못하고, 이성 관계나 계약에서 구설과 번복이 잦음을 뜻합니다." },
+        { category: "합충변화", han: "貪合忘生 / 貪合忘克", term: "탐합망생 / 탐합망극", situation: "합(合)에 눈이 멀어 원래 해야 할 생(生)이나 극(克)의 본분을 잊어버릴 때", meaning: "합을 하느라 주변의 상황이나 마땅히 해야 할 역할(공부, 일, 방어 등)을 놓치게 되어 엉뚱한 결과를 초래하는 사주 원국의 심리적 왜곡을 말합니다." },
+
+        { category: "신살", han: "羊刃", term: "양인살", situation: "일간을 기준으로 제왕(帝旺)에 해당하는 강력한 겁재의 기운을 가질 때", meaning: "칼을 품은 듯한 매우 강인한 기운으로, 군경검(무관), 의료계, 의사, 금융 등 피를 보거나 살생·조정하는 계통에서 엄청난 카리스마와 성공으로 발현되기도 합니다." },
+        { category: "신살", han: "華蓋살", term: "화개살", situation: "진·술·축·미 토(土)의 기운이자 예술, 종교, 고독, 학문의 별을 가질 때", meaning: "재능이 뛰어나고 깊은 철학적·종교적 성향을 가지나, 내면에 외로움이 깊고 세상과 잠시 거리두며 학문이나 도예, 종교에 빠져들기 쉬운 기운입니다." }
+    ];
+
+    function selectMenu(menuName, element) {
+        document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+        renderContent(menuName);
+    }
+
+    function renderContent(menuName) {
+        const contentArea = document.getElementById('contentArea');
+        let filteredData = [];
+        let rangeText = "";
+        let titleHeading = "";
+
+        if (menuName === '전체보기') {
+            filteredData = dataRows;
+            rangeText = "셀 범위: B1 ~ E15";
+            titleHeading = "명리학 용어정리";
+        } else if (menuName === '오행/물상') {
+            filteredData = dataRows.filter(item => item.category === '오행/물상');
+            rangeText = "셀 범위: B2 ~ E5";
+            titleHeading = "1행 제목 및 오행/물상 영역";
+        } else if (menuName === '격국/특수') {
+            filteredData = dataRows.filter(item => item.category === '격국/특수');
+            rangeText = "셀 범위: B6 ~ E9";
+            titleHeading = "1행 제목 및 격국/특수 영역";
+        } else if (menuName === '십신/정신') {
+            filteredData = dataRows.filter(item => item.category === '십신/정신');
+            rangeText = "셀 범위: B10 ~ E11";
+            titleHeading = "1행 제목 및 십신/정신 영역";
+        } else if (menuName === '합충변화') {
+            filteredData = dataRows.filter(item => item.category === '합충변화');
+            rangeText = "셀 범위: B12 ~ E13";
+            titleHeading = "1행 제목 및 합충변화 영역";
+        } else if (menuName === '신살') {
+            filteredData = dataRows.filter(item => item.category === '신살');
+            rangeText = "셀 범위: B14 ~ E15";
+            titleHeading = "1행 제목 및 신살 영역";
+        }
+
+        let html = `
+            <div class="section-heading">
+                ${titleHeading}
+                <span>${rangeText}</span>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">구분</th>
+                        <th style="width: 15%;" class="text-center">한자</th>
+                        <th style="width: 15%;" class="text-center">용어</th>
+                        <th style="width: 27%;">어떤 때 쓰이는가</th>
+                        <th style="width: 28%;">의미 및 해설</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        filteredData.forEach(row => {
+            html += `
+                <tr>
+                    <td><span class="badge">${row.category}</span></td>
+                    <td class="text-center hanzi">${row.han}</td>
+                    <td class="text-center term-name">${row.term}</td>
+                    <td>${row.situation}</td>
+                    <td>${row.meaning}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                </tbody>
+            </table>
+        `;
+
+        contentArea.innerHTML = html;
+    }
+
+    window.onload = function() {
+        renderContent('전체보기');
+    };
+</script>
+
+</body>
+</html>
