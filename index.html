@@ -63,9 +63,104 @@
         .post-info { padding: 15px; background: #fff; }
         .post-title { font-size: 16px; font-weight: bold; color: #2c3e50; }
     </style>
+<!-- 모바일 반응형 겸용 스타일 (Head 마지막에 추가) -->
+<style>
+/* 모바일용 메뉴 토글 버튼 (기본은 PC 화면이라 숨김) */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #e67e22;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+/* 스마트폰 및 화면 너비가 768px 이하일 때 적용되는 반응형 스타일 */
+@media screen and (max-width: 768px) {
+    /* 전체 레이아웃을 세로 배치로 전환 */
+    body {
+        flex-direction: column !important;
+        height: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    /* 좌측 메뉴 프레임을 상단 슬라이드/토글 형태로 변경 */
+    .menu-frame, #menu-frame, .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 0;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease-out;
+        border-right: none !important;
+        border-bottom: 2px solid #1a252f;
+    }
+
+    /* 메뉴 열림 클래스 적용 시 높이 해제 */
+    .menu-frame.mobile-open, #menu-frame.mobile-open, .sidebar.mobile-open {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* 우측 메인 영역 확장 */
+    .main-container, #main-wrapper, #right-container {
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* 상단 제목 프레임 크기 모바일 축소 */
+    .title-frame, #title-frame, .header-frame {
+        height: auto !important;
+        padding: 10px 15px !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        text-align: center;
+    }
+    .title-left, .header-left {
+        justify-content: center !important;
+    }
+    .title-right, .header-right {
+        text-align: center !important;
+        font-size: 11px !important;
+    }
+
+    /* 내용 프레임 간격 조절 및 표 깨짐 방지 (가로 스크롤 허용) */
+    .content-frame, #content-frame {
+        padding: 10px !important;
+        overflow-x: auto !important;
+    }
+    
+    .content-card, .card {
+        padding: 12px !important;
+    }
+
+    /* 표(Table) 가로 터치 스크롤 가능하게 처리 */
+    table {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important; /* 모바일에서 글자가 일그러지지 않게 유지 */
+    }
+
+    /* 모바일 전용 Floating 버튼 표시 */
+    .mobile-menu-toggle {
+        display: block !important;
+    }
+}
+</style>
 </head>
 <body>
-
+<!-- 모바일 전용 메뉴 토글 버튼 -->
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ 메뉴 열기</button>
     <!-- 1. 좌측 메뉴 프레임 -->
     <div id="menu-frame">
         <h2>복덕방사주</h2>
@@ -176,5 +271,48 @@
             loadPage('latest');
         };
     </script>
+<!-- 모바일 메뉴 동작 스크립트 -->
+<script>
+function toggleMobileMenu() {
+    // 기존 메뉴 프레임 ID 또는 Class 자동 탐색
+    var menu = document.getElementById('menu-frame') || 
+               document.querySelector('.menu-frame') || 
+               document.querySelector('.sidebar');
+    var btn = document.querySelector('.mobile-menu-toggle');
+
+    if (menu) {
+        menu.classList.toggle('mobile-open');
+        if (menu.classList.contains('mobile-open')) {
+            btn.innerHTML = '✕ 메뉴 닫기';
+            btn.style.backgroundColor = '#c0392b';
+        } else {
+            btn.innerHTML = '☰ 메뉴 열기';
+            btn.style.backgroundColor = '#e67e22';
+        }
+    }
+}
+
+// 모바일 메뉴 항목 클릭 시 자동으로 메뉴 창이 닫히도록 설정
+document.addEventListener("DOMContentLoaded", function() {
+    var menuItems = document.querySelectorAll('.menu-item, .branch-btn, .menu-grid div');
+    menuItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                var menu = document.getElementById('menu-frame') || 
+                           document.querySelector('.menu-frame') || 
+                           document.querySelector('.sidebar');
+                var btn = document.querySelector('.mobile-menu-toggle');
+                if (menu && menu.classList.contains('mobile-open')) {
+                    menu.classList.remove('mobile-open');
+                    if (btn) {
+                        btn.innerHTML = '☰ 메뉴 열기';
+                        btn.style.backgroundColor = '#e67e22';
+                    }
+                }
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
