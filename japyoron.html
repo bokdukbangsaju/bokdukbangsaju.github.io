@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>춘하추동 신사주학 - 사주 좌표법(座標法) 및 십신 정리</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#06b6d4',
+                        darkBg: '#0f172a',
+                        cardBg: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-darkBg dark:text-slate-100 min-h-screen transition-colors duration-300">
+
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-cardBg/80 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">
+                사주 좌표법 (座標法) 마스터
+            </h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#concept" class="hover:text-indigo-500 transition">좌표법 개요</a>
+                <a href="#pillars" class="hover:text-indigo-500 transition">년·월·일·시 위치</a>
+                <a href="#ten-gods" class="hover:text-indigo-500 transition">십신 위치별 심층 해석</a>
+                <a href="#examples" class="hover:text-indigo-500 transition">실전 예시</a>
+            </nav>
+            <button onclick="toggleDarkMode()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 transition" aria-label="테마 전환">
+                <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
+        <!-- 메인 배너 -->
+        <section class="text-center py-10 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 rounded-3xl border border-indigo-100 dark:border-slate-800">
+            <span class="px-3 py-1 text-xs font-semibold bg-indigo-500 text-white rounded-full uppercase tracking-wider">박청하 선생 춘하추동 신사주학</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-3">사주 좌표법 및 십신 위치별 심층 정리</h2>
+            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-sm md:text-base px-2">
+                사주 팔자의 8개 글자를 시간적·공간적·신체적·사회적 위치로 입체적 분석을 수행하는 명리학의 핵심 원리 및 위치별 통변 가이드입니다.
+            </p>
+        </section>
+
+        <!-- 1. 사주 좌표법의 개요 -->
+        <section id="concept" class="space-y-6">
+            <div class="border-l-4 border-indigo-500 pl-4">
+                <h3 class="text-2xl font-bold">1. 사주 좌표법의 개요 및 특징</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">평면적 오행·격국 해석을 넘어서는 3차원적 입체 분석 도구</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+                    <h4 class="font-bold text-lg text-indigo-500 mb-2">① 정의 및 의의</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        사주 좌표법은 사주 팔자의 8개 글자를 시간적·공간적·신체적·사회적 위치(년, 월, 일, 시)에 배치된 '좌표'로 나누어 입체적으로 분석하는 실전 명리학의 핵심 도구입니다.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+                    <h4 class="font-bold text-lg text-indigo-500 mb-2">② 해석적 유용성</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        전통 명리학의 평면적인 오행 과불급이나 격국·용신 중심의 2차원적 해석 한계를 극복합니다. 팔자의 특정 성분(육친/십신)이 '있어야 할 제자리에 위치해 있는가'를 판별하여 사주의 구조를 신속하게 파악합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 년·월·일·시 좌표의 해석 -->
+        <section id="pillars" class="space-y-6">
+            <div class="border-l-4 border-cyan-500 pl-4">
+                <h3 class="text-2xl font-bold">2. 년(年)·월(月)·일(日)·시(時) 좌표별 공간·시간·육친 해석</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">각 사주 기둥이 가진 고유 영역의 의미 체계</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- 년주 -->
+                <div class="bg-white dark:bg-cardBg p-5 rounded-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs text-indigo-500 font-bold">근(根) · 대과거</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2">년주 (年柱)</h4>
+                        <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                            <li><strong>시간:</strong> 대과거, 초년기 (초·중학 시절)</li>
+                            <li><strong>공간:</strong> 조상 터전, 집터, 뒤뜰/후원</li>
+                            <li><strong>육친/신체:</strong> 조상, 선조, 머리(頭)·정신</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 월주 -->
+                <div class="bg-white dark:bg-cardBg p-5 rounded-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs text-indigo-500 font-bold">묘(苗) · 근과거/현재완료</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2">월주 (月柱)</h4>
+                        <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                            <li><strong>시간:</strong> 근과거, 청년기</li>
+                            <li><strong>공간:</strong> 핵심 활동 운동장, 집안, 주방</li>
+                            <li><strong>육친/신체:</strong> 부모, 형제자매, 어깨·가슴(胸)</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 일주 -->
+                <div class="bg-white dark:bg-cardBg p-5 rounded-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs text-indigo-500 font-bold">화(華) · 현재</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2">일주 (日柱)</h4>
+                        <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                            <li><strong>시간:</strong> 장년기, 근접한 현재</li>
+                            <li><strong>공간:</strong> 나의 거처, 안방, 개인 중심</li>
+                            <li><strong>육친/신체:</strong> 나 자신, 배우자, 몸통·복부(腹)</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 시주 -->
+                <div class="bg-white dark:bg-cardBg p-5 rounded-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs text-indigo-500 font-bold">실(實) · 미래</span>
+                        <h4 class="font-bold text-lg mt-1 mb-2">시주 (時柱)</h4>
+                        <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                            <li><strong>시간:</strong> 미래, 말년기, 최종 결실</li>
+                            <li><strong>공간:</strong> 대문 밖, 도로, 노상, 베란다</li>
+                            <li><strong>육친/신체:</strong> 자식, 아랫사람, 하체·사지(足)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 십신의 위치별 심층 해석 -->
+        <section id="ten-gods" class="space-y-6">
+            <div class="border-l-4 border-indigo-500 pl-4">
+                <h3 class="text-2xl font-bold">3. 십신(十神)의 위치별 심층 해석</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">10가지 십신이 년·월·일·시에 배치될 때 발생하는 환경적/상황적 작용</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 비견 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 rounded-md">比肩</span>
+                    <h4 class="text-lg font-bold">비견 (比肩)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 소년기 주도성/성장성 우수, 교우관계 활발.</li>
+                        <li><strong>월(月):</strong> 부모·형제 자리 무리 형성, 유산 분탈 및 금전 희생.</li>
+                        <li><strong>일(日):</strong> 배우자 자리 위치하여 인연/건강 불안, 갈등 발생.</li>
+                        <li><strong>시(時):</strong> 말년 재물 소모, 타인과의 거래 시 희생 요소 발생.</li>
+                    </ul>
+                </div>
+                <!-- 겁재 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 rounded-md">劫財</span>
+                    <h4 class="text-lg font-bold">겁재 (劫財)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 강한 승부욕과 경쟁심, 독하고 강인한 성향.</li>
+                        <li><strong>월(月):</strong> 부모·형제 불화 인자, 가문 상속 분탈 및 희생.</li>
+                        <li><strong>일(日):</strong> 배우자 자리 불안정, 인연의 굴곡 발생.</li>
+                        <li><strong>시(時):</strong> 대문 밖 도둑 형태, 자식 관련 재산 소모 및 말년 희생.</li>
+                    </ul>
+                </div>
+                <!-- 식신 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-md">食神</span>
+                    <h4 class="text-lg font-bold">식신 (食神)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 조상대 재물 풍성, 유년기 의식주 혜택 풍족.</li>
+                        <li><strong>월(月):</strong> 부모 상속 우수 인자, 개인 재능 및 기술 발달.</li>
+                        <li><strong>일(日):</strong> 재물 생산 우수. 남명은 배우자와 유정, 여명은 남편 인연 약화.</li>
+                        <li><strong>시(時):</strong> 말년 장수 및 건강, 자식의 봉양으로 의식주 풍족.</li>
+                    </ul>
+                </div>
+                <!-- 상관 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-md">傷官</span>
+                    <h4 class="text-lg font-bold">상관 (傷官)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 조상 인연 박함, 규범을 넘는 성향, 풍류/오락성.</li>
+                        <li><strong>월(月):</strong> 가문 몰락 인자, 뛰어난 예능·예술적 재능과 수완.</li>
+                        <li><strong>일(日):</strong> 경제적 재주 뛰어남, 여명은 남편 무력화/이별 경향.</li>
+                        <li><strong>시(時):</strong> 말년 자식 덕 부족, 늦게까지 홀로 지내는 외로움.</li>
+                    </ul>
+                </div>
+                <!-- 편재 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 rounded-md">偏財</span>
+                    <h4 class="text-lg font-bold">편재 (偏財)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 조상이 큰 재물 다룸, 어릴 때 학업 방해(학마).</li>
+                        <li><strong>월(月):</strong> 부모 대 재산 성쇠 굴곡, 어려서부터 돈 버는 재주 추구.</li>
+                        <li><strong>일(日):</strong> 본인 사업 활동성 강함, 배우자도 경제력 보유.</li>
+                        <li><strong>시(時):</strong> 대문 밖 큰 돈, 노후 사업 재물 성취.</li>
+                    </ul>
+                </div>
+                <!-- 정재 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 rounded-md">正財</span>
+                    <h4 class="text-lg font-bold">정재 (正財)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 정당하고 안정적인 가문, 정당한 유산 상속.</li>
+                        <li><strong>월(月):</strong> 확실한 부모 상속, 알뜰한 재산 가치 추구.</li>
+                        <li><strong>일(日):</strong> 남명 현숙한 아내 획득, 여명 알뜰한 주머니 재물.</li>
+                        <li><strong>시(時):</strong> 말년 재산 창고, 남명은 만혼(늦은 결혼) 인자.</li>
+                    </ul>
+                </div>
+                <!-- 편관 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 rounded-md">偏官</span>
+                    <h4 class="text-lg font-bold">편관 (偏官)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 권력 중심 조상, 어릴 때 질병/수술 등 고통 경험.</li>
+                        <li><strong>월(月):</strong> 가문 권세, 군경·특수 전문 조직 인연.</li>
+                        <li><strong>일(日):</strong> 특수 직업 종사, 나를 억누르는 호랑이 같은 배우자.</li>
+                        <li><strong>시(時):</strong> 대문 밖 호랑이, 말년 건강 고충(봉사/특수직 해소 가능).</li>
+                    </ul>
+                </div>
+                <!-- 정관 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 rounded-md">正官</span>
+                    <h4 class="text-lg font-bold">정관 (正官)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 조부 명망가, 일찍 명예와 반장 등 관직 획득.</li>
+                        <li><strong>월(月):</strong> 가문 관직 상속, 평생 안정된 관길(官路) 종사.</li>
+                        <li><strong>일(日):</strong> 무난한 직장 인연 및 정당/단정한 배우자.</li>
+                        <li><strong>시(時):</strong> 말년 벼슬/명예, 현달하는 자식, 여명 만혼 인자.</li>
+                    </ul>
+                </div>
+                <!-- 편인 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300 rounded-md">偏印</span>
+                    <h4 class="text-lg font-bold">편인 (偏印)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 성장성 부족, 눈치 자람, 이공계/의학 특수 학문.</li>
+                        <li><strong>월(月):</strong> 부모 육친 애로, 전문성 및 특수 자격 인자.</li>
+                        <li><strong>일(日):</strong> 배우자와 정신적 갈등, 배우자를 답답하게 만듦.</li>
+                        <li><strong>시(時):</strong> 말년 식복/활동 약화, 임대사업/문서 재산 형태 유효.</li>
+                    </ul>
+                </div>
+                <!-- 정인 -->
+                <div class="bg-white dark:bg-cardBg p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="px-2.5 py-1 text-xs font-bold bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300 rounded-md">正印</span>
+                    <h4 class="text-lg font-bold">정인 (正印)</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
+                        <li><strong>년(年):</strong> 가권 정당 계승 조부, 학문성 강함, 높은 자부심.</li>
+                        <li><strong>월(月):</strong> 글, 학문, 문서권 바탕의 직업적 발전.</li>
+                        <li><strong>일(日):</strong> 포근한 케어형 배우자, 권리·문서 자산 보유.</li>
+                        <li><strong>시(時):</strong> 확실한 권리/부동산/결재권 보유, 자식의 의존.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 실전 예시 -->
+        <section id="examples" class="bg-indigo-900/5 dark:bg-cardBg p-6 md:p-8 rounded-3xl border border-indigo-100 dark:border-slate-800 space-y-6">
+            <div class="border-l-4 border-indigo-600 pl-4">
+                <h3 class="text-2xl font-bold">4. 실전 명리 통변 예시</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400">좌표법을 실전 사주에 직관적으로 적용하는 3가지 사례</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- 예시 1 -->
+                <div class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl shadow-sm space-y-3">
+                    <span class="text-xs font-bold text-indigo-500">[예시 1] 남명(男命) 재성 위치</span>
+                    <h4 class="font-bold text-lg">안방과 대문 밖의 배회</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400"><strong>구조:</strong> 일주 辛卯 (일지 卯木 재성) / 시주 庚寅 (시지 寅木 재성)</p>
+                    <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        일지(日支) 안방에 아내가 이미 자리잡고 있으나, 시지(時支)라는 대문 밖 좌표에 인목(寅木) 재성이 놓인 구조입니다. 대문 밖으로 나서기만 하면 눈에 들어오는 괜찮은 이성이 있어, 안방의 아내에 만족하지 못하고 집 안팎을 수시로 배회하게 됩니다. 오행 세력 계산 없이 '안방과 대문 밖의 재성' 좌표만으로 부부 갈등 인자를 즉시 독해합니다.
+                    </p>
+                </div>
+                <!-- 예시 2 -->
+                <div class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl shadow-sm space-y-3">
+                    <span class="text-xs font-bold text-indigo-500">[예시 2] 여명(女命) 정관 위치</span>
+                    <h4 class="font-bold text-lg">결혼 시기와 인연의 성격</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400"><strong>구조:</strong> 甲木 일간 여성에서 酉金 정관의 위치 비교 (Case A: 월/일주 vs Case B: 시주)</p>
+                    <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        정관이 월/일주에 있으면 적령기에 가까운 곳에서 남편 인연이 형성되어 일찍 성혼합니다. 반면, 시주(時柱)에만 정관이 위치하면 근접 환경에 남편 인자가 드물어 조기 결혼 시 이별수가 발생하기 쉽습니다. 이 경우 늦게 결혼(만혼)하거나 후원자 형태의 남편을 만나는 개운법을 안내합니다.
+                    </p>
+                </div>
+                <!-- 예시 3 -->
+                <div class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl shadow-sm space-y-3">
+                    <span class="text-xs font-bold text-indigo-500">[예시 3] 식신·편재 위치</span>
+                    <h4 class="font-bold text-lg">부모 유산 vs 노후 재물 환경</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400"><strong>구조:</strong> 월주(月柱) 식신/편재 vs 시주(時柱) 식신/편재</p>
+                    <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        월주(月)에 식신/편재가 갖추어지면 부모 대의 경제적 기반이 튼튼해 유산 상속을 크게 받는 좌표입니다. 시주(時)에 위치하면 젊어서는 부모 혜택이 적더라도 대문 밖 활동 수단을 확보한 격으로, 노후 임대사업이나 사업성 재물을 통해 결실을 맺습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 py-8 text-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800 mt-12">
+        박청하 선생 춘하추동 신사주학 좌표론 정리 아카이브 &copy; 2026
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body>
+</html>
