@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백초귀장술 일진별 분석 시스템</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d35400;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #bdc3c7;
+        }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        /* 12일진 선택 버튼 영역 */
+        .iljin-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            background: #eaeded;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .iljin-btn {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: all 0.2s ease;
+        }
+        .iljin-btn:hover, .iljin-btn.active {
+            background-color: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 5px rgba(211, 84, 0, 0.3);
+        }
+
+        /* 5x5 그리드 레이아웃 구조 */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+        }
+        .grid-cell {
+            background: #fdfefe;
+            border: 1px solid #d5dbdb;
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            min-height: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .grid-cell.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+            box-shadow: none;
+        }
+        .grid-cell:not(.empty):hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #fef5f1;
+        }
+        .cell-title {
+            font-size: 11px;
+            color: #7f8c8d;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        .cell-value {
+            font-size: 18px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .symbol-display {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .star { color: #2980b9; } /* 파란색 별 */
+        .cross { color: #c0392b; } /* 빨간색 X */
+
+        /* 팝업 모달 스타일 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .modal-box {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            width: 90%;
+            max-width: 480px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .modal-header h4 {
+            margin: 0;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        .close-btn:hover { color: #333; }
+        .modal-body {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        .modal-body p {
+            margin: 8px 0;
+        }
+
+        /* 출처 푸터 */
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #95a5a6;
+            border-top: 1px solid #eaeded;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>백초귀장술 일진별 웹 분석 시스템</h1>
+    <p class="subtitle">일진을 선택한 후, 각 항목을 클릭하시면 상세 내용이 팝업창으로 나타납니다.</p>
+
+    <!-- 12일진 선택 버튼 -->
+    <div class="iljin-selector" id="iljinSelector">
+        <button class="iljin-btn active" onclick="selectIljin('寅')">寅日</button>
+        <button class="iljin-btn" onclick="selectIljin('卯')">卯日</button>
+        <button class="iljin-btn" onclick="selectIljin('辰')">辰日</button>
+        <button class="iljin-btn" onclick="selectIljin('巳')">巳日</button>
+        <button class="iljin-btn" onclick="selectIljin('午')">午日</button>
+        <button class="iljin-btn" onclick="selectIljin('未')">未日</button>
+        <button class="iljin-btn" onclick="selectIljin('申')">申日</button>
+        <button class="iljin-btn" onclick="selectIljin('酉')">酉日</button>
+        <button class="iljin-btn" onclick="selectIljin('戌')">戌日</button>
+        <button class="iljin-btn" onclick="selectIljin('亥')">亥日</button>
+        <button class="iljin-btn" onclick="selectIljin('子')">子日</button>
+        <button class="iljin-btn" onclick="selectIljin('丑')">丑日</button>
+    </div>
+
+    <!-- 5x5 배치 격자 그리드 -->
+    <div class="grid-layout" id="gridLayout">
+        <!-- 자바스크립트로 동적 생성됩니다 -->
+    </div>
+
+    <!-- 출처 표기 -->
+    <footer>
+        출처: 한루한장 명리 4기생 최혜리 선생님의 자료를 정리함
+    </footer>
+</div>
+
+<!-- 상세 팝업 모달 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-box" id="modalBox">
+    <div class="modal-header">
+        <h4 id="modalTitle">항목 상세 내용</h4>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+        <!-- 상세 내용이 동적으로 들어갑니다 -->
+    </div>
+</div>
+
+<script>
+    // 5x5 그리드 레이아웃 구조 (공백 칸은 null)
+    const gridLayoutStructure = [
+        [null, "백병주", "일진", "천록", null],
+        ["금조건", null, null, null, "사살신"],
+        ["태식", null, null, null, "합식"],
+        ["해결신", null, null, null, "기러기"],
+        [null, "원진록", "약일충", "공망신", null]
+    ];
+
+    // 각 항목별 심볼 기호 (★ 파란색, X 빨간색)
+    const itemSymbols = {
+        "일진": '<span class="star">★★★★★</span>',
+        "천록": '<span class="star">★★★★</span>',
+        "사살신": '<span class="cross">X X X X</span>',
+        "합식": '<span class="star">★★★★</span>',
+        "기러기": '<span class="cross">X X X X</span>',
+        "공망신": '<span class="cross">X X</span>',
+        "약일충": '<span class="cross">X X X X</span>',
+        "원진록": '<span class="cross">X X X X</span>',
+        "해결신": '<span class="star">★★★</span>',
+        "태식": '<span class="cross">X X X</span>',
+        "금조건": '<span class="star">★★★</span>',
+        "백병주": '<span class="cross">X X X X X</span>'
+    };
+
+    // 일진별(寅~丑) 12개 항목 값 매핑
+    const iljinValues = {
+        "寅": { "일진": "寅", "천록": "卯", "사살신": "辰", "합식": "巳", "기러기": "午", "공망신": "未", "약일충": "申", "원진록": "酉", "해결신": "戌", "태식": "亥", "금조건": "子", "백병주": "丑" },
+        "卯": { "일진": "卯", "천록": "辰", "사살신": "巳", "합식": "午", "기러기": "未", "공망신": "申", "약일충": "酉", "원진록": "戌", "해결신": "亥", "태식": "子", "금조건": "丑", "백병주": "寅" },
+        "辰": { "일진": "辰", "천록": "巳", "사살신": "午", "합식": "未", "기러기": "申", "공망신": "酉", "약일충": "戌", "원진록": "亥", "해결신": "子", "태식": "丑", "금조건": "寅", "백병주": "卯" },
+        "巳": { "일진": "巳", "천록": "午", "사살신": "未", "합식": "申", "기러기": "酉", "공망신": "戌", "약일충": "亥", "원진록": "子", "해결신": "丑", "태식": "寅", "금조건": "卯", "백병주": "辰" },
+        "午": { "일진": "午", "천록": "未", "사살신": "申", "합식": "酉", "기러기": "戌", "공망신": "亥", "약일충": "子", "원진록": "丑", "해결신": "寅", "태식": "卯", "금조건": "辰", "백병주": "巳" },
+        "未": { "일진": "未", "천록": "申", "사살신": "酉", "합식": "戌", "기러기": "亥", "공망신": "子", "약일충": "丑", "원진록": "寅", "해결신": "卯", "태식": "辰", "금조건": "巳", "백병주": "午" },
+        "申": { "일진": "申", "천록": "酉", "사살신": "戌", "합식": "亥", "기러기": "子", "공망신": "丑", "약일충": "寅", "원진록": "卯", "해결신": "辰", "태식": "巳", "금조건": "午", "백병주": "未" },
+        "酉": { "일진": "酉", "천록": "戌", "사살신": "亥", "합식": "子", "기러기": "丑", "공망신": "寅", "약일충": "卯", "원진록": "辰", "해결신": "巳", "태식": "午", "금조건": "未", "백병주": "申" },
+        "戌": { "일진": "戌", "천록": "亥", "사살신": "子", "합식": "丑", "기러기": "寅", "공망신": "卯", "약일충": "辰", "원진록": "巳", "해결신": "午", "태식": "未", "금조건": "申", "백병주": "酉" },
+        "亥": { "일진": "亥", "천록": "子", "사살신": "丑", "합식": "寅", "기러기": "卯", "공망신": "辰", "약일충": "巳", "원진록": "午", "해결신": "未", "태식": "申", "금조건": "酉", "백병주": "戌" },
+        "子": { "일진": "子", "천록": "丑", "사살신": "寅", "합식": "卯", "기러기": "辰", "공망신": "巳", "약일충": "午", "원진록": "未", "해결신": "申", "태식": "酉", "금조건": "戌", "백병주": "亥" },
+        "丑": { "일진": "丑", "천록": "寅", "사살신": "卯", "합식": "辰", "기러기": "巳", "공망신": "午", "약일충": "未", "원진록": "申", "해결신": "酉", "태식": "戌", "금조건": "亥", "백병주": "子" }
+    };
+
+    // 각 항목별 상세 내용 데이터 (12신살, 12운성, 내용)
+    const itemDetails = {
+        "일진": {
+            shinsal: "장성살",
+            unse: "제왕",
+            desc: "(강일진) 답답한 마음, 갈등하는 상황, 두 가지 마음, 이럴까 저럴까, 좌불안석, 나의 기운이 강한 사람이 옴, 할까 말까 두 가지 마음을 갖은 사람이 왔음"
+        },
+        "천록": {
+            shinsal: "반안살",
+            unse: "쇠",
+            desc: "(소망) 소망하는 것, 내가 바라는 것, 꼭 하고 싶은 것, 의욕이 강한 상태, 이미 결정한 마음, 열망이 강한 상태"
+        },
+        "사살신": {
+            shinsal: "역마살",
+            unse: "병",
+            desc: "(낙화) 빨리 정리 해라!!!, 역마, 바람, 지금 이 자리는 끝이 났다 → 순간적인 질문에서는 가능, 큰 틀에서 볼 때는 명리로 (대운 등)"
+        },
+        "합식": {
+            shinsal: "육해살",
+            unse: "사",
+            desc: "(목적) 하고 싶은 것이 있다, 의욕이 있다, 의욕이 있는 상태"
+        },
+        "기러기": {
+            shinsal: "화개살",
+            unse: "묘",
+            desc: "(이탈) 궤도에서 이탈 됨, 매매운, 이전, 이장 (묘), 바꿔야 할 때, 떠나 보내야 할 때"
+        },
+        "공망신": {
+            shinsal: "겁살",
+            unse: "절",
+            desc: "(허공) 남편과 같이 사십니까?, 상대가 없다, 고독하다, 주머니가 비어있다"
+        },
+        "약일충": {
+            shinsal: "재살",
+            unse: "태",
+            desc: "(상충) 난처한 상태, 이동 변동사, 상황 판단이 미숙 할 수 있다"
+        },
+        "원진록": {
+            shinsal: "천살",
+            unse: "양",
+            desc: "(양보) 힘이 없다, 양보하고 물러나야 함, 내가 결정 할 수 있는 것이 아님"
+        },
+        "해결신": {
+            shinsal: "지살",
+            unse: "장생",
+            desc: "(합신) 이득이 된다, 합격이 된다, 해결해야 할 일이 있다"
+        },
+        "태식": {
+            shinsal: "연살",
+            unse: "목욕",
+            desc: "(쇠퇴) 의욕이 없다, 관재구설, 아픈 사람은 쾌차하기 어려움, 불안한 상태, 안절부절"
+        },
+        "금조건": {
+            shinsal: "월살",
+            unse: "관대",
+            desc: "(조건) 조건부 이익이 발생한다, 조건을 잘 지키거나 조건이 맞으면 이익이 생긴다"
+        },
+        "백병주": {
+            shinsal: "망신살",
+            unse: "건록",
+            desc: "(암살) 힘든 상황, 구설수, 시기, 질투, 일이 꼬여서 고생한다"
+        }
+    };
+
+    let currentIljin = "寅";
+
+    function selectIljin(iljinKey) {
+        currentIljin = iljinKey;
+        
+        document.querySelectorAll('.iljin-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.innerText.includes(iljinKey)) {
+                btn.classList.add('active');
+            }
+        });
+
+        renderGrid();
+    }
+
+    function renderGrid() {
+        const gridLayout = document.getElementById('gridLayout');
+        gridLayout.innerHTML = '';
+
+        const currentValues = iljinValues[currentIljin];
+
+        gridLayoutStructure.forEach(row => {
+            row.forEach(itemKey => {
+                const cell = document.createElement('div');
+                
+                if (itemKey === null) {
+                    cell.className = 'grid-cell empty';
+                } else {
+                    cell.className = 'grid-cell';
+                    const val = currentValues[itemKey];
+                    const symbol = itemSymbols[itemKey] || '';
+
+                    cell.innerHTML = `
+                        <div class="cell-title">${itemKey}</div>
+                        <div class="cell-value">${val}</div>
+                        <div class="symbol-display">${symbol}</div>
+                    `;
+                    
+                    // 각 항목을 클릭하면 팝업 모달창으로 상세 내용 출력
+                    cell.onclick = () => openModal(itemKey, val);
+                }
+                gridLayout.appendChild(cell);
+            });
+        });
+    }
+
+    function openModal(itemKey, val) {
+        const detail = itemDetails[itemKey];
+        
+        document.getElementById('modalTitle').innerText = `${currentIljin}일 - ${itemKey} (${val})`;
+        document.getElementById('modalBody').innerHTML = `
+            <p>· <strong>12신살</strong> : ${detail.shinsal}</p>
+            <p>· <strong>12운성</strong> : ${detail.unse}</p>
+            <p>· <strong>내&nbsp;&nbsp;&nbsp;&nbsp;용</strong> : ${detail.desc}</p>
+        `;
+        document.getElementById('modalOverlay').style.display = 'block';
+        document.getElementById('modalBox').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+        document.getElementById('modalBox').style.display = 'none';
+    }
+
+    window.onload = function() {
+        selectIljin('寅');
+    };
+</script>
+
+</body>
+</html>
