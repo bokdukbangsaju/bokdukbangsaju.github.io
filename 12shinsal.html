@@ -143,7 +143,7 @@
         .data-table th, .data-table td {
             border: 1px solid #d1d5db;
             padding: 10px 12px;
-            text-align: center; /* 가운데 정렬 */
+            text-align: center;
             font-size: 0.92rem;
             line-height: 1.5;
             vertical-align: middle;
@@ -187,105 +187,23 @@
             border-left: 4px solid #e67e22;
             padding-left: 10px;
         }
+
+        /* 추가된 이미지 영역 스타일 */
+        .sinsal-image-container {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .sinsal-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
     </style>
-<!-- 모바일 반응형 겸용 스타일 (Head 마지막에 추가) -->
-<style>
-/* 모바일용 메뉴 토글 버튼 (기본은 PC 화면이라 숨김) */
-.mobile-menu-toggle {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    background-color: #e67e22;
-    color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    cursor: pointer;
-}
-
-/* 스마트폰 및 화면 너비가 768px 이하일 때 적용되는 반응형 스타일 */
-@media screen and (max-width: 768px) {
-    /* 전체 레이아웃을 세로 배치로 전환 */
-    body {
-        flex-direction: column !important;
-        height: auto !important;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-    }
-
-    /* 좌측 메뉴 프레임을 상단 슬라이드/토글 형태로 변경 */
-    .menu-frame, #menu-frame, .sidebar {
-        width: 100% !important;
-        height: auto !important;
-        max-height: 0;
-        overflow: hidden !important;
-        transition: max-height 0.3s ease-out;
-        border-right: none !important;
-        border-bottom: 2px solid #1a252f;
-    }
-
-    /* 메뉴 열림 클래스 적용 시 높이 해제 */
-    .menu-frame.mobile-open, #menu-frame.mobile-open, .sidebar.mobile-open {
-        max-height: 80vh !important;
-        overflow-y: auto !important;
-    }
-
-    /* 우측 메인 영역 확장 */
-    .main-container, #main-wrapper, #right-container {
-        width: 100% !important;
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    /* 상단 제목 프레임 크기 모바일 축소 */
-    .title-frame, #title-frame, .header-frame {
-        height: auto !important;
-        padding: 10px 15px !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        text-align: center;
-    }
-    .title-left, .header-left {
-        justify-content: center !important;
-    }
-    .title-right, .header-right {
-        text-align: center !important;
-        font-size: 11px !important;
-    }
-
-    /* 내용 프레임 간격 조절 및 표 깨짐 방지 (가로 스크롤 허용) */
-    .content-frame, #content-frame {
-        padding: 10px !important;
-        overflow-x: auto !important;
-    }
-    
-    .content-card, .card {
-        padding: 12px !important;
-    }
-
-    /* 표(Table) 가로 터치 스크롤 가능하게 처리 */
-    table {
-        display: block !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important; /* 모바일에서 글자가 일그러지지 않게 유지 */
-    }
-
-    /* 모바일 전용 Floating 버튼 표시 */
-    .mobile-menu-toggle {
-        display: block !important;
-    }
-}
-</style>
 </head>
 <body>
-<!-- 모바일 전용 메뉴 토글 버튼 -->
-<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ 메뉴 열기</button>
+
     <div id="menu-frame">
         <h1>一日命理</h1>
         
@@ -333,7 +251,6 @@
     </div>
 
     <script>
-        // 1. 12신살_01 Sheet 데이터
         const sinsal01Data = [
             { sinsal: "지살", meaning: "\"자발적 변화/계획성 有/희망\"\n지살은 아이가 태어나서 걸음을 배우는 형태라서 매우 활동적이고 이사, 변동, 직업변동, 여행, 이민 등이 발생한다.\n(지살 방향에 문패, 간판, 거울, 기타 선전물 현관문 등이 있고, 지살 방에 차고 및 출입문을 내면 좋다.)", detail: "1) 힘들었던 과거 (겁살 : 허물어지다. 재살 : 고민을 시작, 천살 : 복구, 갱생)\n2) 능동적 움직임, 새로운 시작 (역마 → 지살과 충)\n3) 장기적인 계획, 정보 多 (이치에 밝은 사람)\n4) 최선을 다해 노력(각오, 의지)\n5) 밝은 성품, 호기심, 적극성 多", direction: "영업장 출입문\n간판설치에 길한 방향. 사업장에는 이 방향으로 문을 내면 좋다.\n대문, 복도, 차고, 신발장에 길한 방향\n자신을 알리는 선전물을 걸기" },
             { sinsal: "장성살", meaning: "\"정면대응/책임감\"\n장성살은 용맹심이 왕성하여 과감하다는 뜻이 있고, 무슨 일이든 진취적으로 임하여 인내와 끈기로 능히 많은 어려움을 돌파하여 업무를 수행한다. 장성 방향은 항상 담장을 높여야 한다. 공부하는 학생은 더욱 꺼린다. 장성살 방에 대문을 두면 안 된다. 특히 남자한테 화가 온다.", detail: "1) 책임, 의무, 중심을 잃어서는 안된다.\n2) 자리를 비우기 어렵다. 이동 X\n3) 용맹, 책임, 주도, 의지, 지략\n4) 굳어 있다. 융통성 ↓\n5) 유치원, 요양원, 보육원, 체력이 강함 → 뭔가를 지키는 일(법률, 보험)", direction: "이 방위는 막혀 있어야 한다.\n사람의 출입문은 물론 외부 기운이 스며들지 않도록 막아 두어야 하는 방향.\n부엌이나 창고, 장독대 설치하는 것이 좋다.\n부적은 여기!" },
@@ -349,7 +266,6 @@
             { sinsal: "반안살", meaning: "\"남의 덕/대행\"\n반안살은 말의 안장을 말하는 것으로 무관을 뜻하고 그만큼 안정되어 있다는 것을 나타낸다.\n(활용 : 반안살 방향은 숨는 곳이며 사람 및 물건을 찾는 곳이다. 미혼자들은 반안살 방향으로 잠을 자면 결혼이 성사된다. 건강이 좋지 않을 때는 반안살 방위에 자면 좋아진다.)", detail: "1) 남의 능력을 대행\n2) 금고 두는 곳\n3) 편안하게 대행 해 주다\n4) 비밀, 고지식, 속내를 감추다.\n5) 일회용품, 임시 통변 물건\n6) 예술, 문화", direction: "이사 길한 방위.\n잠잘 때 머리를 두는 두침 방위.\n평소 믿고 의지할 수 있는 사람이 살거나 돈줄이 되는 방향.\n학생은 이 방향을 보고 공부하면 학업에 지장" }
         ];
 
-        // 2. 12신살 Sheet 데이터 (지지별 12신살)
         const jijiData = {
             "寅": ["亥","子","丑","寅","卯","辰","巳","午","未","申","酉","戌"],
             "卯": ["申","酉","戌","亥","子","丑","寅","卯","辰","巳","午","未"],
@@ -366,7 +282,6 @@
         };
         const sinsalHeaders = ["겁살", "재살", "천살", "지살", "연살", "월살", "망신살", "장성살", "반안살", "역마살", "육해살", "화개살"];
 
-        // 3. 12신살_02 Sheet 데이터 (삼합기준 신살)
         const samhapData = {
             "寅午戌": {
                 sang: ["겁살", "연살", "반안살"],
@@ -410,7 +325,8 @@
             }
         };
 
-        // 12신살_01 표 출력
+        const targetImageUrl = "https://postfiles.pstatic.net/MjAyNjEwMDVfMTIz/MDAxNzkxMTYyODcxNjEx.kR0Fw8oVmyDDsAEXj_8m7I7X4G5CtM-76H3LMty1YGIg.qakhCTKSZnFrc8NzB0s37XFqefKn1XK85kJh6n8HCigg.PNG/12%EC%8B%A0%EC%82%B4.png?type=w773";
+
         function show12Sinsal(element) {
             clearActiveState();
             element.classList.add('active');
@@ -441,7 +357,6 @@
             contentFrame.innerHTML = html;
         }
 
-        // 지지별 12신살 표 출력
         function showJiji(jiji, element) {
             clearActiveState();
             element.classList.add('active');
@@ -473,10 +388,14 @@
                         </tbody>
                     </table>`;
 
+            // 이미지 추가
+            html += `<div class="sinsal-image-container">
+                        <img src="${targetImageUrl}" alt="12신살 참고 이미지">
+                     </div>`;
+
             contentFrame.innerHTML = html;
         }
 
-        // 삼합기준 신살 표 출력 (셀 병합, 빈 셀 테두리 제거, 가운데 정렬 적용)
         function showSamhap(samhapKey, element) {
             clearActiveState();
             element.classList.add('active');
@@ -548,62 +467,22 @@
                         </tbody>
                     </table>`;
 
+            // 이미지 추가
+            html += `<div class="sinsal-image-container">
+                        <img src="${targetImageUrl}" alt="12신살 참고 이미지">
+                     </div>`;
+
             contentFrame.innerHTML = html;
         }
 
-        // 선택 상태 초기화
         function clearActiveState() {
             const items = document.querySelectorAll('.menu-title, .submenu-item');
             items.forEach(item => item.classList.remove('active'));
         }
 
-        // 페이지 진입 시 기본으로 12신살 표 출력
         window.onload = function() {
             show12Sinsal(document.querySelector('.menu-title'));
         };
     </script>
-<!-- 모바일 메뉴 동작 스크립트 -->
-<script>
-function toggleMobileMenu() {
-    // 기존 메뉴 프레임 ID 또는 Class 자동 탐색
-    var menu = document.getElementById('menu-frame') || 
-               document.querySelector('.menu-frame') || 
-               document.querySelector('.sidebar');
-    var btn = document.querySelector('.mobile-menu-toggle');
-
-    if (menu) {
-        menu.classList.toggle('mobile-open');
-        if (menu.classList.contains('mobile-open')) {
-            btn.innerHTML = '✕ 메뉴 닫기';
-            btn.style.backgroundColor = '#c0392b';
-        } else {
-            btn.innerHTML = '☰ 메뉴 열기';
-            btn.style.backgroundColor = '#e67e22';
-        }
-    }
-}
-
-// 모바일 메뉴 항목 클릭 시 자동으로 메뉴 창이 닫히도록 설정
-document.addEventListener("DOMContentLoaded", function() {
-    var menuItems = document.querySelectorAll('.menu-item, .branch-btn, .menu-grid div');
-    menuItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                var menu = document.getElementById('menu-frame') || 
-                           document.querySelector('.menu-frame') || 
-                           document.querySelector('.sidebar');
-                var btn = document.querySelector('.mobile-menu-toggle');
-                if (menu && menu.classList.contains('mobile-open')) {
-                    menu.classList.remove('mobile-open');
-                    if (btn) {
-                        btn.innerHTML = '☰ 메뉴 열기';
-                        btn.style.backgroundColor = '#e67e22';
-                    }
-                }
-            }
-        });
-    });
-});
-</script>
 </body>
 </html>
