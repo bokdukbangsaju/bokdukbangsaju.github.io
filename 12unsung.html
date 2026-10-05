@@ -28,7 +28,6 @@
             flex-direction: column;
             border-right: 1px solid #34495e;
             flex-shrink: 0;
-            transition: max-height 0.3s ease-out;
         }
 
         .sidebar-header {
@@ -72,7 +71,7 @@
             border-left: 4px solid #f39c12;
         }
 
-        /* 2. 지지 항목 한 줄에 3개씩 표현하는 그리드 스타일 */
+        /* 기존 지지별 12운성 항목 (한 줄에 3개 그리드) */
         .submenu-list {
             list-style: none;
             background-color: #212f3d;
@@ -104,6 +103,47 @@
             font-weight: bold;
         }
 
+        /* '일간별 12운성' 섹션 및 그리드 (한 줄당 2개) */
+        .menu-section-title {
+            padding: 10px 20px 5px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #f39c12;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .ilgan-grid {
+            list-style: none;
+            background-color: #212f3d;
+            padding: 10px 12px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .ilgan-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 5px;
+            background-color: #2c3e50;
+            color: #a6acaf;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .ilgan-link:hover, .ilgan-link.active {
+            background-color: #27ae60;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
         /* 우측 전체 메인 영역 */
         #main-container {
             flex-grow: 1;
@@ -113,7 +153,7 @@
             overflow: hidden;
         }
 
-        /* 3. 우측 상단 제목 프레임 */
+        /* 2. 우측 상단 제목 프레임 */
         #header-frame {
             height: 85px;
             background-color: #ffffff;
@@ -181,8 +221,9 @@
 
         .styled-table th, .styled-table td {
             border: 1px solid #cbd5e1;
-            padding: 10px 12px;
+            padding: 12px 10px;
             text-align: center;
+            vertical-align: middle;
             white-space: nowrap;
         }
 
@@ -210,106 +251,30 @@
             background-color: #2c3e50;
         }
 
-        /* 지지별 운성 원 스타일 시트 */
+        /* 운성 원 스타일 시트 */
         .unseong-cell-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            min-height: 60px;
         }
 
         .circle-indicator {
             border-radius: 50%;
             display: inline-block;
         }
-
-        /* 모바일 반응형 커스텀 스타일 */
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-            background-color: #e67e22;
-            color: #ffffff;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            font-size: 15px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-        }
-
-        @media screen and (max-width: 768px) {
-            body {
-                flex-direction: column !important;
-                height: auto !important;
-                min-height: 100vh;
-                overflow-x: hidden !important;
-                overflow-y: auto !important;
-            }
-
-            #sidebar {
-                width: 100% !important;
-                height: auto !important;
-                max-height: 0;
-                overflow: hidden !important;
-                border-right: none !important;
-                border-bottom: 2px solid #1a252f;
-            }
-
-            #sidebar.mobile-open {
-                max-height: 80vh !important;
-                overflow-y: auto !important;
-            }
-
-            #main-container {
-                width: 100% !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-
-            #header-frame {
-                height: auto !important;
-                padding: 12px 15px !important;
-                justify-content: center;
-            }
-
-            .header-title {
-                font-size: 18px !important;
-            }
-
-            .book-img {
-                height: 45px !important;
-                margin-right: 12px !important;
-            }
-
-            #content-frame {
-                padding: 12px !important;
-            }
-
-            .content-card {
-                padding: 12px !important;
-            }
-
-            .mobile-menu-toggle {
-                display: block !important;
-            }
-        }
     </style>
 </head>
 <body>
-
-    <!-- 모바일 전용 메뉴 토글 버튼 -->
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ 메뉴 열기</button>
 
     <div id="sidebar">
         <div class="sidebar-header">
             <h1>一日命理</h1>
         </div>
         <ul class="menu-list">
+            <!-- 12운성 전체표 메뉴 -->
             <li class="menu-item">
                 <a class="menu-link active" onclick="show12UnseongFull(this)">12운성</a>
                 <ul class="submenu-list">
@@ -327,7 +292,26 @@
                     <li><a class="submenu-link" onclick="showBranchUnseong(12, '丑', this)">丑</a></li>
                 </ul>
             </li>
+
+            <!-- '일간별 12운성' 메뉴 (한 줄당 2개씩 배치) -->
             <li class="menu-item">
+                <div class="menu-section-title">일간별 12운성</div>
+                <ul class="ilgan-grid">
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('甲', 1, this)">甲</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('乙', 2, this)">乙</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('丙', 3, this)">丙</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('丁', 4, this)">丁</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('戊', 5, this)">戊</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('己', 6, this)">己</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('庚', 7, this)">庚</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('辛', 8, this)">辛</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('壬', 9, this)">壬</a></li>
+                    <li><a class="ilgan-link" onclick="showIlganUnseong('癸', 10, this)">癸</a></li>
+                </ul>
+            </li>
+
+            <!-- 60갑자 12운성 메뉴 -->
+            <li class="menu-item" style="margin-top: 10px;">
                 <a class="menu-link" onclick="show60Gabja(this)">60갑자 12운성</a>
             </li>
         </ul>
@@ -379,8 +363,43 @@
             [56, "己", "未", "관대"], [57, "庚", "申", "건록"], [58, "辛", "酉", "건록"], [59, "壬", "戌", "관대"], [60, "癸", "亥", "제왕"]
         ];
 
+        // 12운성 단계별 원 크기 순위 규칙: 제왕 > 건록=관대 > 쇠=목욕 > 병=장생 > 사=양 > 묘=태 > 절
+        function getCircleSize(unseong) {
+            switch(unseong) {
+                case '제왕': return 26;
+                case '건록': 
+                case '관대': return 22;
+                case '쇠': 
+                case '목욕': return 18;
+                case '병': 
+                case '장생': return 14;
+                case '사': 
+                case '양': return 10;
+                case '묘': 
+                case '태': return 7;
+                case '절': return 5;
+                default: return 10;
+            }
+        }
+
+        // 천간별 색상 속성 부여 (선과 채우기)
+        function getStemColorStyle(stem) {
+            if (stem === '甲' || stem === '乙') {
+                return 'border: 2px solid #27ae60; background-color: #27ae60;';
+            } else if (stem === '丙' || stem === '丁') {
+                return 'border: 2px solid #c0392b; background-color: #c0392b;';
+            } else if (stem === '戊' || stem === '己') {
+                return 'border: 2px solid #d4ac0d; background-color: #f1c40f;';
+            } else if (stem === '庚' || stem === '辛') {
+                return 'border: 2px solid #2c3e50; background-color: #ffffff;';
+            } else if (stem === '壬' || stem === '癸') {
+                return 'border: 2px solid #111111; background-color: #111111;';
+            }
+            return 'border: 2px solid #333333; background-color: #333333;';
+        }
+
         function clearActive() {
-            document.querySelectorAll('.menu-link, .submenu-link').forEach(el => {
+            document.querySelectorAll('.menu-link, .submenu-link, .ilgan-link').forEach(el => {
                 el.classList.remove('active');
             });
         }
@@ -409,47 +428,11 @@
             document.getElementById('content-body').innerHTML = html;
         }
 
-        // 12운성 단계별 원 크기 매핑 함수 (제왕 > 건록=관대 > 쇠=목욕 > 병=장생 > 사=양 > 묘=태 > 절)
-        function getCircleSize(unseong) {
-            switch(unseong) {
-                case '제왕': return 35;
-                case '건록': 
-                case '관대': return 30;
-                case '쇠': 
-                case '목욕': return 18;
-                case '병': 
-                case '장생': return 15;
-                case '사': 
-                case '양': return 12;
-                case '묘': 
-                case '태': return 10;
-                case '절': return 8;
-                default: return 10;
-            }
-        }
-
-        // 천간별 색상 속성 부여 함수 (甲乙 녹색, 丙丁 붉은색, 戊己 노란색, 庚辛 검은색선/백색채우기, 壬癸 검은색)
-        function getStemColorStyle(stem) {
-            if (stem === '甲' || stem === '乙') {
-                return 'border: 2px solid #27ae60; background-color: #27ae60;';
-            } else if (stem === '丙' || stem === '丁') {
-                return 'border: 2px solid #c0392b; background-color: #c0392b;';
-            } else if (stem === '戊' || stem === '己') {
-                return 'border: 2px solid #f1c40f; background-color: #f1c40f;';
-            } else if (stem === '庚' || stem === '辛') {
-                return 'border: 2px solid #2c3e50; background-color: #ffffff;';
-            } else if (stem === '壬' || stem === '癸') {
-                return 'border: 2px solid #111111; background-color: #111111;';
-            }
-            return 'border: 2px solid #333333; background-color: #333333;';
-        }
-
-        // 지지별 12운성 출력 (하단에 원 추가 적용)
+        // 지지별 12운성 출력 (기존 기능 유지)
         function showBranchUnseong(rowIndex, branchName, elem) {
             clearActive();
             if(elem) {
                 elem.classList.add('active');
-                elem.closest('.menu-item').querySelector('.menu-link').classList.add('active');
             }
 
             let html = `<h2 class="content-title">지지별 12운성 - [ ${branchName} ]</h2>`;
@@ -473,11 +456,47 @@
                     html += `<td>
                         <div class="unseong-cell-content">
                             <span>${cell}</span>
-                            <span class="circle-indicator" style="width: ${size}px; height: ${size}px; ${colorStyle}" title="${stem} - ${cell}"></span>
+                            <span class="circle-indicator" style="width: ${size}px; height: ${size}px; ${colorStyle}" title="${stem}: ${cell}"></span>
                         </div>
                     </td>`;
                 }
             });
+            html += '</tr></tbody></table></div>';
+
+            document.getElementById('content-body').innerHTML = html;
+        }
+
+        // 일간별 12운성 출력 (행과 열을 바꾸어 가로형 1행 테이블로 표시)
+        function showIlganUnseong(ilganName, colIndex, elem) {
+            clearActive();
+            if(elem) {
+                elem.classList.add('active');
+            }
+
+            let html = `<h2 class="content-title">일간별 12운성 - [ ${ilganName} 일간 ]</h2>`;
+            html += '<div class="table-responsive"><table class="styled-table"><thead><tr>';
+            
+            // 헤더: 첫 칸은 '일간', 나머지는 寅 ~ 丑 (12지지)
+            html += `<th>일간</th>`;
+            for(let i = 1; i < unseongData.length; i++) {
+                html += `<th>${unseongData[i][0]}</th>`;
+            }
+            html += '</tr></thead><tbody><tr>';
+
+            // 데이터 행: 선택된 일간 이름과 각 지지별 운성값
+            html += `<td><b>${ilganName}</b></td>`;
+            for(let i = 1; i < unseongData.length; i++) {
+                const unseong = unseongData[i][colIndex];
+                const size = getCircleSize(unseong);
+                const colorStyle = getStemColorStyle(ilganName);
+
+                html += `<td>
+                    <div class="unseong-cell-content">
+                        <span>${unseong}</span>
+                        <span class="circle-indicator" style="width: ${size}px; height: ${size}px; ${colorStyle}" title="${ilganName} (${unseongData[i][0]}): ${unseong}"></span>
+                    </div>
+                </td>`;
+            }
             html += '</tr></tbody></table></div>';
 
             document.getElementById('content-body').innerHTML = html;
@@ -508,46 +527,10 @@
             document.getElementById('content-body').innerHTML = html;
         }
 
+        // 초기 화면 로드
         window.onload = function() {
             show12UnseongFull(document.querySelector('.menu-link'));
         };
-
-        // 모바일 메뉴 토글 제어 스크립트
-        function toggleMobileMenu() {
-            var sidebar = document.getElementById('sidebar');
-            var btn = document.querySelector('.mobile-menu-toggle');
-
-            if (sidebar) {
-                sidebar.classList.toggle('mobile-open');
-                if (sidebar.classList.contains('mobile-open')) {
-                    btn.innerHTML = '✕ 메뉴 닫기';
-                    btn.style.backgroundColor = '#c0392b';
-                } else {
-                    btn.innerHTML = '☰ 메뉴 열기';
-                    btn.style.backgroundColor = '#e67e22';
-                }
-            }
-        }
-
-        // 모바일에서 메뉴 선택 시 사이드바 자동 접힘
-        document.addEventListener("DOMContentLoaded", function() {
-            var menuLinks = document.querySelectorAll('.menu-link, .submenu-link');
-            menuLinks.forEach(function(item) {
-                item.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        var sidebar = document.getElementById('sidebar');
-                        var btn = document.querySelector('.mobile-menu-toggle');
-                        if (sidebar && sidebar.classList.contains('mobile-open')) {
-                            sidebar.classList.remove('mobile-open');
-                            if (btn) {
-                                btn.innerHTML = '☰ 메뉴 열기';
-                                btn.style.backgroundColor = '#e67e22';
-                            }
-                        }
-                    }
-                });
-            });
-        });
     </script>
 </body>
 </html>
