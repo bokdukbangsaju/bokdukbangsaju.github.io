@@ -21,7 +21,7 @@
 
         /* 1. 좌측 메뉴 프레임 */
         #sidebar {
-            width: 250px;
+            width: 280px;
             background-color: #2c3e50;
             color: #ecf0f1;
             display: flex;
@@ -72,25 +72,35 @@
             border-left: 4px solid #f39c12;
         }
 
+        /* 2. 지지 항목 한 줄에 3개씩 표현하는 그리드 스타일 */
         .submenu-list {
             list-style: none;
             background-color: #212f3d;
-            padding: 5px 0;
+            padding: 10px 12px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
         }
 
         .submenu-link {
-            display: block;
-            padding: 8px 10px 8px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 5px;
+            background-color: #2c3e50;
             color: #a6acaf;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-align: center;
         }
 
         .submenu-link:hover, .submenu-link.active {
-            background-color: #2e4053;
-            color: #f39c12;
+            background-color: #f39c12;
+            color: #ffffff;
             font-weight: bold;
         }
 
@@ -103,7 +113,7 @@
             overflow: hidden;
         }
 
-        /* 2. 우측 상단 제목 프레임 */
+        /* 3. 우측 상단 제목 프레임 */
         #header-frame {
             height: 85px;
             background-color: #ffffff;
@@ -200,7 +210,21 @@
             background-color: #2c3e50;
         }
 
-        /* --- 모바일 반응형 커스텀 스타일 --- */
+        /* 지지별 운성 원 스타일 시트 */
+        .unseong-cell-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .circle-indicator {
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* 모바일 반응형 커스텀 스타일 */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -277,6 +301,7 @@
     </style>
 </head>
 <body>
+
     <!-- 모바일 전용 메뉴 토글 버튼 -->
     <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ 메뉴 열기</button>
 
@@ -360,6 +385,7 @@
             });
         }
 
+        // 12운성 전체표 출력
         function show12UnseongFull(elem) {
             clearActive();
             if(elem) elem.classList.add('active');
@@ -383,6 +409,42 @@
             document.getElementById('content-body').innerHTML = html;
         }
 
+        // 12운성 단계별 원 크기 매핑 함수 (제왕 > 건록=관대 > 쇠=목욕 > 병=장생 > 사=양 > 묘=태 > 절)
+        function getCircleSize(unseong) {
+            switch(unseong) {
+                case '제왕': return 35;
+                case '건록': 
+                case '관대': return 30;
+                case '쇠': 
+                case '목욕': return 18;
+                case '병': 
+                case '장생': return 15;
+                case '사': 
+                case '양': return 12;
+                case '묘': 
+                case '태': return 10;
+                case '절': return 8;
+                default: return 10;
+            }
+        }
+
+        // 천간별 색상 속성 부여 함수 (甲乙 녹색, 丙丁 붉은색, 戊己 노란색, 庚辛 검은색선/백색채우기, 壬癸 검은색)
+        function getStemColorStyle(stem) {
+            if (stem === '甲' || stem === '乙') {
+                return 'border: 2px solid #27ae60; background-color: #27ae60;';
+            } else if (stem === '丙' || stem === '丁') {
+                return 'border: 2px solid #c0392b; background-color: #c0392b;';
+            } else if (stem === '戊' || stem === '己') {
+                return 'border: 2px solid #f1c40f; background-color: #f1c40f;';
+            } else if (stem === '庚' || stem === '辛') {
+                return 'border: 2px solid #2c3e50; background-color: #ffffff;';
+            } else if (stem === '壬' || stem === '癸') {
+                return 'border: 2px solid #111111; background-color: #111111;';
+            }
+            return 'border: 2px solid #333333; background-color: #333333;';
+        }
+
+        // 지지별 12운성 출력 (하단에 원 추가 적용)
         function showBranchUnseong(rowIndex, branchName, elem) {
             clearActive();
             if(elem) {
@@ -393,19 +455,35 @@
             let html = `<h2 class="content-title">지지별 12운성 - [ ${branchName} ]</h2>`;
             html += '<div class="table-responsive"><table class="styled-table"><thead><tr>';
 
-            unseongData[0].forEach(col => {
+            const headers = unseongData[0];
+            headers.forEach(col => {
                 html += `<th>${col || '지지/천간'}</th>`;
             });
             html += '</tr></thead><tbody><tr>';
 
-            unseongData[rowIndex].forEach(cell => {
-                html += `<td>${cell}</td>`;
+            const rowData = unseongData[rowIndex];
+            rowData.forEach((cell, idx) => {
+                if (idx === 0) {
+                    html += `<td>${cell}</td>`;
+                } else {
+                    const stem = headers[idx];
+                    const size = getCircleSize(cell);
+                    const colorStyle = getStemColorStyle(stem);
+                    
+                    html += `<td>
+                        <div class="unseong-cell-content">
+                            <span>${cell}</span>
+                            <span class="circle-indicator" style="width: ${size}px; height: ${size}px; ${colorStyle}" title="${stem} - ${cell}"></span>
+                        </div>
+                    </td>`;
+                }
             });
             html += '</tr></tbody></table></div>';
 
             document.getElementById('content-body').innerHTML = html;
         }
 
+        // 60갑자 12운성 전체표 출력
         function show60Gabja(elem) {
             clearActive();
             if(elem) elem.classList.add('active');
@@ -473,3 +551,4 @@
     </script>
 </body>
 </html>
+```eof
