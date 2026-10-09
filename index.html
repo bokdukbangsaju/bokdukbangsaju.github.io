@@ -283,7 +283,7 @@
             </p>
             <div>
                 <div class="visitor-count">
-                    방문자수 <span id="count-number">1</span>분이 다녀가셨습니다.
+                    <span id="count-number">1</span>분이 다녀가셨습니다.
                 </div>
             </div>
             <div class="footer-email">
@@ -294,27 +294,23 @@
     </div>
 
     <script>
-        // 방문자수 카운팅 정상 동작 스크립트
-        window.addEventListener('DOMContentLoaded', () => {
-            let visits = localStorage.getItem('haru_total_visitors');
+        // 확실하게 동작하는 방문자수 카운팅 스크립트
+        (function() {
+            let count = localStorage.getItem('haru_visitor_cnt');
             
-            // 기록이 없으면 0으로 시작
-            if (!visits) {
-                visits = 0;
+            if (!count) {
+                count = 1; // 처음 방문 시 1명
             } else {
-                visits = parseInt(visits, 10);
+                // 페이지에 진입할 때마다 무조건 1씩 증가 (테스트용으로 편하게 확인 가능)
+                count = parseInt(count, 10) + 1;
             }
-
-            // 이번 브라우저 세션(탭)에서 아직 카운트되지 않은 경우에만 증가
-            if (!sessionStorage.getItem('haru_session_counted')) {
-                visits += 1;
-                localStorage.setItem('haru_total_visitors', visits);
-                sessionStorage.setItem('haru_session_counted', 'true');
-            }
-
-            // 화면에 반영
-            document.getElementById('count-number').innerText = visits.toLocaleString();
-        });
+            
+            // 저장
+            localStorage.setItem('haru_visitor_cnt', count);
+            
+            // 화면 출력
+            document.getElementById('count-number').innerText = Number(count).toLocaleString();
+        })();
     </script>
 
 </body>
