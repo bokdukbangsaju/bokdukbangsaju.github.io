@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루한장 명리 - 대문 페이지</title>
+    <title>하루한장 명리_대문페이지</title>
     <style>
         * {
             box-sizing: border-box;
@@ -225,7 +225,7 @@
         <!-- 제목 -->
         <h1 class="main-title">하루한장 명리</h1>
 
-        <!-- Blog, YouTube, 평생교육원 링크 (target="_blank" 추가) -->
+        <!-- Blog, YouTube, 평생교육원 링크 (새창 실행) -->
         <div class="nav-links-row">
             <a href="https://blog.naver.com/ssjj0425" target="_blank" class="nav-card">
                 <img src="https://www.haru3378.com/images/logo.jpg" alt="Blog 로고">
@@ -241,7 +241,7 @@
             </a>
         </div>
 
-        <!-- 세부 콘텐츠 링크 (링크1 ~ 링크4, target="_blank" 추가) -->
+        <!-- 세부 콘텐츠 링크 (링크1 ~ 링크4, 새창 실행) -->
         <div class="content-links-grid">
             <a href="cheongan.html" target="_blank" class="content-card">
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="천간 vs 천간">
@@ -283,7 +283,7 @@
             </p>
             <div>
                 <div class="visitor-count">
-                    방문자수 <span id="count-number">1,425</span>분이 다녀가셨습니다.
+                    <span id="count-number">1</span>분이 다녀가셨습니다.
                 </div>
             </div>
             <div class="footer-email">
@@ -294,12 +294,12 @@
     </div>
 
     <script>
-        // 세션/로컬스토리지 활용 방문자수 누적 스크립트
+        // 방문자수 1명부터 시작되도록 초기값 설정 수정
         function updateVisitorCount() {
             let visits = localStorage.getItem('haru_total_visitors');
             
             if (!visits) {
-                visits = 1425;
+                visits = 0; // 초기값을 0으로 설정하여 첫 방문 시 1이 되도록 함
             }
 
             if (!sessionStorage.getItem('haru_visited_session')) {
