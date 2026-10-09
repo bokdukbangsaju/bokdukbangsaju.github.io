@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루한장 명리 - 대문 페이지</title>
+    <title>예비 공인중개사의 명리학 공부</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,19 +13,18 @@
 
         body {
             font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f7f9fa;
-            color: #333;
             padding: 40px 20px;
         }
 
-        /* 전체 레이아웃 컨테이너 */
-        .landing-container {
+        .main-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             background: #ffffff;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -37,182 +36,130 @@
             gap: 35px;
         }
 
-        /* [ 제목 ] 스타일 */
+        /* 3. 제목 스타일 */
         .main-title {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             color: #2c3e50;
             text-align: center;
             letter-spacing: -1px;
-            border-bottom: 3px solid #f1c40f;
+            border-bottom: 3px solid #e67e22;
             padding-bottom: 12px;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
         }
 
-        /* [Blog] [YouTube] [평생교육원] 레이아웃 */
-        .nav-links-row {
+        /* 4. Sub메뉴 3분할 상단 탭 영역 */
+        .sub-menu-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .tab-card {
+            background: #2c3e50;
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .tab-card.coming-soon {
+            background: #95a5a6;
+            color: #ecf0f1;
+        }
+
+        /* 콘텐츠 영역 (3개의 컬럼 레이아웃: 명리학관련 / 부동산관련 / 법관련) */
+        .category-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             width: 100%;
-            max-width: 700px;
         }
 
-        .nav-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 20px 15px;
-            text-align: center;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        .category-column {
+            background: #f8fafc;
             border: 1px solid #e2e8f0;
-            transition: all 0.25s ease;
+            border-radius: 12px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             gap: 12px;
         }
 
-        .nav-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        .category-column.active-column {
+            background: #ffffff;
             border-color: #3498db;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.08);
         }
 
-        .nav-card img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #f1f2f6;
-        }
-
-        .nav-card span {
+        .column-title {
             font-size: 16px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        /* [링크1] ~ [링크4] 레이아웃 */
-        .content-links-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            width: 100%;
-        }
-
-        .content-card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border-color: #e67e22;
-        }
-
-        .content-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
-
-        .content-info {
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            text-align: center;
-            flex-grow: 1;
-            justify-content: center;
-        }
-
-        .content-thumb {
-            font-size: 13px;
-            font-weight: 600;
-            color: #e67e22;
-        }
-
-        .content-title-text {
-            font-size: 15px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        /* [텍스트], [방문자수], [메일주소] 영역 */
-        .footer-section {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 25px;
-        }
-
-        .desc-text {
-            font-size: 14.5px;
-            line-height: 1.6;
-            color: #4a5568;
-        }
-
-        /* 강조 스타일 (붉은색 밑줄) */
-        .highlight-red {
-            color: #e74c3c;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            font-weight: bold;
-        }
-
-        .visitor-count {
-            font-size: 15px;
             font-weight: 700;
-            color: #2d3748;
-            background: #edf2f7;
-            padding: 8px 18px;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 5px auto 0 auto;
+            color: #2c3e50;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e1;
         }
 
-        /* 메일 주소 스타일 추가 */
-        .footer-email {
-            font-size: 14px;
-            color: #718093;
-            margin-top: 5px;
+        /* 하부 메뉴 링크 버튼 스타일 */
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .footer-email a {
-            color: #3182ce;
+        .link-item {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 12px;
+            text-align: center;
             text-decoration: none;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .link-item:hover {
+            background: #3498db;
+            color: #ffffff;
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2);
+        }
+
+        /* 추가 예정 항목 스타일 */
+        .empty-item {
+            background: #f1f5f9;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
             font-weight: 500;
         }
 
-        .footer-email a:hover {
-            text-decoration: underline;
+        /* 푸터 영역 */
+        .footer-section {
+            text-align: center;
+            font-size: 13px;
+            color: #718093;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+            width: 100%;
         }
 
         /* 반응형 디자인 */
         @media (max-width: 768px) {
-            .nav-links-row {
-                grid-template-columns: 1fr;
-            }
-            .content-links-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .content-links-grid {
+            .sub-menu-tabs, .category-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -220,98 +167,62 @@
 </head>
 <body>
 
-    <div class="landing-container">
+    <div class="main-container">
         
-        <!-- 제목 -->
-        <h1 class="main-title">하루한장 명리</h1>
+        <!-- 3. 제목 -->
+        <h1 class="main-title">예비 공인중개사의 명리학 공부</h1>
 
-        <!-- Blog, YouTube, 평생교육원 링크 (새창 실행) -->
-        <div class="nav-links-row">
-            <a href="https://blog.naver.com/ssjj0425" target="_blank" class="nav-card">
-                <img src="https://www.haru3378.com/images/logo.jpg" alt="Blog 로고">
-                <span>Blog</span>
-            </a>
-            <a href="https://www.youtube.com/@mong-be" target="_blank" class="nav-card">
-                <img src="https://yt3.googleusercontent.com/09-NCiTqF6AaRhdOnw9MFxeWEIaf6n2QW-7uHl3CA0rzL1JI-uPNEwMShkcnUZ9H11ckXVPC=s160-c-k-c0x00ffffff-no-rj" alt="YouTube 로고">
-                <span>YouTube</span>
-            </a>
-            <a href="https://www.haru3378.com/index.html" target="_blank" class="nav-card">
-                <img src="https://usabjdxr.gensparkspace.com/images/char2.png" alt="평생교육원 캐릭터">
-                <span>평생교육원</span>
-            </a>
+        <!-- 4. Sub메뉴 탭 구성 ([명리학관련], [부동산관련], [법관련]) -->
+        <div class="sub-menu-tabs">
+            <div class="tab-card">명리학관련</div>
+            <div class="tab-card coming-soon">부동산관련 (추가예정)</div>
+            <div class="tab-card coming-soon">법관련 (추가예정)</div>
         </div>
 
-        <!-- 세부 콘텐츠 링크 (링크1 ~ 링크4, 새창 실행) -->
-        <div class="content-links-grid">
-            <a href="cheongan.html" target="_blank" class="content-card">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="천간 vs 천간">
-                <div class="content-info">
-                    <span class="content-thumb">하늘의 기운 상호작용</span>
-                    <span class="content-title-text">천간 vs 천간</span>
+        <!-- 하부 메뉴 및 추가 예정 영역 컨테이너 -->
+        <div class="category-grid">
+            
+            <!-- 1) 명리학관련 하부 메뉴 (새창 실행 링크 반영) -->
+            <div class="category-column active-column">
+                <div class="column-title">명리학관련 자료</div>
+                <div class="link-list">
+                    <a href="haru.html" target="_blank" class="link-item">하루한장명리</a>
+                    <a href="5haeng.html" target="_blank" class="link-item">5행</a>
+                    <a href="cheongan.html" target="_blank" class="link-item">천간</a>
+                    <a href="jijivsjiji.html" target="_blank" class="link-item">지지 vs 지지</a>
+                    <a href="hyeongchung.html" target="_blank" class="link-item">형충회합파해</a>
+                    <a href="mulsang01.html" target="_blank" class="link-item">물상론</a>
+                    <a href="japyoron.html" target="_blank" class="link-item">좌표론</a>
+                    <a href="oneday.html" target="_blank" class="link-item">하루한장책정리</a>
+                    <a href="terms.html" target="_blank" class="link-item">용어정리</a>
                 </div>
-            </a>
-            <a href="12unsung.html" target="_blank" class="content-card">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="12운성">
-                <div class="content-info">
-                    <span class="content-thumb">에너지의 세기와 흐름</span>
-                    <span class="content-title-text">12운성</span>
+            </div>
+
+            <!-- 2) 부동산관련 (추가 예정) -->
+            <div class="category-column">
+                <div class="column-title">부동산관련</div>
+                <div class="empty-item">
+                    추가 예정입니다.<br>(공인중개사 공부 자료)
                 </div>
-            </a>
-            <a href="12shinsal.html" target="_blank" class="content-card">
-                <img src="https://images.unsplash.com/photo-1532767153582-b1a0e5145009?auto=format&fit=crop&w=600&q=80" alt="12신살">
-                <div class="content-info">
-                    <span class="content-thumb">인생의 12가지 변화 기운</span>
-                    <span class="content-title-text">12신살</span>
+            </div>
+
+            <!-- 3) 법관련 (추가 예정) -->
+            <div class="column-title" style="display:none;"></div> <!-- 레이아웃 균형용 -->
+            <div class="category-column">
+                <div class="column-title">법관련</div>
+                <div class="empty-item">
+                    추가 예정입니다.<br>(민법 및 부동산 관련 법령)
                 </div>
-            </a>
-            <a href="gwijang.html" target="_blank" class="content-card">
-                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="백초귀장술">
-                <div class="content-info">
-                    <span class="content-thumb">신비로운 손끝의 비법</span>
-                    <span class="content-title-text">백초귀장술</span>
-                </div>
-            </a>
+            </div>
+
         </div>
 
-        <!-- 안내 텍스트, 방문자수 및 이메일 주소 영역 -->
+        <!-- 푸터 안내 영역 -->
         <div class="footer-section">
-            <p class="desc-text">
-                본 자료는 하루한장 명리 4기생 강의 자료를 정리한 것으로, 자투리 시간 활용을 위해 만들어 졌습니다.
-            </p>
-            <p class="desc-text">
-                <span class="highlight-red">어쨋거나 말았거나</span>, 공부는 강의 들으시고 <span class="highlight-red">쓰면서</span> 하시기 바랍니다.
-            </p>
-            <div>
-                <div class="visitor-count">
-                    <span id="count-number">1</span>분이 다녀가셨습니다.
-                </div>
-            </div>
-            <div class="footer-email">
-                Contact: <a href="mailto:icemnpe@naver.com">icemnpe@naver.com</a>
-            </div>
+            <p>Copyright &copy; 예비 공인중개사의 명리학 공부 All Rights Reserved.</p>
         </div>
 
     </div>
-
-    <script>
-        // 확실하게 동작하는 방문자수 카운팅 스크립트
-        (function() {
-            let count = localStorage.getItem('haru_visitor_cnt');
-            
-            if (!count) {
-                count = 1; // 처음 방문 시 1명
-            } else {
-                // 페이지에 진입할 때마다 무조건 1씩 증가 (테스트용으로 편하게 확인 가능)
-                count = parseInt(count, 10) + 1;
-            }
-            
-            // 저장
-            localStorage.setItem('haru_visitor_cnt', count);
-            
-            // 화면 출력
-            document.getElementById('count-number').innerText = Number(count).toLocaleString();
-        })();
-    </script>
 
 </body>
 </html>
