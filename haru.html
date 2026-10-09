@@ -17,41 +17,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
+            background-color: #f7f9fa;
             color: #333;
-            overflow-x: hidden;
             padding: 40px 20px;
-        }
-
-        /* 1. 배경 이미지 및 투명도 50% 설정 */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('/image/background.png') no-repeat center center/cover;
-            opacity: 0.5;
-            z-index: -1;
         }
 
         /* 전체 레이아웃 컨테이너 */
         .landing-container {
             width: 100%;
             max-width: 900px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            padding: 45px 35px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 35px;
         }
 
-        /* [ 제목 ] 스타일 (3. 추천 폰트 및 사이즈 적용) */
+        /* [ 제목 ] 스타일 */
         .main-title {
             font-size: 36px;
             font-weight: 800;
@@ -64,7 +50,7 @@
             max-width: 400px;
         }
 
-        /* [Blog] [YouTube] [홈페이지] 레이아웃 */
+        /* [Blog] [YouTube] [평생교육원] 레이아웃 */
         .nav-links-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -79,7 +65,7 @@
             padding: 20px 15px;
             text-align: center;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
             border: 1px solid #e2e8f0;
             transition: all 0.25s ease;
             display: flex;
@@ -90,7 +76,7 @@
 
         .nav-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             border-color: #3498db;
         }
 
@@ -108,7 +94,7 @@
             color: #2c3e50;
         }
 
-        /* [링크1] [링크2] [링크3] [링크4] 레이아웃 */
+        /* [링크1] ~ [링크4] 레이아웃 */
         .content-links-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -121,7 +107,7 @@
             border-radius: 12px;
             overflow: hidden;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
             border: 1px solid #e2e8f0;
             transition: all 0.25s ease;
             display: flex;
@@ -130,7 +116,7 @@
 
         .content-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             border-color: #e67e22;
         }
 
@@ -162,12 +148,12 @@
             color: #2c3e50;
         }
 
-        /* [텍스트] 및 [접속자수] 영역 */
+        /* [텍스트], [방문자수], [메일주소] 영역 */
         .footer-section {
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             width: 100%;
             border-top: 1px solid #e2e8f0;
             padding-top: 25px;
@@ -192,13 +178,30 @@
             font-weight: 700;
             color: #2d3748;
             background: #edf2f7;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             display: inline-block;
-            margin: 0 auto;
+            margin: 5px auto 0 auto;
         }
 
-        /* 반응형 디자인 (태블릿 및 모바일) */
+        /* 메일 주소 스타일 추가 */
+        .footer-email {
+            font-size: 14px;
+            color: #718093;
+            margin-top: 5px;
+        }
+
+        .footer-email a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-email a:hover {
+            text-decoration: underline;
+        }
+
+        /* 반응형 디자인 */
         @media (max-width: 768px) {
             .nav-links-row {
                 grid-template-columns: 1fr;
@@ -219,56 +222,49 @@
 
     <div class="landing-container">
         
-        <!-- 3. 제목 -->
+        <!-- 제목 -->
         <h1 class="main-title">하루한장 명리</h1>
 
-        <!-- 4, 5, 6. Blog, YouTube, 홈페이지 링크 메뉴 -->
+        <!-- Blog, YouTube, 평생교육원 링크 (target="_blank" 추가) -->
         <div class="nav-links-row">
-            <!-- Blog -->
             <a href="https://blog.naver.com/ssjj0425" target="_blank" class="nav-card">
                 <img src="https://www.haru3378.com/images/logo.jpg" alt="Blog 로고">
                 <span>Blog</span>
             </a>
-            <!-- YouTube -->
             <a href="https://www.youtube.com/@mong-be" target="_blank" class="nav-card">
                 <img src="https://yt3.googleusercontent.com/09-NCiTqF6AaRhdOnw9MFxeWEIaf6n2QW-7uHl3CA0rzL1JI-uPNEwMShkcnUZ9H11ckXVPC=s160-c-k-c0x00ffffff-no-rj" alt="YouTube 로고">
                 <span>YouTube</span>
             </a>
-            <!-- 홈페이지 -->
             <a href="https://www.haru3378.com/index.html" target="_blank" class="nav-card">
                 <img src="https://usabjdxr.gensparkspace.com/images/char2.png" alt="평생교육원 캐릭터">
                 <span>평생교육원</span>
             </a>
         </div>
 
-        <!-- 7, 8, 9, 10. 세부 콘텐츠 링크 (링크1 ~ 링크4) -->
+        <!-- 세부 콘텐츠 링크 (링크1 ~ 링크4, target="_blank" 추가) -->
         <div class="content-links-grid">
-            <!-- 링크1 -->
-            <a href="cheongan.html" class="content-card">
+            <a href="cheongan.html" target="_blank" class="content-card">
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="천간 vs 천간">
                 <div class="content-info">
                     <span class="content-thumb">하늘의 기운 상호작용</span>
                     <span class="content-title-text">천간 vs 천간</span>
                 </div>
             </a>
-            <!-- 링크2 -->
-            <a href="12unsung.html" class="content-card">
+            <a href="12unsung.html" target="_blank" class="content-card">
                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="12운성">
                 <div class="content-info">
                     <span class="content-thumb">에너지의 세기와 흐름</span>
                     <span class="content-title-text">12운성</span>
                 </div>
             </a>
-            <!-- 링크3 -->
-            <a href="12shinsal.html" class="content-card">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="12신살">
+            <a href="12shinsal.html" target="_blank" class="content-card">
+                <img src="https://images.unsplash.com/photo-1532767153582-b1a0e5145009?auto=format&fit=crop&w=600&q=80" alt="12신살">
                 <div class="content-info">
                     <span class="content-thumb">인생의 12가지 변화 기운</span>
                     <span class="content-title-text">12신살</span>
                 </div>
             </a>
-            <!-- 링크4 (백초귀장술 추천 이미지 및 썸네일 적용) -->
-            <a href="gwijang.html" class="content-card">
+            <a href="gwijang.html" target="_blank" class="content-card">
                 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="백초귀장술">
                 <div class="content-info">
                     <span class="content-thumb">신비로운 손끝의 비법</span>
@@ -277,7 +273,7 @@
             </a>
         </div>
 
-        <!-- 11, 12. 안내 텍스트 및 방문자수 표시 영역 -->
+        <!-- 안내 텍스트, 방문자수 및 이메일 주소 영역 -->
         <div class="footer-section">
             <p class="desc-text">
                 본 자료는 하루한장 명리 4기생 강의 자료를 정리한 것으로, 자투리 시간 활용을 위해 만들어 졌습니다.
@@ -285,25 +281,37 @@
             <p class="desc-text">
                 <span class="highlight-red">어쨋거나 말았거나</span>, 공부는 강의 들으시고 <span class="highlight-red">쓰면서</span> 하시기 바랍니다.
             </p>
-            <div style="margin-top: 10px;">
-                <div class="visitor-count" id="visitor-display">
-                    <span id="count-number">1,248</span>분이 다녀가셨습니다.
+            <div>
+                <div class="visitor-count">
+                    방문자수 <span id="count-number">1,425</span>분이 다녀가셨습니다.
                 </div>
+            </div>
+            <div class="footer-email">
+                <a href="mailto:icemnpe@naver.com">icemnpe@naver.com</a>
             </div>
         </div>
 
     </div>
 
     <script>
-        // 간단한 방문자수 카운트 시뮬레이션 (새로고침 시 로컬스토리지 연동 또는 증가 효과)
-        let visits = localStorage.getItem('haru_visitor_count');
-        if (!visits) {
-            visits = 1; // 초기 기준 방문자수
-        } else {
-            visits = parseInt(visits) + 1;
+        // 세션/로컬스토리지 활용 방문자수 누적 스크립트
+        function updateVisitorCount() {
+            let visits = localStorage.getItem('haru_total_visitors');
+            
+            if (!visits) {
+                visits = 1425;
+            }
+
+            if (!sessionStorage.getItem('haru_visited_session')) {
+                visits = parseInt(visits) + 1;
+                localStorage.setItem('haru_total_visitors', visits);
+                sessionStorage.setItem('haru_visited_session', 'true');
+            }
+
+            document.getElementById('count-number').innerText = Number(visits).toLocaleString();
         }
-        localStorage.setItem('haru_visitor_count', visits);
-        document.getElementById('count-number').innerText = visits.toLocaleString();
+
+        window.onload = updateVisitorCount;
     </script>
 
 </body>
