@@ -3,351 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>복덕방사주</title>
+    <title>하루한장 명리_대문페이지</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Malgun Gothic', sans-serif; display: flex; height: 100vh; overflow: hidden; color: #333; background: #f8f9fa; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        /* 좌측 메뉴 프레임 */
-        #menu-frame { width: 320px; background: #2c3e50; color: #ecf0f1; height: 100%; overflow-y: auto; padding: 20px 15px; border-right: 1px solid #1a252f; }
-        #menu-frame h2 { font-size: 22px; margin-bottom: 20px; text-align: center; color: #f1c40f; border-bottom: 2px solid #f1c40f; padding-bottom: 10px; }
-        .sub-title { font-size: 16px; font-weight: bold; margin: 15px 0 8px; color: #bdc3c7; border-left: 4px solid #3498db; padding-left: 8px; }
-        .menu-list { list-style: none; margin-bottom: 15px; }
-        .menu-item { padding: 8px 12px; font-size: 13px; cursor: pointer; border-radius: 4px; margin-bottom: 3px; transition: background 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; text-decoration: none; color: #ecf0f1; }
-        .menu-item:hover { background: #34495e; color: #fff; }
-        .menu-item.active { background: #3498db; color: #fff; font-weight: bold; }
-
-        /* 우측 영역 */
-        #main-area { flex: 1; display: flex; flex-direction: column; height: 100%; }
-
-        /* 우측 상단 제목 프레임 */
-        #header-frame { height: 90px; background: #fff; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; padding: 10px 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        #header-frame img { height: 70px; margin-right: 20px; border-radius: 4px; border: 1px solid #ddd; }
-        #header-frame h1 { font-size: 24px; color: #2c3e50; font-weight: bold; }
-
-        /* 우측 하단 내용 프레임 */
-        #content-frame { flex: 1; padding: 30px; overflow-y: auto; background: #fff; }
-        
-        /* 콘텐츠 스타일 */
-        .content-body h3 { font-size: 20px; margin-bottom: 15px; color: #16a085; border-bottom: 2px solid #16a085; padding-bottom: 5px; }
-        
-        /* 최신 포스트 카드 그리드 스타일 */
-        .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 20px; }
-        .post-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
-        .post-card:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-        
-        .post-thumbnail { 
-            height: 140px; 
-            background-size: cover; 
-            background-position: center; 
-            position: relative;
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            min-height: 100vh;
             display: flex;
-            align-items: flex-end;
-            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f9fa;
+            color: #333;
+            padding: 40px 20px;
         }
-        .post-thumbnail::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
-            z-index: 1;
+
+        /* 전체 레이아웃 컨테이너 */
+        .landing-container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
         }
-        .post-thumbnail span {
-            position: relative;
-            z-index: 2;
-            color: #fff;
-            font-size: 14px;
+
+        /* [ 제목 ] 스타일 */
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #2c3e50;
+            text-align: center;
+            letter-spacing: -1px;
+            border-bottom: 3px solid #f1c40f;
+            padding-bottom: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* [Blog] [YouTube] [평생교육원] 레이아웃 */
+        .nav-links-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .nav-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .nav-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #f1f2f6;
+        }
+
+        .nav-card span {
+            font-size: 16px;
             font-weight: bold;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            color: #2c3e50;
         }
-        .post-info { padding: 15px; background: #fff; }
-        .post-title { font-size: 16px; font-weight: bold; color: #2c3e50; }
+
+        /* [링크1] ~ [링크4] 레이아웃 */
+        .content-links-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+
+        .content-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #e67e22;
+        }
+
+        .content-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .content-info {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: center;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .content-thumb {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e67e22;
+        }
+
+        .content-title-text {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* [텍스트], [방문자수], [메일주소] 영역 */
+        .footer-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 25px;
+        }
+
+        .desc-text {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        /* 강조 스타일 (붉은색 밑줄) */
+        .highlight-red {
+            color: #e74c3c;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            font-weight: bold;
+        }
+
+        .visitor-count {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2d3748;
+            background: #edf2f7;
+            padding: 8px 18px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px auto 0 auto;
+        }
+
+        /* 메일 주소 스타일 추가 */
+        .footer-email {
+            font-size: 14px;
+            color: #718093;
+            margin-top: 5px;
+        }
+
+        .footer-email a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-email a:hover {
+            text-decoration: underline;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .nav-links-row {
+                grid-template-columns: 1fr;
+            }
+            .content-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-<!-- 모바일 반응형 겸용 스타일 (Head 마지막에 추가) -->
-<style>
-/* 모바일용 메뉴 토글 버튼 (기본은 PC 화면이라 숨김) */
-.mobile-menu-toggle {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    background-color: #e67e22;
-    color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    cursor: pointer;
-}
-
-/* 스마트폰 및 화면 너비가 768px 이하일 때 적용되는 반응형 스타일 */
-@media screen and (max-width: 768px) {
-    /* 전체 레이아웃을 세로 배치로 전환 */
-    body {
-        flex-direction: column !important;
-        height: auto !important;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-    }
-
-    /* 좌측 메뉴 프레임을 상단 슬라이드/토글 형태로 변경 */
-    .menu-frame, #menu-frame, .sidebar {
-        width: 100% !important;
-        height: auto !important;
-        max-height: 0;
-        overflow: hidden !important;
-        transition: max-height 0.3s ease-out;
-        border-right: none !important;
-        border-bottom: 2px solid #1a252f;
-    }
-
-    /* 메뉴 열림 클래스 적용 시 높이 해제 */
-    .menu-frame.mobile-open, #menu-frame.mobile-open, .sidebar.mobile-open {
-        max-height: 80vh !important;
-        overflow-y: auto !important;
-    }
-
-    /* 우측 메인 영역 확장 */
-    .main-container, #main-wrapper, #right-container {
-        width: 100% !important;
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    /* 상단 제목 프레임 크기 모바일 축소 */
-    .title-frame, #title-frame, .header-frame {
-        height: auto !important;
-        padding: 10px 15px !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        text-align: center;
-    }
-    .title-left, .header-left {
-        justify-content: center !important;
-    }
-    .title-right, .header-right {
-        text-align: center !important;
-        font-size: 11px !important;
-    }
-
-    /* 내용 프레임 간격 조절 및 표 깨짐 방지 (가로 스크롤 허용) */
-    .content-frame, #content-frame {
-        padding: 10px !important;
-        overflow-x: auto !important;
-    }
-    
-    .content-card, .card {
-        padding: 12px !important;
-    }
-
-    /* 표(Table) 가로 터치 스크롤 가능하게 처리 */
-    table {
-        display: block !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important; /* 모바일에서 글자가 일그러지지 않게 유지 */
-    }
-
-    /* 모바일 전용 Floating 버튼 표시 */
-    .mobile-menu-toggle {
-        display: block !important;
-    }
-}
-</style>
 </head>
 <body>
-<!-- 모바일 전용 메뉴 토글 버튼 -->
-<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰ 메뉴 열기</button>
-    <!-- 1. 좌측 메뉴 프레임 -->
-    <div id="menu-frame">
-        <h2>복덕방사주</h2>
-        
-        <div class="sub-title">메뉴</div>
-        <ul class="menu-list">
-            <li><a class="menu-item active" onclick="loadPage('latest')">홈 (포스트 목록)</a></li>
-            <li><a href="5haeng.html" target="_blank" class="menu-item">음양오행</a></li>
-            <li><a href="12shinsal.html" target="_blank" class="menu-item">12신살</a></li>
-            <li><a href="12unsung.html" target="_blank" class="menu-item">12운성</a></li>
-            <li><a href="cheongan.html" target="_blank" class="menu-item">천간 vs 천간</a></li>
-            <li><a href="hyeongchung.html" target="_blank" class="menu-item">형충회합파해</a></li>
-            <li><a href="jijivsjiji.html" target="_blank" class="menu-item">지지 vs 지지</a></li>
-            <li><a href="oneday.html" target="_blank" class="menu-item">하루한장명리</a></li>
-            <li><a href="terms.html" target="_blank" class="menu-item">용어정리</a></li>
-            <li><a href="japyoron.html" target="_blank" class="menu-item">좌표론_박청화선생</a></li>
-            <li><a href="mulsang.html" target="_blank" class="menu-item">물상론(천간vs천간)</a></li>
-            <li><a href="mulsang01.html" target="_blank" class="menu-item">물상론(월지기준)</a></li>
-            <li><a href="gwijang.html" target="_blank" class="menu-item">귀장술</a></li> 
-            <li><a href="haru.html" target="_blank" class="menu-item">하루한장</a></li>
-        </ul>
-    </div>
 
-    <!-- 우측 영역 -->
-    <div id="main-area">
-        <!-- 2. 우측 상단 고정 제목 프레임 -->
-        <div id="header-frame">
-            <img src="https://image.yes24.com/goods/177570594/XL" alt="복덕방사주">
-            <h1>예비 공인중개사의 사주명리 공부방</h1>
+    <div class="landing-container">
+        
+        <!-- 제목 -->
+        <h1 class="main-title">하루한장 명리</h1>
+
+        <!-- Blog, YouTube, 평생교육원 링크 (새창 실행) -->
+        <div class="nav-links-row">
+            <a href="https://blog.naver.com/ssjj0425" target="_blank" class="nav-card">
+                <img src="https://www.haru3378.com/images/logo.jpg" alt="Blog 로고">
+                <span>Blog</span>
+            </a>
+            <a href="https://www.youtube.com/@mong-be" target="_blank" class="nav-card">
+                <img src="https://yt3.googleusercontent.com/09-NCiTqF6AaRhdOnw9MFxeWEIaf6n2QW-7uHl3CA0rzL1JI-uPNEwMShkcnUZ9H11ckXVPC=s160-c-k-c0x00ffffff-no-rj" alt="YouTube 로고">
+                <span>YouTube</span>
+            </a>
+            <a href="https://www.haru3378.com/index.html" target="_blank" class="nav-card">
+                <img src="https://usabjdxr.gensparkspace.com/images/char2.png" alt="평생교육원 캐릭터">
+                <span>평생교육원</span>
+            </a>
         </div>
 
-        <!-- 3. 우측 하단 내용 프레임 -->
-        <div id="content-frame">
-            <div id="content-display" class="content-body">
-                <!-- 기본 홈 화면 로딩 영역 -->
+        <!-- 세부 콘텐츠 링크 (링크1 ~ 링크4, 새창 실행) -->
+        <div class="content-links-grid">
+            <a href="cheongan.html" target="_blank" class="content-card">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="천간 vs 천간">
+                <div class="content-info">
+                    <span class="content-thumb">하늘의 기운 상호작용</span>
+                    <span class="content-title-text">천간 vs 천간</span>
+                </div>
+            </a>
+            <a href="12unsung.html" target="_blank" class="content-card">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="12운성">
+                <div class="content-info">
+                    <span class="content-thumb">에너지의 세기와 흐름</span>
+                    <span class="content-title-text">12운성</span>
+                </div>
+            </a>
+            <a href="12shinsal.html" target="_blank" class="content-card">
+                <img src="https://images.unsplash.com/photo-1532767153582-b1a0e5145009?auto=format&fit=crop&w=600&q=80" alt="12신살">
+                <div class="content-info">
+                    <span class="content-thumb">인생의 12가지 변화 기운</span>
+                    <span class="content-title-text">12신살</span>
+                </div>
+            </a>
+            <a href="gwijang.html" target="_blank" class="content-card">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="백초귀장술">
+                <div class="content-info">
+                    <span class="content-thumb">신비로운 손끝의 비법</span>
+                    <span class="content-title-text">백초귀장술</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- 안내 텍스트, 방문자수 및 이메일 주소 영역 -->
+        <div class="footer-section">
+            <p class="desc-text">
+                본 자료는 하루한장 명리 4기생 강의 자료를 정리한 것으로, 자투리 시간 활용을 위해 만들어 졌습니다.
+            </p>
+            <p class="desc-text">
+                <span class="highlight-red">어쨋거나 말았거나</span>, 공부는 강의 들으시고 <span class="highlight-red">쓰면서</span> 하시기 바랍니다.
+            </p>
+            <div>
+                <div class="visitor-count">
+                    <span id="count-number">1</span>분이 다녀가셨습니다.
+                </div>
+            </div>
+            <div class="footer-email">
+                <a href="mailto:icemnpe@naver.com">icemnpe@naver.com</a>
             </div>
         </div>
+
     </div>
 
-    <!-- Data 및 Script -->
     <script>
-        const pages = {
-            'latest': `
-                <h3>사주명리 핵심 포스트 목록</h3>
-                <div class="post-grid">
-                    <a href="5haeng.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80');">
-                            <span>음양의 조화와 오행</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">음양오행</div></div>
-                    </a>
-                    <a href="12shinsal.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1532767153582-b1a0e5145009?auto=format&fit=crop&w=600&q=80');">
-                            <span>인생의 12가지 변화 기운</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">12신살</div></div>
-                    </a>
-                    <a href="12unsung.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80');">
-                            <span>에너지의 세기와 흐름</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">12운성</div></div>
-                    </a>
-                    <a href="cheongan.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80');">
-                            <span>하늘의 기운 상호작용</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">천간 vs 천간</div></div>
-                    </a>
-                    <a href="hyeongchung.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80');">
-                            <span>합충형파해의 역학 관계</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">형충회합파해</div></div>
-                    </a>
-                    <a href="jijivsjiji.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=600&q=80');">
-                            <span>땅의 기운과 합충 분석</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">지지 vs 지지</div></div>
-                    </a>
-                    <a href="oneday.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80');">
-                            <span>매일 완성하는 사주 공부</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">하루한장명리</div></div>
-                    </a>
-                    <a href="terms.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80');">
-                            <span>사주명리 필수 핵심 용어</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">용어정리</div></div>
-                    </a>
-                    <a href="japyoron.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80');">
-                            <span>좌표론_춘하추동_박청화선생</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">좌표론</div></div>
-                    </a>
-                    <a href="mulsang.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80');">
-                            <span>물상론(천간vs천간)</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">물상론(천간vs천간)</div></div>
-                    </a>
-                    <a href="mulsang01.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80');">
-                            <span>물상론(월지기준)</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">물상론(월지기준)</div></div>
-                    </a>
-                    <a href="gwijang.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80');">
-                            <span>귀장술</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">귀장술</div></div>
-                    </a>
-                    <a href="haru.html" target="_blank" class="post-card">
-                        <div class="post-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80');">
-                            <span>하루한장 명리 4기생</span>
-                        </div>
-                        <div class="post-info"><div class="post-title">하루한장 4기 내용 정리</div></div>
-                    </a>
-                </div>
-            `
-        };
-
-        function loadPage(pageKey) {
-            const display = document.getElementById('content-display');
-            if (pages[pageKey]) {
-                display.innerHTML = pages[pageKey];
-            }
-
-            // 활성화 표시 처리
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(item => item.classList.remove('active'));
+        // 방문자수 1명부터 시작되도록 초기값 설정 수정
+        function updateVisitorCount() {
+            let visits = localStorage.getItem('haru_total_visitors');
             
-            event && event.currentTarget && event.currentTarget.classList.add('active');
-        }
-
-        // 초기 시작시 홈 화면 자동 로딩
-        window.onload = function() {
-            loadPage('latest');
-        };
-    </script>
-<!-- 모바일 메뉴 동작 스크립트 -->
-<script>
-function toggleMobileMenu() {
-    // 기존 메뉴 프레임 ID 또는 Class 자동 탐색
-    var menu = document.getElementById('menu-frame') || 
-               document.querySelector('.menu-frame') || 
-               document.querySelector('.sidebar');
-    var btn = document.querySelector('.mobile-menu-toggle');
-
-    if (menu) {
-        menu.classList.toggle('mobile-open');
-        if (menu.classList.contains('mobile-open')) {
-            btn.innerHTML = '✕ 메뉴 닫기';
-            btn.style.backgroundColor = '#c0392b';
-        } else {
-            btn.innerHTML = '☰ 메뉴 열기';
-            btn.style.backgroundColor = '#e67e22';
-        }
-    }
-}
-
-// 모바일 메뉴 항목 클릭 시 자동으로 메뉴 창이 닫히도록 설정
-document.addEventListener("DOMContentLoaded", function() {
-    var menuItems = document.querySelectorAll('.menu-item, .branch-btn, .menu-grid div');
-    menuItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                var menu = document.getElementById('menu-frame') || 
-                           document.querySelector('.menu-frame') || 
-                           document.querySelector('.sidebar');
-                var btn = document.querySelector('.mobile-menu-toggle');
-                if (menu && menu.classList.contains('mobile-open')) {
-                    menu.classList.remove('mobile-open');
-                    if (btn) {
-                        btn.innerHTML = '☰ 메뉴 열기';
-                        btn.style.backgroundColor = '#e67e22';
-                    }
-                }
+            if (!visits) {
+                visits = 0; // 초기값을 0으로 설정하여 첫 방문 시 1이 되도록 함
             }
-        });
-    });
-});
-</script>
+
+            if (!sessionStorage.getItem('haru_visited_session')) {
+                visits = parseInt(visits) + 1;
+                localStorage.setItem('haru_total_visitors', visits);
+                sessionStorage.setItem('haru_visited_session', 'true');
+            }
+
+            document.getElementById('count-number').innerText = Number(visits).toLocaleString();
+        }
+
+        window.onload = updateVisitorCount;
+    </script>
+
 </body>
 </html>
