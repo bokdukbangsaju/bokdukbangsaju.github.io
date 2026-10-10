@@ -293,25 +293,29 @@
 
     </div>
 
-    <script>
-        // 확실하게 동작하는 방문자수 카운팅 스크립트
-        (function() {
-            let count = localStorage.getItem('haru_visitor_cnt');
-            
-            if (!count) {
-                count = 1; // 처음 방문 시 1명
-            } else {
-                // 페이지에 진입할 때마다 무조건 1씩 증가 (테스트용으로 편하게 확인 가능)
-                count = parseInt(count, 10) + 1;
-            }
-            
-            // 저장
-            localStorage.setItem('haru_visitor_cnt', count);
-            
-            // 화면 출력
-            document.getElementById('count-number').innerText = Number(count).toLocaleString();
-        })();
-    </script>
+<script>
+    // 모든 페이지가 공통으로 공유하는 전체 방문자수 키 설정
+    const STORAGE_KEY = 'haru_total_visitors_all';
+
+    (function() {
+        // 기존에 저장된 전체 방문자수 가져오기
+        let count = localStorage.getItem(STORAGE_KEY);
+        
+        if (!count) {
+            count = 1; // 첫 방문인 경우 1부터 시작
+        } else {
+            // 방문할 때마다 전체 누적 숫자가 1씩 증가
+            count = parseInt(count, 10) + 1;
+        }
+        
+        // 공통 키에 다시 저장
+        localStorage.setItem(STORAGE_KEY, count);
+        
+        // 화면에 전체 방문자수 출력
+        document.getElementById('count-number').innerText = Number(count).toLocaleString();
+    })();
+</script>
+
 
 </body>
 </html>
