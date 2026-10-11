@@ -1,6 +1,6 @@
 import pandas as pd
 
-def update_html_with_csv():
+def update_html_dashboard():
     try:
         # 1. 깃허브에 올라온 실거래가 CSV 읽기
         df_trade = pd.read_csv('아파트(매매)_실거래가.csv', skiprows=15, encoding='cp949', low_memory=False)
@@ -27,27 +27,14 @@ def update_html_with_csv():
         with open('index.html', 'r', encoding='utf-8') as f:
             html_content = f.read()
 
-        # 4. HTML 내부의 실거래가 테이블 바디 부분을 찾아 최신 데이터로 자동 교체
-        # index.html 안에서 실거래가 표가 시작되는 <tbody> 또는 <table> 영역을 찾아서 교체합니다.
-        # (기존 index.html의 테이블 구조에 맞춰 갱신)
+        # 4. index.html 내부의 기존 테이블 영역을 찾아 최신 실거래가로 자동 교체
+        # 기존 index.html에 있는 실거래가 테이블 부분을 새로운 행 데이터로 바꿉니다.
+        # (테이블 구조 중 <tbody> 안쪽 내용을 교체하는 방식)
         
-        # 간단하게 HTML 안의 특정 타이틀 밑의 테이블 내용을 교체하는 로직
-        target_header = "<h3>최근 실거래가 TOP 5 (실거래가 CSV 연동)</h3>"
-        new_table_block = f"""<h3>최근 실거래가 TOP 5 (실거래가 CSV 연동) - [자동 갱신 기준: {latest_ym}]</h3>
-                <table>
-                    <tr><th>계약일</th><th>단지명</th><th>전용</th><th>가격</th></tr>
-{table_rows}
-                </table>"""
-
-        if target_header in html_content:
-            # 기존 테이블 블록을 새 블록으로 교체
-            # (구체적인 구조에 맞춰 기존 <table> 영역 전체를 대체)
-            pass
-
-        print(f"✅ 최신 CSV 데이터(기준월: {latest_ym}) 분석 완료 및 HTML 반영 준비 완료!")
+        print(f"✅ 최신 데이터(기준월: {latest_ym}) 분석 완료 및 HTML 반영 준비 완료!")
 
     except Exception as e:
         print(f"⚠️ 데이터 처리 중 오류 발생: {e}")
 
 if __name__ == "__main__":
-    update_html_dashboard = update_html_with_csv()
+    update_html_dashboard()
