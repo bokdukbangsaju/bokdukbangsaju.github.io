@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자평진전 - 4. 십간합의 성정을 논함</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        /* 대제목 스타일 (검은색 사각형 박스 형태) */
+        h1.main-title {
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+        /* 소제목 스타일 */
+        h2.sub-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #334155;
+        }
+        /* 각 문장별 블록 카드 */
+        .item-block {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+        }
+        hr.divider {
+            border: none;
+            border-top: 1px solid #cbd5e1;
+            margin: 12px 0;
+        }
+        .content-row {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            padding: 8px 0;
+        }
+        .hanzi {
+            flex: 1;
+            font-family: 'Batang', 'Georgia', serif;
+            font-size: 15.5px;
+            color: #111;
+            word-break: break-all;
+        }
+        .korean {
+            flex: 1;
+            font-size: 14.5px;
+            color: #2c3e50;
+            word-break: break-all;
+        }
+        /* [한자음뜻] 및 [강해] 입력 칸 스타일 */
+        .input-box {
+            margin-top: 8px;
+            padding: 10px 14px;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-size: 13.5px;
+            color: #475569;
+        }
+        .input-box span {
+            font-weight: bold;
+            color: #1e293b;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 대제목 -->
+        <h1 class="main-title">■ 십간합의 성정을 논함</h1>
+
+        <!-- 서두 문장들 -->
+        <div class="item-block">
+            <hr class="divider">
+            <div class="content-row">
+                <div class="hanzi">合化之義, 以十干陰陽相配而成.</div>
+                <div class="korean">합과 화는 십간의 음과 양이 서로 만나 짝을 이루면서 이루어진다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">河圖之數, 以一二三四五配六七八十, 先天之道也.</div>
+                <div class="korean">하도의 수는 1,2,3,4,5와 6,7,8,9,10이 각각 배합하여 선천의 도를 이룬다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">故始于太陰之水 而終於沖氣之土, 以氣而語其生之序也.</div>
+                <div class="korean">태음인 수에서 시작하여 충기의 토에서 마치게 되는데, 氣로서 상생의 순서를 이야기한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">蓋未有五行之先, 必先有陰陽老少, 而後沖氣, 故生以土.</div>
+                <div class="korean">오행이 있기 전에, 음양과 노소가 있었고, 그 후 충기가 있어서 土가 생긴다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">終之旣有五行 則萬物又生於土, 而水火木金, 亦寄質焉, 故以土先之.</div>
+                <div class="korean">토가 생긴 후에 오행이 생기게 되니, 토가 앞선 것이다.만물은 토에서 만들어지고, 수화목금 역시 토에 기탁하므로 가장 먼저 토가 있는 것이다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">是以甲己相合之始, 則化爲土 ; 土則生金,</div>
+                <div class="korean">갑기합에서 시작하여 土로 化한다. 토는 금을 생한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">故乙庚化金次之 ; 金生水,</div>
+                <div class="korean">을경합은 금으로 화한다. 금은 수를 생한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">故丙辛化水又次之 ; 水生木,</div>
+                <div class="korean">병신합은 수로 화한다. 수는 목을 생한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">故丁壬化木又次之 ; 木生火</div>
+                <div class="korean">정임합은 목으로 화한다. 목은 화를 생한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">故戊癸化火又次之, 而五行遍焉,</div>
+                <div class="korean">무계합은 화로 화한다. 이로서 오행이 두루 마친다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">先之以土, 相生之序, 自然如此.</div>
+                <div class="korean">토에서 먼저 상생하는 순서가되는데, 이는 자연의 이치이다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">此十干合化之義也.</div>
+                <div class="korean">이것이 십간이 합화하는 의미이다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+
+        <!-- 소제목 1 -->
+        <h2 class="sub-title">1. 희신이 합하여 쓸모를 잃은 경우</h2>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">其性情何也?</div>
+                <div class="korean">(십간합의) 성정은 어떠한가?</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">蓋既有配合, 必有向背.</div>
+                <div class="korean">이미 짝이 된 합이 있으면 그 향배가 반드시 있다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">如甲用辛官, 透丙作合, 而官非其官;</div>
+                <div class="korean">갑목이 신금 정관을 쓰는데, 병화가 투출하여 신금과 합하면, 정관은 정관으로서 역할을 하지 못하게 된다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">甲用癸印, 透戊作合, 而印非其印;</div>
+                <div class="korean">갑목이 계수 인성을 쓰는데, 무토가 투출하여 합을 하면, 인성은 인성으로서 역할을 하지 못한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">甲用己財, 己與別位之甲作合, 而財非其財.</div>
+                <div class="korean">갑목이 기토 재성을 쓰는데, 기토가 다른 위치의 갑목과 합한다면, 재성은 재성으로서 역할을 하지 못한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">如年己月甲, 年上之財, 被月合去, 而日主之甲已無分;</div>
+                <div class="korean">년己월甲, 년간의 재성이 있으면, 월간이 재성을 합거하여, 갑을 일간에게는 재성의 몫이 없다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">年甲月己, 月上之財, 被年合去, 而日主之甲不與是也.</div>
+                <div class="korean">년甲월己, 월간에 재성이 있으면, 년간이 합거하여, 갑을 일간에게 재성의 몫이 없다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">甲用丙食, 與辛作合, 而非其食,</div>
+                <div class="korean">갑목이 병화 식신인 경우, 신금이 있어 합하면, 식신은 식신으로서의 역할을 하지 못한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">此四喜神因合而無用者也.</div>
+                <div class="korean">네 가지 희신이 합하여 쓸모를 잃은 것을 이야기한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+
+        <!-- 소제목 2 -->
+        <h2 class="sub-title">2. 기신이 합하여 좋게 변한 경우</h2>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">又如甲逢庚為煞, 與乙作合, 而煞不攻身;</div>
+                <div class="korean">또 갑목이 칠살의 경금을 만났는데, 을목이 합하면, 칠살이 일간을 칠 수 없게 된다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">甲逢乙為劫, 與庚作合, 而乙不劫財;</div>
+                <div class="korean">갑목이 을목을 만나면 겁재로 작용하지만, 경금과 합하면 을목은 재를 겁탈하지 않는다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">甲逢丁為傷, 與壬作合, 而丁不為傷官;</div>
+                <div class="korean">갑목이 정화를 만나면 상관으로 작용하지만, 임수와 합하면, 정화는 관을 상하게 하지 않는다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">甲逢壬為梟, 與丁作合, 而壬不奪食,</div>
+                <div class="korean">갑목이 임수를 만나면 편인으로 작용하지만, 정화와 합한다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">此四忌神因合化吉者也.</div>
+                <div class="korean">네 가지 기신이 합하여 좋게 변한 예이다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+
+        <!-- 소제목 3 -->
+        <h2 class="sub-title">3. 배합에 따라 희기의 향배가 달라짐</h2>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">蓋有原合而無所用, 遂吉不為吉, 凶因不為凶.</div>
+                <div class="korean">합이 되면 기피하는 것도 없게 되어, 길함이 길함이 되지 않고, 흉함이 흉함이 되지 않는다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">即以六親言之, 如男以財為妻, 而被別干合去, 財妻豈能親其夫乎?</div>
+                <div class="korean">육친으로 이야기하면, 남자의 재성은 아내인데, 재성이 다른 천간과 합거되면, 재성 아내가 어찌 그 남편을 친애할 수 있겠는가?</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">女以官為夫, 而被他干合去, 官夫豈能愛其妻乎?</div>
+                <div class="korean">여자에게 정관은 남편인데, 정관이 다른 천간과 합거되면, 관성인 남편이 어찌 그 아내를 친애할 수 있겠는가?</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+            <hr class="divider">
+        </div>
+
+        <div class="item-block">
+            <div class="content-row">
+                <div class="hanzi">此謂配合之性情, 因向背而殊也.</div>
+                <div class="korean">배합의 성정으로 향배가 달라지는 사례이다.</div>
+            </div>
+            <div class="input-box"><span>[한자음뜻]</span> </div>
+            <div class="input-box"><span>[강해]</span> </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
