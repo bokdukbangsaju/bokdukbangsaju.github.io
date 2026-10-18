@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자평진전 - 통합 학습 뷰어</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f6f9;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* 1. 좌측 메뉴 프레임 */
+        #menu-frame {
+            width: 300px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #1a252f;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        #menu-frame::-webkit-scrollbar {
+            width: 6px;
+        }
+        #menu-frame::-webkit-scrollbar-thumb {
+            background-color: #34495e;
+            border-radius: 3px;
+        }
+
+        .menu-header {
+            padding: 18px 15px;
+            background-color: #1a252f;
+            text-align: center;
+            border-bottom: 2px solid #34495e;
+        }
+        .menu-header h1 {
+            font-size: 19px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: #f39c12;
+        }
+
+        .menu-section {
+            padding: 12px 0;
+        }
+        .menu-section-title {
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #bdc3c7;
+            background-color: #243342;
+            border-left: 4px solid #e67e22;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 5px 0;
+        }
+        .menu-item {
+            padding: 10px 18px 10px 22px;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .menu-item:hover {
+            background-color: #34495e;
+            color: #3498db;
+            padding-left: 26px;
+        }
+        .menu-item.active {
+            background-color: #e67e22;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* 2. 우측 내용 프레임 */
+        #content-frame {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 좌측 메뉴 프레임 -->
+    <div id="menu-frame">
+        <div class="menu-header">
+            <h1>子平眞詮 (자평진전)</h1>
+        </div>
+        <div class="menu-section">
+            <div class="menu-section-title">목차 선택</div>
+            <ul class="menu-list" id="menu-list">
+                <li class="menu-item active" onclick="loadChapter('ch01.html', this)">01. 論十干十二支</li>
+                <li class="menu-item" onclick="loadChapter('ch02.html', this)">02. 論陰陽生剋</li>
+                <li class="menu-item" onclick="loadChapter('ch03.html', this)">03. 論陰陽生死</li>
+                <li class="menu-item" onclick="loadChapter('ch04.html', this)">04. 論十干配合性情</li>
+                <li class="menu-item" onclick="loadChapter('ch05.html', this)">05. 論十干合而不合</li>
+                <li class="menu-item" onclick="loadChapter('ch06.html', this)">06. 論十干得時不旺失時不弱</li>
+                <li class="menu-item" onclick="loadChapter('ch07.html', this)">07. 論刑沖會合解法</li>
+                <li class="menu-item" onclick="loadChapter('ch08.html', this)">08. 論用神</li>
+                <li class="menu-item" onclick="loadChapter('ch09.html', this)">09. 論用神成敗救應</li>
+                <li class="menu-item" onclick="loadChapter('ch10.html', this)">10. 論用神變化</li>
+                <li class="menu-item" onclick="loadChapter('ch11.html', this)">11. 論用神純雜</li>
+                <li class="menu-item" onclick="loadChapter('ch12.html', this)">12. 論用神格局高低</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 우측 내용 프레임 (iframe을 통해 각 장의 html 파일을 동적 로드) -->
+    <div id="content-frame">
+        <iframe id="content-viewer" name="content-viewer" src="ch01.html"></iframe>
+    </div>
+
+    <script>
+        // 메뉴 클릭 시 우측 내용 프레임(iframe)의 페이지를 전환하는 함수
+        function loadChapter(pageUrl, element) {
+            // 모든 메뉴 아이템의 active 클래스 제거
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+            // 클릭한 항목에 active 클래스 추가
+            if(element) element.classList.add('active');
+
+            // iframe 소스 변경 (해당 chXX.html 로드)
+            document.getElementById('content-viewer').src = pageUrl;
+        }
+    </script>
+</body>
+</html>
