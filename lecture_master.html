@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장 명리 - 강의 뷰어</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 1. 비밀번호 입력 화면 (Password Gate) */
+        #password-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .gate-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .gate-card h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .gate-card p {
+            font-size: 13.5px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+        }
+
+        .gate-input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .gate-input:focus {
+            border-color: #3498db;
+        }
+
+        .gate-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .gate-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 12px;
+            min-height: 18px;
+        }
+
+        /* 2. 메인 앱 레이아웃 (비밀번호 통과 후 표시) */
+        #main-app {
+            display: none; /* 초기에는 숨김 */
+            height: 100vh;
+            display: flex;
+        }
+
+        /* 좌측 메뉴 프레임 */
+        #menu-frame {
+            width: 280px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #1a252f;
+            flex-shrink: 0;
+        }
+
+        .menu-header {
+            padding: 22px 15px;
+            background-color: #1a252f;
+            text-align: center;
+            border-bottom: 2px solid #34495e;
+        }
+
+        .menu-header h1 {
+            font-size: 18px;
+            color: #f39c12;
+            letter-spacing: 1px;
+        }
+
+        .menu-section-title {
+            padding: 15px 20px 8px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #bdc3c7;
+            text-transform: uppercase;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0 10px;
+        }
+
+        .menu-item {
+            padding: 12px 15px;
+            margin: 6px 0;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            background-color: #34495e;
+            color: #ecf0f1;
+            font-weight: 600;
+        }
+
+        .menu-item:hover {
+            background-color: #4e6d8d;
+        }
+
+        .menu-item.active {
+            background-color: #e67e22;
+            color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* 우측 내용 프레임 */
+        #content-frame {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 비밀번호 입력 화면 (디폴트) -->
+    <div id="password-gate">
+        <div class="gate-card">
+            <h2>하루한장 명리 강의</h2>
+            <p>저작권 보호를 위해 비밀번호를 입력해주세요.</p>
+            <input type="password" id="pass-input" class="gate-input" placeholder="비밀번호 입력" maxlength="6" autofocus onkeydown="checkEnter(event)">
+            <button class="gate-btn" onclick="verifyPassword()">확인</button>
+            <div id="error-message" class="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- 2. 메인 콘텐츠 화면 (비밀번호 인증 후 노출) -->
+    <div id="main-app" style="display: none;">
+        <!-- 좌측 메뉴 프레임 -->
+        <div id="menu-frame">
+            <div class="menu-header">
+                <h1>하루한장 명리 강의</h1>
+            </div>
+            <div class="menu-section-title">강의 목차</div>
+            <ul class="menu-list">
+                <li class="menu-item active" onclick="loadLecture('lecture01.html', this)">01. 6학기_1주차</li>
+                <li class="menu-item" onclick="loadLecture('lecture02.html', this)">02. 6학기_2주차</li>
+            </ul>
+        </div>
+
+        <!-- 우측 내용 프레임 (iframe) -->
+        <div id="content-frame">
+            <iframe id="content-viewer" name="content-viewer" src="lecture01.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // 비밀번호 확인 함수
+        function verifyPassword() {
+            const inputVal = document.getElementById('pass-input').value;
+            const errorDiv = document.getElementById('error-message');
+
+            if (inputVal === '3378') {
+                // 비밀번호 일치 시 게이트 숨기고 메인 앱 표시
+                document.getElementById('password-gate').style.display = 'none';
+                document.getElementById('main-app').style.display = 'flex';
+            } else {
+                errorDiv.innerText = '비밀번호가 올바르지 않습니다. (예: 3378)';
+                document.getElementById('pass-input').value = '';
+                document.getElementById('pass-input').focus();
+            }
+        }
+
+        // 엔터키 입력 감지
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                verifyPassword();
+            }
+        }
+
+        // 좌측 메뉴 클릭 시 우측 내용 프레임(iframe) URL 변경
+        function loadLecture(pageUrl, element) {
+            // 모든 메뉴 항목의 active 클래스 제거
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+            // 클릭한 항목에 active 클래스 추가
+            if (element) {
+                element.classList.add('active');
+            }
+            // iframe 소스 변경
+            document.getElementById('content-viewer').src = pageUrl;
+        }
+    </script>
+</body>
+</html>
