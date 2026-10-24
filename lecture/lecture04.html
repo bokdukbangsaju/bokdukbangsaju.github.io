@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장명리 | 4주차 강의노트: 동일사주·시공간 풍수, 12운성 분류법 및 양생음사 짝꿍 법칙</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        myeongri: {
+                            dark: '#0f172a',
+                            navy: '#1e293b',
+                            accent: '#d97706', // Gold / Amber accent
+                            gold: '#f59e0b',
+                            light: '#f8fafc',
+                            card: '#ffffff',
+                            subtext: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-moon text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold block">하루한장명리 아카이브</span>
+                    <h1 class="text-lg font-bold tracking-tight">강의노트 (4주차)</h1>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#samechart" class="hover:text-amber-400 transition">동일사주 비교</a>
+                <a href="#classification" class="hover:text-amber-400 transition">12운성 4대 분류</a>
+                <a href="#daedae" class="hover:text-amber-400 transition">양생음사 짝꿍</a>
+                <a href="#totalenergy" class="hover:text-amber-400 transition">오행 총량 보존</a>
+                <a href="#terms" class="hover:text-amber-400 transition">12운성 본질</a>
+                <a href="#summary" class="hover:text-amber-400 transition">핵심 요약</a>
+            </nav>
+            <button onclick="window.print()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition shadow flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> 인쇄 / PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="relative bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
+                <i class="fa-solid fa-book-bookmark"></i> 4기 4주차 통합 강의노트
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-6 leading-tight">
+                동일 사주와 시공간의 차이, 12운성 분류법(봉·거·좌·인종), 양생음사 짝꿍 법칙 및 오행 총량 원리
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+                같은 생년월일이라도 시(時)와 환경(풍수)에 따라 달라지는 삶의 궤적, 12운성의 세부 분류법, 그리고 양생음사 짝꿍 법칙과 오행 총량 보존의 법칙을 상세히 정리한 노트입니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 1. Same Birthdate Chart Comparison & Feng Shui -->
+        <section id="samechart" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">1</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">동일 사주 명조 비교 및 시공간(풍수)의 중요성</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                명리학에서는 연·월·일이 같은 동일 사주라도 <strong>'시(時)'</strong>의 차이와 원국 지지 구성의 세밀한 차이에 따라 인생의 전개 양상이 극적으로 달라질 수 있습니다. 두 계수 일간 사주를 통해 원국의 구체적 작용을 살핍니다[cite: 9].
+            </p>
+
+            <!-- Table 1 -->
+            <div class="overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-3 text-sm sm:text-base">[표 1] 동일 생년월일 계수 일간 두 사주의 구조 및 인생 전개 비교표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">비교 항목</th>
+                            <th class="py-3 px-3 font-semibold">사주 A (사유합 巳酉合 / 법조인)[cite: 9]</th>
+                            <th class="py-3 px-3 font-semibold">사주 B (천간 병화 丙火 / 갈등형)[cite: 9]</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">천간 및 지지 특징</td>
+                            <td class="py-3 px-3">천간 정화/기토 투간, 지지 사유(巳酉) 삼합 금국 형성[cite: 9]</td>
+                            <td class="py-3 px-3">천간 병화(丙火) 투간, 지지 진유(辰酉) 육합 형성[cite: 9]</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">인성(金) 및 식상 쓰임</td>
+                            <td class="py-3 px-3">사유축 금국으로 인성(金)적 가치가 튼실. 식상을 살인상생 및 경금 결실로 순응[cite: 9]</td>
+                            <td class="py-3 px-3">천간 병화가 보여 식상생제의 꿈이 너무 큼. 근기가 약해 꿈과 현실의 갭 누적[cite: 9]</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">신사년(2001년) 현상</td>
+                            <td class="py-3 px-3">신금(장성의 인성)운에 사법시험 통과, 법조계 진출 및 안정적 지위 확보[cite: 9]</td>
+                            <td class="py-3 px-3">신금에 의해 병화가 어두워지고 방향성 상실, 군대 자살소동 등 답답함 경험[cite: 9]</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">인생의 전개 양상</td>
+                            <td class="py-3 px-3">부모/조직의 틀에 순응하여 법관/공직자로서 안정적이고 높은 결실 완성[cite: 9]</td>
+                            <td class="py-3 px-3">자기 고집과 식상을 밀어붙이려 하나 현실적 한계와 충돌하며 지속적 갈등 경험[cite: 9]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-200 text-xs sm:text-sm text-slate-700">
+                <span class="font-bold text-amber-800">💡 초보자를 위한 핵심 통찰 (시공간과 풍수의 중요성):</span> 동일한 명조라도 부모의 내력, 조상의 터전, 소속된 집단 및 환경(풍수)에 따라 사주의 기운이 구현되는 세부 형태가 다릅니다. 사주는 고정된 결과가 아니라 '패턴'을 보여주는 것이며, 자신이 처한 공간적/인간적 시공간 환경이 삶의 질을 좌우합니다[cite: 9].
+            </div>
+        </section>
+
+        <!-- 2. 4 Classification Methods of 12-Unseong -->
+        <section id="classification" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">2</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">12운성의 세부 분류 개념: 봉법·거법·좌법·인종법</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                명리학에서 천간과 지지의 관계를 읽는 12운성은 관찰하는 시점과 분석 대상에 따라 4가지 정교한 방법으로 분류됩니다[cite: 9].
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 text-amber-700">봉법 (逢法)</h4>
+                    <p class="text-xs text-slate-600">일간을 기준으로 연지, 월지, 일지, 시지를 대조하여 12운성 상태를 판단합니다. (예: 4월 병화 = 걸록)[cite: 9]</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 text-amber-700">거법 (居法)</h4>
+                    <p class="text-xs text-slate-600">천간과 지지 한 기둥(동주) 자체의 12운성 상태를 읽습니다. (예: 임술 = 관대, 임자 = 제왕)[cite: 9]</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 text-amber-700">좌법 (坐法)</h4>
+                    <p class="text-xs text-slate-600">지반 지지와 지장간 사이의 12운성 관계를 읽으며 일주론 분석의 핵심 기반이 됩니다. (예: 술토 지장간 신금 관대)[cite: 9]</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 text-amber-700">인종법 (引從法)</h4>
+                    <p class="text-xs text-slate-600">원국에 없는 천간 글자를 임의로 끌어와 지지와의 관계를 측정해 잠재적 성향이나 가족 관계를 추기합니다[cite: 9].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Yangsaeng Umsa & Daedae Pairs -->
+        <section id="daedae" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">3</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">양생음사(陽生陰死)·음생양사(陰生陽死)와 12운성 1:1 짝꿍 법칙</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                양간과 음간은 별개로 움직이는 것이 아니라, 하나의 입체 파동(토러스 구조) 안에서 동전의 양면처럼 완벽히 1:1로 맞물려 작동합니다[cite: 9].
+            </p>
+
+            <!-- Table 2 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 2] 양간과 음간의 12운성 1:1 짝꿍 대응표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">양간의 12운성 상태</th>
+                            <th class="py-3 px-3 font-semibold">음간의 12운성 상태</th>
+                            <th class="py-3 px-3 font-semibold">작용력 및 내면적 심리 메커니즘</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">장생 (長生)</td><td class="py-3 px-3">사지 (死地)</td><td class="py-3 px-3">양간이 순수하게 출생하고 태동할 때 음간은 사지로 작용을 정지함[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">목욕 (沐浴)</td><td class="py-3 px-3">병지 (病地)</td><td class="py-3 px-3">양간이 목적지로 향하며 불안·번복할 때 음간은 모양이 꺾여 병지로 작용[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">관대 (冠帶)</td><td class="py-3 px-3">쇠지 (衰地)</td><td class="py-3 px-3">양간이 옷을 입고 주도할 때 음간은 뒤에서 노련하게 지원(말련 병장)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">건록 (建祿)</td><td class="py-3 px-3">제왕 (帝旺)</td><td class="py-3 px-3">양간이 자기 자립(祿)을 세울 때 음간은 세력의 극치(旺)로 만개함[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">절지 (絶地)</td><td class="py-3 px-3">태지 (胎地)</td><td class="py-3 px-3">양간의 한 사이클이 완전히 단절될 때 음간은 새로운 생명으로 잉태됨[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">묘지 (墓地)</td><td class="py-3 px-3">양지 (養地)</td><td class="py-3 px-3">양간이 안으로 보관/입묘될 때 음간은 내부 모태에서 길러짐[cite: 9]</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4. Total Energy Conservation Law (Gap/Eul positions across 12 months) -->
+        <section id="totalenergy" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">4</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">오행 총량 보존의 법칙 (12지 각 월별 갑목·을목 포지션)</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                자연의 에너지 총량은 12지 어느 구간에서나 100%로 일정하게 유지됩니다. 목(木) 기운이 늘어나면 화(火)나 금(金)이 줄어들 뿐, 전체 파동의 합은 항상 동일합니다[cite: 9].
+            </p>
+
+            <!-- Table 3 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 3] 12지 각 월별 갑목(甲)과 을목(乙)의 12운성 포지션 종합표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">월지 (月支)</th>
+                            <th class="py-3 px-3 font-semibold">갑목(甲木 - 양간) 포지션</th>
+                            <th class="py-3 px-3 font-semibold">을목(乙木 - 음간) 포지션</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">인월 (寅月)[cite: 9]</td><td class="py-3 px-3">건록 (建祿 - 주동적 수직 상승)[cite: 9]</td><td class="py-3 px-3">제왕 (帝旺 - 세력의 만개)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">묘월 (卯月)[cite: 9]</td><td class="py-3 px-3">제왕 (帝旺 - 양인격, 경금 필요)[cite: 9]</td><td class="py-3 px-3">건록 (建祿 - 자립 및 확산)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">진월 (辰土)[cite: 9]</td><td class="py-3 px-3">쇠 (衰 - 을목 보조, 수기 전달)[cite: 9]</td><td class="py-3 px-3">관대 (冠帶 - 을병 확산 가속)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">사월 (巳火)[cite: 9]</td><td class="py-3 px-3">병 (病 - 회전력 꺾임, 변형)[cite: 9]</td><td class="py-3 px-3">목욕 (沐浴 - 화 펼침의 번복/불안)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">오월 (午火)[cite: 9]</td><td class="py-3 px-3">사 (死 - 수직 성장 그침, 정화 관대)[cite: 9]</td><td class="py-3 px-3">장생 (長生 - 순수한 화 운동 대대)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">미월 (未土)[cite: 9]</td><td class="py-3 px-3">임묘 (入墓 - 계갑 입묘, 회전축)[cite: 9]</td><td class="py-3 px-3">양 (養 - 내면에서 정경 육성)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">신월 (申月)[cite: 9]</td><td class="py-3 px-3">절 (絶 - 절처봉생, 신중 임수 장생)[cite: 9]</td><td class="py-3 px-3">태 (胎 - 내면의 세심한 모색)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">유월 (酉金)[cite: 9]</td><td class="py-3 px-3">태 (胎 - 정관 틀 안에서 잉태)[cite: 9]</td><td class="py-3 px-3">절 (絶 - 한 사이클의 완전한 마감)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">술월 (戌土)[cite: 9]</td><td class="py-3 px-3">양 (養 - 내면의 수렴 및 양육)[cite: 9]</td><td class="py-3 px-3">묘 (墓 - 을목의 보관 및 입묘)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">해월 (亥水)[cite: 9]</td><td class="py-3 px-3">장생 (長生 - 순수한 수생목 출발)[cite: 9]</td><td class="py-3 px-3">사 (死 - 수직 동작의 정지)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">자월 (子水)[cite: 9]</td><td class="py-3 px-3">목욕 (沐浴 - 동지점, 불안과 번복)[cite: 9]</td><td class="py-3 px-3">병 (病 - 모양의 변경 및 공감)[cite: 9]</td></tr>
+                        <tr class="hover:bg-slate-50"><td class="py-3 px-3 font-bold text-slate-900">축월 (丑土)[cite: 9]</td><td class="py-3 px-3">관대 (冠帶 - 계수 수생목 흡수)[cite: 9]</td><td class="py-3 px-3">쇠 (衰 - 갑목 자립 지원, 노련함)[cite: 9]</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. Essential Nature of 12-Unseong Terms -->
+        <section id="terms" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">5</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">12운성 12개 용어의 실전 기운적 본질 해설</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">절 (絶) - 완전한 단절과 절처봉생[cite: 9]</strong>
+                    한 사이클이 완전히 마감되는 자리이나, 내부적으로 새로운 기운이 장생하여 다시 일어서는 발판이 됩니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">태 (胎) - 모태 잉태와 조용한 모색[cite: 9]</strong>
+                    새로운 생명이 모태에 조용히 잉태되는 시기로, 겉으로 드러나기보다 내면의 구상과 준비가 이루어집니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">양 (養) - 내부적 육성과 기대감[cite: 9]</strong>
+                    엄마 뱃속에서 자라는 상태로, 주변 환경으로부터 기대와 지원을 받으며 안정적으로 세력을 키워갑니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">장생 (長生) - 순수한 태동과 격국 채택[cite: 9]</strong>
+                    갓 태어난 아이처럼 순수하게 자기 오행 작용을 시작하며, 창의성과 순수한 열정이 발현되어 격국의 기준이 됩니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">목욕 (沐浴) - 목적지를 향한 불안과 번복[cite: 9]</strong>
+                    새로운 단계로 넘어가기 전 '내가 잘하고 있나?' 하는 불안과 번복이 발생하며 자제가 필요합니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">관대 (冠帶) - 사모관대를 차는 주도성과 고집[cite: 9]</strong>
+                    옷을 차려입고 본격적으로 사회에 나서는 단계로, 강한 주도성과 고집이 발현됩니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">건록 (建祿) - 순일한 자립과 주동적 추진[cite: 9]</strong>
+                    자기 스스로 록(祿)을 세워 주동적으로 사회적 책임을 완수하고 당당하게 자립하는 가장 안정적인 기운입니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">제왕 (帝旺) - 기세의 극치와 양인의 칼날[cite: 9]</strong>
+                    에너지의 가장 높은 정점으로, 양간에게는 양인살이 되어 칼날과 같은 고집과 권력을 부여합니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">쇠 (衰) - 한 걸음 물러선 노련함 (말련 병장)[cite: 9]</strong>
+                    최고점에서 한 걸음 뒤로 물러서서 겁재(남)를 성취시키고 자신도 결실을 나누는 노련하고 중후한 버팀목입니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">병 (病) - 회전력이 꺾이는 변형과 공감[cite: 9]</strong>
+                    직선 상승 운동이 꺾이며 모양이 변하는 구간으로, 타인의 아픔을 깊이 공감하는 능력과 문창 기운이 발현됩니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">사 (死) - 수직 운동의 정지와 방향 전환[cite: 9]</strong>
+                    기존 수직 성장이 완전히 그치고 정화/경금 등 새로운 결실의 단계로 에너지 방향이 전환되는 지점입니다[cite: 9].
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-1">묘 (墓) - 소멸이 아닌 내부 보존과 회전축[cite: 9]</strong>
+                    기운이 없어지는 것이 아니라, 다음 계절을 위해 안으로 소중히 보관하고 회전축 역할을 수행하는 과정입니다[cite: 9].
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Summary Section -->
+        <section id="summary" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-900 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-check text-sm"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold">4주차 강의 4줄 핵심 요약</h3>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">01. 동일 사주와 시공간의 차이</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">동일 생년월일이라도 시(時)의 구성과 타고난 환경(부모·풍수)에 따라 사주 기운의 실전 성취 형태가 완전히 다릅니다[cite: 9].</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">02. 12운성 4대 분류법</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">12운성은 일간 기준(봉법), 동주 기준(거법), 지장간 기준(좌법), 없는 글자 대조(인종법)로 정교하게 분석합니다[cite: 9].</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">03. 양생음사와 총량 보존 법칙</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">양간과 음간은 장생-사, 관대-쇠, 걸록-제왕 등 1:1로 맞물려 작동하며 오행 전체의 총량은 항상 100%로 보존됩니다[cite: 9].</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">04. 쇠지(衰地)의 성숙함</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">쇠지는 에너지가 저하되는 것이 아니라, 뒤에서 겁재를 성취시키고 자신도 실속을 챙기는 '말련 병장'의 노련한 지혜입니다[cite: 9].</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center mt-20">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-300">하루한장명리 4기자료</p>
+            <p>&copy; 2026 하루한장명리. All rights reserved. Designed for personal homepage &amp; study archive.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
