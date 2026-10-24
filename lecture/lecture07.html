@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장명리 | 7주차 강의노트: 건록·제왕·병지의 정교한 본질, 정관 유인 및 목왕절 4대 오행 부족</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        myeongri: {
+                            dark: '#0f172a',
+                            navy: '#1e293b',
+                            accent: '#d97706', // Gold / Amber accent
+                            gold: '#f59e0b',
+                            light: '#f8fafc',
+                            card: '#ffffff',
+                            subtext: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-moon text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold block">하루한장명리 아카이브</span>
+                    <h1 class="text-lg font-bold tracking-tight">강의노트 (7주차)</h1>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#geollok" class="hover:text-amber-400 transition">건록과 정관유인</a>
+                <a href="#jewang" class="hover:text-amber-400 transition">제왕과 양인</a>
+                <a href="#byeong" class="hover:text-amber-400 transition">병지와 문창귀인</a>
+                <a href="#mokwang" class="hover:text-amber-400 transition">목왕절 오행부족</a>
+                <a href="#summary" class="hover:text-amber-400 transition">핵심 요약</a>
+            </nav>
+            <button onclick="window.print()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition shadow flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> 인쇄 / PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="relative bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
+                <i class="fa-solid fa-book-bookmark"></i> 4기 7주차 통합 강의노트
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-6 leading-tight">
+                12운성 건록·제왕·병지의 정교한 기학적 본질과 정관 유인 원리, 양생음사·문창귀인 메커니즘, 및 목왕절 4대 오행 부족 실전 통변
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+                건록이 정관을 불러오는 합(合)의 원리, 제왕(양인)의 양면성과 병지의 문창귀인 발현, 그리고 봄철 목왕절의 4대 오행(수·화·토·금) 부족에 따른 실전 통변을 상세히 정리한 노트입니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 1. Geollok & Table 1 -->
+        <section id="geollok" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">1</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">건록(建祿)의 정관(正官) 유인 원리와 월지 중심축</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                사주팔자에서 월지는 전체 기운을 주도하는 핵심축입니다. 그중 건록(建祿)은 순일한 대표 천간이 벼슬에 오르는 상태로 자기 자립과 주동적 책임감을 나타냅니다. 특히 사주 원국에 관성이 드러나지 않아도 건록격이 공직이나 대기업 등 관직 운이 뛰어난 이유는, 건록의 지장간 고유 작용을 통해 정관을 <strong>'합(合)으로 유인'</strong>해오기 때문입니다.
+            </p>
+
+            <!-- Table 1 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 1] 10천간 건록 지지별 정관 유인(合) 원리 비교표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">구분</th>
+                            <th class="py-3 px-3 font-semibold">건록 지지 및 지장간</th>
+                            <th class="py-3 px-3 font-semibold">합(合) 작용 및 불러오는 천간</th>
+                            <th class="py-3 px-3 font-semibold">불러오는 기운의 십신 (정관)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">갑목 (甲木 - 陽)</td>
+                            <td class="py-3 px-3">인목 (寅: 인중 丙火)</td>
+                            <td class="py-3 px-3">병화가 병신합(丙辛合)으로 신금 유인</td>
+                            <td class="py-3 px-3">신금(辛金) → 갑목의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">병화 (丙火 - 陽)</td>
+                            <td class="py-3 px-3">사화 (巳: 사중 戊土)</td>
+                            <td class="py-3 px-3">무토가 무계합(戊癸合)으로 계수 유인</td>
+                            <td class="py-3 px-3">계수(癸水) → 병화의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">경금 (庚金 - 陽)</td>
+                            <td class="py-3 px-3">신금 (申: 신중 壬水)</td>
+                            <td class="py-3 px-3">임수가 정임합(丁壬合)으로 정화 유인</td>
+                            <td class="py-3 px-3">정화(丁火) → 경금의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">임수 (壬水 - 陽)</td>
+                            <td class="py-3 px-3">해수 (亥: 해중 甲木)</td>
+                            <td class="py-3 px-3">갑목이 갑기합(甲己合)으로 기토 유인</td>
+                            <td class="py-3 px-3">기토(己土) → 임수의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">을목 (乙木 - 陰)</td>
+                            <td class="py-3 px-3">묘목 (卯月 - 乙木)</td>
+                            <td class="py-3 px-3">을목이 을경합(乙庚合)으로 경금 유인</td>
+                            <td class="py-3 px-3">경금(庚金) → 을목의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">정화 (丁火 - 陰)</td>
+                            <td class="py-3 px-3">오화 (午火 - 丁火)</td>
+                            <td class="py-3 px-3">정화가 정임합(丁壬合)으로 임수 유인</td>
+                            <td class="py-3 px-3">임수(壬水) → 정화의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">신금 (辛金 - 陰)</td>
+                            <td class="py-3 px-3">유금 (酉金 - 辛金)</td>
+                            <td class="py-3 px-3">신금이 병신합(丙辛合)으로 병화 유인</td>
+                            <td class="py-3 px-3">병화(丙火) → 신금의 정관</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">계수 (癸水 - 陰)</td>
+                            <td class="py-3 px-3">자수 (子水 - 癸水)</td>
+                            <td class="py-3 px-3">계수가 무계합(戊癸合)으로 무토 유인</td>
+                            <td class="py-3 px-3">무토(戊土) → 계수의 정관</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 2. Jewang & Table 2 -->
+        <section id="jewang" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">2</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">12운성 제왕(帝旺)·병지(病地)의 본질과 핵심 구간별 비교</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                양간의 제왕지는 '양인살'에 해당하여 기세가 극에 달하지만 동시에 겁재의 뿌리가 되므로 편관의 제어(양인용살)가 필수적입니다. 반면 병지는 장생지와 충하며 직진성이 꺾이는 자리이나, 본래 작용(인성)에 강하게 집착하게 되어 <strong>문창귀인</strong>의 뛰어난 학문·예술 두뇌로 발현됩니다.
+            </p>
+
+            <!-- Table 2 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 2] 12운성 핵심 구간별 기학적 본질 및 실전 통변 비교표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">12운성 단계</th>
+                            <th class="py-3 px-3 font-semibold">기학적 본질 및 원운동 매커니즘</th>
+                            <th class="py-3 px-3 font-semibold">실전 통변 및 성격/직업적 특징</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">장생 (長生)</td>
+                            <td class="py-3 px-3">지장간 중기에서 기운이 오롯이 솟구쳐 일어남</td>
+                            <td class="py-3 px-3">순수한 창의성, 귀염, 근(根) 작용, 격국 채택의 일순위</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">건록 (建祿)</td>
+                            <td class="py-3 px-3">이전 계절 기운을 받아 순일하게 자기 자립을 이룸</td>
+                            <td class="py-3 px-3">총대 멞, 공과 사 명확, 정관 유인, 공직자/지휘관 적성</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">제왕 (帝旺)</td>
+                            <td class="py-3 px-3">기세의 극치. 양간은 양인살, 음간은 이양받아 성취</td>
+                            <td class="py-3 px-3">혈기왕성, 독선, 편관 제어 필요(양인용살), 군인/의사</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">병지 (病地)</td>
+                            <td class="py-3 px-3">장생과 충하며 기운이 꺾임. 반대 기운 장생 시작</td>
+                            <td class="py-3 px-3">본래 작용 집착, 문창귀인, 똑똑함, 연구/작가/예술</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">사지 (死地)</td>
+                            <td class="py-3 px-3">수직/본래 동작이 정지되고 다음 오행으로 전환</td>
+                            <td class="py-3 px-3">동작의 그침, 세심함, 정신적 정적인 일, 공감 능력</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">절지 (絶地)</td>
+                            <td class="py-3 px-3">형체는 단절되었으나 지장간 중기에서 모체 장생</td>
+                            <td class="py-3 px-3">절처봉생(絶處逢生), 새로운 시작, 교육/종교/연구/철학</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">태지 (胎地)</td>
+                            <td class="py-3 px-3">다음 계절 완성에 대한 큰 꿈과 기대감을 잉태</td>
+                            <td class="py-3 px-3">장래의 큰 목적 구상, 정교한 분석력, 은밀한 도모</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Byeongji & Moonchang -->
+        <section id="byeong" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">3</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">병지(病地)의 집착과 문창귀인(文昌貴人) 매커니즘</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                병지는 장생지와 충(沖)하는 자리로, 본래의 직진 동작이 꺾여 유연하게 회전하는 구간입니다. 자기 본래 작용이 병들었기 때문에 이를 복원하고 유지하려는 강한 집착이 생깁니다. 갑목은 수(인성), 병화는 목(인성), 경금은 화(관성), 임수는 금(인성)을 더욱 간절히 흡수하고 당겨 쓰게 되며, 이러한 강한 학문적 집착과 세심한 공감 능력이 바로 <strong>문창귀인</strong>이 되어 연구, 작가, 예능, 철학 분야에서 독보적인 두뇌 회전으로 발현됩니다.
+            </p>
+        </section>
+
+        <!-- 4. Mokwangjeol 4 Elements Deficiencies & Table 3 -->
+        <section id="mokwang" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">4</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">목왕절(木旺節: 寅卯辰)의 4대 오행 부족(弱) 실전 통변</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                봄철 인묘진월에 목 기운이 왕성할 때 특정 오행이 부족하거나 결핍되면 독특한 실전 통변 현상들이 발생합니다.
+            </p>
+
+            <!-- Table 3 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 3] 목왕절 사주의 4대 오행 부족(弱) 현상 및 실전 통변표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">오행 결핍 현상</th>
+                            <th class="py-3 px-3 font-semibold">명리학적 명칭</th>
+                            <th class="py-3 px-3 font-semibold">기학적 발생 원인</th>
+                            <th class="py-3 px-3 font-semibold">실생활 통변 및 현상</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">1) 水 부족</td>
+                            <td class="py-3 px-3">목다수갈 (木多水渴)</td>
+                            <td class="py-3 px-3">수생목(인성)의 내실 없이 목의 의욕만 솟구침</td>
+                            <td class="py-3 px-3">사업/학업/결혼에서 자금·학식·준비 부족, 지출 과다, 어머니 고생</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">2) 火 부족</td>
+                            <td class="py-3 px-3">목다화식 (木多火熄)</td>
+                            <td class="py-3 px-3">목생화로 펼치지 못하고 익숙한 공부에만 머묾</td>
+                            <td class="py-3 px-3">성장 지연, 익숙한 습성 고수. 金의 극을 받아야 전환 발현</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">3) 土 부족</td>
+                            <td class="py-3 px-3">목다토붕 (木多土崩)</td>
+                            <td class="py-3 px-3">목극토로 땅이 파헤쳐져 정착할 터전 부족</td>
+                            <td class="py-3 px-3">안정성 부족, 계획성 미비, 변덕과 기복, 주목구구식 진행</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">4) 金 부족</td>
+                            <td class="py-3 px-3">목다금결 (木多金缺)</td>
+                            <td class="py-3 px-3">관성/기준(金)의 통제 없이 자기 방식만 고집</td>
+                            <td class="py-3 px-3">남의 조언/규율 무시, 자기 정당화 주장, 손님/조직과 충돌</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. Summary Section -->
+        <section id="summary" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-900 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-check text-sm"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold">7주차 강의 4줄 핵심 요약</h3>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">01. 건록의 정관 유인</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">건록은 순일한 대표 기운일 뿐만 아니라 지장간 합을 통해 정관을 합으로 유인해오므로 관직/직장 운이 뛰어납니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">02. 양인의 양면성</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">양간의 제왕은 양인살이 되어 편관의 제어(양인용살)가 필요하며, 음간의 제왕은 양간에게 이양받아 안정적 성취를 이룹니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">03. 병지와 문창귀인</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">병지는 장생과 충하며 기운이 꺾이지만 본래 작용(인성)에 집착하여 문창귀인의 뛰어난 학문/예술 두뇌로 발현됩니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">04. 목왕절 오행 부족</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">봄철 목 기운이 왕할 때 水부족(준비 부족), 火부족(성장 지연), 土부족(안정 결여), 金부족(고집/규율 무시)으로 통변합니다.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center mt-20">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-300">하루한장명리 4기자료</p>
+            <p>&copy; 2026 하루한장명리. All rights reserved. Designed for personal homepage &amp; study archive.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
