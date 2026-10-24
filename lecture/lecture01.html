@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장명리 | 단시 점학과 갑일간 월지별 격국·십이운성</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        myeongri: {
+                            dark: '#0f172a',
+                            navy: '#1e293b',
+                            accent: '#d97706', // Gold / Amber accent
+                            gold: '#f59e0b',
+                            light: '#f8fafc',
+                            card: '#ffffff',
+                            subtext: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-moon text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold block">강의노트</span>
+                    <h1 class="text-lg font-bold tracking-tight">강의 노트 &amp; 자료실</h1>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#overview" class="hover:text-amber-400 transition">개요</a>
+                <a href="#core-axis" class="hover:text-amber-400 transition">점학과 원국</a>
+                <a href="#branches" class="hover:text-amber-400 transition">월지별 해석</a>
+                <a href="#table-section" class="hover:text-amber-400 transition">비교표</a>
+                <a href="#summary" class="hover:text-amber-400 transition">핵심 요약</a>
+            </nav>
+            <button onclick="window.print()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition shadow flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> 인쇄 / PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
+                <i class="fa-solid fa-book-open"></i> 심화 학습 강의 노트
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                단시 점학과 갑일간(甲日干)<br class="hidden sm:inline"> 월지별 격국·십이운성 및 통근의 본질
+            </h2>
+            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                귀장술부터 사주 원국의 십이운성, 그리고 오행 포지션의 깊은 의미까지 초보자도 한눈에 이해할 수 있도록 상세히 정리한 실전 강의 노트입니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 1. Two Axes Section -->
+        <section id="core-axis" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">1</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">단시 점학과 사주 원국의 두 축</h3>
+            </div>
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                명리학을 공부할 때 상황에 맞는 올바른 도구를 선택하는 것이 매우 중요합니다. 단시 점학의 신속함과 원국 해석의 거시적 통찰을 균형 있게 갖춰야 합니다.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 hover:border-amber-400 transition">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2.5 rounded-lg bg-amber-500/10 text-amber-600">
+                            <i class="fa-solid fa-bolt text-lg"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900">단시 점학과 십이신살</h4>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside">
+                        <li><strong>적용 범위:</strong> 20분 내외의 짧은 상담, 당장의 구체적 질문</li>
+                        <li><strong>예시 질문:</strong> "오늘 매매가 성사될까요?", "이 사람과 인연이 될까요?"</li>
+                        <li><strong>특징:</strong> 십이신살 논리로 돌아가는 귀장술이나 점학 기법이 매우 신속하고 유용함</li>
+                    </ul>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 hover:border-amber-400 transition">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-600">
+                            <i class="fa-solid fa-compass text-lg"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900">사주 원국 (격국·십이운성)</h4>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside">
+                        <li><strong>적용 범위:</strong> 인생의 큰 그릇, 사회적 역할, 타고난 기질</li>
+                        <li><strong>핵심 요소:</strong> 격국(格局)과 십이운성(十二運星)에 대한 명확한 이해</li>
+                        <li><strong>학습 목표:</strong> 거시적인 대틀과 구체적인 단시 질문의 답변 능력을 균형 있게 확보</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Gap-Ilgan 월지별 해석 -->
+        <section id="branches" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">2</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">갑일간(甲日干)의 주요 월지별 십이운성 및 격국</h3>
+            </div>
+            <p class="text-slate-600">
+                갑목(甲木)이라는 천간 글자가 12개의 월지를 만났을 때 각각 부여받는 환경과 본질적인 사회적 역할을 파악합니다.
+            </p>
+
+            <div class="grid gap-6">
+                <!-- Branch 1: In-wol -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-xs px-3 py-1 rounded-bl-xl font-semibold">건록격(建祿格)</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xl shrink-0">寅</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">인월의 갑목 (寅月甲木) — 건록(建祿)</h4>
+                            <p class="text-sm text-slate-600 mb-3 leading-relaxed">
+                                인월(寅月)은 갑목의 건록 자리입니다. 갑목 본연의 순수한 특성인 <strong>'수(水, 인성/엄마)를 내 안으로 끌어당겨 위로 꿋꿋하게 솟구치는 일'</strong>을 주도적으로 수행합니다.
+                            </p>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 text-xs text-slate-700 flex items-start gap-2">
+                                <i class="fa-solid fa-circle-info text-amber-500 mt-0.5"></i>
+                                <span><strong>성향 및 삶의 모습:</strong> 수(水)를 끌안고 가야 하므로 책임감이 강하고 똑똑하며 활동적입니다. 차남/차녀로 태어나더라도 집안에서 장남/장녀 역할을 맡게 되는 경우가 많습니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch 2: Sin-wol -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-indigo-600 text-white text-xs px-3 py-1 rounded-bl-xl font-semibold">편관격(偏官格)</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xl shrink-0">申</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">신월의 갑목 (申月甲木) — 절지(絕地) &amp; 절처봉생(絕處逢生)</h4>
+                            <p class="text-sm text-slate-600 mb-3 leading-relaxed">
+                                신월(申月)은 갑목에게 절지이자 편관격입니다. 하지만 신금(申金)의 지장간(무·임·경) 중 <strong>임수(壬水)가 신월에서 장생</strong>합니다. 나를 생해주는 모체(임수)가 끊어짐의 기운 속에서 새로 태어나기 때문에 바닥을 찍고 일어서는 <strong>절처봉생</strong>이 시작됩니다.
+                            </p>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 text-xs text-slate-700 flex items-start gap-2">
+                                <i class="fa-solid fa-circle-info text-indigo-500 mt-0.5"></i>
+                                <span><strong>환경 적응:</strong> 자기 마음대로 주도하지 못하고 강한 환경·규율(편관)에 맞춰 살아가는 역할(군인, 소방관, 경찰, 조직원 등)을 수행함을 의미합니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch 3: Hae-wol -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-600 text-white text-xs px-3 py-1 rounded-bl-xl font-semibold">장생지(長生之地)</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xl shrink-0">亥</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">해월의 갑목 (亥月甲木) — 장생지</h4>
+                            <p class="text-sm text-slate-600 mb-3 leading-relaxed">
+                                해월(亥月)은 갑목의 장생지입니다. 마치 갓 태어난 아이처럼 순수하게 <strong>수(水)를 끌어올리기 시작하는 시기</strong>입니다.
+                            </p>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 text-xs text-slate-700 flex items-start gap-2">
+                                <i class="fa-solid fa-circle-info text-emerald-500 mt-0.5"></i>
+                                <span><strong>성향:</strong> 주변에서 완성된 결과나 뛰어난 목(木)이 될 것을 독촉하지 않습니다. '일단 순수하게 해봐라'라는 기운이 작동하며 시도 자체에 큰 의미를 둡니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch 4: Myo-wol -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-rose-600 text-white text-xs px-3 py-1 rounded-bl-xl font-semibold">양인격(羊刃格)</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xl shrink-0">卯</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-1">묘월의 갑목 (卯月甲木) — 제왕지 &amp; 양인격</h4>
+                            <p class="text-sm text-slate-600 mb-3 leading-relaxed">
+                                묘월(卯月)은 갑목의 제왕지이자 양인격입니다. 춘분을 지나며 을목(乙木)이 주도하는 시기로 넘어가므로 힘을 드세게 쓰는 형태가 됩니다.
+                            </p>
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 text-xs text-slate-700 flex items-start gap-2">
+                                <i class="fa-solid fa-circle-info text-rose-500 mt-0.5"></i>
+                                <span><strong>편관(경금)의 조율:</strong> 양인의 칼날이 드세므로 편관(경금 庚金)으로 나 자신을 제어하고 억제해 주어야 조직과 사회를 이끄는 멋진 인물(양인용살)이 됩니다. 경금의 제어가 없으면 자기 고집만 부리기 쉽습니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Comparison Table Section -->
+        <section id="table-section" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">3</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">갑일간 월지별 십이운성, 격국 및 핵심 역할 비교표</h3>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3.5 px-4 font-semibold">월지 (月支)</th>
+                            <th class="py-3.5 px-4 font-semibold">십이운성</th>
+                            <th class="py-3.5 px-4 font-semibold">격국 (格局)</th>
+                            <th class="py-3.5 px-4 font-semibold">핵심 특징 및 사회적 역할</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm text-slate-600">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-amber-500"></span> 인월 (寅月)
+                            </td>
+                            <td class="py-4 px-4 font-medium text-amber-700">건록 (建祿)</td>
+                            <td class="py-4 px-4">건록격 (建祿格)</td>
+                            <td class="py-4 px-4 leading-relaxed">수(水)를 주도적으로 끌어올려 꿋꿋이 성숙함. 집안/조직의 장남·장녀 역할 수행.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-indigo-500"></span> 신월 (申月)
+                            </td>
+                            <td class="py-4 px-4 font-medium text-indigo-700">절지 (絕地)</td>
+                            <td class="py-4 px-4">편관격 (偏官格)</td>
+                            <td class="py-4 px-4 leading-relaxed">신중 임수 장생으로 절처봉생(絕處逢生). 강한 편관 환경에 적응해 생존함.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 해월 (亥月)
+                            </td>
+                            <td class="py-4 px-4 font-medium text-emerald-700">장생 (長生)</td>
+                            <td class="py-4 px-4">편인 / 장생</td>
+                            <td class="py-4 px-4 leading-relaxed">순수하게 수 기운을 흡수해 배움과 도전을 시작함. 결과 부담이 적음.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 묘월 (卯月)
+                            </td>
+                            <td class="py-4 px-4 font-medium text-rose-700">제왕 (帝旺)</td>
+                            <td class="py-4 px-4">양인격 (羊刃格)</td>
+                            <td class="py-4 px-4 leading-relaxed">드센 기운의 양인. 편관(경금 庚金)의 제어가 있어야 조직의 리더로 대성함.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4. Beyond Simple Tung-geun Section -->
+        <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">4</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">단순 통근론(通根論)을 넘어선 오행 포지션의 이해</h3>
+            </div>
+            
+            <div class="space-y-4 text-slate-600 leading-relaxed text-sm sm:text-base">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <h4 class="font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> 단순 신강·신약 판정의 한계
+                    </h4>
+                    <p>단순히 '방합(인묘진)이나 삼합(해묘미)에 목이 있으니 목 기운이 강하다 또는 통근했다'고만 단편적으로 판단하는 것은 명리학의 깊은 해석이 아닙니다.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <h5 class="font-bold text-slate-900 mb-2 text-amber-700">갑목(甲)과 을목(乙)의 시기별 역할 구분</h5>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>해월~인월~묘월(춘분 전):</strong> 갑목(甲木)이 주동하여 수(水)를 위로 끌어올리는 구간<br>
+                            <strong>춘분 후~진월~미월:</strong> 을목(乙木)이 주동하여 화(火)를 펼치고 금(金)을 달기 위해 작용하는 구간
+                        </p>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <h5 class="font-bold text-slate-900 mb-2 text-amber-700">진월 을목 vs 미월 을목의 차이</h5>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>진월 을목:</strong> 을병 상관으로 화(火)를 사방으로 넓게 펼치는 데 강점<br>
+                            <strong>미월 을목:</strong> 단단한 결실인 경금(庚金, 관성)을 달려고 하므로 남편·직장·사회적 틀을 인생에서 매우 중요하게 여김
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Core Summary Section -->
+        <section id="summary" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-900 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-check text-sm"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold">강의 핵심 요약 노트</h3>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">01. 목적에 맞는 도구 활용</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">단시 질문(20분 상담 등)에는 십이신살/귀장술을 활용하고, 사주 전체의 그릇과 역할에는 격국과 십이운성을 활용합니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">02. 신월 갑목과 절처봉생</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">신월 갑목의 절처봉생은 신중 임수(壬水)가 장생하여 나를 다시 일으키는 원리이며, 절지는 편관의 환경에 맞춰 살아가는 역할입니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">03. 양인격과 편관의 제어</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">양인격(묘월 갑목)은 편관(경금)으로 제어될 때 나를 희생해 사회적 책임을 다하는 훌륭한 리더의 격이 완성됩니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">04. 통근론의 본질 이해</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">단순 통근 여부보다 각 월지에서 천간 글자가 수행하는 실질적인 역할과 환경을 읽어내는 것이 명리학의 본질입니다.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center mt-20">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-300">하루한장명리 4기자료</p>
+            <p>&copy; 2026 하루한장명리. All rights reserved. Designed for personal homepage &amp; study archive.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
