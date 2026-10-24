@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장명리 | 6주차 강의노트: 장생·사지의 본질, 양생음사·목욕 짝꿍, 월지 통변 및 목다수갈</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        myeongri: {
+                            dark: '#0f172a',
+                            navy: '#1e293b',
+                            accent: '#d97706', // Gold / Amber accent
+                            gold: '#f59e0b',
+                            light: '#f8fafc',
+                            card: '#ffffff',
+                            subtext: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-moon text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold block">하루한장명리 아카이브</span>
+                    <h1 class="text-lg font-bold tracking-tight">강의노트 (6주차)</h1>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#jangsaeng" class="hover:text-amber-400 transition">장생지 원리</a>
+                <a href="#saji" class="hover:text-amber-400 transition">사지·목욕 짝꿍</a>
+                <a href="#wolji" class="hover:text-amber-400 transition">월지 중심 통변</a>
+                <a href="#mokdag" class="hover:text-amber-400 transition">목다수갈 해설</a>
+                <a href="#summary" class="hover:text-amber-400 transition">핵심 요약</a>
+            </nav>
+            <button onclick="window.print()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition shadow flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> 인쇄 / PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="relative bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
+                <i class="fa-solid fa-book-bookmark"></i> 4기 6주차 통합 강의노트
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-6 leading-tight">
+                12운성 장생지와 사지의 깊은 원리, 양생음사·목욕지의 짝꿍 메커니즘, 월지 중심 통변 및 목다수갈 심리 구조
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+                에너지가 순수하게 일어나는 장생지와 동작 정점인 사지의 참뜻, 음간 장생의 전환 결심, 월지 환경 중심의 통변, 그리고 봄철 수(水) 부족(목다수갈)의 실전 통변을 상세히 정리한 노트입니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 1. Jangsaeng Principle & Table 1 -->
+        <section id="jangsaeng" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">1</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">12운성 장생지(長生地)의 입체 원리와 격국(格局) 채택 기준</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                장생지는 멈추어 있던 에너지가 다시 기세와 회전력을 가지고 일어서기 시작하는 자리입니다. 순수한 작동의 자리이므로 지장간 중기/본기에 명확히 표기되며, 천간 투간 시 격국의 핵심으로 삼습니다. 반면 음간의 장생은 자기를 드러내는 것이 아니라 '다음 결과물'을 만들기 위해 자기를 바꾸기로 결심하는 시점입니다.
+            </p>
+
+            <!-- Table 1 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 1] 10천간 12운성 장생지(長生地) 지장간 및 격국/실전 통변 의미 비교표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">구분/천간</th>
+                            <th class="py-3 px-3 font-semibold">장생지 (長生)</th>
+                            <th class="py-3 px-3 font-semibold">지장간 위치 및 특성</th>
+                            <th class="py-3 px-3 font-semibold">격국 취용 및 실전 통변 핵심</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">갑목 (甲木 - 陽)</td>
+                            <td class="py-3 px-3">해수 (亥水)</td>
+                            <td class="py-3 px-3">해중 갑목 (중기)</td>
+                            <td class="py-3 px-3">순수한 수직 성장 시작. 천간 투간 시 격국 취용</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">병화 (丙火 - 陽)</td>
+                            <td class="py-3 px-3">인목 (寅木)</td>
+                            <td class="py-3 px-3">인중 병화 (중기)</td>
+                            <td class="py-3 px-3">확산의 시작. 순수한 빛과 열성. 인목에서 격국 취용</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">무토 (戊土 - 陽)</td>
+                            <td class="py-3 px-3">인목 (寅木)</td>
+                            <td class="py-3 px-3">인중 무토 (초기)</td>
+                            <td class="py-3 px-3">병화 동궁. 인중 무토 투간 시 관성 속에서도 격 취용</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">경금 (庚金 - 陽)</td>
+                            <td class="py-3 px-3">사화 (巳火)</td>
+                            <td class="py-3 px-3">사중 경금 (중기)</td>
+                            <td class="py-3 px-3">화에 의한 결실 형성 시작. 사중 경금 투간 시 격 취용</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">임수 (壬水 - 陽)</td>
+                            <td class="py-3 px-3">신금 (申金)</td>
+                            <td class="py-3 px-3">신중 임수 (중기)</td>
+                            <td class="py-3 px-3">아래로 수렴·응축 동작의 시작. 신중 임수 격 취용</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">을목 (乙木 - 陰)</td>
+                            <td class="py-3 px-3">오화 (午火)</td>
+                            <td class="py-3 px-3">오중 정화/기토</td>
+                            <td class="py-3 px-3">경금(庚金) 결실을 맺기 위해 오화에서 자신을 딱딱하게 전환</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">정화/기토 (陰)</td>
+                            <td class="py-3 px-3">유금 (酉金)</td>
+                            <td class="py-3 px-3">유중 신금 (본기)</td>
+                            <td class="py-3 px-3">임수(壬水)에 다다르기 위해 유금에서 화기를 극도로 압축</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">신금 (辛金 - 陰)</td>
+                            <td class="py-3 px-3">자수 (子水)</td>
+                            <td class="py-3 px-3">자중 계수 (본기)</td>
+                            <td class="py-3 px-3">갑목(甲木)을 싹틔우기 위해 자수에서 씨앗을 깨트려 터뜨림</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">계수 (癸水 - 陰)</td>
+                            <td class="py-3 px-3">묘목 (卯木)</td>
+                            <td class="py-3 px-3">묘중 을목 (본기)</td>
+                            <td class="py-3 px-3">병화(丙火)를 띄우기 위해 묘월에서 수생목을 본격 주도</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 2. Saji & Table 2 -->
+        <section id="saji" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">2</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">12운성 사지(死地)의 본질, 양생음사·목욕지의 짝꿍 구조</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                사지는 에너지가 소멸하는 것이 아니라, 기존의 수직/확산 동작을 멈추고 다음 오행을 완성하기 위해 자신을 희생·전환하는 최고 정점의 시점입니다. 오행 교차점(오·자·유·묘)에서는 사지가 되는 자리에서 반대 오행이 목욕(갈등/번복)을 하고 음간은 장생을 하는 절묘한 짝꿍 구조를 이룹니다.
+            </p>
+
+            <!-- Table 2 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 2] 12지 각 계절 교차점별 사지(死地) · 목욕지(沐浴地) · 장생지(長生地) 짝꿍 종합 비교표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">교차 계절 (월지)</th>
+                            <th class="py-3 px-3 font-semibold">사지 (死地 - 동작 정지)</th>
+                            <th class="py-3 px-3 font-semibold">목욕지 (沐浴 - 갈등/번복)</th>
+                            <th class="py-3 px-3 font-semibold">장생지 (長生 - 새로 결심)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">5월 (午火 - 하지 기점)</td>
+                            <td class="py-3 px-3">갑목 사지 (甲午死)<br>수직 성장의 정지</td>
+                            <td class="py-3 px-3">경금 목욕지 (庚午沐浴)<br>금 형성의 갈등/번복</td>
+                            <td class="py-3 px-3">을목 장생지 (乙午長生)<br>경금 결실 완성 결심</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">11월 (子水 - 동지 기점)</td>
+                            <td class="py-3 px-3">경금 사지 (庚子死)<br>화기 품기 정지</td>
+                            <td class="py-3 px-3">갑목 목욕지 (甲子沐浴)<br>수생목 솟구침의 갈등</td>
+                            <td class="py-3 px-3">신금 장생지 (辛子長生)<br>갑목 씨앗 깨뜨림 결심</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">8월 (酉金 - 추분 기점)</td>
+                            <td class="py-3 px-3">병화 사지 (丙酉死)<br>사방 확산 정지</td>
+                            <td class="py-3 px-3">임수 목욕지 (壬酉沐浴)<br>수렴·응축으로의 갈등</td>
+                            <td class="py-3 px-3">정화 장생지 (丁酉長生)<br>임수 도달을 위한 압축</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">2월 (卯木 - 춘분 기점)</td>
+                            <td class="py-3 px-3">임수 사지 (壬卯死)<br>아래 응축 정지</td>
+                            <td class="py-3 px-3">병화 목욕지 (丙卯沐浴)<br>확산 상승으로의 갈등</td>
+                            <td class="py-3 px-3">계수 장생지 (癸卯長生)<br>병화 띄우기 본격 주도</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Wolji Centered Interpretation -->
+        <section id="wolji" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">3</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">월지(月支) 환경 중심의 통변: 일간 성향보다 월령의 요구가 우선</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                일간 하나만 가지고 독립적으로 해석하면 통변이 틀립니다. 내가 어떤 월지(월령) 환경에 태어났는가가 사회적 미션과 그릇을 결정합니다. 예를 들어 계수 일간이라도 <strong>자월 계수(건록격)</strong>는 식상생제를 주도적으로 밀어붙이고, <strong>묘월 계수(식신격)</strong>는 자기 재능을 빠르게 펼쳐 재성을 이루며, <strong>유월 계수(인성격)</strong>는 인성을 녹여 자신의 재능(갑목)으로 연결하는 등 월지에 따라 사회적 역할이 완전히 달라집니다.
+            </p>
+        </section>
+
+        <!-- 4. Mokdag Sugal Interpretation -->
+        <section id="mokdag" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">4</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">봄 모광절(木旺節: 寅卯辰) 사주의 수(水) 부족: 목다수갈(木多水渴) 실전 통변</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                인월부터 진월까지는 목 기운의 정점인 '목왕절'입니다. 이때 목의 솟구치는 의욕과 자존심은 강한데 이를 받쳐주는 수(수, 인성/학식/자금/여유)가 고갈된 상태를 <strong>'목다수갈(木多水渴)'</strong>이라 합니다. 이는 사업을 하려 해도 <strong>여유 자금과 준비</strong>가 부족하고, 학업을 하려 해도 <strong>축적된 실력</strong>이 부족하며, 결혼을 하려 해도 <strong>현실적 기반</strong>이 부족해 서두르다 차질을 겪는 상태로 명쾌하게 통변해야 합니다. 또한 모체인 어머니가 자식들을 뒷바라지하느라 고생이 극심했음으로 풀이됩니다.
+            </p>
+        </section>
+
+        <!-- 5. Summary Section -->
+        <section id="summary" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-900 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-check text-sm"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold">6주차 강의 4줄 핵심 요약</h3>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">01. 장생지의 입체 원리</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">원운동 상에서 기운이 순수하게 일어서는 시발점이며, 지장간에 명확히 표기되어 천간 투간 시 격국(格局)의 기준이 됩니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">02. 사지와 목욕의 짝꿍 메커니즘</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">사지는 기운의 소멸이 아니라 수직/본래 동작의 정지 및 다음 결실로의 전환이며, 사지 자리에서 반대 오행이 목욕(갈등)을 합니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">03. 월지 중심의 통변</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">일간의 단독 성향보다 내가 속한 월지(월령)가 요구하는 사회적 역할과 미션을 파악하는 것이 우선입니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">04. 목다수갈(木多水渴)</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">봄철 목 기운이 왕할 때 수가 부족하면 준비·학식·자금 부족으로 서두르다 감당하기 어려운 한계에 부딪힙니다.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center mt-20">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-300">하루한장명리 4기자료</p>
+            <p>&copy; 2026 하루한장명리. All rights reserved. Designed for personal homepage &amp; study archive.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
