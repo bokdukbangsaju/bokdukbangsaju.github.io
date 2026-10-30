@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장 명리 - 멤버십 강의실</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: #0f0f0f;
+            color: #f1f1f1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 유튜브 스타일 상단 네비게이션 바 */
+        header {
+            background-color: #212121;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border-bottom: 1px solid #3f3f3f;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ff0000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-logo span {
+            color: #ffffff;
+        }
+
+        .header-info {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        /* 메인 컨테이너 그리드 레이아웃 */
+        .main-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px;
+            flex-grow: 1;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-left: 4px solid #ff0000;
+            padding-left: 10px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* 유튜브 스타일 비디오 카드 */
+        .video-card {
+            background-color: #1f1f1f;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #272727;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border-color: #3f3f3f;
+        }
+
+        .thumbnail-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #2c2c2c;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* 유튜브 플레이 아이콘 오버레이 효과 */
+        .thumbnail-container::after {
+            content: '▶';
+            position: absolute;
+            font-size: 24px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 16px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .video-card:hover .thumbnail-container::after {
+            opacity: 1;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-info {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .video-title {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #f1f1f1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-channel {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .video-badge {
+            display: inline-block;
+            background-color: rgba(255, 0, 0, 0.15);
+            color: #ff4e45;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        /* 하단 푸터 */
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid #212121;
+            color: #777;
+            font-size: 13px;
+            background-color: #0f0f0f;
+        }
+
+        /* 반응형 스타일 */
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 유튜브 스타일 헤더 -->
+    <header>
+        <div class="header-logo">
+            📺 <span>하루한장 명리</span> 멤버십 강의실
+        </div>
+        <div class="header-info">
+            간편 접속 링크 페이지
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="main-container">
+        <div class="section-title">멤버십 시청 강의 목록</div>
+
+        <div class="video-grid">
+            
+            <!-- 강의 1 -->
+            <a href="https://youtu.be/t9xgeGvgSZM?si=uSveP0GYSrBCX0Mj" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/t9xgeGvgSZM/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBABX788Nu8vLI9tfb6s5ZHxFFzCg" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">하루한장명리 멤버십이 출발합니다! 정미년 운세 배우는 기회!</div>
+                    <div class="video-channel">2026.09.27</div>
+                </div>
+            </a>
+
+            <!-- 강의 2 -->
+            <a href="https://youtu.be/gQJccAkPAfU?si=nAa_gkRW_ezc7A1n" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/gQJccAkPAfU/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAGkfQBqhlDiFEMLbszx9DmxVzYDA" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">정미년(2027)에 드러나는 사람 vs 살아남는 사람</div>
+                    <div class="video-channel">2026.09.22</div>
+                </div>
+            </a>
+
+            <!-- 강의 3 -->
+            <a href="https://youtu.be/_kd6PdXK8r8?si=JxAtvR9HFbpl7XzA" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/_kd6PdXK8r8/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAKjeE8xtvwyi4utIScIuMsYRmfyA" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">정미년 관대 위에 놓인 정화, 강한 작용력!!!</div>
+                    <div class="video-channel">2026.09.27</div>
+                </div>
+            </a>
+
+            <!-- 강의 4 -->
+            <a href="https://youtu.be/QdIuetOSUqI?si=O0UTb1azVM2vhYFh" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/QdIuetOSUqI/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDd_ZHNZZ68JWymHT790xy0nS5sCw" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">당신이 상담을 받으러 온 이유? 일진과 삼합에 답이 있습니다!</div>
+                    <div class="video-channel">2026.10.02</div>
+                </div>
+            </a>
+
+            <!-- 강의 5 -->
+            <a href="https://youtu.be/y3cX7ufQwdU?si=pybUC7TMlUG37pIJ" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/y3cX7ufQwdU/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBD1x-L4uAJLeyl2xWZ4-9MfTcsGA" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">정미년 미토, 그 냉혹함과 차가움에 대하여!!!</div>
+                    <div class="video-channel">2026.10.02</div>
+                </div>
+            </a>
+
+            <!-- 강의 6 -->
+            <a href="https://youtu.be/u27k-TQSC3c?si=3DY-S_8YK77obz2r" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/u27k-TQSC3c/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB5T0F5dVf5mkQRZ8KJRC2j0Phjgw" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">같은 사주, 명문대 출신 법조인 vs 방황하는 청춘</div>
+                    <div class="video-channel">2026.10.04</div>
+                </div>
+            </a>
+
+            <!-- 강의 7 -->
+            <a href="https://youtu.be/VbZSoh6bG-k?si=Qmh-YfZAphtnibOL" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/VbZSoh6bG-k/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCZ6tp3uORF_aTPDprhIwKlBICQ-Q" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 강의</span>
+                    <div class="video-title">정미년 천간과 지지, 왜 내 사주를 좌우할까? 명리학 관계성 이해</div>
+                    <div class="video-channel">2026.10.11</div>
+                </div>
+            </a>
+
+            <!-- 강의 8 -->
+            <a href="https://youtu.be/AfS0tOGSpDY?si=HswIoQB0OdUWgKf7" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/AfS0tOGSpDY/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCmvhFftb-v_y7vtn0jbqCDuo0iVw" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">십이신살로 보는 정미년 운세</div>
+                    <div class="video-channel">2026.10.19</div>
+                </div>
+            </a>
+
+            <!-- 강의 9 -->
+            <a href="https://youtu.be/gy15gcseT_Q?si=lY3CrG4carkgMD2A" target="_blank" class="video-card">
+                <div class="thumbnail-container">
+                    <img src=https://i.ytimg.com/vi/gy15gcseT_Q/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCYu-SnuI4Adgc1WjxUggg5eqqq9g" alt="강의 썸네일">
+                </div>
+                <div class="video-info">
+                    <span class="video-badge">멤버십 전용</span>
+                    <div class="video-title">2027년 정미년 갑목일간 운세_갑인, 갑오, 갑술, 갑신, 갑자, 갑진일주</div>
+                    <div class="video-channel">2026.10.26</div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>Copyright ⓒ 하루한장 명리 멤버십 간편 링크 페이지. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
