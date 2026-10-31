@@ -1,0 +1,39 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. 12지지 순서 정의
+branches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
+
+# 2. 12운성 단계별 표준 사인파 에너지 값 매핑 (제왕=+1, 절=-1 기준)
+wunseong_sine_map = {
+    '제왕': 1.0,
+    '건록': 0.866,
+    '관대': 0.5,
+    '장생': 0.2,
+    '목욕': 0.0,
+    '쇠': 0.5,
+    '병': 0.0,
+    '사': -0.5,
+    '묘': -0.866,
+    '절': -1.0,
+    '태': -0.866,
+    '양': -0.5
+}
+
+# 3. 예시: 갑목(甲木)의 지지별 12운성 데이터
+# (자:목욕, 축:관대, 인:건록, 묘:제왕, 진:쇠, 사:병, 오:사, 미:묘, 신:절, 유:태, 술:양, 해:장생)
+gap_mok_data = ['목욕', '관대', '건록', '제왕', '쇠', '병', '사', '묘', '절', '태', '양', '장생']
+y_values = [wunseong_sine_map[ws] for ws in gap_mok_data]
+
+# 4. 사인곡선 그래프 시각화
+plt.figure(figsize=(10, 5))
+plt.plot(branches, y_values, marker='o', linestyle='-', color='b', linewidth=2, label='甲木 12운성 에너지 파동')
+plt.axhline(0, color='gray', linestyle='--', linewidth=1)
+plt.title('甲木 일간의 12운성 단순조화운동(Sine Wave) 모델', fontsize=14)
+plt.xlabel('지 지 (Earthly Branches)', fontsize=12)
+plt.ylabel('에너지 크기 (Force / Value)', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.ylim(-1.2, 1.2)
+plt.legend()
+plt.show()
