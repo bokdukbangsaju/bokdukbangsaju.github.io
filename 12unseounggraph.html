@@ -3,26 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>일간별 12운성 사인곡선(Simple Harmonic Motion) 대시보드</title>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>12운성 단순조화운동변환</title>
+    <!-- Chart.js 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6f9;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 900px;
+        .main-container {
+            max-width: 1100px;
             margin: 0 auto;
+        }
+        /* 홈페이지 인트로(배경 및 전제조건) 카드 스타일 */
+        .intro-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .intro-card h1 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        .intro-section {
+            margin-bottom: 25px;
+        }
+        .intro-section h2 {
+            font-size: 1.15rem;
+            color: #2563eb;
+            margin-bottom: 10px;
+            border-left: 4px solid #2563eb;
+            padding-left: 10px;
+        }
+        .intro-section ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #475569;
+        }
+        .intro-section li {
+            margin-bottom: 8px;
+        }
+        .quote-box {
+            background: #f8fafc;
+            border-left: 4px solid #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            font-style: italic;
+            color: #334155;
+            border-radius: 0 6px 6px 0;
+        }
+        .disclaimer {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 12px 15px;
+            color: #991b1b;
+            border-radius: 0 6px 6px 0;
+            font-weight: 600;
+        }
+
+        /* 111.html 대시보드 컨테이너 스타일 */
+        .dashboard-wrapper {
             background: #ffffff;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
-        h1 {
+        .dashboard-wrapper h1 {
             font-size: 1.6rem;
             color: #1e293b;
             margin-bottom: 5px;
@@ -32,22 +89,54 @@
             text-align: center;
             color: #64748b;
             font-size: 0.95rem;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
-        .controls {
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+        .checkbox-group {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 10px;
+            margin-bottom: 15px;
             background: #f8fafc;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
         }
-        label {
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
             font-weight: 600;
-            color: #475569;
+            color: #334155;
+            cursor: pointer;
+            background: #fff;
+            padding: 6px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        .checkbox-label:hover {
+            background: #e2e8f0;
+        }
+        .checkbox-label input {
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+        }
+        .branch-select-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
         }
         select {
             padding: 8px 15px;
@@ -56,129 +145,161 @@
             border-radius: 6px;
             background: #fff;
             cursor: pointer;
+            font-weight: 600;
+            color: #1e293b;
         }
         .chart-container {
             position: relative;
-            height: 400px;
+            height: 440px;
             width: 100%;
+            margin-top: 15px;
         }
-        .info-card {
-            margin-top: 25px;
+        .vector-panel {
+            margin-top: 20px;
             background: #f0fdf4;
             border-left: 4px solid #22c55e;
             padding: 15px;
             border-radius: 0 8px 8px 0;
             font-size: 0.95rem;
             color: #166534;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>☯️ 일간별 12운성 사인곡선(Sine Wave) 분석기</h1>
-    <p class="subtitle">제왕(+1)과 절(-1)을 극점으로 하는 단순조화운동(단진자·용수철 모델) 에너지 시뮬레이션</p>
+<div class="main-container">
     
-    <div class="controls">
-        <label for="stemSelect">일간(Stem) 선택:</label>
-        <select id="stemSelect" onchange="updateChart()">
-            <option value="甲">甲 (갑목)</option>
-            <option value="乙">乙 (을목)</option>
-            <option value="丙">丙 (병화)</option>
-            <option value="丁">丁 (정화)</option>
-            <option value="戊">戊 (무토)</option>
-            <option value="己">己 (기토)</option>
-            <option value="庚">庚 (경금)</option>
-            <option value="辛">辛 (신금)</option>
-            <option value="壬">壬 (임수)</option>
-            <option value="癸">癸 (계수)</option>
-        </select>
+    <!-- 1, 2, 3, 5번 항목 텍스트 표현 영역 -->
+    <div class="intro-card">
+        <h1>☯️ 엉뚱한 상상을 구현해 봄</h1>
+        
+        <div class="intro-section">
+            <h2>1. 페이지 제작 배경</h2>
+            <ul>
+                <li>1) 10여 년 전 유명 예능 프로그램(무한도전)에서 사주풀이 내용을 그래프로 시각화하는 장면이 방영된 적이 있음. 당시 12운성을 활용한 것으로 보였는데, 저 그래프가 과연 어떤 수학적·물리적 원리로 계산되는지 무척 궁금해 한 기억이 있음.</li>
+                <li>2) 《명리명강》(김학목 지음, 판미동)을 읽던 중 <strong>"시간은 공간의 흐름이고, 공간은 시간의 내용이다."</strong>라는 구절이 있어 공간(길이), 시간의 함수로 뭔가 만들 수 있지 않을까 생각함.</li>
+                <li>3) 최근 온라인 스터디(4기 강의) 과정에서 이와 맞닿아 있는 주제를 다루게 되면서, 호기심을 살려 직접 웹 페이지로 구현해 보게 됨.</li>
+            </ul>
+        </div>
+
+        <div class="intro-section">
+            <h2>2. 전제조건</h2>
+            <ul>
+                <li>1) 12운성의 에너지를 정량적인 크기와 방향으로 계산해 보고자 함.</li>
+                <li>2) "시간은 공간의 흐름이고, 공간은 시간의 내용이다."라는 명제를 공간과 시간을 동시에 포착하는 물리량인 <strong>속도(Velocity)</strong>로 해석.</li>
+                <li>3) 일간별 12운성의 에너지를 <strong>단순조화운동(Simple Harmonic Motion)</strong>으로 단순화하고, 이를 속도 벡터로 분해하여 크기와 방향을 계산.</li>
+                <li>4. 천간과 천간이 만나는 상황(천간 vs 천간)에서는 각 위치에서의 속도 벡터를 각각 계산한 뒤 <strong>벡터 합(Vector Sum)</strong>을 통해 최종 합력의 크기와 방향을 도출.</li>
+            </ul>
+        </div>
+
+        <div class="intro-section">
+            <h2>3. 안내 및 면책 조항</h2>
+            <div class="disclaimer">
+                ⚠️ 본 페이지는 전문적인 학술 연구나 검증된 이론이 아니며, 단순한 호기심과 상상력으로 만들어 봤습니다. 따라서 논리적 엄밀성이나 객관적 근거는 없으므로 가벼운 흥미위로 참고해 주시기 바랍니다.
+            </div>
+        </div>
     </div>
 
-    <div class="chart-container">
-        <canvas id="wunseongChart"></canvas>
+    <!-- 4. 계산 결과 영역 (111.html 내용 그대로 포함) -->
+    <div class="dashboard-wrapper">
+        <h1>4. 계산 결과 대시보드</h1>
+        <p class="subtitle">12운성에너지의 크기와 방향</p>
+        
+        <!-- 천간 선택 영역 -->
+        <div class="section-title">천간 선택 (다중 중복 선택 가능)</div>
+        <div class="checkbox-group" id="stemCheckboxes"></div>
+
+        <!-- 지지 선택 영역 (속도 벡터 측정 위치) -->
+        <div class="branch-select-bar">
+            <label for="branchSelect" style="font-weight: 600; color: #475569;">기준 지지 선택:</label>
+            <select id="branchSelect" onchange="updateVectorAnalysis()">
+                <option value="0">子 (자)</option>
+                <option value="1">丑 (축)</option>
+                <option value="2">寅 (인)</option>
+                <option value="3">卯 (묘)</option>
+                <option value="4">辰 (진)</option>
+                <option value="5">巳 (사)</option>
+                <option value="6">午 (오)</option>
+                <option value="7">未 (미)</option>
+                <option value="8">申 (신)</option>
+                <option value="9">酉 (유)</option>
+                <option value="10">戌 (술)</option>
+                <option value="11">亥 (해)</option>
+            </select>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="wunseongChart"></canvas>
+        </div>
+
+        <div id="vectorPanel" class="vector-panel">
+            <strong>벡터 합성 결과:</strong> 천간을 선택하고 지지를 지정하면 해당 위치에서의 개별 속도 벡터와 합성 벡터 크기 및 방향이 계산됩니다.
+        </div>
     </div>
 
-    <div id="infoText" class="info-card">
-        <strong>현재 선택된 일간 설명:</strong> 甲목 일간은 卯(묘)에서 제왕(+1)을 맞이하고, 申(신)에서 절(-1)을 맞이하는 정현파(Sine Wave) 운동을 그립니다.
-    </div>
 </div>
 
+<!-- 111.html의 스크립트 로직 -->
 <script>
-    // 12지지 정의
     const branches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
 
-    // 12운성별 표준 사인파 에너지 값 매핑 (제왕=1.0, 절=-1.0 기준 정밀 수치)
-    const stageValues = {
-        '제왕':  1.0,
-        '건록':  0.866,
-        '관대':  0.5,
-        '장생':  0.2,
-        '목욕':  0.0,
-        '관대_': 0.5,
-        '쇠':    0.5,
-        '병':    0.0,
-        '사':   -0.5,
-        '묘':   -0.866,
-        '절':   -1.0,
-        '태':   -0.866,
-        '양':   -0.5
+    const stemColors = {
+        '甲': '#22c55e', '乙': '#84cc16', '丙': '#ef4444', '丁': '#f97316', '戊': '#eab308',
+        '己': '#d97706', '庚': '#64748b', '辛': '#94a3b8', '壬': '#3b82f6', '癸': '#06b6d4'
     };
 
-    // 업로드된 엑셀 기반 10천간별 12운성 배치 데이터
-    const stemDataMap = {
-        '甲': ['목욕', '관대', '건록', '제왕', '쇠', '병', '사', '묘', '절', '태', '양', '장생'],
-        '乙': ['병', '쇠', '제왕', '건록', '관대', '목욕', '장생', '양', '태', '절', '묘', '사'],
-        '丙': ['태', '양', '장생', '목욕', '관대', '건록', '제왕', '쇠', '병', '사', '묘', '절'],
-        '丁': ['절', '묘', '사', '병', '쇠', '제왕', '건록', '관대', '목욕', '장생', '양', '태'],
-        '戊': ['태', '양', '장생', '목욕', '관대', '건록', '제왕', '쇠', '병', '사', '묘', '절'],
-        '己': ['절', '묘', '사', '병', '쇠', '제왕', '건록', '관대', '목욕', '장생', '양', '태'],
-        '庚': ['사', '묘', '절', '태', '양', '장생', '목욕', '관대', '건록', '제왕', '쇠', '병'],
-        '辛': ['장생', '양', '태', '절', '묘', '사', '병', '쇠', '제왕', '건록', '관대', '목욕'],
-        '壬': ['제왕', '쇠', '병', '사', '묘', '절', '태', '양', '장생', '목욕', '관대', '건록'],
-        '癸': ['건록', '관대', '목욕', '장생', '양', '태', '절', '묘', '사', '병', '쇠', '제왕']
+    const stemJewangIndices = {
+        '甲': 3, '乙': 2, '丙': 6, '丁': 5, '戊': 6, '己': 5, '庚': 9, '辛': 8, '壬': 0, '癸': 11
     };
 
-    // 툴팁에 표시할 12운성 명칭 매핑 배열 생성 함수
-    function getNumericValues(stem) {
-        const stages = stemDataMap[stem];
-        return stages.map(st => {
-            // 표준 점수 부여
-            switch(st) {
-                case '제왕': return 1.0;
-                case '건록': return 0.866;
-                case '관대': return 0.5;
-                case '장생': return 0.2;
-                case '목욕': return 0.0;
-                case '쇠': return 0.5;
-                case '병': return 0.0;
-                case '사': return -0.5;
-                case '묘': return -0.866;
-                case '절': return -1.0;
-                case '태': return -0.866;
-                case '양': return -0.5;
-                default: return 0.0;
-            }
-        });
+    function getSmoothStemValues(stem) {
+        const jewangIdx = stemJewangIndices[stem] || 0;
+        const values = [];
+        const totalPoints = 60;
+        for (let i = 0; i <= totalPoints; i++) {
+            const pos = (i / totalPoints) * 12;
+            const angle = (2 * Math.PI * (pos - jewangIdx)) / 12 + Math.PI / 2;
+            values.push(parseFloat(Math.sin(angle).toFixed(4)));
+        }
+        return values;
     }
 
-    // Chart.js 초기화
+    const smoothLabels = [];
+    const totalPoints = 60;
+    for (let i = 0; i <= totalPoints; i++) {
+        if (i % (totalPoints / 12) === 0) {
+            smoothLabels.push(branches[Math.round(i / (totalPoints / 12)) % 12]);
+        } else {
+            smoothLabels.push('');
+        }
+    }
+
+    const container = document.getElementById('stemCheckboxes');
+    const stems = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+    
+    stems.forEach((stem) => {
+        const label = document.createElement('label');
+        label.className = 'checkbox-label';
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = stem;
+        checkbox.id = 'stem_' + stem;
+        if (stem === '甲' || stem === '乙') checkbox.checked = true;
+        checkbox.addEventListener('change', () => { updateChart(); updateVectorAnalysis(); });
+
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(` ${stem}`));
+        container.appendChild(label);
+    });
+
     const ctx = document.getElementById('wunseongChart').getContext('2d');
     let wunseongChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: branches,
-            datasets: [{
-                label: '甲목 12운성 에너지 파동 (Sine Wave)',
-                data: getNumericValues('甲'),
-                borderColor: '#2563eb',
-                backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 6,
-                pointBackgroundColor: '#2563eb'
-            }]
+            labels: smoothLabels,
+            datasets: getSelectedDatasets()
         },
         options: {
             responsive: true,
@@ -187,27 +308,36 @@
                 y: {
                     min: -1.2,
                     max: 1.2,
-                    grid: { color: '#e2e8f0' },
-                    ticks: {
-                        callback: function(value) {
-                            if (value === 1) return '제왕 (+1)';
-                            if (value === 0) return '평형점 (0)';
-                            if (value === -1) return '절 (-1)';
-                            return value;
-                        }
-                    }
+                    display: false,
+                    grid: { display: false }
                 },
                 x: {
-                    grid: { display: false }
+                    grid: { color: '#f1f5f9' },
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 0,
+                        font: { size: 14, weight: 'bold' }
+                    }
                 }
             },
             plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                        pointStyle: 'line',
+                        boxWidth: 30,
+                        font: { size: 13, weight: 'bold' }
+                    }
+                },
                 tooltip: {
                     callbacks: {
+                        title: function(context) {
+                            const idx = Math.floor((context[0].dataIndex / totalPoints) * 12);
+                            return `지지(Branch): ${branches[idx]}`;
+                        },
                         label: function(context) {
-                            const stem = document.getElementById('stemSelect').value;
-                            const stage = stemDataMap[stem][context.dataIndex];
-                            return ` 12운성: ${stage} (에너지 값: ${context.parsed.y})`;
+                            return ` ${context.dataset.label}: ${context.parsed.y}`;
                         }
                     }
                 }
@@ -215,19 +345,78 @@
         }
     });
 
-    // 선택 변경 시 차트 실시간 업데이트 함수
-    function updateChart() {
-        const stem = document.getElementById('stemSelect').value;
-        const newData = getNumericValues(stem);
-        
-        wunseongChart.data.datasets[0].label = `${stem}일간 12운성 에너지 파동 (Sine Wave)`;
-        wunseongChart.data.datasets[0].data = newData;
-        wunseongChart.update();
-
-        // 하단 설명 업데이트
-        const stages = stemDataMap[stem];
-        document.getElementById('infoTextinnerHTML = `<strong>${stem}일간 특성:</strong> 12지지별 순환 흐름이 반영되었습니다. (예: 자(子)=${stages[0]}, 묘(卯)=${stages[3]}, 오(午)=${stages[6]}, 유(酉)=${stages[9]})`;
+    function getSelectedDatasets() {
+        const datasets = [];
+        stems.forEach(stem => {
+            const checkbox = document.getElementById('stem_' + stem);
+            if (checkbox && checkbox.checked) {
+                datasets.push({
+                    label: stem,
+                    data: getSmoothStemValues(stem),
+                    borderColor: stemColors[stem],
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 5
+                });
+            }
+        });
+        return datasets;
     }
+
+    function updateChart() {
+        wunseongChart.data.datasets = getSelectedDatasets();
+        wunseongChart.update();
+    }
+
+    function updateVectorAnalysis() {
+        const branchIdx = parseInt(document.getElementById('branchSelect').value);
+        const branchName = branches[branchIdx];
+        
+        let sumVx = 0;
+        let sumVy = 0;
+        let selectedCount = 0;
+        let detailsText = "";
+
+        stems.forEach(stem => {
+            const checkbox = document.getElementById('stem_' + stem);
+            if (checkbox && checkbox.checked) {
+                selectedCount++;
+                const jewangIdx = stemJewangIndices[stem];
+                const angle = (2 * Math.PI * (branchIdx - jewangIdx)) / 12 + Math.PI / 2;
+                const velocity = Math.cos(angle);
+
+                const branchAngle = (2 * Math.PI * branchIdx) / 12;
+                const vx = velocity * Math.cos(branchAngle);
+                const vy = velocity * Math.sin(branchAngle);
+
+                sumVx += vx;
+                sumVy += vy;
+
+                detailsText += `[${stem}] 속도: ${velocity.toFixed(3)} `;
+            }
+        });
+
+        if (selectedCount === 0) {
+            document.getElementById('vectorPanel').innerHTML = `<strong>결과:</strong> 선택된 천간이 없습니다. 상단에서 천간을 선택해주세요.`;
+            return;
+        }
+
+        const netMagnitude = Math.sqrt(sumVx * sumVx + sumVy * sumVy);
+        const netAngleRad = Math.atan2(sumVy, sumVx);
+        const netAngleDeg = (netAngleRad * 180 / Math.PI + 360) % 360;
+
+        document.getElementById('vectorPanel').innerHTML = `
+            <strong>📍 선택 지지 [${branchName}]에서의 분석:</strong><br>
+            • 선택된 천간 개수: ${selectedCount}개<br>
+            • 개별 천간 속도 정보: ${detailsText}<br>
+            • <strong>합의 크기 (Magnitude):</strong> ${netMagnitude.toFixed(4)}<br>
+            • <strong>합의 방향 (Angle):</strong> ${netAngleDeg.toFixed(2)}° (라디안: ${netAngleRad.toFixed(3)} rad)
+        `;
+    }
+
+    updateVectorAnalysis();
 </script>
 
 </body>
