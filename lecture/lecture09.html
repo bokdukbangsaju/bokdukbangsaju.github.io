@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한장명리 | 9주차 강의노트: 진술축미 4분면 회전, 12운성 4대 반응, 인성태과 명조 및 원진기문</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        myeongri: {
+                            dark: '#0f172a',
+                            navy: '#1e293b',
+                            accent: '#d97706', // Gold / Amber accent
+                            gold: '#f59e0b',
+                            light: '#f8fafc',
+                            card: '#ffffff',
+                            subtext: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Inter & Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-moon text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold block">하루한장명리 아카이브</span>
+                    <h1 class="text-lg font-bold tracking-tight">강의노트 (9주차)</h1>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#quadrant" class="hover:text-amber-400 transition">4분면 회전구조</a>
+                <a href="#reactions" class="hover:text-amber-400 transition">12운성 4대 반응</a>
+                <a href="#mingjo" class="hover:text-amber-400 transition">인성태과 실전명조</a>
+                <a href="#wonjin" class="hover:text-amber-400 transition">임묘·원진기문</a>
+                <a href="#summary" class="hover:text-amber-400 transition">핵심 요약</a>
+            </nav>
+            <button onclick="window.print()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition shadow flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> 인쇄 / PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="relative bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
+                <i class="fa-solid fa-book-bookmark"></i> 4기 9주차 통합 강의노트
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-6 leading-tight">
+                진술축미 4분면 회전 구조, 12운성 4대 반응, 인성태과 실전 명조 및 임묘지·원진기문 메커니즘
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+                진술축미 토(土) 지지의 정교한 회전 매커니즘과 12운성 4대 반응, 인성태과(土多) 곤명 실전 명조의 통변, 그리고 임묘지와 원진기문의 기학적 원리를 상세히 정리한 노트입니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 1. Quadrant Rotation & Table 1 -->
+        <section id="quadrant" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">1</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">진술축미(辰戌丑未) 4분면 회전 구조와 12운성 4대 반응</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                진술축미는 사계절의 마디(환절기)로서, 외부 기운을 안으로 모아 가두고(임묘), 내면에서 정교하게 가꾸어(양지), 다음 계절의 주도권을 일으키며(관대), 이전 계절의 기운을 뒤에서 지원(쇠지)하는 거대한 전환 그릇 역할을 담당합니다. 자오묘유(왕지)나 인신사해(생지)에서는 절대 나오지 않으며 오직 진술축미 4개 토 지지에서만 관대, 쇠, 임묘, 양지의 4대 반응이 일어납니다.
+            </p>
+
+            <!-- Table 1 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 1] 4대 사분면 섹터별 오행 전환 및 12운성(관대·쇠·임묘·양) 종합 구성표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">사분면 섹터</th>
+                            <th class="py-3 px-3 font-semibold">관대 (冠帶)</th>
+                            <th class="py-3 px-3 font-semibold">쇠지 (衰地)</th>
+                            <th class="py-3 px-3 font-semibold">임묘 (入墓)</th>
+                            <th class="py-3 px-3 font-semibold">양지 (養地)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">1사분면 (자~묘)<br>축토 (丑土)</td>
+                            <td class="py-3 px-3">계수(癸)<br>갑목(甲)</td>
+                            <td class="py-3 px-3">을목(乙)<br>임수(壬)</td>
+                            <td class="py-3 px-3">정화(丁)<br>경금(庚)</td>
+                            <td class="py-3 px-3">신금(辛)<br>병화(丙)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">2사분면 (묘~오)<br>진토 (辰土)</td>
+                            <td class="py-3 px-3">을목(乙)<br>병화(丙)</td>
+                            <td class="py-3 px-3">갑목(甲)<br>정화(丁)</td>
+                            <td class="py-3 px-3">신금(辛)<br>임수(壬)</td>
+                            <td class="py-3 px-3">계수(癸)<br>경금(庚)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">3사분면 (오~유)<br>미토 (未土)</td>
+                            <td class="py-3 px-3">정화(丁)<br>경금(庚)</td>
+                            <td class="py-3 px-3">병화(丙)<br>신금(辛)</td>
+                            <td class="py-3 px-3">계수(癸)<br>갑목(甲)</td>
+                            <td class="py-3 px-3">을목(乙)<br>임수(壬)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">4사분면 (유~자)<br>술토 (戌土)</td>
+                            <td class="py-3 px-3">신금(辛)<br>임수(壬)</td>
+                            <td class="py-3 px-3">경금(庚)<br>계수(癸)</td>
+                            <td class="py-3 px-3">을목(乙)<br>병화(丙)</td>
+                            <td class="py-3 px-3">정화(丁)<br>갑목(甲)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-200 text-xs sm:text-sm text-slate-700">
+                <span class="font-bold text-amber-800">💡 [오해 교정] 술토 지장간 정화(丁)와 신금(辛)의 관계:</span> 시중 일부 콘텐츠에서 '술중 정화가 신금을 화극금으로 극하여 해친다'고 설명하지만 이는 완전히 잘못된 해설입니다! 술토 속 정화는 신금을 부수는 것이 아니라, 정화의 기운과 유전적 정보가 신금 내면에 극도로 수축·압축되어 다음 해수(壬水) 세상으로 안전하게 넘어가기 위한 바탕이자 핵심 씨앗으로 작동합니다.
+            </div>
+        </section>
+
+        <!-- 2. Four Reactions & Table 2 -->
+        <section id="reactions" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">2</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">4개 진술축미 지지별 12운성 4대 반응 대조</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                축토는 수생목을 주도하며 금생수의 신금을 양육하고, 진토는 목생화를 펼치며 수생목의 계수를 양육하며, 미토는 화생금과 재생관을 완수하고, 술토는 금생수를 완성하며 정화와 갑목을 내면에서 양육합니다.
+            </p>
+
+            <!-- Table 2 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 2] 진술축미 4개 지지의 12운성(관대·쇠·임묘·양) 4대 반응 종합 대조표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">지지 (地支)</th>
+                            <th class="py-3 px-3 font-semibold">관대 (冠帶) - 주도</th>
+                            <th class="py-3 px-3 font-semibold">쇠지 (衰地) - 지원</th>
+                            <th class="py-3 px-3 font-semibold">임묘 (入墓) - 보관</th>
+                            <th class="py-3 px-3 font-semibold">양지 (養地) - 길러짐</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">축토 (丑土)</td>
+                            <td class="py-3 px-3">계수(癸) / 갑목(甲)</td>
+                            <td class="py-3 px-3">을목(乙) / 임수(壬)</td>
+                            <td class="py-3 px-3">정화(丁) / 경금(庚)</td>
+                            <td class="py-3 px-3">신금(辛) / 병화(丙)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">진토 (辰土)</td>
+                            <td class="py-3 px-3">을목(乙) / 병화(丙)</td>
+                            <td class="py-3 px-3">갑목(甲) / 정화(丁)</td>
+                            <td class="py-3 px-3">신금(辛) / 임수(壬)</td>
+                            <td class="py-3 px-3">계수(癸) / 경금(庚)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">미토 (未土)</td>
+                            <td class="py-3 px-3">정화(丁) / 경금(庚)</td>
+                            <td class="py-3 px-3">병화(丙) / 신금(辛)</td>
+                            <td class="py-3 px-3">계수(癸) / 갑목(甲)</td>
+                            <td class="py-3 px-3">을목(乙) / 임수(壬)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-3 font-bold text-slate-900">술토 (戌土)</td>
+                            <td class="py-3 px-3">신금(辛) / 임수(壬)</td>
+                            <td class="py-3 px-3">경금(庚) / 계수(癸)</td>
+                            <td class="py-3 px-3">을목(乙) / 병화(丙)</td>
+                            <td class="py-3 px-3">정화(丁) / 갑목(甲)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Insung Taegwa Mingjo & Table 3 -->
+        <section id="mingjo" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">3</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">인성태과(土多) 실전 명조 분석 (무술 / 기미 / 신축 / 무술)</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base">
+                무술년 기미월 신축일 무술시(곤명 51세) 명조는 팔자 전체가 온통 토(토 - 인성)로 가득 찬 전형적인 인성태과 사주입니다. 토가 너무 많으면 식상이 매몰(토다수갈)되어 주동적으로 일을 도모하기 힘듭니다. 미월 신금 쇠지의 특성상 자기가 직접 고생하기보다 타인(경금)이 쌓아놓은 화토 결실을 통해 혜택을 누리며 살아왔으나, 수생목 환경으로 변동되는 대운에서는 직접 일해야 하는 난관을 맞이합니다.
+            </p>
+
+            <!-- Table 3 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 overflow-x-auto">
+                <h4 class="font-bold text-slate-900 mb-4 text-sm sm:text-base">[표 3] 인성태과 곤명 사주 (戊戌 / 己未 / 辛丑 / 戊戌) 원국 및 대운 흐름 분석표</h4>
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3 px-3 font-semibold">구분</th>
+                            <th class="py-3 px-3 font-semibold">년주 (年柱)</th>
+                            <th class="py-3 px-3 font-semibold">월주 (月柱)</th>
+                            <th class="py-3 px-3 font-semibold">일주 (日柱)</th>
+                            <th class="py-3 px-3 font-semibold">시주 (時柱)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">천간·지지</td>
+                            <td class="py-3 px-3">무토 (정인)<br>술토 (정인)</td>
+                            <td class="py-3 px-3">기토 (편인)<br>미토 (편인/월령)</td>
+                            <td class="py-3 px-3">신금 (일간)<br>축토 (편인)</td>
+                            <td class="py-3 px-3">무토 (정인)<br>술토 (정인)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">세력 및 특징</td>
+                            <td class="py-3 px-3">신·정·무 (토강)</td>
+                            <td class="py-3 px-3">정·을·기 (쇠지/토다)</td>
+                            <td class="py-3 px-3">계·신·기 (축미충)</td>
+                            <td class="py-3 px-3">신·정·무 (토강)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 font-bold text-slate-900">통변 핵심</td>
+                            <td class="py-3 px-3">토다수갈<br>식상/재성 억제</td>
+                            <td class="py-3 px-3">타인 활용<br>재생관 혜택 누림</td>
+                            <td class="py-3 px-3">축중 계수(식상)<br>쓰기 어려운 환경</td>
+                            <td class="py-3 px-3">계축 대운 진입 시<br>직접 일해야 하는 변곡점</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 4. Immyoji & Wonjin -->
+        <section id="wonjin" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">4</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">임묘지(入墓地)의 개고(開庫) 작용 및 원진기문(怨嗔鬼門)의 원리</h3>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                6개 임묘지 일주(병술·정축·무술·기축·임진·계미)는 보관, 정적임, 속 깊은 사고 등 화개의 정신성을 가집니다. 진술충, 축미충이 일어나면 창고가 열리는 <strong>개고(開庫) 작용</strong>이 발생하는데, 천간에 비겁이 투간해 있으면 재관이 비겁과 합하여 유산을 빼앗기는 합분탈이 일어날 수 있습니다. 또한 걸록과 임묘지의 충돌(인미, 사술, 진해)은 걸록을 세우려는 기운과 안으로 임묘시키려는 기운 간의 충돌에서 강력한 정신적 갈등인 <strong>원진기문</strong>을 발생시킵니다.
+            </p>
+        </section>
+
+        <!-- 5. Summary Section -->
+        <section id="summary" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-900 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-check text-sm"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold">9주차 강의 4줄 핵심 요약</h3>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">01. 진술축미의 4대 12운성</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">진술축미 4개 지지는 관대, 쇠지, 임묘, 양지라는 4가지 12운성 반응만 오직 일으키는 계절 교차의 거대한 그릇입니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">02. 지장간 중기 양지의 본질</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">축중 신금, 진중 계수, 미중 을목, 술중 정화는 양지(養地)로서 다음 오행을 완성하기 위해 자기를 희생·압축하는 핵심 정보입니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">03. 인성태과 실전 명조 통변</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">39페이지 인성태과(土多) 명조는 미월 신금 쇠지의 재생관 혜택을 누렸으나, 수생목 대운 변곡점에서 직접 일해야 하는 난관을 맞이했습니다.</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                    <div class="text-amber-400 font-bold mb-1">04. 원진기문의 생성 원리</div>
+                    <p class="text-slate-300 text-xs leading-relaxed">인미, 사술, 진해 원진기문은 걸록을 세우려는 지지와 이를 임묘시키려는 지지 간의 충돌에서 발생하는 기학적 메커니즘입니다.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 text-center mt-20">
+        <div class="max-w-6xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-300">하루한장명리 4기자료</p>
+            <p>&copy; 2026 하루한장명리. All rights reserved. Designed for personal homepage &amp; study archive.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
