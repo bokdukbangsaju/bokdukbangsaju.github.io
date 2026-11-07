@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부산 부동산 통합 관제 대시보드</title>
-    <!-- 실시간 CSV 파싱을 위한 PapaParse 라이브러리 로드 -->
+    <!-- CSV 파싱을 위한 PapaParse 라이브러리 로드 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; }
@@ -73,7 +73,7 @@
                 <h1>부산 부동산 시장 한눈에 보기</h1>
                 <p>깃허브 원본 CSV 파일 실시간 연동 자동 업데이트 대시보드</p>
             </div>
-            <div id="data-status" class="source-tags">CSV 데이터 로딩 중...</div>
+            <div id="data-status" class="source-tags">CSV 데이터 연동 대기 중...</div>
         </div>
 
         <!-- 1단: KPI 핵심 지표 요약 카드 -->
@@ -110,19 +110,19 @@
             <div class="panel">
                 <h3>부산 아파트 매매 가격지수 추이</h3>
                 <div class="chart-placeholder" id="panel-m-index">
-                    [(월) 지역별 매매지수_아파트.csv 연동 대기 중]
+                    [(월) 지역별 매매지수_아파트.csv 연동 중...]
                 </div>
             </div>
             <div class="panel">
                 <h3>미분양 주택 현황 추이</h3>
                 <div class="chart-placeholder" id="panel-unsold">
-                    [미분양주택현황.csv 연동 대기 중]
+                    [미분양주택현황.csv 연동 중...]
                 </div>
             </div>
             <div class="panel">
                 <h3>신규 분양 세대수 현황</h3>
                 <div class="chart-placeholder" id="panel-supply">
-                    [지역별 신규 분양세대수.csv 연동 대기 중]
+                    [지역별 신규 분양세대수.csv 연동 중...]
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@
             <div class="panel" style="grid-column: span 2;">
                 <h3>부산 행정구역별 아파트 매매거래현황</h3>
                 <div class="chart-placeholder" id="panel-trade-status">
-                    [(월) 행정구역별 아파트매매거래현황.csv 연동 대기 중]
+                    [(월) 행정구역별 아파트매매거래현황.csv 연동 중...]
                 </div>
             </div>
             <div class="panel table-box">
@@ -154,7 +154,7 @@
         </div>
     </div>
 
-    <!-- 브라우저 내부에서 실시간으로 CSV 파일을 읽어와 대시보드를 채우는 자바스크립트 로직 -->
+    <!-- 브라우저 내부에서 CSV 파일을 안정적으로 파싱하여 대시보드에 뿌려주는 스크립트 -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             // 1. 매매지수 CSV 읽기
@@ -164,7 +164,7 @@
                 complete: function(results) {
                     const rows = results.data;
                     for (let row of rows) {
-                        if (row.includes("부산")) {
+                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
                             const latestVal = row[row.length - 1];
                             document.getElementById("kpi-m-index").innerText = latestVal;
                             document.getElementById("panel-m-index").innerHTML = `최신 부산 매매지수: <b>${latestVal}</b><br>(기준월 데이터 자동 반영됨)`;
@@ -181,7 +181,7 @@
                 complete: function(results) {
                     const rows = results.data;
                     for (let row of rows) {
-                        if (row.includes("부산")) {
+                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
                             const latestVal = row[row.length - 1];
                             document.getElementById("kpi-unsold").innerText = latestVal + " 호";
                             document.getElementById("panel-unsold").innerHTML = `부산 최신 미분양 주택수:<br><b>${latestVal} 호</b>`;
@@ -198,7 +198,7 @@
                 complete: function(results) {
                     const rows = results.data;
                     for (let row of rows) {
-                        if (row.includes("부산")) {
+                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
                             const latestVal = row[row.length - 1];
                             document.getElementById("kpi-supply").innerText = latestVal + " 세대";
                             document.getElementById("panel-supply").innerHTML = `부산 최신 신규 분양세대수:<br><b>${latestVal} 세대</b>`;
@@ -215,7 +215,7 @@
                 complete: function(results) {
                     const rows = results.data;
                     for (let row of rows) {
-                        if (row.includes("부산")) {
+                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
                             const latestVal = row[row.length - 2];
                             document.getElementById("panel-trade-status").innerHTML = `부산 최근월 매매 거래량 데이터 연동 완료<br>최신 거래 규모: <b>${latestVal} 건(호수)</b>`;
                             break;
