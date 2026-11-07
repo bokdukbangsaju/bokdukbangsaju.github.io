@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부산 부동산 통합 관제 대시보드</title>
-    <!-- 브라우저에서 CSV 파일을 파싱하기 위한 PapaParse 라이브러리 로드 -->
+    <!-- 실시간 CSV 파싱을 위한 PapaParse 라이브러리 로드 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; }
         body { display: flex; height: 100vh; background-color: #f8f9fa; color: #0f172a; overflow: hidden; }
         
-        /* 좌측 사이드바 */
+        /* 좌측 사이드바 스타일 */
         .sidebar { width: 250px; background-color: #1e293b; color: #94a3b8; display: flex; flex-direction: column; padding: 20px; }
         .sidebar h2 { color: white; font-size: 18px; margin-bottom: 5px; }
         .sidebar p { font-size: 11px; margin-bottom: 30px; color: #64748b; }
-        .menu-item { padding: 12px 15px; margin-bottom: 8px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .menu-item { padding: 12px 15px; margin-bottom: 8px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .menu-item:hover { background-color: #334155; color: white; }
         .menu-item.active { background-color: #3b82f6; color: white; font-weight: bold; }
-        .menu-item:hover:not(.active) { background-color: #334155; color: white; }
-        .sidebar-footer { margin-top: auto; font-size: 12px; font-style: italic; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 15px; }
+        .sidebar-footer { margin-top: auto; font-size: 12px; font-style: italic; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 15px; line-height: 1.4; }
 
-        /* 메인 콘텐츠 */
+        /* 메인 콘텐츠 영역 스타일 */
         .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 25px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .header h1 { font-size: 22px; font-weight: bold; color: #0f172a; }
-        .header p { font-size: 12px; color: #64748b; }
-        .source-tags { font-size: 11px; color: #475569; background: #e2e8f0; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .header p { font-size: 12px; color: #64748b; margin-top: 3px; }
+        .source-tags { font-size: 11px; color: #16a34a; background: #dcfce7; padding: 6px 12px; border-radius: 4px; font-weight: bold; }
 
-        /* 상단 KPI 카드 그리드 */
+        /* 상단 KPI 카드 Grid */
         .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 20px; }
         .kpi-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .kpi-title { font-size: 11px; color: #64748b; margin-bottom: 5px; }
@@ -34,21 +34,22 @@
         .kpi-sub { font-size: 11px; color: #2563eb; font-weight: bold; }
         .kpi-sub.down { color: #dc2626; }
 
-        /* 대시보드 바디 패널 구조 */
+        /* 중앙 차트 및 패널 Layout */
         .dashboard-body { display: grid; grid-template-columns: 2fr 2fr 1.5fr; gap: 15px; }
-        .panel { background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1; min-height: 250px; display: flex; flex-direction: column; }
-        .panel h3 { font-size: 13px; font-weight: bold; margin-bottom: 15px; color: #0f172a; }
+        .panel { background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1; min-height: 260px; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .panel h3 { font-size: 13px; font-weight: bold; margin-bottom: 15px; color: #0f172a; display: flex; align-items: center; justify-content: space-between; }
         .chart-placeholder { flex: 1; display: flex; align-items: center; justify-content: center; color: #475569; font-size: 12px; border: 2px dashed #e2e8f0; border-radius: 6px; background: #fafafa; text-align: center; padding: 10px; line-height: 1.5; }
         
         /* 실거래가 테이블 스타일 */
         .table-box table { width: 100%; border-collapse: collapse; font-size: 11px; }
-        .table-box th, .table-box td { padding: 6px 8px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        .table-box th { color: #64748b; background: #f8f9fa; }
+        .table-box th, .table-box td { padding: 8px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .table-box th { color: #475569; background: #f1f5f9; font-weight: bold; }
         .table-box td { color: #1e293b; }
     </style>
 </head>
 <body>
-    <!-- 좌측 네비게이션 사이드바 -->
+
+    <!-- 좌측 메뉴 네비게이션 -->
     <div class="sidebar">
         <h2>Busan Real Estate</h2>
         <p>Data-Driven Dashboard</p>
@@ -61,21 +62,21 @@
         <div class="menu-item">Compare</div>
         <div class="menu-item">My Memo</div>
         <div class="sidebar-footer">
-            “ 좋은 정보가 좋은 중개를 만듭니다. ”<br><br>예비 공인중개사 오늘도, 한 걸음 더
+            “ 좋은 정보가<br>좋은 중개를 만듭니다. ”<br><br>예비 공인중개사<br>오늘도, 한 걸음 더
         </div>
     </div>
 
-    <!-- 우측 메인 콘텐츠 화면 -->
+    <!-- 우측 메인 대시보드 콘텐츠 -->
     <div class="main-content">
         <div class="header">
             <div>
-                <h1>부산 부동산 시장 한눈에 보기 (Busan Real Estate Dashboard)</h1>
+                <h1>부산 부동산 시장 한눈에 보기</h1>
                 <p>깃허브 원본 CSV 파일 실시간 연동 자동 업데이트 대시보드</p>
             </div>
             <div id="data-status" class="source-tags">CSV 데이터 로딩 중...</div>
         </div>
 
-        <!-- 1단: KPI 요약 카드 -->
+        <!-- 1단: KPI 핵심 지표 요약 카드 -->
         <div class="kpi-grid">
             <div class="kpi-card">
                 <div class="kpi-title">최신 매매지수 (부산)</div>
@@ -99,12 +100,12 @@
             </div>
             <div class="kpi-card">
                 <div class="kpi-title">데이터 연동 상태</div>
-                <div class="kpi-value" style="font-size: 14px; color: #16a34a;" id="kpi-status-text">정상 연결</div>
+                <div class="kpi-value" style="font-size: 14px; color: #16a34a;">정상 연결</div>
                 <div class="kpi-sub">자동 갱신 활성화</div>
             </div>
         </div>
 
-        <!-- 2단: 차트 및 히트맵 영역 -->
+        <!-- 2단: 가격 추이 및 지역별 분석 영역 -->
         <div class="dashboard-body">
             <div class="panel">
                 <h3>부산 아파트 매매 가격지수 추이</h3>
@@ -138,7 +139,12 @@
                 <h3>최근 실거래가 TOP 5 (아파트(매매)_실거래가.csv)</h3>
                 <table>
                     <thead>
-                        <tr><th>계약일</th><th>단지명</th><th>전용</th><th>거래금액</th></tr>
+                        <tr>
+                            <th>계약일</th>
+                            <th>단지명</th>
+                            <th>전용</th>
+                            <th>거래금액</th>
+                        </tr>
                     </thead>
                     <tbody id="real-deal-tbody">
                         <tr><td colspan="4" style="text-align:center;">실거래가 데이터를 불러오는 중...</td></tr>
@@ -148,7 +154,7 @@
         </div>
     </div>
 
-    <!-- 브라우저 내에서 CSV 파일을 읽어와 대시보드를 채우는 자바스크립트 로직 -->
+    <!-- 브라우저 내부에서 실시간으로 CSV 파일을 읽어와 대시보드를 채우는 자바스크립트 로직 -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             // 1. 매매지수 CSV 읽기
@@ -230,7 +236,6 @@
                     let tbody = document.getElementById("real-deal-tbody");
                     tbody.innerHTML = "";
 
-                    // 상위 5개 행 추출
                     const top5 = data.slice(0, 5);
                     top5.forEach(item => {
                         let tr = document.createElement("tr");
@@ -242,7 +247,7 @@
                         `;
                         tbody.appendChild(tr);
                     });
-                    document.getElementById("data-status").innerText = "모든 CSV 데이터 연동 완료";
+                    document.getElementById("data-status").innerText = "모든 CSV 데이터 실시간 연동 완료";
                 },
                 error: function(err) {
                     document.getElementById("data-status").innerText = "CSV 로드 확인 필요";
