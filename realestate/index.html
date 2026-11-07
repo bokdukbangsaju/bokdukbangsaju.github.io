@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부산 부동산 통합 관제 대시보드</title>
-    <!-- CSV 파싱을 위한 PapaParse 라이브러리 로드 -->
+    <!-- 브라우저에서 CSV 파일을 파싱하기 위한 PapaParse 라이브러리 로드 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; }
@@ -24,7 +24,12 @@
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .header h1 { font-size: 22px; font-weight: bold; color: #0f172a; }
         .header p { font-size: 12px; color: #64748b; margin-top: 3px; }
-        .source-tags { font-size: 11px; color: #16a34a; background: #dcfce7; padding: 6px 12px; border-radius: 4px; font-weight: bold; }
+        
+        /* 우측 상단 CSV 업로드 버튼 영역 */
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        .source-tags { font-size: 11px; color: #475569; background: #e2e8f0; padding: 6px 12px; border-radius: 4px; font-weight: bold; }
+        .upload-btn { background-color: #2563eb; color: white; border: none; padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .upload-btn:hover { background-color: #1d4ed8; }
 
         /* 상단 KPI 카드 Grid */
         .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 20px; }
@@ -71,189 +76,152 @@
         <div class="header">
             <div>
                 <h1>부산 부동산 시장 한눈에 보기</h1>
-                <p>깃허브 원본 CSV 파일 실시간 연동 자동 업데이트 대시보드</p>
+                <p>우측 상단 버튼을 통해 CSV 파일을 업로드하면 대시보드가 즉시 갱신됩니다.</p>
             </div>
-            <div id="data-status" class="source-tags">CSV 데이터 연동 대기 중...</div>
+            <div class="header-right">
+                <div id="update-status" class="source-tags">CSV 파일을 업로드하세요</div>
+                <!-- 숨겨진 파일 선택기 및 업로드 버튼 -->
+                <input type="file" id="csvFileInput" accept=".csv" style="display: none;" onchange="handleFileSelect(event)">
+                <button class="upload-btn" onclick="document.getElementById('csvFileInput').click()">
+                    📂 CSV 업데이트
+                </button>
+            </div>
         </div>
 
         <!-- 1단: KPI 핵심 지표 요약 카드 -->
         <div class="kpi-grid">
             <div class="kpi-card">
-                <div class="kpi-title">최신 매매지수 (부산)</div>
-                <div class="kpi-value" id="kpi-m-index">-</div>
-                <div class="kpi-sub">한국부동산원 매매지수</div>
+                <div class="kpi-title">업로드된 파일 정보</div>
+                <div class="kpi-value" id="kpi-filename" style="font-size: 13px; word-break: break-all;">-</div>
+                <div class="kpi-sub">실시간 연동 대기 중</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-title">최신 미분양 주택 수</div>
-                <div class="kpi-value" id="kpi-unsold">-</div>
-                <div class="kpi-sub down">미분양주택현황 소스</div>
+                <div class="kpi-title">총 데이터 행 수</div>
+                <div class="kpi-value" id="kpi-total-rows">-</div>
+                <div class="kpi-sub">데이터 레코드</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-title">신규 분양 세대수 (최근월)</div>
-                <div class="kpi-value" id="kpi-supply">-</div>
-                <div class="kpi-sub">지역별 신규 분양 소스</div>
+                <div class="kpi-title">데이터 모드</div>
+                <div class="kpi-value" id="kpi-metric-3">-</div>
+                <div class="kpi-sub">자동 분류</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-title">실거래가 총 건수</div>
-                <div class="kpi-value" id="kpi-deal-count">-</div>
-                <div class="kpi-sub">국토부 실거래가 소스</div>
+                <div class="kpi-title">상세 요약</div>
+                <div class="kpi-value" id="kpi-metric-4">-</div>
+                <div class="kpi-sub">최신 기준</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-title">데이터 연동 상태</div>
-                <div class="kpi-value" style="font-size: 14px; color: #16a34a;">정상 연결</div>
-                <div class="kpi-sub">자동 갱신 활성화</div>
+                <div class="kpi-title">시스템 상태</div>
+                <div class="kpi-value" style="color: #16a34a;">정상 가동</div>
+                <div class="kpi-sub">브라우저 엔진 연동</div>
             </div>
         </div>
 
-        <!-- 2단: 가격 추이 및 지역별 분석 영역 -->
+        <!-- 2단: 분석 영역 -->
         <div class="dashboard-body">
             <div class="panel">
-                <h3>부산 아파트 매매 가격지수 추이</h3>
-                <div class="chart-placeholder" id="panel-m-index">
-                    [(월) 지역별 매매지수_아파트.csv 연동 중...]
+                <h3>가격지수 및 시계열 요약</h3>
+                <div class="chart-placeholder" id="chart-panel-1">
+                    [CSV 파일을 업로드하면 요약 정보가 표시됩니다]
                 </div>
             </div>
             <div class="panel">
-                <h3>미분양 주택 현황 추이</h3>
-                <div class="chart-placeholder" id="panel-unsold">
-                    [미분양주택현황.csv 연동 중...]
+                <h3>구·군별 지역 분석 영역</h3>
+                <div class="chart-placeholder" id="chart-panel-2">
+                    [지역별 데이터 분석 영역]
                 </div>
             </div>
             <div class="panel">
-                <h3>신규 분양 세대수 현황</h3>
-                <div class="chart-placeholder" id="panel-supply">
-                    [지역별 신규 분양세대수.csv 연동 중...]
+                <h3>핵심 통계 지표</h3>
+                <div class="chart-placeholder" id="chart-panel-3">
+                    [통계 지표 표시 영역]
                 </div>
             </div>
         </div>
 
-        <!-- 3단: 거래량 및 실거래가 테이블 영역 -->
+        <!-- 3단: 실거래가 및 데이터 테이블 영역 -->
         <div class="dashboard-body" style="margin-top: 15px;">
-            <div class="panel" style="grid-column: span 2;">
-                <h3>부산 행정구역별 아파트 매매거래현황</h3>
-                <div class="chart-placeholder" id="panel-trade-status">
-                    [(월) 행정구역별 아파트매매거래현황.csv 연동 중...]
-                </div>
-            </div>
-            <div class="panel table-box">
-                <h3>최근 실거래가 TOP 5 (아파트(매매)_실거래가.csv)</h3>
+            <div class="panel table-box" style="grid-column: span 3;">
+                <h3 id="table-title">업로드된 CSV 데이터 미리보기 (상위 5개 행)</h3>
                 <table>
                     <thead>
-                        <tr>
-                            <th>계약일</th>
-                            <th>단지명</th>
-                            <th>전용</th>
-                            <th>거래금액</th>
+                        <tr id="table-header">
+                            <th>파일을 업로드하면 헤더가 표시됩니다</th>
                         </tr>
                     </thead>
-                    <tbody id="real-deal-tbody">
-                        <tr><td colspan="4" style="text-align:center;">실거래가 데이터를 불러오는 중...</td></tr>
+                    <tbody id="csv-table-body">
+                        <tr><td style="text-align:center; padding: 20px; color:#94a3b8;">우측 상단의 [📂 CSV 업데이트] 버튼을 눌러 원하시는 CSV 파일을 선택해주세요.</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- 브라우저 내부에서 CSV 파일을 안정적으로 파싱하여 대시보드에 뿌려주는 스크립트 -->
+    <!-- JavaScript를 통한 브라우저 내 CSV 실시간 파싱 및 화면 갱신 로직 -->
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            // 1. 매매지수 CSV 읽기
-            Papa.parse("(월) 지역별 매매지수_아파트.csv", {
-                download: true,
-                header: false,
-                complete: function(results) {
-                    const rows = results.data;
-                    for (let row of rows) {
-                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
-                            const latestVal = row[row.length - 1];
-                            document.getElementById("kpi-m-index").innerText = latestVal;
-                            document.getElementById("panel-m-index").innerHTML = `최신 부산 매매지수: <b>${latestVal}</b><br>(기준월 데이터 자동 반영됨)`;
-                            break;
-                        }
-                    }
-                }
-            });
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
 
-            // 2. 미분양 주택 현황 CSV 읽기
-            Papa.parse("미분양주택현황.csv", {
-                download: true,
-                header: false,
-                complete: function(results) {
-                    const rows = results.data;
-                    for (let row of rows) {
-                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
-                            const latestVal = row[row.length - 1];
-                            document.getElementById("kpi-unsold").innerText = latestVal + " 호";
-                            document.getElementById("panel-unsold").innerHTML = `부산 최신 미분양 주택수:<br><b>${latestVal} 호</b>`;
-                            break;
-                        }
-                    }
-                }
-            });
+            document.getElementById("update-status").innerText = "파일 읽는 중...";
+            document.getElementById("kpi-filename").innerText = file.name;
 
-            // 3. 신규 분양 세대수 CSV 읽기
-            Papa.parse("지역별 신규 분양세대수.csv", {
-                download: true,
-                header: false,
-                complete: function(results) {
-                    const rows = results.data;
-                    for (let row of rows) {
-                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
-                            const latestVal = row[row.length - 1];
-                            document.getElementById("kpi-supply").innerText = latestVal + " 세대";
-                            document.getElementById("panel-supply").innerHTML = `부산 최신 신규 분양세대수:<br><b>${latestVal} 세대</b>`;
-                            break;
-                        }
-                    }
-                }
-            });
-
-            // 4. 행정구역별 매매거래현황 CSV 읽기
-            Papa.parse("(월) 행정구역별 아파트매매거래현황.csv", {
-                download: true,
-                header: false,
-                complete: function(results) {
-                    const rows = results.data;
-                    for (let row of rows) {
-                        if (row.some(cell => cell && cell.toString().includes("부산"))) {
-                            const latestVal = row[row.length - 2];
-                            document.getElementById("panel-trade-status").innerHTML = `부산 최근월 매매 거래량 데이터 연동 완료<br>최신 거래 규모: <b>${latestVal} 건(호수)</b>`;
-                            break;
-                        }
-                    }
-                }
-            });
-
-            // 5. 아파트 실거래가 CSV 읽기 (상위 5개 추출)
-            Papa.parse("아파트(매매)_실거래가.csv", {
-                download: true,
+            Papa.parse(file, {
                 header: true,
                 skipEmptyLines: true,
+                encoding: "CP949", // 한글 깨짐 방지
                 complete: function(results) {
                     const data = results.data;
-                    document.getElementById("kpi-deal-count").innerText = data.length.toLocaleString() + " 건";
-                    
-                    let tbody = document.getElementById("real-deal-tbody");
-                    tbody.innerHTML = "";
+                    const fields = results.meta.fields || [];
 
+                    document.getElementById("kpi-total-rows").innerText = data.length.toLocaleString() + " 건";
+                    document.getElementById("update-status").innerText = "업데이트 완료 (" + file.name + ")";
+                    document.getElementById("table-title").innerText = `업로드된 파일: ${file.name} (미리보기 TOP 5)`;
+
+                    // 테이블 헤더 동적 생성
+                    const theadTr = document.getElementById("table-header");
+                    theadTr.innerHTML = "";
+                    fields.slice(0, 7).forEach(field => {
+                        let th = document.createElement("th");
+                        th.innerText = field;
+                        theadTr.appendChild(th);
+                    });
+
+                    // 테이블 본문 동적 생성 (상위 5개)
+                    const tbody = document.getElementById("csv-table-body");
+                    tbody.innerHTML = "";
                     const top5 = data.slice(0, 5);
-                    top5.forEach(item => {
+
+                    top5.forEach(row => {
                         let tr = document.createElement("tr");
-                        tr.innerHTML = `
-                            <td>${item['계약일'] || '-'}일</td>
-                            <td><b>${item['단지명'] || '-'}</b></td>
-                            <td>${item['전용면적(㎡)'] || '-'}㎡</td>
-                            <td style="color:#2563eb; font-weight:bold;">${item['거래금액(만원)'] || '-'} 만원</td>
-                        `;
+                        fields.slice(0, 7).forEach(field => {
+                            let td = document.createElement("td");
+                            td.innerText = row[field] || '-';
+                            tr.appendChild(td);
+                        });
                         tbody.appendChild(tr);
                     });
-                    document.getElementById("data-status").innerText = "모든 CSV 데이터 실시간 연동 완료";
+
+                    // 파일 종류별 맞춤형 KPI 표시
+                    if (file.name.includes("실거래가")) {
+                        document.getElementById("kpi-metric-3").innerText = "실거래가 모드";
+                        document.getElementById("kpi-metric-4").innerText = data.length + "건 거래";
+                        document.getElementById("chart-panel-1").innerHTML = `<b>${file.name}</b><br>성공적으로 로드되었습니다.`;
+                    } else if (file.name.includes("매매지수") || file.name.includes("전세가격지수")) {
+                        document.getElementById("kpi-metric-3").innerText = "가격지수 모드";
+                        document.getElementById("kpi-metric-4").innerText = "시계열 데이터";
+                        document.getElementById("chart-panel-1").innerHTML = `<b>${file.name}</b><br>지수 시계열 데이터가 연동되었습니다.`;
+                    } else {
+                        document.getElementById("kpi-metric-3").innerText = "일반 데이터 모드";
+                        document.getElementById("kpi-metric-4").innerText = data.length + " 행";
+                    }
                 },
                 error: function(err) {
-                    document.getElementById("data-status").innerText = "CSV 로드 확인 필요";
+                    alert("CSV 파일을 읽는 중 오류가 발생했습니다: " + err.message);
+                    document.getElementById("update-status").innerText = "업데이트 실패";
                 }
             });
-        });
+        }
     </script>
 </body>
 </html>
