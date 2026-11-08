@@ -2,96 +2,228 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>부동산 시장과 정책: 가치 계산기</title>
+    <title>부동산 시장과 정책: 종합 분석 및 계산 프로그램</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax for LaTeX Formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="bg-slate-50 min-h-screen p-6">
-    <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
-        <h1 class="text-2xl font-bold text-slate-800 mb-2">🏢 부동산 시장과 정책: 가치 계산기</h1>
-        <p class="text-sm text-slate-500 mb-6">화폐의 시간가치(현재가치/미래가치 선택)와 부동산의 내재가치를 시뮬레이션합니다.</p>
-
-        <!-- 탭 메뉴 -->
-        <div class="flex border-b border-slate-200 mb-6">
-            <button onclick="switchTab('timeValue')" id="btn-timeValue" class="py-2 px-4 font-semibold text-blue-600 border-b-2 border-blue-600 focus:outline-none transition">1. 화폐의 시간가치</button>
-            <button onclick="switchTab('intrinsicValue')" id="btn-intrinsicValue" class="py-2 px-4 font-semibold text-slate-500 focus:outline-none transition">2. 부동산 내재가치</button>
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8 space-y-8">
+        
+        <!-- 타이틀 섹션 -->
+        <div>
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">🏢 부동산 시장과 정책: 종합 분석 및 계산 프로그램</h1>
+            <p class="text-sm text-slate-500">강의노트 기반의 화폐의 시간가치, 내재가치, 수익률, 대출 규제 및 거품 검증 공식을 통합 시뮬레이션합니다.</p>
         </div>
 
-        <!-- 탭 1: 화폐의 시간가치 -->
+        <!-- 상단 탭 메뉴 -->
+        <div class="flex flex-wrap border-b border-slate-200 gap-2 pb-2">
+            <button onclick="switchTab('timeValue')" id="btn-timeValue" class="py-2 px-4 font-semibold text-blue-600 border-b-2 border-blue-600 focus:outline-none">1. 시간가치 & 내재가치</button>
+            <button onclick="switchTab('returns')" id="btn-returns" class="py-2 px-4 font-semibold text-slate-500 focus:outline-none">2. 수익률 및 NOI·ROE</button>
+            <button onclick="switchTab('loan')" id="btn-loan" class="py-2 px-4 font-semibold text-slate-500 focus:outline-none">3. 대출 및 레버리지 (LTV·DTI)</button>
+            <button onclick="switchTab('bubble')" id="btn-bubble" class="py-2 px-4 font-semibold text-slate-500 focus:outline-none">4. 전세가율 및 거품 검증</button>
+        </div>
+
+        <!-- 탭 1: 시간가치 및 부동산 내재가치 계산기 -->
         <div id="tab-timeValue" class="space-y-6">
-            <div class="bg-blue-50 p-4 rounded-lg text-sm text-blue-800">
-                • <b>미래가치 (A_t = A_0 x (1 + i)^t)</b>: 현재 금액이 이자율에 따라 미래에 얼마가 되는지 계산합니다.<br>
-                • <b>현재가치 (A_0 = A_t / (1 + i)^t)</b>: 미래의 금액을 현재 가치로 할인합니다.
+            <div class="bg-blue-50 p-4 rounded-lg text-sm text-blue-800 space-y-1">
+                <p class="font-bold">• 화폐의 시간가치 및 부동산 내재가치 공식</p>
+                <p>• 미래가치: A_t = A_0 x (1 + i)^t / 현재가치: A_0 = A_t / (1 + i)^t</p>
+                <p>• 내재가치: V_0 = {R}{i - g} (임대료 R, 할인율 i, 상승률 g)</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">계산 방식 선택</label>
-                    <select id="tv-mode" onchange="calcTimeValue()" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 bg-white">
-                        <option value="fv">미래가치 (A_t) 계산</option>
-                        <option value="pv">현재가치 (A_0) 계산</option>
-                    </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 화폐 시간가치 서브 카드 -->
+                <div class="border border-slate-200 p-4 rounded-lg space-y-3">
+                    <h3 class="font-bold text-slate-800">화폐의 시간가치 계산</h3>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">모드 선택</label>
+                        <select id="tv-mode" onchange="calcTimeValue()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-white">
+                            <option value="fv">미래가치 (A_t) 계산</option>
+                            <option value="pv">현재가치 (A_0) 계산</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">기준 금액 (A_0 또는 A_t)</label>
+                        <input type="text" id="tv-amount" value="100" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcTV(this)">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">이자율/할인율 (i, %)</label>
+                            <input type="number" id="tv-rate" value="10" step="0.1" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="calcTimeValue()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">기간 (t, 년)</label>
+                            <input type="number" id="tv-period" value="1" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="calcTimeValue()">
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 p-3 rounded-lg text-center">
+                        <span id="tv-result-label" class="text-xs text-slate-500">결과</span>
+                        <p id="res-tv-val" class="text-lg font-bold text-blue-600">-</p>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">기준 금액 (A_0 또는 A_t)</label>
-                    <input type="text" id="tv-amount" value="100" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500" oninput="formatAndCalcTV(this)">
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">이자율/할인율 (i, %)</label>
-                    <input type="number" id="tv-rate" value="10" step="0.1" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500" oninput="calcTimeValue()">
+                <!-- 부동산 내재가치 서브 카드 -->
+                <div class="border border-slate-200 p-4 rounded-lg space-y-3">
+                    <h3 class="font-bold text-slate-800">부동산 내재가치 및 Cap Rate</h3>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">연간 임대료 / 순영업소득 (R)</label>
+                        <input type="text" id="iv-rent" value="10,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcIV(this)">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">할인율/요구수익률 (i, %)</label>
+                            <input type="number" id="iv-rate" value="10" step="0.1" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="calcIntrinsicValue()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1">상승률 (g, %)</label>
+                            <input type="number" id="iv-growth" value="0" step="0.1" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="calcIntrinsicValue()">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">실제 시장 가격 (P, 비교용)</label>
+                        <input type="text" id="iv-market-price" value="95,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcIV(this)">
+                    </div>
+                    <div class="bg-slate-100 p-3 rounded-lg space-y-1 text-xs">
+                        <div class="flex justify-between"><span>내재가치 (V_0):</span> <span id="res-v0" class="font-bold text-emerald-600">-</span></div>
+                        <div class="flex justify-between"><span>자본환원율 (Cap Rate):</span> <span id="res-cap" class="font-bold text-blue-600">-</span></div>
+                        <div class="pt-1 border-t border-slate-200 text-center font-bold" id="res-analysis">-</div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">기간 ($t$, 년)</label>
-                    <input type="number" id="tv-period" value="1" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500" oninput="calcTimeValue()">
-                </div>
-            </div>
-
-            <div class="bg-slate-100 p-4 rounded-lg text-center">
-                <p id="tv-result-label" class="text-xs text-slate-500">계산된 미래가치 ($A_t$)</p>
-                <p id="res-tv-val" class="text-2xl font-bold text-blue-600">-</p>
             </div>
         </div>
 
-        <!-- 탭 2: 부동산 내재가치 -->
-        <div id="tab-intrinsicValue" class="space-y-6 hidden">
-            <div class="bg-emerald-50 p-4 rounded-lg text-sm text-emerald-800">
-                • <b>내재가치 공식 (V_0 = R / $)</b>: 임대료(R)가 영구적으로 일정할 때, 이자율(할인율, i)을 나누어 부동산의 총 내재가치를 산출합니다. (금액은 소수점 없이 정수로 표시되며 3자리 콤마가 자동 적용됩니다.)
+        <!-- 탭 2: 수익률 및 NOI·ROE 계산기 -->
+        <div id="tab-returns" class="space-y-6 hidden">
+            <div class="bg-emerald-50 p-4 rounded-lg text-sm text-emerald-800 space-y-1">
+                <p class="font-bold">• 수익률 및 임대수익 구조 관련 공식</p>
+                <p>• 유효총수입(EGI) = 가능총소득(PGI) - 공실 및 미납손실</p>
+                <p>• 순운영소득(NOI) = 유효총수입(EGI) - 영업경비(유지관리비, 재산세 등)</p>
+                <p>• 자본환원율(Cap Rate) = 연간 순영업소득(NOI)/부동산 총 자산가치(매입가격) x 100<br>대출(타인자본)을 전혀 고려하지 않고, 해당 부동산 자체에서 나오는 순수익이 자산 대비 몇 %인지 보여주는 지표입니다.</p>
+                <p>• 자기자본수익률(ROE) = {연간 세전 현금흐름 (BTCF)}/{투입된 실제 자기자본 x 100<br>내가 실제로 넣은 내 돈 대비 연간 얼마의 현금수익이 나고 있는지를 보여주며, 대출(레버리지) 효과가 반영된 수익률</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">연간 임대료 (R)</label>
-                    <input type="text" id="iv-rent" value="100,000" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500" oninput="formatAndCalcIV(this)">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-slate-200 p-4 rounded-lg space-y-3">
+                    <h3 class="font-bold text-slate-800">NOI 및 Cap Rate 계산</h3>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">가능총소득 (PGI)</label>
+                        <input type="text" id="ret-pgi" value="12,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcReturns(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">공실 및 미납 손실액</label>
+                        <input type="text" id="ret-loss" value="1,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcReturns(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">영업경비 (유지비, 재산세 등)</label>
+                        <input type="text" id="ret-exp" value="1,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcReturns(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">부동산 총 자산가격 (매입가)</label>
+                        <input type="text" id="ret-price" value="100,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcReturns(this)">
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">이자율 / 자본환원율 (i, %)</label>
-                    <input type="number" id="iv-rate" value="10" step="0.1" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500" oninput="calcIntrinsicValue()">
-                </div>
-            </div>
 
-            <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">실제 시장 가격 (P, 비교용)</label>
-                <input type="text" id="iv-market-price" value="950,000" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500" oninput="formatAndCalcIV(this)">
-            </div>
-
-            <div class="bg-slate-100 p-4 rounded-lg space-y-2">
-                <div class="flex justify-between items-center">
-                    <span class="text-sm text-slate-600">부동산 내재가치 (V_0 = R / i):</span>
-                    <span id="res-v0" class="font-bold text-emerald-600 text-lg">-</span>
-                </div>
-                <div class="flex justify-between border-t border-slate-200 pt-2 items-center">
-                    <span class="text-sm text-slate-600">시장 균형 상태 분석:</span>
-                    <span id="res-analysis" class="font-bold text-slate-800 text-right">-</span>
+                <div class="border border-slate-200 p-4 rounded-lg space-y-3 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-slate-800 mb-3">계산 결과</h3>
+                        <div class="bg-slate-100 p-4 rounded-lg space-y-2 text-sm">
+                            <div class="flex justify-between"><span>유효총수입 (EGI):</span> <span id="res-egi" class="font-bold">-</span></div>
+                            <div class="flex justify-between"><span>순운영소득 (NOI):</span> <span id="res-noi" class="font-bold text-emerald-600">-</span></div>
+                            <div class="flex justify-between border-t pt-2"><span>자본환원율 (Cap Rate):</span> <span id="res-calc-cap" class="font-bold text-blue-600 text-lg">-</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-lg text-xs text-emerald-900">
+                        * 계산된 NOI를 바탕으로 부동산 자체의 순수익 창출력을 평가합니다.
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- 탭 3: 대출 및 레버리지 관련 공식 (LTV·DTI) -->
+        <div id="tab-loan" class="space-y-6 hidden">
+            <div class="bg-purple-50 p-4 rounded-lg text-sm text-purple-800 space-y-1">
+                <p class="font-bold">• 대출 및 레버리지 지표 공식</p>
+                <p>• LTV (Loan to Value) = {대출금액} / {담보가액 (부동산 가격)} x 100</p>
+                <p>• DTI (Debt to Income) = {모든 금융기관 대출의 연간 원금 + 이자상환액} / {가처분소득 (연간 총소득)} x 100</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- LTV 계산 -->
+                <div class="border border-slate-200 p-4 rounded-lg space-y-3">
+                    <h3 class="font-bold text-slate-800">LTV (담보대출인정비율) 계산</h3>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">대출금액</label>
+                        <input type="text" id="loan-amt" value="400,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcLoan(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">부동산 담보가액 (가격)</label>
+                        <input type="text" id="loan-val" value="1,000,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcLoan(this)">
+                    </div>
+                    <div class="bg-slate-100 p-3 rounded-lg text-center">
+                        <span class="text-xs text-slate-500">산출된 LTV 비율</span>
+                        <p id="res-ltv" class="text-xl font-bold text-purple-600">-</p>
+                    </div>
+                </div>
+
+                <!-- DTI 계산 -->
+                <div class="border border-slate-200 p-4 rounded-lg space-y-3">
+                    <h3 class="font-bold text-slate-800">DTI (소득대비 원리금상환비율) 계산</h3>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">연간 원리금 상환액</label>
+                        <input type="text" id="dti-pmt" value="30,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcLoan(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">연간 가처분 소득</label>
+                        <input type="text" id="dti-inc" value="100,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcLoan(this)">
+                    </div>
+                    <div class="bg-slate-100 p-3 rounded-lg text-center">
+                        <span class="text-xs text-slate-500">산출된 DTI 비율</span>
+                        <p id="res-dti" class="text-xl font-bold text-purple-600">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 탭 4: 전세가율 및 가격 거품 검증 -->
+        <div id="tab-bubble" class="space-y-6 hidden">
+            <div class="bg-amber-50 p-4 rounded-lg text-sm text-amber-900 space-y-1">
+                <p class="font-bold">• 전세보증금과 매매가격 / 거품 검증 모형</p>
+                <p>• 전세보증금 운용수익(f x D)은 월세(R)와 균형을 이룸 (R = fD)</p>
+                <p>• 매매가 대비 전세가비율(D/P)이 지나치게 낮아지면 향후 가격 상승 기대 심리에 의한 <b>거품(Bubble)</b>을 의심</p>
+            </div>
+
+            <div class="border border-slate-200 p-4 rounded-lg space-y-4">
+                <h3 class="font-bold text-slate-800">전세가율 및 거품 진단 시뮬레이터</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">전세보증금 (D)</label>
+                        <input type="text" id="bub-d" value="600,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcBubble(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">부동산 매매가격 (P)</label>
+                        <input type="text" id="bub-p" value="1,000,000,000" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="formatAndCalcBubble(this)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">보증금 운용수익률 (f, %)</label>
+                        <input type="number" id="bub-f" value="4" step="0.1" class="w-full border border-slate-300 rounded-lg p-2 text-sm" oninput="calcBubble()">
+                    </div>
+                </div>
+
+                <div class="bg-slate-100 p-4 rounded-lg space-y-2 text-sm">
+                    <div class="flex justify-between"><span>매매가 대비 전세가비율 (D/P):</span> <span id="res-dp-ratio" class="font-bold text-amber-700">-</span></div>
+                    <div class="flex justify-between"><span>전세보증금 연간 환산 임대료 (R = fD):</span> <span id="res-eq-rent" class="font-bold">-</span></div>
+                    <div class="pt-2 border-t text-center font-bold" id="res-bubble-analysis">-</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
+    <!-- JavaScript 로직 -->
     <script>
-        // 숫자에 3자리 콤마를 추가하는 유틸리티 함수
         function numberWithCommas(x) {
             if (!x) return "";
             let parts = x.toString().replace(/,/g, "").split(".");
@@ -99,120 +231,143 @@
             return parts.join(".");
         }
 
-        // 콤마가 포함된 문자열을 숫자로 변환하는 유틸리티 함수
         function parseNumber(val) {
             if (!val) return 0;
             return parseFloat(val.toString().replace(/,/g, "")) || 0;
         }
 
-        // 입력 중 콤마 자동 포맷팅 적용 (화폐 시간가치)
-        function formatAndCalcTV(input) {
+        function formatAndInput(input) {
             let cursorPosition = input.selectionStart;
             let originalLength = input.value.length;
-            
             let rawValue = parseNumber(input.value);
             input.value = rawValue === 0 && input.value !== "0" ? "" : numberWithCommas(rawValue);
-            
             let newLength = input.value.length;
             cursorPosition = Math.max(0, cursorPosition + (newLength - originalLength));
             input.setSelectionRange(cursorPosition, cursorPosition);
-
-            calcTimeValue();
         }
 
-        // 입력 중 콤마 자동 포맷팅 적용 (부동산 내재가치)
-        function formatAndCalcIV(input) {
-            let cursorPosition = input.selectionStart;
-            let originalLength = input.value.length;
-            
-            let rawValue = parseNumber(input.value);
-            input.value = rawValue === 0 && input.value !== "0" ? "" : numberWithCommas(rawValue);
-            
-            let newLength = input.value.length;
-            cursorPosition = Math.max(0, cursorPosition + (newLength - originalLength));
-            input.setSelectionRange(cursorPosition, cursorPosition);
-
-            calcIntrinsicValue();
-        }
-
-        // 탭 전환 함수 (안정적인 클래스 제어 적용)
+        // 탭 전환 함수
         function switchTab(tabName) {
-            const tabTV = document.getElementById('tab-timeValue');
-            const tabIV = document.getElementById('tab-intrinsicValue');
-            const btnTV = document.getElementById('btn-timeValue');
-            const btnIV = document.getElementById('btn-intrinsicValue');
-
-            if (tabName === 'timeValue') {
-                tabTV.classList.remove('hidden');
-                tabIV.classList.add('hidden');
-                btnTV.className = "py-2 px-4 font-semibold text-blue-600 border-b-2 border-blue-600 focus:outline-none transition";
-                btnIV.className = "py-2 px-4 font-semibold text-slate-500 focus:outline-none transition";
-            } else {
-                tabIV.classList.remove('hidden');
-                tabTV.classList.add('hidden');
-                btnIV.className = "py-2 px-4 font-semibold text-emerald-600 border-b-2 border-emerald-600 focus:outline-none transition";
-                btnTV.className = "py-2 px-4 font-semibold text-slate-500 focus:outline-none transition";
-            }
+            const tabs = ['timeValue', 'returns', 'loan', 'bubble'];
+            tabs.forEach(t => {
+                document.getElementById('tab-' + t).classList.add('hidden');
+                document.getElementById('btn-' + t).className = "py-2 px-4 font-semibold text-slate-500 focus:outline-none";
+            });
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).className = "py-2 px-4 font-semibold text-blue-600 border-b-2 border-blue-600 focus:outline-none";
         }
 
-        // 화폐의 시간가치 계산
+        // 1. 시간가치 및 내재가치 계산
+        function formatAndCalcTV(input) { formatAndInput(input); calcTimeValue(); }
+        function formatAndCalcIV(input) { formatAndInput(input); calcIntrinsicValue(); }
+
         function calcTimeValue() {
             let mode = document.getElementById('tv-mode').value;
             let amount = parseNumber(document.getElementById('tv-amount').value);
             let rate = parseFloat(document.getElementById('tv-rate').value) / 100 || 0;
             let period = parseFloat(document.getElementById('tv-period').value) || 0;
 
-            let resultVal = 0;
-            let labelText = "";
-
-            if (mode === 'fv') {
-                resultVal = amount * Math.pow((1 + rate), period);
-                labelText = "계산된 미래가치 (At)";
-            } else {
-                resultVal = amount / Math.pow((1 + rate), period);
-                labelText = "계산된 현재가치 (A0)";
-            }
-
-            document.getElementById('tv-result-label').innerText = labelText;
-            document.getElementById('res-tv-val').innerText = Math.round(resultVal).toLocaleString() + " 원";
+            let val = (mode === 'fv') ? amount * Math.pow((1 + rate), period) : amount / Math.pow((1 + rate), period);
+            document.getElementById('tv-result-label').innerText = (mode === 'fv') ? "계산된 미래가치 (At)" : "계산된 현재가치 (A0)";
+            document.getElementById('res-tv-val').innerText = Math.round(val).toLocaleString() + " 원";
         }
 
-        // 부동산 내재가치 계산
         function calcIntrinsicValue() {
             let r = parseNumber(document.getElementById('iv-rent').value);
             let i = parseFloat(document.getElementById('iv-rate').value) / 100 || 0;
+            let g = parseFloat(document.getElementById('iv-growth').value) / 100 || 0;
             let p = parseNumber(document.getElementById('iv-market-price').value);
 
-            if (i === 0) return;
-
-            let v0 = r / i;
-            let v0Rounded = Math.round(v0);
-            
-            document.getElementById('res-v0').innerText = v0Rounded.toLocaleString() + " 원";
-
-            let analysisText = "";
-            let analysisColor = "";
-
-            if (p > v0Rounded) {
-                analysisText = `시장가격(${p.toLocaleString()}원) > 내재가치(${v0Rounded.toLocaleString()}원) ➡️ 고평가 상태 (가격 하락 압력 발생)`;
-                analysisColor = "text-rose-600";
-            } else if (p < v0Rounded) {
-                analysisText = `시장가격(${p.toLocaleString()}원) < 내재가치(${v0Rounded.toLocaleString()}원) ➡️ 저평가 상태 (가격 상승 압력 발생)`;
-                analysisColor = "text-blue-600";
-            } else {
-                analysisText = `시장가격(${p.toLocaleString()}원) = 내재가치(${v0Rounded.toLocaleString()}원) ➡️ 균형 상태 (P = V₀)`;
-                analysisColor = "text-emerald-600";
+            let netRate = i - g;
+            if (netRate <= 0) {
+                document.getElementById('res-v0').innerText = "산출 불가 (할인율 > 상승률 이어야 함)";
+                document.getElementById('res-cap').innerText = "-";
+                document.getElementById('res-analysis').innerText = "-";
+                return;
             }
 
-            let analysisEl = document.getElementById('res-analysis');
-            analysisEl.innerText = analysisText;
-            analysisEl.className = "font-bold text-sm " + analysisColor;
+            let v0 = Math.round(r / netRate);
+            let capRate = netRate * 100;
+
+            document.getElementById('res-v0').innerText = v0.toLocaleString() + " 원";
+            document.getElementById('res-cap').innerText = capRate.toFixed(2) + " %";
+
+            let analysis = "";
+            if (p > v0) {
+                analysis = `시장가격(${p.toLocaleString()}원) > 내재가치(${v0.toLocaleString()}원) ➡️ 고평가 상태 (하락 압력)`;
+                document.getElementById('res-analysis').className = "pt-1 border-t border-slate-200 text-center font-bold text-rose-600";
+            } else if (p < v0) {
+                analysis = `시장가격(${p.toLocaleString()}원) < 내재가치(${v0.toLocaleString()}원) ➡️ 저평가 상태 (상승 압력)`;
+                document.getElementById('res-analysis').className = "pt-1 border-t border-slate-200 text-center font-bold text-blue-600";
+            } else {
+                analysis = `시장가격과 내재가치가 일치하는 균형 상태입니다.`;
+                document.getElementById('res-analysis').className = "pt-1 border-t border-slate-200 text-center font-bold text-emerald-600";
+            }
+            document.getElementById('res-analysis').innerText = analysis;
         }
 
-        // 페이지 로드시 기본 계산 실행
+        // 2. 수익률 및 NOI 계산
+        function formatAndCalcReturns(input) { formatAndInput(input); calcReturns(); }
+        function calcReturns() {
+            let pgi = parseNumber(document.getElementById('ret-pgi').value);
+            let loss = parseNumber(document.getElementById('ret-loss').value);
+            let exp = parseNumber(document.getElementById('ret-exp').value);
+            let price = parseNumber(document.getElementById('ret-price').value);
+
+            let egi = pgi - loss;
+            let noi = egi - exp;
+            let cap = price > 0 ? (noi / price) * 100 : 0;
+
+            document.getElementById('res-egi').innerText = egi.toLocaleString() + " 원";
+            document.getElementById('res-noi').innerText = noi.toLocaleString() + " 원";
+            document.getElementById('res-calc-cap').innerText = cap.toFixed(2) + " %";
+        }
+
+        // 3. 대출 (LTV·DTI)
+        function formatAndCalcLoan(input) { formatAndInput(input); calcLoan(); }
+        function calcLoan() {
+            let ltvAmt = parseNumber(document.getElementById('loan-amt').value);
+            let ltvVal = parseNumber(document.getElementById('loan-val').value);
+            let ltv = ltvVal > 0 ? (ltvAmt / ltvVal) * 100 : 0;
+            document.getElementById('res-ltv').innerText = ltv.toFixed(2) + " %";
+
+            let dtiPmt = parseNumber(document.getElementById('dti-pmt').value);
+            let dtiInc = parseNumber(document.getElementById('dti-inc').value);
+            let dti = dtiInc > 0 ? (dtiPmt / dtiInc) * 100 : 0;
+            document.getElementById('res-dti').innerText = dti.toFixed(2) + " %";
+        }
+
+        // 4. 전세가율 및 거품 검증
+        function formatAndCalcBubble(input) { formatAndInput(input); calcBubble(); }
+        function calcBubble() {
+            let d = parseNumber(document.getElementById('bub-d').value);
+            let p = parseNumber(document.getElementById('bub-p').value);
+            let f = parseFloat(document.getElementById('bub-f').value) / 100 || 0;
+
+            let ratio = p > 0 ? (d / p) * 100 : 0;
+            let eqRent = d * f;
+
+            document.getElementById('res-dp-ratio').innerText = ratio.toFixed(2) + " %";
+            document.getElementById('res-eq-rent').innerText = Math.round(eqRent).toLocaleString() + " 원";
+
+            let analysis = "";
+            if (ratio < 40) {
+                analysis = "⚠️ 전세가율이 지나치게 낮습니다. 가격 상승 기대심리에 따른 거품(Bubble) 가능성을 의심해야 합니다.";
+                document.getElementById('res-bubble-analysis').className = "pt-2 border-t text-center font-bold text-rose-600";
+            } else {
+                analysis = "✅ 전세가율이 안정적인 수준을 유지하고 있습니다.";
+                document.getElementById('res-bubble-analysis').className = "pt-2 border-t text-center font-bold text-emerald-600";
+            }
+            document.getElementById('res-bubble-analysis').innerText = analysis;
+        }
+
+        // 초기 실행
         window.onload = function() {
             calcTimeValue();
             calcIntrinsicValue();
+            calcReturns();
+            calcLoan();
+            calcBubble();
         };
     </script>
 </body>
