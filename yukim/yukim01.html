@@ -225,66 +225,6 @@
             </div>
         </section>
 
-        <!-- [뷰 2] 실시간 육임 12운성 판별기 -->
-        <section id="view-calc" class="hidden max-w-3xl mx-auto space-y-6">
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold text-slate-900 mb-2">🧮 육임 12운성 실시간 판별기</h2>
-                <p class="text-sm text-slate-500 mb-6">일간(천간)과 지지, 그리고 천반/지반 위치를 선택하면 정확한 12운성과 고급 특이사항을 분석합니다.</p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                    <!-- 일간 선택 -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">1. 일간 (天干)</label>
-                        <select id="calc-gan" onchange="calculateUnseong()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-base font-bold rounded-xl p-3 focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="甲">甲 (갑목)</option>
-                            <option value="乙">乙 (을목)</option>
-                            <option value="丙">丙 (병화)</option>
-                            <option value="丁">丁 (정화)</option>
-                            <option value="戊" selected>戊 (무토)</option>
-                            <option value="己">己 (기토)</option>
-                            <option value="庚">庚 (경금)</option>
-                            <option value="辛">辛 (신금)</option>
-                            <option value="壬">壬 (임수)</option>
-                            <option value="癸">癸 (계수)</option>
-                        </select>
-                    </div>
-
-                    <!-- 지지 선택 -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">2. 대상 지지 (地支)</label>
-                        <select id="calc-jiji" onchange="calculateUnseong()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-base font-bold rounded-xl p-3 focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="子">子 (자수)</option>
-                            <option value="丑">丑 (축토)</option>
-                            <option value="寅">寅 (인목)</option>
-                            <option value="卯">卯 (묘목)</option>
-                            <option value="辰">辰 (진토)</option>
-                            <option value="巳" selected>巳 (사화)</option>
-                            <option value="午">午 (오화)</option>
-                            <option value="未">未 (미토)</option>
-                            <option value="申">申 (신금)</option>
-                            <option value="酉">酉 (유금)</option>
-                            <option value="戌">戌 (술토)</option>
-                            <option value="亥">亥 (해수)</option>
-                        </select>
-                    </div>
-
-                    <!-- 천반/지반 구분 -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">3. 위치 (천반/지반)</label>
-                        <select id="calc-pos" onchange="calculateUnseong()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-base font-bold rounded-xl p-3 focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="cheongban">천반 (天盤)</option>
-                            <option value="jiban">지반 (地盤)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- 판별 결과 박스 -->
-                <div id="calc-result-box" class="p-6 rounded-2xl bg-slate-900 text-white space-y-4">
-                    <!-- JS로 결과 렌더링 -->
-                </div>
-            </div>
-        </section>
-
         <!-- [뷰 2] 천반의 뿌리 [중급] ★★★ 인터랙티브 매트릭스 -->
         <section id="view-root" class="hidden space-y-6">
             <!-- 상단 타이틀 및 필터 바 -->
